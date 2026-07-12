@@ -11,7 +11,7 @@ Pick a design, drop in your details, and host it **free forever** on GitHub Page
 
 ---
 
-## ✨ What you get
+## What you get
 
 - **15 formats × 3 color schemes = 45 ready-to-use pages**
 - **Zero dependencies** — no npm, no build, no CDN. Just open `index.html`.
@@ -23,7 +23,7 @@ Pick a design, drop in your details, and host it **free forever** on GitHub Page
 
 ---
 
-## 🎨 The 15 templates
+## The 15 templates
 
 | # | Template | Best for | Live demo |
 |---|----------|----------|-----------|
@@ -47,7 +47,7 @@ Each folder contains three color variants: `index.html` (v1), `v2.html`, `v3.htm
 
 ---
 
-## 🚀 Deploy your own: free in 5 minutes
+## Deploy your own: free in 5 minutes
 
 No servers, no cost, no credit card. Your portfolio will be live at `https://YOUR-USERNAME.github.io/my-portfolio/`.
 
@@ -55,7 +55,7 @@ No servers, no cost, no credit card. Your portfolio will be live at `https://YOU
 Download this repo (green **Code** button → **Download ZIP**) and unzip it. Open the folder for the format you like, e.g. `format-01-developer/`.
 
 ### Step 2 — Make it yours
-Open that folder's `index.html` in any editor (VS Code, Notepad, TextEdit) and change the text to your own — your name, role, projects, etc. See [Editing your content](#-editing-your-content) below. Double-click `index.html` anytime to preview it in your browser.
+Open that folder's `index.html` in any editor (VS Code, Notepad, TextEdit) and change the text to your own — your name, role, projects, etc. See [Editing your content](#editing-your-content) below. Double-click `index.html` anytime to preview it in your browser.
 
 ### Step 3 — Create a GitHub repo
 1. On [github.com](https://github.com), click **+** → **New repository**.
@@ -74,7 +74,7 @@ Open that folder's `index.html` in any editor (VS Code, Notepad, TextEdit) and c
 
 ---
 
-## ✏️ Editing your content
+## Editing your content
 
 Everything is plain HTML inside `index.html`. No coding experience needed — just find the demo text and replace it with yours. Common things to change:
 
@@ -85,13 +85,13 @@ Everything is plain HTML inside `index.html`. No coding experience needed — ju
 - **Projects** — title, description, tech tags, and the **Live / Source** links. To change a project image, drop your image into `assets/images/` and update the `<img src="...">`.
 - **Skills** — the skill names and percentages.
 - **Social links** — the hero icons point to `https://github.com/yourusername`, `https://linkedin.com/in/yourusername`, etc. Replace `yourusername` with your handles.
-- **Contact email** — see [Contact form setup](#-contact-form-setup) below.
+- **Contact email** — see [Contact form setup](#contact-form-setup) below.
 
 **Workflow:** edit → save → double-click `index.html` to preview → happy? commit/push. If something looks off, undo your last change; the layout is driven by CSS classes, so keep the tags and classes intact and only change the text between them.
 
 ---
 
-## 🌈 Changing colors
+## Changing colors
 
 Each template ships with **3 curated color schemes**. Two ways to use them:
 
@@ -115,7 +115,7 @@ Change `--animfolio-accent` and `--animfolio-secondary` to any hex colors you wa
 
 ---
 
-## 📬 Contact form setup
+## Contact form setup
 
 The contact form sends messages straight to your inbox using the free [FormSubmit.co](https://formsubmit.co) service — **no backend, no signup.**
 
@@ -130,7 +130,7 @@ Until you set your email, the form politely shows a "set your email" note instea
 
 ---
 
-## 📁 Folder structure
+## Folder structure
 
 ```
 animfolio-html/
@@ -149,13 +149,13 @@ Every format folder is **fully self-contained** — you can copy just one folder
 
 ---
 
-## 🧩 Want a no-code admin panel instead?
+## Want a no-code admin panel instead?
 
 If you'd rather manage your portfolio from a dashboard (drag-and-drop sections, 1-click demo import, fill it with AI) install the free **[AnimFolio WordPress plugin](https://wordpress.org/plugins/animfolio/)** — it powers these exact 15 designs.
 
 ---
 
-## 🙏 Credits & license
+## Credits & license
 
 - **License:** GPL-2.0-or-later — free to use, modify, and share (personal or commercial).
 - Bundled fonts: [Inter](https://rsms.me/inter/) & [JetBrains Mono](https://www.jetbrains.com/lp/mono/) (SIL OFL 1.1). QR generation: [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) (MIT).
