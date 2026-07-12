@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio – AnimFolio Dev — Teal Trust</title>
+<meta name="description" content="Julian Bennett — Freelance Web Developer & Consultant. I help businesses grow online.">
+<style>
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('./assets/fonts/inter-latin.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('./assets/fonts/jetbrains-mono-latin.woff2') format('woff2'); }
+
+/*# sourceURL=animfolio-fonts-local-inline-css */
+</style>
+<link rel="stylesheet" href="./assets/css/animfolio-base.css">
+<link rel="stylesheet" href="./assets/css/animfolio-animations.css">
+<link rel="stylesheet" href="./assets/css/animfolio-nav.css">
+<link rel="stylesheet" href="./assets/css/animfolio-contact.css">
+<link rel="stylesheet" href="./assets/css/animfolio-gallery.css">
+<link rel="stylesheet" href="./assets/css/animfolio-qr.css">
+<link rel="stylesheet" href="./assets/css/animfolio-print.css" media="print">
+<link rel="stylesheet" href="./assets/css/format.css">
+<style id="animfolio-theme-vars">
+.animfolio-container {
+	--animfolio-accent: #0D9488 !important;
+	--animfolio-accent-hover: #038a7e !important;
+	--animfolio-accent-light: rgba(13, 148, 136, 0.1) !important;
+	--animfolio-accent-subtle: rgba(13, 148, 136, 0.12) !important;
+	--animfolio-accent-shadow: rgba(13, 148, 136, 0.3) !important;
+	--animfolio-accent-glow: rgba(13, 148, 136, 0.5) !important;
+	--animfolio-secondary: #F59E0B !important;
+	--animfolio-secondary-hover: #eb9401 !important;
+	--animfolio-secondary-light: rgba(245, 158, 11, 0.1) !important;
+	--animfolio-on-accent: #14110f !important;
+	--animfolio-on-secondary: #14110f !important;
+	--animfolio-bg: #0f172a;
+	--animfolio-bg-secondary: #f8fafc;
+	--animfolio-bg-tertiary: #1e1e1e;
+	--animfolio-text: #f1f5f9;
+	--animfolio-text-secondary: #a0a0a0;
+	--animfolio-text-muted: #8a8a8a;
+	--animfolio-border: rgba(255, 255, 255, 0.1);
+	--animfolio-border-strong: rgba(255, 255, 255, 0.2);
+	--animfolio-surface: #1a1a1a;
+	--animfolio-surface-hover: #222222;
+	--animfolio-overlay: rgba(0, 0, 0, 0.75);
+	--animfolio-success: #22c55e;
+	--animfolio-warning: #f59e0b;
+	--animfolio-error: #ef4444;
+	--animfolio-info: #3b82f6;
+	--animfolio-font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+	--animfolio-font-size-base: 16px;
+	--animfolio-font-size-h1: clamp(2.5rem, 5vw, 4rem);
+	--animfolio-font-size-h2: clamp(1.75rem, 3.5vw, 2.5rem);
+	--animfolio-font-size-h3: 1.5rem;
+	--animfolio-font-size-h4: 1.25rem;
+	--animfolio-font-weight-bold: 700;
+	--animfolio-font-weight-medium: 500;
+	--animfolio-line-height: 1.6;
+	--animfolio-letter-spacing: 0em;
+	--animfolio-container-width: 1200px;
+	--animfolio-section-spacing: 100px;
+	--animfolio-radius: 12px;
+	--animfolio-radius-sm: 6px;
+	--animfolio-radius-lg: 16px;
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.2);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.3);
+	--animfolio-duration: 0.6s;
+	--animfolio-delay: 0s;
+	--animfolio-easing: cubic-bezier(0.4, 0, 0.2, 1);
+	--animfolio-easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--animfolio-stagger: 0.1s;
+	--animfolio-transition-fast: 150ms ease;
+	--animfolio-transition-normal: 300ms ease;
+	--animfolio-transition-slow: 500ms ease;
+	--animfolio-z-base: 1;
+	--animfolio-z-dropdown: 100;
+	--animfolio-z-sticky: 200;
+	--animfolio-z-nav: 300;
+	--animfolio-z-modal: 400;
+	--animfolio-z-lightbox: 500;
+	--animfolio-z-tooltip: 600;
+	--animfolio-z-cursor: 700;
+}
+.animfolio-container--light, .animfolio-container[data-animfolio-scheme="light"] {
+	--animfolio-bg: #ffffff;
+	--animfolio-bg-secondary: #f5f5f5;
+	--animfolio-bg-tertiary: #ebebeb;
+	--animfolio-text: #0f172a;
+	--animfolio-text-secondary: #555555;
+	--animfolio-text-muted: #767676;
+	--animfolio-border: rgba(0, 0, 0, 0.1);
+	--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+	--animfolio-surface: #ffffff;
+	--animfolio-surface-hover: #f9f9f9;
+	--animfolio-overlay: rgba(0, 0, 0, 0.5);
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+	--animfolio-accent-light: rgba(13, 148, 136, 0.08) !important;
+	--animfolio-accent-subtle: rgba(13, 148, 136, 0.05) !important;
+	--animfolio-accent-shadow: rgba(13, 148, 136, 0.2) !important;
+	--animfolio-accent-glow: rgba(13, 148, 136, 0.15) !important;
+	--animfolio-on-accent: #14110f !important;
+	--animfolio-on-secondary: #14110f !important;
+}
+@media (prefers-color-scheme: light) {
+	.animfolio-container--auto {
+		--animfolio-bg: #ffffff;
+		--animfolio-bg-secondary: #f5f5f5;
+		--animfolio-bg-tertiary: #ebebeb;
+		--animfolio-text: #0f172a;
+		--animfolio-text-secondary: #555555;
+		--animfolio-text-muted: #767676;
+		--animfolio-border: rgba(0, 0, 0, 0.1);
+		--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+		--animfolio-surface: #ffffff;
+		--animfolio-surface-hover: #f9f9f9;
+		--animfolio-overlay: rgba(0, 0, 0, 0.5);
+		--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+		--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+		--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+		--animfolio-accent-light: rgba(13, 148, 136, 0.08) !important;
+		--animfolio-accent-subtle: rgba(13, 148, 136, 0.05) !important;
+		--animfolio-accent-shadow: rgba(13, 148, 136, 0.2) !important;
+		--animfolio-accent-glow: rgba(13, 148, 136, 0.15) !important;
+		--animfolio-on-accent: #14110f !important;
+		--animfolio-on-secondary: #14110f !important;
+	}
+}
+
+.animfolio-container *,.animfolio-container *::before,.animfolio-container *::after{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{margin:0;padding:0;background:#ffffff;color:#0f172a;font-family:var(--animfolio-font-body,'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);font-size:var(--animfolio-font-size-base,16px);line-height:var(--animfolio-line-height,1.6);overflow-x:hidden}body.admin-bar{padding-top:32px}body.admin-bar .animfolio-nav--sticky{top:32px}@media screen and (max-width:782px){body.admin-bar{padding-top:46px}body.admin-bar .animfolio-nav--sticky{top:46px}}.wp-site-blocks,.entry-content,.page-content,.post-content{all:unset;display:block}
+/*# sourceURL=animfolio-base-inline-css */
+</style>
+<script>
+document.documentElement.className+=" animfolio-js";(function(){function r(){if(window.animfolio&&window.animfolio._initialized){return;}var e=document.querySelectorAll("[data-animfolio-animate]:not(.animfolio-visible),.animfolio-stagger__item:not(.animfolio-visible)");for(var i=0;i<e.length;i++){e[i].classList.add("animfolio-visible");}}if(document.readyState==="complete"){setTimeout(r,1500);}else{window.addEventListener("load",function(){setTimeout(r,1500);});}setTimeout(r,4000);})();
+//# sourceURL=animfolio-failsafe-js-after
+</script>
+</head>
+<body>
+<!-- ============================================================
+     CONFIG — set your email for the contact form (FormSubmit.co).
+     First submission emails you a one-time confirmation link; click it
+     once and every message afterwards lands in your inbox. See README.
+     ============================================================ -->
+<script>window.ANIMFOLIO_CONTACT_EMAIL = "you@example.com";</script>
+
+<div class="animfolio-container animfolio-container--light animfolio-container--format-03 animfolio-container--one-page" data-animfolio-scheme="light" data-animfolio-format="format-03-freelancer" data-animfolio-intensity="medium"><a href="#hero" class="animfolio-skip-link">Skip to main content</a><nav class="animfolio-nav animfolio-nav--horizontal animfolio-nav--sticky" role="navigation" aria-label="Portfolio navigation"><a href="#hero" class="animfolio-nav__logo">Julian Bennett</a><button class="animfolio-nav__toggle" aria-expanded="false" aria-controls="animfolio-nav-menu" aria-label="Toggle navigation"><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span></button><ul class="animfolio-nav__list" id="animfolio-nav-menu"><li class="animfolio-nav__item"><a href="#hero" class="animfolio-nav__link" data-animfolio-section="hero">Home</a></li><li class="animfolio-nav__item"><a href="#about" class="animfolio-nav__link" data-animfolio-section="about">About</a></li><li class="animfolio-nav__item"><a href="#services" class="animfolio-nav__link" data-animfolio-section="services">Services</a></li><li class="animfolio-nav__item"><a href="#projects" class="animfolio-nav__link" data-animfolio-section="projects">Projects</a></li><li class="animfolio-nav__item"><a href="#testimonials" class="animfolio-nav__link" data-animfolio-section="testimonials">Testimonials</a></li><li class="animfolio-nav__item"><a href="#stats" class="animfolio-nav__link" data-animfolio-section="stats">Stats</a></li><li class="animfolio-nav__item"><a href="#skills" class="animfolio-nav__link" data-animfolio-section="skills">Skills</a></li><li class="animfolio-nav__item"><a href="#achievements" class="animfolio-nav__link" data-animfolio-section="achievements">Achievements</a></li><li class="animfolio-nav__item"><a href="#contact" class="animfolio-nav__link" data-animfolio-section="contact">Contact</a></li></ul><button class="animfolio-theme-toggle" aria-label="Toggle dark mode"><span class="animfolio-theme-toggle__icon animfolio-theme-toggle__icon--sun" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span><span class="animfolio-theme-toggle__icon animfolio-theme-toggle__icon--moon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></span></button></nav><section id="hero" class="animfolio-section animfolio-section--hero animfolio-section--align-center" data-animfolio-section="hero"><div class="animfolio-inner">
+<div class="animfolio-hero">
+	<div class="animfolio-hero__content">
+		
+					<h1 class="animfolio-hero__name" data-animfolio-animate="fade-up">Julian Bennett</h1>
+		
+					<h2 class="animfolio-hero__title" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">Freelance Web Developer &amp; Consultant</h2>
+		
+					<div class="animfolio-hero__subtitle animfolio-hero__typed" data-animfolio-typed="[&quot;I help businesses grow online.&quot;,&quot;I deliver results, not just deliverables.&quot;,&quot;Available for your next project.&quot;]" data-animfolio-animate="fade-up" data-animfolio-delay="0.2">I help businesses grow online.</div>
+		
+					<div class="animfolio-hero__cta" data-animfolio-animate="fade-up" data-animfolio-delay="0.3">
+									<a href="#projects" class="animfolio-button animfolio-button--primary animfolio-hero__cta-primary">
+						View My Work					</a>
+									<a href="#contact" class="animfolio-button animfolio-button--secondary animfolio-hero__cta-secondary">
+						Get In Touch					</a>
+											</div>
+		
+					<div class="animfolio-hero__social animfolio-social-icons animfolio-social-icons--outline" data-animfolio-animate="fade-up" data-animfolio-delay="0.4">
+														<a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>							<span class="animfolio-social__label">Github</span>
+						</a>
+															<a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>							<span class="animfolio-social__label">Linkedin</span>
+						</a>
+															<a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>							<span class="animfolio-social__label">Twitter</span>
+						</a>
+															<a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg>							<span class="animfolio-social__label">Dribbble</span>
+						</a>
+															<a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>							<span class="animfolio-social__label">Email</span>
+						</a>
+							</div>
+		
+			</div>
+</div>
+</div><!-- .animfolio-inner --></section><section id="about" class="animfolio-section animfolio-section--about animfolio-section--align-center" data-animfolio-section="about"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">About Me</h2></div><div class="animfolio-about" data-animfolio-animate="fade-up">
+				<div class="animfolio-about__bio">I'm an independent web developer and consultant helping small businesses and startups build their digital presence. Over the past 6 years, I've completed 80+ projects across e-commerce, SaaS, and marketing sites. I care about delivering results, not just deliverables.
+
+I work as an extension of your team — translating business goals into shipped products, communicating clearly at every step, and treating your budget like it's my own. No agency overhead, no hand-offs to junior staff: you work directly with me from kickoff to launch.</div>
+				<div class="animfolio-about__fun-facts animfolio-stagger" data-animfolio-stagger="0.1">
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I work from a different coffee shop every week				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					My best client relationship started as a cold email				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I've never missed a deadline (knock on wood)				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I name all my test servers after pizza toppings				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					80+ projects shipped, zero ghosting				</div>
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="services" class="animfolio-section animfolio-section--services animfolio-section--align-center" data-animfolio-section="services"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Services</h2></div><div class="animfolio-services__grid animfolio-stagger" data-animfolio-stagger="0.1" data-animfolio-animate="fade-up">
+					<div class="animfolio-service-card animfolio-stagger__item">
+							<div class="animfolio-service-card__icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>				</div>
+						<h3 class="animfolio-service-card__title">Web Development</h3>
+							<p class="animfolio-service-card__body">Custom websites and web applications built to your specifications. WordPress, Shopify, or fully custom — whatever fits your business best.</p>
+										<span class="animfolio-service-card__price">From $4,500 / project</span>
+					</div>
+					<div class="animfolio-service-card animfolio-stagger__item">
+							<div class="animfolio-service-card__icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"></path></svg>				</div>
+						<h3 class="animfolio-service-card__title">Technical Consulting</h3>
+							<p class="animfolio-service-card__body">Technology stack evaluation, architecture planning, and technical roadmapping. Making the right technical decisions before writing a single line of code.</p>
+										<span class="animfolio-service-card__price">$150 / hour</span>
+					</div>
+					<div class="animfolio-service-card animfolio-stagger__item">
+							<div class="animfolio-service-card__icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>				</div>
+						<h3 class="animfolio-service-card__title">SEO &amp; Performance</h3>
+							<p class="animfolio-service-card__body">Technical SEO audits, Core Web Vitals optimization, and conversion rate improvement. Turning your website into a growth engine.</p>
+										<span class="animfolio-service-card__price">From $1,200 / audit</span>
+					</div>
+					<div class="animfolio-service-card animfolio-stagger__item">
+							<div class="animfolio-service-card__icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>				</div>
+						<h3 class="animfolio-service-card__title">Care &amp; Maintenance</h3>
+							<p class="animfolio-service-card__body">Ongoing updates, security monitoring, backups, and small enhancements. Keep your site fast, secure, and worry-free with a monthly retainer.</p>
+										<span class="animfolio-service-card__price">From $350 / month</span>
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="projects" class="animfolio-section animfolio-section--projects animfolio-section--align-center" data-animfolio-section="projects"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Featured Projects</h2></div>
+<div class="animfolio-grid animfolio-grid--2 animfolio-f03-projects animfolio-stagger" data-animfolio-stagger="0.15">
+					<article class="animfolio-project animfolio-f03-project-card animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<div class="animfolio-f03-project-card__chrome">
+				<span class="animfolio-f03-project-card__dots" aria-hidden="true">
+					<span class="animfolio-f03-project-card__dot"></span>
+					<span class="animfolio-f03-project-card__dot"></span>
+					<span class="animfolio-f03-project-card__dot"></span>
+				</span>
+							</div>
+			<div class="animfolio-f03-project-card__media">
+													<img src="./assets/images/project-tech.jpg" alt="Artisan Coffee Co. Website" class="animfolio-project__image animfolio-f03-project-card__image" width="600" height="400" loading="lazy" decoding="async">
+				
+							</div>
+
+			<div class="animfolio-f03-project-card__body">
+									<h3 class="animfolio-project__title animfolio-card__title animfolio-f03-project-card__title">Artisan Coffee Co. Website</h3>
+				
+									<p class="animfolio-project__description animfolio-f03-project-card__result">Custom WordPress website for a boutique coffee roaster. Online ordering, subscription management, and a location finder. Revenue increased 120% in the first quarter after launch.</p>
+				
+									<div class="animfolio-project__stack animfolio-card__tags animfolio-f03-project-card__tags">
+																				<span class="animfolio-card__tag">WordPress</span>
+																				<span class="animfolio-card__tag">WooCommerce</span>
+																				<span class="animfolio-card__tag">PHP</span>
+																				<span class="animfolio-card__tag">JavaScript</span>
+											</div>
+				
+									<div class="animfolio-project__links animfolio-card__footer animfolio-f03-project-card__links">
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+								View Case Study							</a>
+																							</div>
+				
+							</div>
+		</article>
+					<article class="animfolio-project animfolio-f03-project-card animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<div class="animfolio-f03-project-card__chrome">
+				<span class="animfolio-f03-project-card__dots" aria-hidden="true">
+					<span class="animfolio-f03-project-card__dot"></span>
+					<span class="animfolio-f03-project-card__dot"></span>
+					<span class="animfolio-f03-project-card__dot"></span>
+				</span>
+							</div>
+			<div class="animfolio-f03-project-card__media">
+													<img src="./assets/images/project-ecommerce.jpg" alt="StyleVault E-Commerce Store" class="animfolio-project__image animfolio-f03-project-card__image" width="600" height="400" loading="lazy" decoding="async">
+				
+							</div>
+
+			<div class="animfolio-f03-project-card__body">
+									<h3 class="animfolio-project__title animfolio-card__title animfolio-f03-project-card__title">StyleVault E-Commerce Store</h3>
+				
+									<p class="animfolio-project__description animfolio-f03-project-card__result">Full e-commerce build for a fashion brand with 500+ SKUs. Custom product filtering, size guides, wishlists, and integrated inventory management.</p>
+				
+									<div class="animfolio-project__stack animfolio-card__tags animfolio-f03-project-card__tags">
+																				<span class="animfolio-card__tag">Shopify</span>
+																				<span class="animfolio-card__tag">Liquid</span>
+																				<span class="animfolio-card__tag">JavaScript</span>
+																				<span class="animfolio-card__tag">Figma</span>
+											</div>
+				
+									<div class="animfolio-project__links animfolio-card__footer animfolio-f03-project-card__links">
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+								View Case Study							</a>
+																							</div>
+				
+							</div>
+		</article>
+					<article class="animfolio-project animfolio-f03-project-card animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<div class="animfolio-f03-project-card__chrome">
+				<span class="animfolio-f03-project-card__dots" aria-hidden="true">
+					<span class="animfolio-f03-project-card__dot"></span>
+					<span class="animfolio-f03-project-card__dot"></span>
+					<span class="animfolio-f03-project-card__dot"></span>
+				</span>
+							</div>
+			<div class="animfolio-f03-project-card__media">
+													<img src="./assets/images/project-dashboard.jpg" alt="TaskPilot SaaS MVP" class="animfolio-project__image animfolio-f03-project-card__image" width="600" height="400" loading="lazy" decoding="async">
+				
+							</div>
+
+			<div class="animfolio-f03-project-card__body">
+									<h3 class="animfolio-project__title animfolio-card__title animfolio-f03-project-card__title">TaskPilot SaaS MVP</h3>
+				
+									<p class="animfolio-project__description animfolio-f03-project-card__result">Built the MVP for a project management tool in 8 weeks. Kanban boards, time tracking, and team collaboration features. Helped the founder secure $500K in seed funding.</p>
+				
+									<div class="animfolio-project__stack animfolio-card__tags animfolio-f03-project-card__tags">
+																				<span class="animfolio-card__tag">React</span>
+																				<span class="animfolio-card__tag">Node.js</span>
+																				<span class="animfolio-card__tag">MongoDB</span>
+																				<span class="animfolio-card__tag">Stripe</span>
+											</div>
+				
+									<div class="animfolio-project__links animfolio-card__footer animfolio-f03-project-card__links">
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+								View Case Study							</a>
+																							</div>
+				
+							</div>
+		</article>
+					<article class="animfolio-project animfolio-f03-project-card animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<div class="animfolio-f03-project-card__chrome">
+				<span class="animfolio-f03-project-card__dots" aria-hidden="true">
+					<span class="animfolio-f03-project-card__dot"></span>
+					<span class="animfolio-f03-project-card__dot"></span>
+					<span class="animfolio-f03-project-card__dot"></span>
+				</span>
+							</div>
+			<div class="animfolio-f03-project-card__media">
+													<img src="./assets/images/project-startup.jpg" alt="GreenLeaf Marketing Site" class="animfolio-project__image animfolio-f03-project-card__image" width="600" height="400" loading="lazy" decoding="async">
+				
+							</div>
+
+			<div class="animfolio-f03-project-card__body">
+									<h3 class="animfolio-project__title animfolio-card__title animfolio-f03-project-card__title">GreenLeaf Marketing Site</h3>
+				
+									<p class="animfolio-project__description animfolio-f03-project-card__result">High-converting marketing website for a sustainability startup. Custom animations, lead capture forms, and CRM integration. Conversion rate of 4.8%.</p>
+				
+									<div class="animfolio-project__stack animfolio-card__tags animfolio-f03-project-card__tags">
+																				<span class="animfolio-card__tag">Next.js</span>
+																				<span class="animfolio-card__tag">Tailwind</span>
+																				<span class="animfolio-card__tag">HubSpot</span>
+																				<span class="animfolio-card__tag">Vercel</span>
+											</div>
+				
+									<div class="animfolio-project__links animfolio-card__footer animfolio-f03-project-card__links">
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+								View Case Study							</a>
+																							</div>
+				
+							</div>
+		</article>
+					<article class="animfolio-project animfolio-f03-project-card animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<div class="animfolio-f03-project-card__chrome">
+				<span class="animfolio-f03-project-card__dots" aria-hidden="true">
+					<span class="animfolio-f03-project-card__dot"></span>
+					<span class="animfolio-f03-project-card__dot"></span>
+					<span class="animfolio-f03-project-card__dot"></span>
+				</span>
+							</div>
+			<div class="animfolio-f03-project-card__media">
+													<img src="./assets/images/project-dashboard.jpg" alt="BrightDesk AI Support Assistant" class="animfolio-project__image animfolio-f03-project-card__image" width="600" height="400" loading="lazy" decoding="async">
+				
+							</div>
+
+			<div class="animfolio-f03-project-card__body">
+									<h3 class="animfolio-project__title animfolio-card__title animfolio-f03-project-card__title">BrightDesk AI Support Assistant</h3>
+				
+									<p class="animfolio-project__description animfolio-f03-project-card__result">Built a custom AI support chatbot for a SaaS client, grounded in their help docs using a RAG pipeline over a vector database. Handles 70% of incoming tickets automatically with citations, escalating only the tricky ones to humans. Cut first-response time from hours to seconds and saved the team ~25 support hours a week.</p>
+				
+									<div class="animfolio-project__stack animfolio-card__tags animfolio-f03-project-card__tags">
+																				<span class="animfolio-card__tag">OpenAI API</span>
+																				<span class="animfolio-card__tag">RAG</span>
+																				<span class="animfolio-card__tag">Pinecone</span>
+																				<span class="animfolio-card__tag">Next.js</span>
+																				<span class="animfolio-card__tag">Node.js</span>
+											</div>
+				
+									<div class="animfolio-project__links animfolio-card__footer animfolio-f03-project-card__links">
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+								View Case Study							</a>
+																							</div>
+				
+							</div>
+		</article>
+	</div>
+
+	<p class="animfolio-f03-clients__label" data-animfolio-animate="fade-up">
+		Trusted by teams I have worked with	</p>
+	<div class="animfolio-f03-clients" data-animfolio-animate="fade-up" role="list" aria-label="Client logos">
+												<span class="animfolio-f03-clients__name" role="listitem">Northwind Co.</span>
+															<span class="animfolio-f03-clients__name" role="listitem">Acme Studio</span>
+															<span class="animfolio-f03-clients__name" role="listitem">BrightLabs</span>
+															<span class="animfolio-f03-clients__name" role="listitem">Summit Group</span>
+															<span class="animfolio-f03-clients__name" role="listitem">Volta Tech</span>
+						</div>
+
+	<div class="animfolio-f03-badges" data-animfolio-animate="fade-up">
+					<span class="animfolio-f03-badge">
+				<span class="animfolio-f03-badge__icon" aria-hidden="true">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+						<polyline points="20 6 9 17 4 12"></polyline>
+					</svg>
+				</span>
+				100% On-Time Delivery			</span>
+					<span class="animfolio-f03-badge">
+				<span class="animfolio-f03-badge__icon" aria-hidden="true">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+						<polyline points="20 6 9 17 4 12"></polyline>
+					</svg>
+				</span>
+				5.0 Average Client Rating			</span>
+					<span class="animfolio-f03-badge">
+				<span class="animfolio-f03-badge__icon" aria-hidden="true">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+						<polyline points="20 6 9 17 4 12"></polyline>
+					</svg>
+				</span>
+				50+ Projects Shipped			</span>
+			</div>
+</div><!-- .animfolio-inner --></section><section id="testimonials" class="animfolio-section animfolio-section--testimonials animfolio-section--align-center" data-animfolio-section="testimonials"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">What Clients Say</h2></div><div class="animfolio-testimonials-carousel" data-animfolio-animate="fade-up">
+	<div class="animfolio-testimonials-carousel__track" id="animfolio-testimonials-track">
+					<div class="animfolio-testimonials-carousel__slide" id="testimonial-slide-0">
+									<div class="animfolio-testimonial animfolio-card animfolio-card--bordered">
+						<blockquote class="animfolio-testimonial__quote">They built our entire e-commerce platform in 6 weeks. Sales doubled in the first month. Best investment we've made in our business.</blockquote>
+						<div class="animfolio-card__footer">
+															<img src="./assets/images/avatar-1.jpg" alt="Rachel Simmons" class="animfolio-testimonial__photo" width="40" height="40" loading="lazy" decoding="async">
+														<div>
+								<strong class="animfolio-testimonial__author">Rachel Simmons</strong>
+																	<span class="animfolio-testimonial__role">Owner</span>
+																									<span class="animfolio-testimonial__company">, StyleVault Boutique</span>
+															</div>
+						</div>
+					</div>
+									<div class="animfolio-testimonial animfolio-card animfolio-card--bordered">
+						<blockquote class="animfolio-testimonial__quote">A rare freelancer who truly understands business goals, not just technical requirements. They suggested features we hadn't even considered that drove real revenue.</blockquote>
+						<div class="animfolio-card__footer">
+															<img src="./assets/images/avatar-2.jpg" alt="David Kim" class="animfolio-testimonial__photo" width="40" height="40" loading="lazy" decoding="async">
+														<div>
+								<strong class="animfolio-testimonial__author">David Kim</strong>
+																	<span class="animfolio-testimonial__role">CEO</span>
+																									<span class="animfolio-testimonial__company">, GreenLeaf Sustainability</span>
+															</div>
+						</div>
+					</div>
+							</div>
+					<div class="animfolio-testimonials-carousel__slide animfolio-testimonials-carousel__slide--single" id="testimonial-slide-1">
+									<div class="animfolio-testimonial animfolio-card animfolio-card--bordered">
+						<blockquote class="animfolio-testimonial__quote">We've worked with many developers over the years. None match their combination of speed, quality, and communication. Our go-to for every project now.</blockquote>
+						<div class="animfolio-card__footer">
+															<img src="./assets/images/avatar-3.jpg" alt="Lisa Chang" class="animfolio-testimonial__photo" width="40" height="40" loading="lazy" decoding="async">
+														<div>
+								<strong class="animfolio-testimonial__author">Lisa Chang</strong>
+																	<span class="animfolio-testimonial__role">Marketing Director</span>
+																									<span class="animfolio-testimonial__company">, Artisan Coffee Co.</span>
+															</div>
+						</div>
+					</div>
+							</div>
+			</div>
+
+	<div class="animfolio-testimonials-carousel__dots">
+					<a href="#testimonial-slide-0" class="animfolio-testimonials-carousel__dot animfolio-testimonials-carousel__dot--active" aria-label="Page 1"></a>
+					<a href="#testimonial-slide-1" class="animfolio-testimonials-carousel__dot " aria-label="Page 2"></a>
+			</div>
+</div>
+</div><!-- .animfolio-inner --></section><section id="stats" class="animfolio-section animfolio-section--stats animfolio-section--align-center" data-animfolio-section="stats"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">By the Numbers</h2></div><div class="animfolio-stats animfolio-stagger" data-animfolio-stagger="0.15">
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="80" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">80+</span>
+			<span class="animfolio-stat__label">Projects Completed</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="50" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">50+</span>
+			<span class="animfolio-stat__label">Happy Clients</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="98" data-animfolio-decimals="0" data-animfolio-suffix="%" data-animfolio-prefix="">98%</span>
+			<span class="animfolio-stat__label">Client Satisfaction</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="2" data-animfolio-decimals="0" data-animfolio-suffix="M+ $" data-animfolio-prefix="">2M+ $</span>
+			<span class="animfolio-stat__label">Revenue Generated for Clients</span>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="skills" class="animfolio-section animfolio-section--skills animfolio-section--align-center" data-animfolio-section="skills"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Skills &amp; Expertise</h2></div>
+<div class="animfolio-skills animfolio-skills--bars" data-animfolio-animate="fade-up">
+
+			<!-- Progress Bars -->
+					<div class="animfolio-grid animfolio-grid--2 animfolio-stagger" data-animfolio-stagger="0.1">
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">Services</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Project Management</span>
+										<span class="animfolio-skills__value">90%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 90%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Client Communication</span>
+										<span class="animfolio-skills__value">95%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 95%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Budget Planning</span>
+										<span class="animfolio-skills__value">85%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 85%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Proposal Writing</span>
+										<span class="animfolio-skills__value">88%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 88%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">Technical</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Web Development</span>
+										<span class="animfolio-skills__value">90%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 90%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>SEO / Marketing</span>
+										<span class="animfolio-skills__value">80%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 80%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Analytics</span>
+										<span class="animfolio-skills__value">75%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 75%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>E-Commerce</span>
+										<span class="animfolio-skills__value">82%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 82%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>AI Integration (LLMs / RAG)</span>
+										<span class="animfolio-skills__value">78%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 78%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">Business</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Contract Negotiation</span>
+										<span class="animfolio-skills__value">88%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 88%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Time Tracking</span>
+										<span class="animfolio-skills__value">92%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 92%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Invoicing / Billing</span>
+										<span class="animfolio-skills__value">85%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 85%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+							</div>
+		
+	
+	</div>
+</div><!-- .animfolio-inner --></section><section id="achievements" class="animfolio-section animfolio-section--achievements animfolio-section--align-center" data-animfolio-section="achievements"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Certifications</h2></div><div class="animfolio-grid animfolio-grid--3 animfolio-stagger" data-animfolio-stagger="0.1">
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">Generative AI with Large Language Models</h3>
+							<span class="animfolio-card__meta">DeepLearning.AI</span>
+										<span class="animfolio-card__meta">Mar 2025</span>
+								</div>
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">AWS Certified Solutions Architect – Associate</h3>
+							<span class="animfolio-card__meta">Amazon Web Services</span>
+										<span class="animfolio-card__meta">Nov 2024</span>
+								</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="contact" class="animfolio-section animfolio-section--contact animfolio-section--align-center" data-animfolio-section="contact"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Contact</h2></div><div class="animfolio-contact" data-animfolio-animate="fade-up">
+
+			<p class="animfolio-contact__heading">Let's build something that grows your business</p>
+				<p class="animfolio-contact__description">Have a project in mind or just want to talk through an idea? Tell me about your goals, timeline, and budget — I respond to every inquiry within one business day and offer a free 30-minute discovery call to scope the work.</p>
+	
+	<div class="animfolio-contact__layout">
+		<!-- Left: Contact Form -->
+		<div class="animfolio-contact__form-wrapper">
+							<form class="animfolio-form" novalidate="">
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-name">Name</label>
+						<input type="text" name="name" id="animfolio-name" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Name is required.</span>
+					</div>
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-email">Email</label>
+						<input type="email" name="email" id="animfolio-email" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Valid email is required.</span>
+					</div>
+										<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-message">Message</label>
+						<textarea name="message" id="animfolio-message" class="animfolio-form__textarea" rows="5" required="" aria-required="true"></textarea>
+						<span class="animfolio-form__error">Message is required.</span>
+					</div>
+											<div class="animfolio-form__honeypot">
+							<input type="text" name="animfolio_hp" tabindex="-1" autocomplete="off">
+						</div>
+										<input type="hidden" name="animfolio_ts" value="">
+					<input type="hidden" name="animfolio_js" value="">
+					<div class="animfolio-form__success">Thank you! I'll get back to you soon.</div>
+					<button type="submit" class="animfolio-button animfolio-button--primary animfolio-form__submit">
+						Send Message					</button>
+				</form>
+					</div>
+
+		<!-- Right: QR Code -->
+		<div class="animfolio-contact__qr-wrapper"><div class="animfolio-qr" data-animfolio-qr="" data-animfolio-vcard="QkVHSU46VkNBUkQNClZFUlNJT046My4wDQpGTjpKdWxpYW4gQmVubmV0dA0KTjpCZW5uZXR0O0p1bGlhbjs7Ow0KVElUTEU6RnJlZWxhbmNlIFdlYiBEZXZlbG9wZXIgJiBDb25zdWx0YW50DQpFTUFJTDtUWVBFPVdPUks6eW91QGV4YW1wbGUuY29tDQpVUkw6aHR0cHM6Ly95b3VyLXdlYnNpdGUuZXhhbXBsZQ0KTk9URTpJJ20gYW4gaW5kZXBlbmRlbnQgd2ViIGRldmVsb3BlciBhbmQgY29uc3VsdGFudCBoZWxwaW5nIHNtYWxsIGJ1c2luZXNzZXMgYW5kIHN0YXJ0dXBzIGJ1aWxkIHRoZWlyIGRpZ2l0YWwgcHJlc2VuY2UuIE92ZXIgdGhlIHBhc3QgNiB5ZWFyc1wsIEkndmUgY29tcGxldGVkIDgwKyBwcm9qZWN0cyBhY3Jvc3MgZS1jb21tZXJjZVwsIFNhYVNcLCBhbmQgbWFya1xuR2l0aHViOiBodHRwczovL2dpdGh1Yi5jb20veW91cnVzZXJuYW1lXG5MaW5rZWRpbjogaHR0cHM6Ly9saW5rZWRpbi5jb20vaW4veW91cnVzZXJuYW1lXG5Ud2l0dGVyOiBodHRwczovL3R3aXR0ZXIuY29tL3lvdXJ1c2VybmFtZVxuRHJpYmJibGU6IGh0dHBzOi8vZHJpYmJibGUuY29tL3lvdXJ1c2VybmFtZQ0KWC1TT0NJQUxQUk9GSUxFO1RZUEU9Z2l0aHViOmh0dHBzOi8vZ2l0aHViLmNvbS95b3VydXNlcm5hbWUNClgtU09DSUFMUFJPRklMRTtUWVBFPWxpbmtlZGluOmh0dHBzOi8vbGlua2VkaW4uY29tL2luL3lvdXJ1c2VybmFtZQ0KWC1TT0NJQUxQUk9GSUxFO1RZUEU9dHdpdHRlcjpodHRwczovL3R3aXR0ZXIuY29tL3lvdXJ1c2VybmFtZQ0KWC1TT0NJQUxQUk9GSUxFO1RZUEU9ZHJpYmJibGU6aHR0cHM6Ly9kcmliYmJsZS5jb20veW91cnVzZXJuYW1lDQpSRVY6MjAyNi0wNy0xMlQxMzoyMjo0NFoNCkVORDpWQ0FSRA0K"><div class="animfolio-qr__code" style="width:200px;height:200px"></div><p class="animfolio-qr__caption">Scan to save my contact</p><a href="./assets/contact.vcf" class="animfolio-qr__download animfolio-button animfolio-button--secondary" download="">Download vCard</a></div></div>	</div>
+
+</div>
+</div><!-- .animfolio-inner --></section><button class="animfolio-back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 15V5M10 5L5 10M10 5L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div class="animfolio-progress"><div class="animfolio-progress__bar"></div></div><div class="animfolio-footer-social animfolio-social-icons animfolio-social-icons--outline"><a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="animfolio-social__label">Github</span></a><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg><span class="animfolio-social__label">Linkedin</span></a><a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg><span class="animfolio-social__label">Twitter</span></a><a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg><span class="animfolio-social__label">Dribbble</span></a><a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span class="animfolio-social__label">Email</span></a></div></div>
+
+<div aria-label="Color scheme preview (demo only)" style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99999;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(18,18,24,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 30px rgba(0,0,0,.4)"><span style="padding:0 6px 0 10px;font:700 11px/1 -apple-system,sans-serif;letter-spacing:.4px;text-transform:uppercase;color:#8b90a0">Colors</span><a href="index.html" title="Professional Blue" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#2563EB;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Professional Blue</a><a href="v2.html" title="Coral Business" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#F43F5E;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Coral Business</a><a href="v3.html" aria-current="true" title="Teal Trust" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#0D9488;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Teal Trust</a></div>
+
+<script>
+var animfolioSettings = {"animationIntensity":"medium","respectReducedMotion":"1","colorScheme":"light","smoothScroll":"1","scrollBehavior":"smooth","customCursor":"","backToTop":"1","progressBar":"1","darkModeToggle":"1","debugMode":""};
+//# sourceURL=animfolio-engine-js-extra
+</script>
+<script src="./assets/js/wp-shim.js"></script>
+<script src="./assets/js/animfolio-engine.js"></script>
+<script src="./assets/js/modules/scroll-trigger.js"></script>
+<script src="./assets/js/modules/typed-text.js"></script>
+<script src="./assets/js/modules/counter.js"></script>
+<script src="./assets/js/modules/timeline-draw.js"></script>
+<script src="./assets/js/modules/stagger.js"></script>
+<script src="./assets/js/modules/parallax.js"></script>
+<script src="./assets/js/modules/progress-bar.js"></script>
+<script src="./assets/js/modules/smooth-scroll.js"></script>
+<script src="./assets/js/modules/theme-toggle.js"></script>
+<script src="./assets/js/vendor/qrcode-generator.min.js"></script>
+<script src="./assets/js/animfolio-qr.js"></script>
+<script src="./assets/js/animfolio-lightbox.js"></script>
+<script src="./assets/js/animfolio-casestudy.js"></script>
+<script src="./assets/js/format.js"></script>
+<script src="./assets/js/animfolio-contact-static.js"></script>
+</body>
+</html>

@@ -1,0 +1,645 @@
+/**
+ * Format 05: Photographer Minimal
+ *
+ * Full-bleed image galleries, masonry layout, thin fonts,
+ * minimal UI chrome, gold accent, maximum visual impact.
+ *
+ * @package AnimFolio
+ * @author     Rahul Mahadik
+ * @since   1.0.0
+ */
+
+/* ===== Base variable mappings (non-color + fonts) ===== */
+
+.animfolio-container--format-05 {
+	--animfolio-font-heading: 'Inter', sans-serif;
+	--animfolio-font-body: 'Inter', sans-serif;
+
+	font-family: 'Inter', sans-serif;
+	background: var(--animfolio-bg);
+	color: var(--animfolio-text);
+	overflow-x: clip;
+}
+
+/* ===== Dual-scheme color tokens =====
+ * Scoped under BOTH the format class AND the scheme class so the theme
+ * toggle re-skins the palette. The light gold (#C8A96E) is legible on
+ * dark bg but far too pale for text on white, so the light scheme uses a
+ * deep gold (#8B6914) which passes AA as text. --animfolio-accent-contrast
+ * is the foreground used ON the gold button fill (dark on light gold,
+ * white on deep gold).
+ * The no-scheme fallback uses the dark palette (default_scheme: dark).
+ */
+
+/* Fallback (before JS adds a scheme class) — dark palette */
+.animfolio-container--format-05 {
+	--animfolio-accent: #C8A96E;
+	--animfolio-accent-text: #C8A96E;
+	--animfolio-accent-contrast: #080808;
+	--animfolio-on-accent: #080808;
+	--animfolio-accent-hover: #B89555;
+	--animfolio-accent-light: rgba(200, 169, 110, 0.1);
+	--animfolio-accent-subtle: rgba(200, 169, 110, 0.05);
+	--animfolio-accent-shadow: rgba(200, 169, 110, 0.3);
+	--animfolio-accent-glow: rgba(200, 169, 110, 0.12);
+	--animfolio-secondary: #8B7355;
+	--animfolio-bg: #080808;
+	--animfolio-bg-secondary: #111111;
+	--animfolio-bg-tertiary: #1A1A1A;
+	--animfolio-text: #F5F5F5;
+	--animfolio-text-secondary: #9A9A9A;
+	--animfolio-text-muted: #8f8f8f;
+	--animfolio-border: rgba(200, 169, 110, 0.08);
+}
+
+/* Dark scheme */
+.animfolio-container--format-05.animfolio-container--dark {
+	--animfolio-accent: #C8A96E;
+	--animfolio-accent-text: #C8A96E;
+	--animfolio-accent-contrast: #080808;
+	--animfolio-on-accent: #080808;
+	--animfolio-accent-hover: #B89555;
+	--animfolio-accent-light: rgba(200, 169, 110, 0.1);
+	--animfolio-accent-subtle: rgba(200, 169, 110, 0.05);
+	--animfolio-accent-shadow: rgba(200, 169, 110, 0.3);
+	--animfolio-accent-glow: rgba(200, 169, 110, 0.12);
+	--animfolio-secondary: #8B7355;
+	--animfolio-bg: #080808;
+	--animfolio-bg-secondary: #111111;
+	--animfolio-bg-tertiary: #1A1A1A;
+	--animfolio-text: #F5F5F5;
+	--animfolio-text-secondary: #9A9A9A;
+	--animfolio-text-muted: #8f8f8f;
+	--animfolio-border: rgba(200, 169, 110, 0.08);
+}
+
+/* Light scheme — deep gold for AA text; white foreground on the gold fill */
+.animfolio-container--format-05.animfolio-container--light {
+	--animfolio-accent: var(--animfolio-accent, #8B6914);
+	--animfolio-accent-text: var(--animfolio-accent, #8B6914);
+	--animfolio-accent-contrast: #ffffff;
+	--animfolio-on-accent: #ffffff;
+	--animfolio-accent-hover: #735611;
+	--animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #8B6914) 10%, transparent);
+	--animfolio-accent-subtle: color-mix(in srgb, var(--animfolio-accent, #8B6914) 5%, transparent);
+	--animfolio-accent-shadow: color-mix(in srgb, var(--animfolio-accent, #8B6914) 30%, transparent);
+	--animfolio-accent-glow: color-mix(in srgb, var(--animfolio-accent, #8B6914) 12%, transparent);
+	--animfolio-secondary: var(--animfolio-secondary, #666666);
+	--animfolio-bg: #ffffff;
+	--animfolio-bg-secondary: #f7f7f7;
+	--animfolio-bg-tertiary: #ededed;
+	--animfolio-text: #111111;
+	--animfolio-text-secondary: #6e6e6e;
+	--animfolio-text-muted: #6e6e6e;
+	--animfolio-border: color-mix(in srgb, var(--animfolio-accent, #8B6914) 18%, transparent);
+}
+
+/* ===== Nav — transparent, becomes visible on scroll ===== */
+
+.animfolio-container--format-05 .animfolio-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	background: transparent;
+	padding: 0 2rem;
+	transition: background 0.4s ease, border-color 0.4s ease;
+	border-bottom: 1px solid transparent;
+}
+
+.animfolio-container--format-05 .animfolio-nav--scrolled {
+	background: color-mix(in srgb, var(--animfolio-bg) 92%, transparent);
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+	border-bottom-color: var(--animfolio-accent-light);
+}
+
+.animfolio-container--format-05 .animfolio-nav__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: var(--animfolio-container, 1200px);
+	margin: 0 auto;
+	height: 60px;
+}
+
+.animfolio-container--format-05 .animfolio-nav__logo {
+	font-family: var(--animfolio-font-heading);
+	font-size: 0.75rem;
+	font-weight: 300;
+	color: var(--animfolio-accent);
+	text-decoration: none;
+	letter-spacing: 0.3em;
+	text-transform: uppercase;
+}
+
+.animfolio-container--format-05 .animfolio-nav__links {
+	display: flex;
+	gap: 2.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.animfolio-container--format-05 .animfolio-nav__link {
+	font-size: 0.6875rem;
+	font-weight: 300;
+	color: var(--animfolio-text-secondary);
+	text-decoration: none;
+	letter-spacing: 0.25em;
+	text-transform: uppercase;
+	transition: color 0.3s ease;
+}
+
+.animfolio-container--format-05 .animfolio-nav__link:hover,
+.animfolio-container--format-05 .animfolio-nav__link--active {
+	color: var(--animfolio-accent);
+}
+
+/* ===== Hero — full bleed image ===== */
+
+.animfolio-container--format-05 .animfolio-section--hero {
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	align-items: flex-end;
+	padding: 0;
+	overflow: hidden;
+}
+
+/* Text-only hero (no background photo set): center the content in the full
+   viewport so the minimal hero is balanced (equal space above and below) and
+   reads as ONE clean section — not text pinned to the bottom over a void.
+   (With a photo present, the section keeps align-items:flex-end for the
+   text-over-image treatment.) */
+.animfolio-container--format-05 .animfolio-section--hero:not(:has(.animfolio-hero__background)) {
+	align-items: center;
+}
+
+.animfolio-container--format-05 .animfolio-hero__background {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+}
+
+.animfolio-container--format-05 .animfolio-hero__background img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.animfolio-container--format-05 .animfolio-hero__background::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(to top, color-mix(in srgb, var(--animfolio-bg) 95%, transparent) 0%, color-mix(in srgb, var(--animfolio-bg) 40%, transparent) 40%, transparent 70%),
+		linear-gradient(to bottom, color-mix(in srgb, var(--animfolio-bg) 30%, transparent) 0%, transparent 30%);
+}
+
+.animfolio-container--format-05 .animfolio-hero__content {
+	position: relative;
+	z-index: 1;
+	padding: 4rem;
+	width: 100%;
+}
+
+.animfolio-container--format-05 .animfolio-hero__name {
+	font-family: var(--animfolio-font-heading);
+	font-weight: 200;
+	font-size: clamp(2rem, 5vw, 4.5rem);
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--animfolio-text);
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+.animfolio-container--format-05 .animfolio-hero__title {
+	font-family: var(--animfolio-font-body);
+	font-weight: 300;
+	font-size: 0.875rem;
+	letter-spacing: 0.35em;
+	text-transform: uppercase;
+	color: var(--animfolio-accent);
+	margin-top: 0.75rem;
+}
+
+/* ===== Section titles — thin and minimal ===== */
+
+.animfolio-container--format-05 .animfolio-section__title {
+	font-family: var(--animfolio-font-heading);
+	font-weight: 300;
+	font-size: clamp(0.6875rem, 1.2vw, 0.8125rem);
+	letter-spacing: 0.35em;
+	text-transform: uppercase;
+	color: var(--animfolio-accent);
+	margin-bottom: 3rem;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+/* ===== Masonry gallery ===== */
+
+.animfolio-container--format-05 .animfolio-projects__grid {
+	columns: 3;
+	column-gap: 6px;
+}
+
+.animfolio-container--format-05 .animfolio-project {
+	break-inside: avoid;
+	margin-bottom: 6px;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.animfolio-container--format-05 .animfolio-project__image {
+	width: 100%;
+	overflow: hidden;
+}
+
+.animfolio-container--format-05 .animfolio-project__image img {
+	width: 100%;
+	display: block;
+	transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animfolio-container--format-05 .animfolio-project:hover .animfolio-project__image img {
+	transform: scale(1.04);
+}
+
+/* Project overlay on hover */
+.animfolio-container--format-05 .animfolio-project__overlay {
+	position: absolute;
+	inset: 0;
+	background: color-mix(in srgb, var(--animfolio-bg) 75%, transparent);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding: 1.5rem;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.animfolio-container--format-05 .animfolio-project:hover .animfolio-project__overlay {
+	opacity: 1;
+}
+
+.animfolio-container--format-05 .animfolio-project__title {
+	font-family: var(--animfolio-font-heading);
+	font-weight: 400;
+	font-size: 1.125rem;
+	letter-spacing: 0.05em;
+	color: #fff;
+}
+
+.animfolio-container--format-05 .animfolio-project__meta {
+	font-size: 0.6875rem;
+	letter-spacing: 0.25em;
+	text-transform: uppercase;
+	color: var(--animfolio-accent);
+	margin-top: 0.25rem;
+}
+
+/* Short caption inside the overlay — minimal, light */
+.animfolio-container--format-05 .animfolio-project__caption {
+	font-family: var(--animfolio-font-body);
+	font-weight: 300;
+	font-size: 0.8125rem;
+	line-height: 1.5;
+	letter-spacing: 0.02em;
+	color: rgba(255, 255, 255, 0.82);
+	margin-top: 0.4rem;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* Subtle "View" affordance — a thin underline that slides in, no button chrome */
+.animfolio-container--format-05 .animfolio-project__view {
+	align-self: flex-start;
+	margin-top: 0.75rem;
+	text-decoration: none;
+	position: relative;
+	transition: color 0.3s ease;
+}
+
+.animfolio-container--format-05 .animfolio-project__view::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: -3px;
+	width: 100%;
+	height: 1px;
+	background: var(--animfolio-accent);
+	transform: scaleX(0);
+	transform-origin: left center;
+	transition: transform 0.3s ease;
+}
+
+.animfolio-container--format-05 .animfolio-project:hover .animfolio-project__view::after,
+.animfolio-container--format-05 .animfolio-project__view:focus-visible::after {
+	transform: scaleX(1);
+}
+
+.animfolio-container--format-05 .animfolio-project__view:focus-visible {
+	outline: 1px solid var(--animfolio-accent);
+	outline-offset: 4px;
+}
+
+/* Graceful fallback when a project has no image — minimal gold frame, no glyph clutter */
+.animfolio-container--format-05 .animfolio-project__placeholder {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	background:
+		repeating-linear-gradient(
+			135deg,
+			var(--animfolio-bg-secondary) 0,
+			var(--animfolio-bg-secondary) 12px,
+			var(--animfolio-bg-tertiary) 12px,
+			var(--animfolio-bg-tertiary) 24px
+		);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.animfolio-container--format-05 .animfolio-project__placeholder-mark {
+	width: 40px;
+	height: 40px;
+	border: 1px solid var(--animfolio-accent-glow);
+	border-radius: 50%;
+	position: relative;
+}
+
+.animfolio-container--format-05 .animfolio-project__placeholder-mark::after {
+	content: '';
+	position: absolute;
+	inset: 35%;
+	border-radius: 50%;
+	background: var(--animfolio-accent-light);
+}
+
+/* When there is no image, the overlay should not hide the placeholder on hover only —
+   keep title legible by anchoring the gradient regardless. */
+.animfolio-container--format-05 .animfolio-project:has(.animfolio-project__placeholder) .animfolio-project__overlay {
+	opacity: 1;
+	background: linear-gradient(
+		to top,
+		color-mix(in srgb, var(--animfolio-bg) 90%, transparent) 0%,
+		transparent 70%
+	);
+}
+
+/* ===== EXIF data display ===== */
+
+.animfolio-container--format-05 .animfolio-f05-exif {
+	display: flex;
+	gap: 1.5rem;
+	font-size: 0.75rem;
+	letter-spacing: 0.1em;
+	color: var(--animfolio-text-secondary);
+	margin-top: 0.5rem;
+}
+
+/* ===== Cards — borderless minimal ===== */
+
+.animfolio-container--format-05 .animfolio-card {
+	background: transparent;
+	border: none;
+	padding: 1.5rem 0;
+	border-bottom: 1px solid var(--animfolio-border);
+	overflow: hidden;
+}
+
+/* ===== Buttons — luxurious gold outline ===== */
+
+.animfolio-container--format-05 .animfolio-button--primary,
+.animfolio-container--format-05 a.animfolio-button--primary {
+	background: var(--animfolio-accent);
+	color: var(--animfolio-accent-contrast);
+	border: 1px solid var(--animfolio-accent);
+	border-radius: 0;
+	font-size: 0.6875rem;
+	letter-spacing: 0.25em;
+	text-transform: uppercase;
+	padding: 0.875rem 2.5rem;
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	line-height: 1.4;
+	white-space: nowrap;
+	text-decoration: none;
+	transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.animfolio-container--format-05 .animfolio-button--primary:hover,
+.animfolio-container--format-05 a.animfolio-button--primary:hover {
+	background: var(--animfolio-accent-hover);
+	color: var(--animfolio-accent-contrast);
+	box-shadow: 0 4px 20px var(--animfolio-accent-shadow);
+}
+
+.animfolio-container--format-05 .animfolio-button--secondary,
+.animfolio-container--format-05 a.animfolio-button--secondary {
+	background: transparent;
+	color: var(--animfolio-accent);
+	border: 1px solid var(--animfolio-accent);
+	border-radius: 0;
+	font-size: 0.6875rem;
+	letter-spacing: 0.25em;
+	text-transform: uppercase;
+	padding: 0.875rem 2.5rem;
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	line-height: 1.4;
+	white-space: nowrap;
+	text-decoration: none;
+	transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.animfolio-container--format-05 .animfolio-button--secondary:hover,
+.animfolio-container--format-05 a.animfolio-button--secondary:hover {
+	background: var(--animfolio-accent);
+	color: var(--animfolio-accent-contrast);
+	box-shadow: 0 4px 20px var(--animfolio-accent-shadow);
+}
+
+/* ===== About — single column centered ===== */
+
+.animfolio-container--format-05 .animfolio-section--about {
+	max-width: 640px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.animfolio-container--format-05 .animfolio-about__text {
+	font-weight: 300;
+	font-size: 1.125rem;
+	line-height: 1.8;
+	color: var(--animfolio-text-secondary);
+}
+
+/* ===== Stats — inline minimal ===== */
+
+.animfolio-container--format-05 .animfolio-stats__grid {
+	display: flex;
+	justify-content: center;
+	gap: 4rem;
+}
+
+.animfolio-container--format-05 .animfolio-stat {
+	text-align: center;
+}
+
+.animfolio-container--format-05 .animfolio-stat__number {
+	font-family: var(--animfolio-font-heading);
+	font-weight: 200;
+	font-size: clamp(2rem, 4vw, 3rem);
+	color: var(--animfolio-accent);
+}
+
+.animfolio-container--format-05 .animfolio-stat__label {
+	font-size: 0.6875rem;
+	letter-spacing: 0.25em;
+	text-transform: uppercase;
+	color: var(--animfolio-text-secondary);
+	margin-top: 0.25rem;
+}
+
+/* ===== Contact — minimal form ===== */
+
+.animfolio-container--format-05 .animfolio-form__input,
+.animfolio-container--format-05 .animfolio-form__textarea {
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid var(--animfolio-accent-glow);
+	border-radius: 0;
+	padding: 1rem 0;
+	font-family: var(--animfolio-font-body);
+	font-weight: 300;
+	letter-spacing: 0.05em;
+}
+
+.animfolio-container--format-05 .animfolio-form__input:focus,
+.animfolio-container--format-05 .animfolio-form__textarea:focus {
+	border-bottom-color: var(--animfolio-accent);
+	outline: none;
+}
+
+.animfolio-container--format-05 .animfolio-form__submit {
+	background: transparent;
+	color: var(--animfolio-accent);
+	border: 1px solid var(--animfolio-accent);
+	padding: 0.875rem 2.5rem;
+	font-size: 0.6875rem;
+	letter-spacing: 0.25em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background 0.2s ease, color 0.2s ease;
+}
+
+.animfolio-container--format-05 .animfolio-form__submit:hover {
+	background: var(--animfolio-accent);
+	color: var(--animfolio-accent-contrast);
+}
+
+/* ===== Lightbox ===== */
+
+.animfolio-container--format-05 .animfolio-f05-lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	background: rgba(0, 0, 0, 0.97);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+}
+
+.animfolio-container--format-05 .animfolio-f05-lightbox--active {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.animfolio-container--format-05 .animfolio-f05-lightbox img {
+	max-width: 90vw;
+	max-height: 90vh;
+	object-fit: contain;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 1024px) {
+	.animfolio-container--format-05 .animfolio-projects__grid {
+		columns: 2;
+	}
+}
+
+@media (max-width: 768px) {
+	.animfolio-container--format-05 .animfolio-nav__links {
+		display: none;
+	}
+
+	.animfolio-container--format-05 .animfolio-hero__content {
+		padding: 2.5rem 2rem;
+	}
+
+	.animfolio-container--format-05 .animfolio-stats__grid {
+		gap: 2.5rem;
+		flex-wrap: wrap;
+	}
+
+	.animfolio-container--format-05 .animfolio-section--about {
+		padding-inline: 1.5rem;
+	}
+}
+
+@media (max-width: 640px) {
+	.animfolio-container--format-05 .animfolio-projects__grid {
+		columns: 1;
+	}
+
+	.animfolio-container--format-05 .animfolio-hero__content {
+		padding: 2rem;
+	}
+
+	.animfolio-container--format-05 .animfolio-stats__grid {
+		gap: 2rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.animfolio-container--format-05 .animfolio-nav {
+		padding: 0 1rem;
+	}
+
+	.animfolio-container--format-05 .animfolio-hero__name {
+		font-size: clamp(1.5rem, 8vw, 2.5rem);
+		letter-spacing: 0.1em;
+	}
+
+	.animfolio-container--format-05 .animfolio-stats__grid {
+		flex-direction: column;
+		gap: 1.5rem;
+		align-items: center;
+	}
+
+	.animfolio-container--format-05 .animfolio-button--primary,
+	.animfolio-container--format-05 .animfolio-button--secondary {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.animfolio-container--format-05 .animfolio-f05-exif {
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+}

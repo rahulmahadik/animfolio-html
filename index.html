@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimFolio — 15 Free Animated Portfolio Templates (HTML)</title>
+<meta name="description" content="15 professionally designed, fully animated portfolio website templates. Free, open source, pure HTML/CSS/JS — no build step. Works offline. Deploy free on GitHub Pages.">
+<meta property="og:title" content="AnimFolio — 15 Free Animated Portfolio Templates">
+<meta property="og:description" content="Free, offline, no-build portfolio templates. Pick one, edit your details, host free on GitHub Pages.">
+<style>
+  :root{--bg:#0b0b10;--bg2:#12121a;--card:#15151f;--line:rgba(255,255,255,.10);--tx:#e9eaf2;--tx2:#a0a4b8;--accent:#7F77DD;--accent2:#1D9E75}
+  *{margin:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  .hero{position:relative;overflow:hidden;text-align:center;padding:88px 0 56px;
+    background:radial-gradient(760px 420px at 15% -10%,rgba(127,119,221,.30),transparent 60%),radial-gradient(760px 420px at 90% 0%,rgba(29,158,117,.22),transparent 60%)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#cdd2ff;border:1px solid rgba(127,119,221,.4);background:rgba(127,119,221,.12);padding:6px 14px;border-radius:999px;margin-bottom:22px}
+  h1{font-size:clamp(34px,6vw,58px);line-height:1.05;font-weight:800;letter-spacing:-1.5px;margin-bottom:18px}
+  h1 .g{background:linear-gradient(95deg,#b8b2ff,#5fd6a8);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{max-width:680px;margin:0 auto 26px;font-size:18px;color:var(--tx2)}
+  .feats{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 auto 30px;max-width:760px}
+  .feats span{font-size:13px;font-weight:600;color:var(--tx2);background:var(--bg2);border:1px solid var(--line);padding:7px 13px;border-radius:8px}
+  .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:13px 22px;border-radius:10px;transition:.15s;border:1px solid transparent}
+  .btn--primary{background:linear-gradient(135deg,var(--accent),#6c63cf);color:#fff}
+  .btn--primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .btn--ghost{border-color:var(--line);color:var(--tx);background:var(--bg2)}
+  .btn--ghost:hover{border-color:var(--accent)}
+  section.grid-sec{padding:56px 0 40px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+  .card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.18s}
+  .card:hover{transform:translateY(-4px);border-color:rgba(127,119,221,.5);box-shadow:0 18px 50px -20px rgba(0,0,0,.7)}
+  .card__shot{aspect-ratio:1200/750;overflow:hidden;background:var(--bg2);border-bottom:1px solid var(--line)}
+  .card__shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+  .card__body{padding:16px 18px 18px}
+  .card__row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .card__num{font-size:12px;font-weight:800;color:var(--accent);background:rgba(127,119,221,.14);border-radius:6px;padding:2px 7px}
+  .card__title{font-size:18px;font-weight:750;flex:1}
+  .badge{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;padding:3px 9px;border-radius:999px}
+  .badge--dark{background:#1e1e2b;color:#b8bce0;border:1px solid var(--line)}
+  .badge--light{background:#f1f2f7;color:#2a2c38}
+  .card__for{font-size:14px;color:var(--tx2);min-height:40px}
+  .card__foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+  .dots{display:flex;gap:6px}
+  .dot{width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+  .card__go{font-size:13px;font-weight:700;color:var(--accent)}
+  .band{background:linear-gradient(135deg,rgba(127,119,221,.10),rgba(29,158,117,.08));border:1px solid var(--line);border-radius:16px;padding:30px;margin:20px 0 46px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+  .band h2{font-size:22px;margin-bottom:4px}
+  .band p{color:var(--tx2);font-size:15px;max-width:560px}
+  footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--tx2);font-size:14px;text-align:center}
+  footer a{color:var(--tx);border-bottom:1px solid var(--line)}
+  @media(max-width:640px){.hero{padding:60px 0 40px}.card__for{min-height:0}}
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <span class="kicker">● 15 templates · 100% free · open source</span>
+      <h1>Animated portfolio templates<br><span class="g">that go live in one click</span></h1>
+      <p class="sub">Pick a design, drop in your details, and host it free forever on GitHub Pages. Pure HTML, CSS &amp; vanilla JS — no build step, no framework, works offline.</p>
+      <div class="feats">
+        <span>15 formats × 3 color schemes</span><span>Dark / light toggle</span><span>Scannable QR vCard</span><span>Working contact form</span><span>Fully responsive</span><span>Zero dependencies</span>
+      </div>
+      <div class="cta">
+        <a class="btn btn--primary" href="#formats">Browse the 15 templates ↓</a>
+        <a class="btn btn--ghost" href="https://github.com/rahulmahadik/animfolio-html#-deploy-your-own-free-in-5-minutes">Deploy your own (free guide)</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="grid-sec" id="formats">
+    <div class="wrap">
+      <div class="grid">
+<a class="card" href="./format-01-developer/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-01-developer.png" alt="Developer Classic portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">01</span><h3 class="card__title">Developer Classic</h3><span class="badge badge--dark">dark</span></div>
+        <p class="card__for">Software developers, engineers</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#7F77DD" title="Default Purple"></span><span class="dot" style="background:#238636" title="GitHub Green"></span><span class="dot" style="background:#007ACC" title="VS Code Blue"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-02-designer/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-02-designer.png" alt="Designer Showcase portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">02</span><h3 class="card__title">Designer Showcase</h3><span class="badge badge--light">light</span></div>
+        <p class="card__for">UI/UX designers, graphic designers</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#E8526E" title="Rose &amp; Tangerine"></span><span class="dot" style="background:#7B6BA4" title="Lavender Dream"></span><span class="dot" style="background:#5A7D62" title="Sage &amp; Terracotta"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-03-freelancer/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-03-freelancer.png" alt="Freelancer Pro portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">03</span><h3 class="card__title">Freelancer Pro</h3><span class="badge badge--light">light</span></div>
+        <p class="card__for">Freelancers, consultants</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#2563EB" title="Professional Blue"></span><span class="dot" style="background:#F43F5E" title="Coral Business"></span><span class="dot" style="background:#0D9488" title="Teal Trust"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-04-agency/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-04-agency.png" alt="Agency Bold portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">04</span><h3 class="card__title">Agency Bold</h3><span class="badge badge--dark">dark</span></div>
+        <p class="card__for">Small agencies, studios</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#FF4D4D" title="Red &amp; Gold"></span><span class="dot" style="background:#7C3AED" title="Electric Violet"></span><span class="dot" style="background:#0891B2" title="Neon Cyan"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-05-photographer/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-05-photographer.png" alt="Photographer Minimal portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">05</span><h3 class="card__title">Photographer Minimal</h3><span class="badge badge--dark">dark</span></div>
+        <p class="card__for">Photographers, videographers</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#D4A853" title="Gold &amp; Dark"></span><span class="dot" style="background:#808080" title="Pure Mono"></span><span class="dot" style="background:#C17B4A" title="Film Warm"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-06-writer/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-06-writer.png" alt="Writer Elegant portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">06</span><h3 class="card__title">Writer Elegant</h3><span class="badge badge--light">light</span></div>
+        <p class="card__for">Writers, journalists, content creators</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#8B5E3C" title="Walnut &amp; Sage"></span><span class="dot" style="background:#A08060" title="Ink &amp; Parchment"></span><span class="dot" style="background:#B8607A" title="Wine &amp; Olive"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-07-data-scientist/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-07-data-scientist.png" alt="Data Scientist portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">07</span><h3 class="card__title">Data Scientist</h3><span class="badge badge--light">light</span></div>
+        <p class="card__for">Data scientists, researchers, academics</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#2563EB" title="Notebook Blue"></span><span class="dot" style="background:#C05E10" title="Jupyter Orange"></span><span class="dot" style="background:#6366F1" title="Academic Gray"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-08-product-manager/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-08-product-manager.png" alt="Product Manager portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">08</span><h3 class="card__title">Product Manager</h3><span class="badge badge--dark">dark</span></div>
+        <p class="card__for">Product managers, program managers</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#8B5CF6" title="Purple &amp; Cyan"></span><span class="dot" style="background:#6366F1" title="Indigo Focus"></span><span class="dot" style="background:#7B8DA3" title="Slate Pro"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-09-startup-founder/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-09-startup-founder.png" alt="Startup Founder portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">09</span><h3 class="card__title">Startup Founder</h3><span class="badge badge--dark">dark</span></div>
+        <p class="card__for">Founders, entrepreneurs</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#6366F1" title="SaaS Startup"></span><span class="dot" style="background:#4F46E5" title="Fintech"></span><span class="dot" style="background:#7C3AED" title="Bold Founder"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-10-consultant/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-10-consultant.png" alt="Consultant Executive portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">10</span><h3 class="card__title">Consultant Executive</h3><span class="badge badge--dark">dark</span></div>
+        <p class="card__for">Management consultants, advisors</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#D4A853" title="Executive Navy"></span><span class="dot" style="background:#2563EB" title="Corporate Steel"></span><span class="dot" style="background:#E11D48" title="Prestige Burgundy"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-11-student/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-11-student.png" alt="Student Fresh portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">11</span><h3 class="card__title">Student Fresh</h3><span class="badge badge--light">light</span></div>
+        <p class="card__for">Students, recent graduates</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#D97706" title="Sunshine"></span><span class="dot" style="background:#DB2777" title="Berry Pop"></span><span class="dot" style="background:#E11D48" title="Coral Crush"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-12-creative/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-12-creative.png" alt="Creative Portfolio portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">12</span><h3 class="card__title">Creative Portfolio</h3><span class="badge badge--dark">dark</span></div>
+        <p class="card__for">Creative directors, art directors</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#E11D48" title="Rose Bold"></span><span class="dot" style="background:#2563EB" title="Electric Blue"></span><span class="dot" style="background:#757575" title="Monochrome Pop"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-13-minimalist/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-13-minimalist.png" alt="Minimalist Zen portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">13</span><h3 class="card__title">Minimalist Zen</h3><span class="badge badge--light">light</span></div>
+        <p class="card__for">Anyone preferring extreme simplicity</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#0D0D0D" title="Pure Light"></span><span class="dot" style="background:#D97706" title="Warm Minimal"></span><span class="dot" style="background:#2563EB" title="Cool Minimal"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-14-gamified/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-14-gamified.png" alt="Gamified Quest portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">14</span><h3 class="card__title">Gamified Quest</h3><span class="badge badge--dark">dark</span></div>
+        <p class="card__for">Game developers, creative technologists</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#FFC53D" title="Classic RPG"></span><span class="dot" style="background:#C44CE8" title="Cyberpunk"></span><span class="dot" style="background:#FF8A5B" title="Retro Arcade"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+<a class="card" href="./format-15-cli-terminal/index.html">
+      <div class="card__shot"><img loading="lazy" src="./gallery-assets/thumbs/format-15-cli-terminal.png" alt="CLI Terminal portfolio template preview" width="1200" height="750"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__num">15</span><h3 class="card__title">CLI Terminal</h3><span class="badge badge--dark">dark</span></div>
+        <p class="card__for">Backend developers, DevOps engineers, hackers</p>
+        <div class="card__foot"><div class="dots"><span class="dot" style="background:#00FF41" title="Matrix Green"></span><span class="dot" style="background:#B45309" title="Amber Terminal"></span><span class="dot" style="background:#0369A1" title="Phosphor Blue"></span></div><span class="card__go">View demo →</span></div>
+      </div>
+    </a>
+      </div>
+
+      <div class="band">
+        <div>
+          <h2>Prefer a no-code admin panel?</h2>
+          <p>Same 15 designs, editable from a WordPress dashboard — drag-and-drop sections, fill it with your details (or AI), 1-click demo import. Free on WordPress.org.</p>
+        </div>
+        <a class="btn btn--primary" href="https://wordpress.org/plugins/animfolio/">Get the WordPress plugin →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>Each template: open the folder, edit <code>index.html</code>, push. <a href="https://github.com/rahulmahadik/animfolio-html">Full guide &amp; source on GitHub</a> · <a href="https://wordpress.org/plugins/animfolio/">WordPress plugin</a></p>
+      <p style="margin-top:10px">AnimFolio · GPL-2.0-or-later · Built by <a href="https://rahulmahadik.com">Rahul Mahadik</a></p>
+    </div>
+  </footer>
+</body>
+</html>

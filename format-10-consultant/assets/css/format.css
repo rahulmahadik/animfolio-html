@@ -1,0 +1,602 @@
+/**
+ * AnimFolio — Format 10: Consultant Executive
+ * Premium corporate aesthetic with navy/gold palette and Cormorant Garamond serif.
+ */
+
+.animfolio-container--format-10 {
+	--animfolio-font-heading: 'Cormorant Garamond', serif;
+	--animfolio-font-body: 'Inter', sans-serif;
+
+	font-family: 'Inter', sans-serif;
+	background: var(--animfolio-bg);
+	color: var(--animfolio-text);
+	overflow-x: hidden;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   DUAL-SCHEME PALETTE
+   Both private --af10-* vars and the --animfolio-* mapping (read by
+   base.css) are scoped per scheme so the theme toggle works and text
+   stays legible in either mode. The no-scheme block below the dark
+   block doubles as the pre-JS fallback (default_scheme = dark).
+   ────────────────────────────────────────────────────────────── */
+
+/* Dark scheme (config default_colors.dark) + no-scheme fallback */
+.animfolio-container--format-10,
+.animfolio-container--format-10.animfolio-container--dark {
+	--af10-accent: var(--animfolio-accent, #D4A853);
+	--af10-accent-rgb: 212, 168, 83;
+	--af10-secondary: var(--animfolio-secondary, #7C8DB0);
+	--af10-bg: #0F172A;
+	--af10-bg-secondary: #1E293B;
+	--af10-text: #F8FAFC;
+	--af10-text-muted: #94A3B8;
+	--af10-border: color-mix(in srgb, var(--animfolio-accent, #D4A853) 15%, transparent);
+	/* Text color sitting ON the accent (gold) button/CTA fill */
+	--af10-on-accent: #0F172A;
+
+	--animfolio-accent: var(--animfolio-accent, #D4A853);
+	--animfolio-accent-text: var(--animfolio-accent, #D4A853);
+	--animfolio-accent-hover: #E5BD6D;
+	--animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #D4A853) 10%, transparent);
+	--animfolio-accent-shadow: color-mix(in srgb, var(--animfolio-accent, #D4A853) 30%, transparent);
+	--animfolio-accent-glow: color-mix(in srgb, var(--animfolio-accent, #D4A853) 15%, transparent);
+	--animfolio-accent-subtle: color-mix(in srgb, var(--animfolio-accent, #D4A853) 6%, transparent);
+	--animfolio-secondary: var(--animfolio-secondary, #7C8DB0);
+	--animfolio-bg: #0F172A;
+	--animfolio-bg-secondary: #1E293B;
+	--animfolio-bg-tertiary: #283548;
+	--animfolio-text: #F8FAFC;
+	--animfolio-text-secondary: #CBD5E1;
+	--animfolio-text-muted: #94A3B8;
+	--animfolio-border: color-mix(in srgb, var(--animfolio-accent, #D4A853) 15%, transparent);
+}
+
+/* Light scheme (config default_colors.light) */
+.animfolio-container--format-10.animfolio-container--light {
+	--af10-accent: var(--animfolio-accent, #7D6416);
+	--af10-accent-rgb: 125, 100, 22;
+	--af10-secondary: var(--animfolio-secondary, #64748B);
+	--af10-bg: #FAFAF8;
+	--af10-bg-secondary: #F1EDE4;
+	--af10-text: #0F172A;
+	/* config muted #64748B fails AA on bg_secondary (4.07); darkened to #5A687C (5.42/4.85) */
+	--af10-text-muted: #5A687C;
+	--af10-border: rgba(15, 23, 42, 0.1);
+	/* White text on the dark-gold light-mode button (5.67) — navy would fail (3.15) */
+	--af10-on-accent: #FFFFFF;
+
+	--animfolio-accent: var(--animfolio-accent, #7D6416);
+	--animfolio-accent-text: var(--animfolio-accent, #7D6416);
+	--animfolio-accent-hover: #5F4C11;
+	--animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #7D6416) 10%, transparent);
+	--animfolio-accent-shadow: color-mix(in srgb, var(--animfolio-accent, #7D6416) 25%, transparent);
+	--animfolio-accent-glow: color-mix(in srgb, var(--animfolio-accent, #7D6416) 15%, transparent);
+	--animfolio-accent-subtle: color-mix(in srgb, var(--animfolio-accent, #7D6416) 6%, transparent);
+	--animfolio-secondary: var(--animfolio-secondary, #64748B);
+	--animfolio-bg: #FAFAF8;
+	--animfolio-bg-secondary: #F1EDE4;
+	--animfolio-bg-tertiary: #E8E1D2;
+	--animfolio-text: #0F172A;
+	--animfolio-text-secondary: #475569;
+	--animfolio-text-muted: #5A687C;
+	--animfolio-border: rgba(15, 23, 42, 0.1);
+}
+
+/* ── Nav: Premium dark navy with gold accent ── */
+
+.animfolio-container--format-10 .animfolio-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	background: rgba(15, 23, 42, 0.95);
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+	border-bottom: 1px solid var(--animfolio-border);
+	padding: 0 2rem;
+	overflow: hidden;
+}
+
+.animfolio-container--format-10 .animfolio-nav__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: var(--animfolio-container, 1200px);
+	margin: 0 auto;
+	height: 64px;
+}
+
+.animfolio-container--format-10 .animfolio-nav__logo {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 1.25rem;
+	font-weight: 600;
+	/* Fixed dark-scheme gold: nav bar is always navy, so the light-mode
+	   dark-gold token (#7D6416) would be low-contrast here. */
+	color: var(--animfolio-accent, #D4A853);
+	text-decoration: none;
+	letter-spacing: 0.02em;
+}
+
+.animfolio-container--format-10 .animfolio-nav__links {
+	display: flex;
+	gap: 2.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/*
+ * The nav bar background is hardcoded navy (rgba(15,23,42,0.95)) in BOTH
+ * schemes. The scheme tokens (--af10-text-muted / --af10-accent) darken in
+ * light mode (#5A687C / #7D6416), which would be low-contrast on the navy bar.
+ * So the nav links use fixed navy-legible values instead of scheme tokens:
+ * light slate at rest (~5.4:1 on navy) and the dark-scheme gold on
+ * hover/active (~6:1 on navy).
+ */
+.animfolio-container--format-10 .animfolio-nav__link {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: #94A3B8;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	transition: color 0.2s ease;
+	position: relative;
+}
+
+.animfolio-container--format-10 .animfolio-nav__link::after {
+	content: '';
+	position: absolute;
+	bottom: -4px;
+	left: 0;
+	width: 0;
+	height: 1px;
+	background: var(--animfolio-accent, #D4A853);
+	transition: width 0.3s ease;
+}
+
+.animfolio-container--format-10 .animfolio-nav__link:hover,
+.animfolio-container--format-10 .animfolio-nav__link--active {
+	color: var(--animfolio-accent, #D4A853);
+}
+
+.animfolio-container--format-10 .animfolio-nav__link:hover::after,
+.animfolio-container--format-10 .animfolio-nav__link--active::after {
+	width: 100%;
+}
+
+/* ── Hero: Executive presence ── */
+
+.animfolio-container--format-10 .animfolio-hero {
+	box-sizing: border-box;
+	min-height: 100vh;
+	min-height: 100dvh;
+	display: flex;
+	align-items: center;
+	padding: 80px 0;
+	position: relative;
+	border-bottom: 1px solid var(--af10-border);
+}
+
+.animfolio-container--format-10 .animfolio-hero::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: linear-gradient(90deg, transparent, var(--af10-accent), transparent);
+}
+
+.animfolio-container--format-10 .animfolio-hero__label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.25em;
+	color: var(--af10-accent);
+	margin-bottom: 20px;
+}
+
+.animfolio-container--format-10 .animfolio-hero__title {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: clamp(3rem, 7vw, 5.5rem);
+	font-weight: 300;
+	line-height: 1.1;
+	margin-bottom: 24px;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.animfolio-container--format-10 .animfolio-hero__title strong {
+	font-weight: 600;
+	color: var(--af10-accent);
+}
+
+.animfolio-container--format-10 .animfolio-hero__summary {
+	font-size: 1.15rem;
+	color: var(--af10-text-muted);
+	max-width: 520px;
+	line-height: 1.8;
+	margin-bottom: 40px;
+}
+
+/* ── About section: ensure text visibility on dark navy ── */
+
+.animfolio-container--format-10 .animfolio-about__bio {
+	color: var(--animfolio-text-secondary);
+	font-size: 1.15rem;
+	line-height: 1.8;
+}
+
+.animfolio-container--format-10 .animfolio-about__fun-fact {
+	color: var(--af10-text-muted);
+	background: var(--af10-bg-secondary);
+	border-color: var(--af10-border);
+}
+
+.animfolio-container--format-10 p {
+	color: var(--animfolio-text-secondary);
+}
+
+/* ── Links: gold on navy ── */
+
+.animfolio-container--format-10 a {
+	color: var(--af10-accent);
+}
+
+.animfolio-container--format-10 a:hover {
+	color: var(--animfolio-accent-hover);
+}
+
+/* ── Buttons: dark text on gold background ── */
+
+.animfolio-container--format-10 .animfolio-button--primary,
+.animfolio-container--format-10 a.animfolio-button--primary {
+	background: var(--af10-accent);
+	color: var(--af10-on-accent);
+	border: none;
+	border-radius: 0;
+	font-family: var(--animfolio-font-body);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	padding: 1rem 2.25rem;
+	box-shadow: 0 4px 16px var(--animfolio-accent-shadow);
+	transition: background 0.2s ease, box-shadow 0.2s ease;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.animfolio-container--format-10 .animfolio-button--primary:hover,
+.animfolio-container--format-10 a.animfolio-button--primary:hover {
+	color: var(--af10-on-accent);
+	background: var(--animfolio-accent-hover);
+	box-shadow: 0 6px 24px var(--animfolio-accent-shadow);
+}
+
+.animfolio-container--format-10 .animfolio-button--secondary,
+.animfolio-container--format-10 a.animfolio-button--secondary {
+	background: transparent;
+	color: var(--af10-accent);
+	border: 1px solid var(--af10-accent);
+	border-radius: 0;
+	font-family: var(--animfolio-font-body);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	padding: 1rem 2.25rem;
+	transition: background 0.2s ease, color 0.2s ease;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.animfolio-container--format-10 .animfolio-button--secondary:hover,
+.animfolio-container--format-10 a.animfolio-button--secondary:hover {
+	background: var(--animfolio-accent-subtle);
+	color: var(--animfolio-accent-hover);
+}
+
+/* ── Section alternating backgrounds ── */
+
+.animfolio-container--format-10 .animfolio-section:nth-child(even) {
+	background: var(--af10-bg-secondary);
+}
+
+/* ── Executive CTA ── */
+
+.animfolio-container--format-10 .animfolio-cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	padding: 16px 36px;
+	font-size: 0.85rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	text-decoration: none;
+	transition: all 0.3s ease;
+}
+
+.animfolio-container--format-10 .animfolio-cta--primary {
+	background: var(--af10-accent);
+	color: var(--af10-bg);
+	border: none;
+}
+
+.animfolio-container--format-10 .animfolio-cta--primary:hover {
+	background: var(--animfolio-accent-hover);
+	box-shadow: 0 4px 24px var(--animfolio-accent-shadow);
+}
+
+/* ── Section titles: Gold accent line ── */
+
+.animfolio-container--format-10 .animfolio-section {
+	padding: 100px 2rem;
+	box-sizing: border-box;
+	overflow: hidden;
+	border-bottom: 1px solid var(--af10-border);
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.animfolio-container--format-10 .animfolio-section__title {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 2.5rem;
+	font-weight: 400;
+	margin-bottom: 8px;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.animfolio-container--format-10 .animfolio-section__subtitle {
+	color: var(--af10-text-muted);
+	font-size: 1rem;
+	margin-top: 12px;
+	margin-bottom: 48px;
+}
+
+/* ── Expertise grid ── */
+
+.animfolio-container--format-10 .animfolio-expertise-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 1px;
+	background: var(--af10-border);
+	border: 1px solid var(--af10-border);
+}
+
+.animfolio-container--format-10 .animfolio-expertise-cell {
+	background: var(--af10-bg);
+	padding: 40px 32px;
+	transition: background 0.3s ease;
+}
+
+.animfolio-container--format-10 .animfolio-expertise-cell:hover {
+	background: var(--af10-bg-secondary);
+}
+
+.animfolio-container--format-10 .animfolio-expertise-cell__icon {
+	font-size: 1.5rem;
+	color: var(--af10-accent);
+	margin-bottom: 16px;
+}
+
+.animfolio-container--format-10 .animfolio-expertise-cell__title {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 1.3rem;
+	font-weight: 600;
+	margin-bottom: 8px;
+}
+
+.animfolio-container--format-10 .animfolio-expertise-cell__text {
+	color: var(--af10-text-muted);
+	font-size: 0.9rem;
+	line-height: 1.7;
+}
+
+/* ── Premium cards ── */
+
+.animfolio-container--format-10 .animfolio-card {
+	background: var(--af10-bg-secondary);
+	border: 1px solid var(--af10-border);
+	padding: 36px;
+	overflow: hidden;
+	word-break: break-word;
+	overflow-wrap: break-word;
+	transition: border-color 0.3s ease;
+}
+
+.animfolio-container--format-10 .animfolio-card:hover {
+	border-color: var(--af10-accent);
+}
+
+.animfolio-container--format-10 .animfolio-card__title {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 1.4rem;
+	font-weight: 600;
+	margin-bottom: 8px;
+}
+
+.animfolio-container--format-10 .animfolio-card__meta {
+	color: var(--af10-accent);
+	font-size: 0.8rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	margin-bottom: 16px;
+}
+
+.animfolio-container--format-10 .animfolio-card__description {
+	color: var(--af10-text-muted);
+	line-height: 1.7;
+}
+
+/* ── Methodology steps ── */
+
+.animfolio-container--format-10 .animfolio-methodology {
+	display: flex;
+	gap: 0;
+	counter-reset: method-step;
+}
+
+.animfolio-container--format-10 .animfolio-methodology__step {
+	flex: 1;
+	padding: 40px 28px;
+	border-inline-end: 1px solid var(--af10-border);
+	counter-increment: method-step;
+	position: relative;
+}
+
+.animfolio-container--format-10 .animfolio-methodology__step:last-child {
+	border-inline-end: none;
+}
+
+.animfolio-container--format-10 .animfolio-methodology__step::before {
+	content: '0' counter(method-step);
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 2.5rem;
+	font-weight: 300;
+	color: var(--af10-accent);
+	display: block;
+	margin-bottom: 16px;
+}
+
+/* ── White paper / download links ── */
+
+.animfolio-container--format-10 .animfolio-download {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 20px 24px;
+	border: 1px solid var(--af10-border);
+	text-decoration: none;
+	color: var(--af10-text);
+	transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.animfolio-container--format-10 .animfolio-download:hover {
+	border-color: var(--af10-accent);
+	background: var(--animfolio-accent-subtle);
+}
+
+/* ── Testimonial: Elegant blockquote ── */
+
+.animfolio-container--format-10 .animfolio-testimonial {
+	padding: 48px;
+	border-inline-start: 3px solid var(--af10-accent);
+	background: var(--af10-bg-secondary);
+}
+
+.animfolio-container--format-10 .animfolio-testimonial__quote {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 1.4rem;
+	font-style: italic;
+	line-height: 1.8;
+	margin-bottom: 24px;
+}
+
+.animfolio-container--format-10 .animfolio-testimonial__author {
+	font-size: 0.85rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1024px) {
+	.animfolio-container--format-10 .animfolio-hero {
+		padding: 80px 1.5rem;
+	}
+
+	.animfolio-container--format-10 .animfolio-section {
+		padding: 80px 1.5rem;
+	}
+
+	.animfolio-container--format-10 .animfolio-nav__links {
+		gap: 1.75rem;
+	}
+
+	.animfolio-container--format-10 .animfolio-expertise-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 768px) {
+	.animfolio-container--format-10 .animfolio-hero {
+		padding: 80px 1.25rem;
+	}
+
+	.animfolio-container--format-10 .animfolio-section {
+		padding: 64px 1.25rem;
+	}
+
+	.animfolio-container--format-10 .animfolio-methodology {
+		flex-direction: column;
+	}
+
+	.animfolio-container--format-10 .animfolio-methodology__step {
+		border-inline-end: none;
+		border-bottom: 1px solid var(--af10-border);
+	}
+
+	.animfolio-container--format-10 .animfolio-expertise-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 480px) {
+	.animfolio-container--format-10 .animfolio-hero {
+		padding: 70px 1rem;
+		min-height: auto;
+	}
+
+	.animfolio-container--format-10 .animfolio-section {
+		padding: 48px 1rem;
+	}
+
+	.animfolio-container--format-10 .animfolio-nav__links {
+		display: none;
+	}
+
+	.animfolio-container--format-10 .animfolio-card {
+		padding: 24px;
+	}
+
+	.animfolio-container--format-10 .animfolio-expertise-cell {
+		padding: 28px 20px;
+	}
+
+	.animfolio-container--format-10 .animfolio-testimonial {
+		padding: 28px;
+	}
+
+	.animfolio-container--format-10 .animfolio-section__title {
+		font-size: 2rem;
+	}
+
+	.animfolio-container--format-10 .animfolio-button--primary,
+	.animfolio-container--format-10 a.animfolio-button--primary,
+	.animfolio-container--format-10 .animfolio-button--secondary,
+	.animfolio-container--format-10 a.animfolio-button--secondary {
+		width: 100%;
+		text-align: center;
+		box-sizing: border-box;
+	}
+}
+
+/* Hero is one full viewport: the inner .animfolio-hero owns the 100vh + its own
+   nav-clearance padding, so the hero SECTION must not add the standard section
+   spacing on top (that pushed the hero past one screen and the content low).
+   Higher specificity (.animfolio-section.animfolio-section--hero) beats the
+   format's own .animfolio-section padding at every breakpoint. */
+.animfolio-container--format-10 .animfolio-section.animfolio-section--hero {
+	padding-top: 0;
+	padding-bottom: 0;
+}

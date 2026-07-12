@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Adrian Reyes
+N:Reyes;Adrian;;;
+TITLE:Founder & CEO
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:I'm a two-time founder with a track record of building and scaling technology companies. My first startup was acquired in 2024\, and I'm currently building my second. I'm passionate about developer too\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:22:55Z
+END:VCARD

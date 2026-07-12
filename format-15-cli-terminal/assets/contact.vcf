@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Marcus Holloway
+N:Holloway;Marcus;;;
+TITLE:Backend Engineer
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:Backend engineer and infrastructure specialist. I build the systems that other systems depend on. 10 years of experience in distributed systems\, cloud infrastructure\, and making things that don't go d\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:23:05Z
+END:VCARD

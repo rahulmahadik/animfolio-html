@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Riley Quinn
+N:Quinn;Riley;;;
+TITLE:Game Developer
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:I'm a game developer and creative technologist who believes everything is better when it's fun. I build games\, interactive web experiences\, and tools that bring joy. Currently at Level 28 with 42\,750\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:23:03Z
+END:VCARD

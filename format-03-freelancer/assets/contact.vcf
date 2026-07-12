@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Julian Bennett
+N:Bennett;Julian;;;
+TITLE:Freelance Web Developer & Consultant
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:I'm an independent web developer and consultant helping small businesses and startups build their digital presence. Over the past 6 years\, I've completed 80+ projects across e-commerce\, SaaS\, and mark\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:22:44Z
+END:VCARD

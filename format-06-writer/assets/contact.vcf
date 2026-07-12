@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Eleanor Voss
+N:Voss;Eleanor;;;
+TITLE:Content Writer & Author
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:I'm a writer\, editor\, and content strategist with a passion for turning complex ideas into compelling stories. My work spans books\, feature journalism\, technical documentation\, and content marketing.\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:25:28Z
+END:VCARD

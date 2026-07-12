@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Elena Marchetti
+N:Marchetti;Elena;;;
+TITLE:UI/UX Designer
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:I'm a UI/UX designer who believes great design is invisible. With 7 years of experience across startups and enterprises\, I specialize in creating design systems and product experiences that users love\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:22:43Z
+END:VCARD

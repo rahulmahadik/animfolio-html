@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Dr. Maya Krishnan
+N:Maya Krishnan;Dr.;;;
+TITLE:Data Scientist & Researcher
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:I'm a data scientist and ML engineer with a PhD in Statistics and 6 years of industry experience. I specialize in building production ML systems that drive real business outcomes. My work spans NLP\, c\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:22:51Z
+END:VCARD

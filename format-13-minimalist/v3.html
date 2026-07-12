@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio – AnimFolio Dev — Cool Minimal</title>
+<meta name="description" content="Sigrid Halvorsen — Minimalist Designer. Less is more.">
+<style></style>
+<link rel="stylesheet" href="./assets/css/animfolio-base.css">
+<link rel="stylesheet" href="./assets/css/animfolio-animations.css">
+<link rel="stylesheet" href="./assets/css/animfolio-nav.css">
+<link rel="stylesheet" href="./assets/css/animfolio-contact.css">
+<link rel="stylesheet" href="./assets/css/animfolio-gallery.css">
+<link rel="stylesheet" href="./assets/css/animfolio-qr.css">
+<link rel="stylesheet" href="./assets/css/animfolio-print.css" media="print">
+<link rel="stylesheet" href="./assets/css/format.css">
+<style id="animfolio-theme-vars">
+.animfolio-container {
+	--animfolio-accent: #2563EB !important;
+	--animfolio-accent-hover: #1b59e1 !important;
+	--animfolio-accent-light: rgba(37, 99, 235, 0.1) !important;
+	--animfolio-accent-subtle: rgba(37, 99, 235, 0.12) !important;
+	--animfolio-accent-shadow: rgba(37, 99, 235, 0.3) !important;
+	--animfolio-accent-glow: rgba(37, 99, 235, 0.5) !important;
+	--animfolio-secondary: #6B7280 !important;
+	--animfolio-secondary-hover: #616876 !important;
+	--animfolio-secondary-light: rgba(107, 114, 128, 0.1) !important;
+	--animfolio-on-accent: #ffffff !important;
+	--animfolio-on-secondary: #ffffff !important;
+	--animfolio-bg: #111111;
+	--animfolio-bg-secondary: #FAFAFA;
+	--animfolio-bg-tertiary: #1e1e1e;
+	--animfolio-text: #E5E5E5;
+	--animfolio-text-secondary: #a0a0a0;
+	--animfolio-text-muted: #8a8a8a;
+	--animfolio-border: rgba(255, 255, 255, 0.1);
+	--animfolio-border-strong: rgba(255, 255, 255, 0.2);
+	--animfolio-surface: #1a1a1a;
+	--animfolio-surface-hover: #222222;
+	--animfolio-overlay: rgba(0, 0, 0, 0.75);
+	--animfolio-success: #22c55e;
+	--animfolio-warning: #f59e0b;
+	--animfolio-error: #ef4444;
+	--animfolio-info: #3b82f6;
+	--animfolio-font-heading: 'system-ui', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-body: 'system-ui', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-mono: 'ui-monospace', 'Fira Code', 'Consolas', monospace;
+	--animfolio-font-size-base: 16px;
+	--animfolio-font-size-h1: clamp(2.5rem, 5vw, 4rem);
+	--animfolio-font-size-h2: clamp(1.75rem, 3.5vw, 2.5rem);
+	--animfolio-font-size-h3: 1.5rem;
+	--animfolio-font-size-h4: 1.25rem;
+	--animfolio-font-weight-bold: 700;
+	--animfolio-font-weight-medium: 500;
+	--animfolio-line-height: 1.6;
+	--animfolio-letter-spacing: 0em;
+	--animfolio-container-width: 1200px;
+	--animfolio-section-spacing: 100px;
+	--animfolio-radius: 12px;
+	--animfolio-radius-sm: 6px;
+	--animfolio-radius-lg: 16px;
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.2);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.3);
+	--animfolio-duration: 0.6s;
+	--animfolio-delay: 0s;
+	--animfolio-easing: cubic-bezier(0.4, 0, 0.2, 1);
+	--animfolio-easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--animfolio-stagger: 0.1s;
+	--animfolio-transition-fast: 150ms ease;
+	--animfolio-transition-normal: 300ms ease;
+	--animfolio-transition-slow: 500ms ease;
+	--animfolio-z-base: 1;
+	--animfolio-z-dropdown: 100;
+	--animfolio-z-sticky: 200;
+	--animfolio-z-nav: 300;
+	--animfolio-z-modal: 400;
+	--animfolio-z-lightbox: 500;
+	--animfolio-z-tooltip: 600;
+	--animfolio-z-cursor: 700;
+}
+.animfolio-container--light, .animfolio-container[data-animfolio-scheme="light"] {
+	--animfolio-bg: #FFFFFF;
+	--animfolio-bg-secondary: #f5f5f5;
+	--animfolio-bg-tertiary: #ebebeb;
+	--animfolio-text: #171717;
+	--animfolio-text-secondary: #555555;
+	--animfolio-text-muted: #767676;
+	--animfolio-border: rgba(0, 0, 0, 0.1);
+	--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+	--animfolio-surface: #ffffff;
+	--animfolio-surface-hover: #f9f9f9;
+	--animfolio-overlay: rgba(0, 0, 0, 0.5);
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+	--animfolio-accent-light: rgba(37, 99, 235, 0.08) !important;
+	--animfolio-accent-subtle: rgba(37, 99, 235, 0.05) !important;
+	--animfolio-accent-shadow: rgba(37, 99, 235, 0.2) !important;
+	--animfolio-accent-glow: rgba(37, 99, 235, 0.15) !important;
+	--animfolio-on-accent: #ffffff !important;
+	--animfolio-on-secondary: #ffffff !important;
+}
+@media (prefers-color-scheme: light) {
+	.animfolio-container--auto {
+		--animfolio-bg: #FFFFFF;
+		--animfolio-bg-secondary: #f5f5f5;
+		--animfolio-bg-tertiary: #ebebeb;
+		--animfolio-text: #171717;
+		--animfolio-text-secondary: #555555;
+		--animfolio-text-muted: #767676;
+		--animfolio-border: rgba(0, 0, 0, 0.1);
+		--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+		--animfolio-surface: #ffffff;
+		--animfolio-surface-hover: #f9f9f9;
+		--animfolio-overlay: rgba(0, 0, 0, 0.5);
+		--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+		--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+		--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+		--animfolio-accent-light: rgba(37, 99, 235, 0.08) !important;
+		--animfolio-accent-subtle: rgba(37, 99, 235, 0.05) !important;
+		--animfolio-accent-shadow: rgba(37, 99, 235, 0.2) !important;
+		--animfolio-accent-glow: rgba(37, 99, 235, 0.15) !important;
+		--animfolio-on-accent: #ffffff !important;
+		--animfolio-on-secondary: #ffffff !important;
+	}
+}
+
+.animfolio-container *,.animfolio-container *::before,.animfolio-container *::after{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{margin:0;padding:0;background:#FFFFFF;color:#171717;font-family:var(--animfolio-font-body,'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);font-size:var(--animfolio-font-size-base,16px);line-height:var(--animfolio-line-height,1.6);overflow-x:hidden}body.admin-bar{padding-top:32px}body.admin-bar .animfolio-nav--sticky{top:32px}@media screen and (max-width:782px){body.admin-bar{padding-top:46px}body.admin-bar .animfolio-nav--sticky{top:46px}}.wp-site-blocks,.entry-content,.page-content,.post-content{all:unset;display:block}
+/*# sourceURL=animfolio-base-inline-css */
+</style>
+<script>
+document.documentElement.className+=" animfolio-js";(function(){function r(){if(window.animfolio&&window.animfolio._initialized){return;}var e=document.querySelectorAll("[data-animfolio-animate]:not(.animfolio-visible),.animfolio-stagger__item:not(.animfolio-visible)");for(var i=0;i<e.length;i++){e[i].classList.add("animfolio-visible");}}if(document.readyState==="complete"){setTimeout(r,1500);}else{window.addEventListener("load",function(){setTimeout(r,1500);});}setTimeout(r,4000);})();
+//# sourceURL=animfolio-failsafe-js-after
+</script>
+</head>
+<body>
+<!-- ============================================================
+     CONFIG — set your email for the contact form (FormSubmit.co).
+     First submission emails you a one-time confirmation link; click it
+     once and every message afterwards lands in your inbox. See README.
+     ============================================================ -->
+<script>window.ANIMFOLIO_CONTACT_EMAIL = "you@example.com";</script>
+
+<div class="animfolio-container animfolio-container--light animfolio-container--format-13 animfolio-container--one-page" data-animfolio-scheme="light" data-animfolio-format="format-13-minimalist" data-animfolio-intensity="medium"><a href="#hero" class="animfolio-skip-link">Skip to main content</a><nav class="animfolio-nav animfolio-nav--horizontal animfolio-nav--sticky" role="navigation" aria-label="Portfolio navigation"><a href="#hero" class="animfolio-nav__logo">Sigrid Halvorsen</a><button class="animfolio-nav__toggle" aria-expanded="false" aria-controls="animfolio-nav-menu" aria-label="Toggle navigation"><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span></button><ul class="animfolio-nav__list" id="animfolio-nav-menu"><li class="animfolio-nav__item"><a href="#hero" class="animfolio-nav__link" data-animfolio-section="hero">Home</a></li><li class="animfolio-nav__item"><a href="#about" class="animfolio-nav__link" data-animfolio-section="about">About</a></li><li class="animfolio-nav__item"><a href="#experience" class="animfolio-nav__link" data-animfolio-section="experience">Experience</a></li><li class="animfolio-nav__item"><a href="#projects" class="animfolio-nav__link" data-animfolio-section="projects">Projects</a></li><li class="animfolio-nav__item"><a href="#stats" class="animfolio-nav__link" data-animfolio-section="stats">Stats</a></li><li class="animfolio-nav__item"><a href="#services" class="animfolio-nav__link" data-animfolio-section="services">Services</a></li><li class="animfolio-nav__item"><a href="#achievements" class="animfolio-nav__link" data-animfolio-section="achievements">Achievements</a></li><li class="animfolio-nav__item"><a href="#contact" class="animfolio-nav__link" data-animfolio-section="contact">Contact</a></li></ul><button class="animfolio-theme-toggle" aria-label="Toggle dark mode"><span class="animfolio-theme-toggle__icon animfolio-theme-toggle__icon--sun" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span><span class="animfolio-theme-toggle__icon animfolio-theme-toggle__icon--moon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></span></button></nav><section id="hero" class="animfolio-section animfolio-section--hero animfolio-section--align-center" data-animfolio-section="hero"><div class="animfolio-inner">
+<div class="animfolio-hero">
+	<div class="animfolio-hero__content">
+		
+					<h1 class="animfolio-hero__name" data-animfolio-animate="fade-up">Sigrid Halvorsen</h1>
+		
+					<h2 class="animfolio-hero__title" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">Minimalist Designer</h2>
+		
+					<div class="animfolio-hero__subtitle animfolio-hero__typed" data-animfolio-typed="[&quot;Less is more.&quot;,&quot;Simplicity is the ultimate sophistication.&quot;,&quot;Focus on what matters.&quot;]" data-animfolio-animate="fade-up" data-animfolio-delay="0.2">Less is more.</div>
+		
+					<div class="animfolio-hero__cta" data-animfolio-animate="fade-up" data-animfolio-delay="0.3">
+									<a href="#projects" class="animfolio-button animfolio-button--primary animfolio-hero__cta-primary">
+						View My Work					</a>
+									<a href="#contact" class="animfolio-button animfolio-button--secondary animfolio-hero__cta-secondary">
+						Get In Touch					</a>
+											</div>
+		
+					<div class="animfolio-hero__social animfolio-social-icons animfolio-social-icons--outline" data-animfolio-animate="fade-up" data-animfolio-delay="0.4">
+														<a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>							<span class="animfolio-social__label">Github</span>
+						</a>
+															<a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>							<span class="animfolio-social__label">Linkedin</span>
+						</a>
+															<a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>							<span class="animfolio-social__label">Twitter</span>
+						</a>
+															<a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg>							<span class="animfolio-social__label">Dribbble</span>
+						</a>
+															<a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>							<span class="animfolio-social__label">Email</span>
+						</a>
+							</div>
+		
+			</div>
+</div>
+</div><!-- .animfolio-inner --></section><section id="about" class="animfolio-section animfolio-section--about animfolio-section--align-center" data-animfolio-section="about"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">About</h2></div><div class="animfolio-about" data-animfolio-animate="fade-up">
+				<div class="animfolio-about__bio">I solve problems through simplicity. Designer, developer, and consultant with a focus on removing the unnecessary to reveal what matters. Less noise, more signal.</div>
+				<div class="animfolio-about__fun-facts animfolio-stagger" data-animfolio-stagger="0.1">
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I own exactly 33 items of clothing				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					My desk has nothing on it except my laptop				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I deleted all social media in 2022				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					My favorite design principle: when in doubt, remove				</div>
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="experience" class="animfolio-section animfolio-section--experience animfolio-section--align-center" data-animfolio-section="experience"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Experience</h2></div>
+<div class="animfolio-timeline animfolio-stagger" data-animfolio-animate="fade-up" data-animfolio-stagger="0.1">
+	<div class="animfolio-timeline__line"></div>
+
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.0">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Independent Designer</div>
+				<div class="animfolio-timeline__company">Self-Employed</div>
+				<div class="animfolio-timeline__date">
+					Mar 2019 — Present											· Remote									</div>
+									<div class="animfolio-timeline__description">Partner directly with founders and product teams to simplify interfaces and ship clean, considered design. Each engagement starts by removing before adding.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">Design</span>
+													<span class="animfolio-card__tag">Strategy</span>
+													<span class="animfolio-card__tag">Development</span>
+											</div>
+							</div>
+		</div>
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Senior Product Designer</div>
+				<div class="animfolio-timeline__company">Calm Software</div>
+				<div class="animfolio-timeline__date">
+					Jun 2016 — Feb 2019											· Copenhagen									</div>
+									<div class="animfolio-timeline__description">Led the redesign of the core product, cutting the onboarding flow from eleven steps to four and reducing support tickets by 60%.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">UI Design</span>
+													<span class="animfolio-card__tag">Design Systems</span>
+											</div>
+							</div>
+		</div>
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.2">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Product Designer</div>
+				<div class="animfolio-timeline__company">Mono Studio</div>
+				<div class="animfolio-timeline__date">
+					Aug 2014 — May 2016											· Berlin									</div>
+									<div class="animfolio-timeline__description">Designed and front-end built marketing sites and product interfaces for early-stage clients, establishing a shared, restraint-first visual language.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">Web</span>
+													<span class="animfolio-card__tag">Branding</span>
+											</div>
+							</div>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="projects" class="animfolio-section animfolio-section--projects animfolio-section--align-center" data-animfolio-section="projects"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Selected Work</h2></div>
+<div class="animfolio-grid animfolio-grid--2 animfolio-stagger" data-animfolio-stagger="0.15">
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-design.jpg" alt="Ledger — Fintech Design System" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">Ledger — Fintech Design System</h3>
+
+							<p class="animfolio-project__description">A unified design system for a consumer banking app. Tokenized color, type, and spacing, 80+ accessible components, and clear usage docs that cut design-to-dev handoff time in half.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">Figma</span>
+											<span class="animfolio-card__tag">Design Tokens</span>
+											<span class="animfolio-card__tag">Auto Layout</span>
+											<span class="animfolio-card__tag">WCAG AA</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+															</div>
+
+					</div>
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-writing.jpg" alt="Margin — Editorial Brand Identity" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">Margin — Editorial Brand Identity</h3>
+
+							<p class="animfolio-project__description">Brand identity and visual system for an independent literary magazine. A custom wordmark, restrained editorial type scale, and a flexible grid that holds long-form reading together across print and web.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">Brand Identity</span>
+											<span class="animfolio-card__tag">Typography</span>
+											<span class="animfolio-card__tag">Editorial Design</span>
+											<span class="animfolio-card__tag">Adobe InDesign</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--secondary">
+						Source					</a>
+											</div>
+
+					</div>
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-dashboard.jpg" alt="Clearwater — Product Redesign" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">Clearwater — Product Redesign</h3>
+
+							<p class="animfolio-project__description">An end-to-end redesign of a project-tracking dashboard. Reframed the information hierarchy around a single primary action, trimming the core workflow from eleven steps to four and lifting task completion by 38%.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">UX Research</span>
+											<span class="animfolio-card__tag">Figma</span>
+											<span class="animfolio-card__tag">Prototyping</span>
+											<span class="animfolio-card__tag">Usability Testing</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+															</div>
+
+					</div>
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-dashboard.jpg" alt="Quiet — AI Help Assistant" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">Quiet — AI Help Assistant</h3>
+
+							<p class="animfolio-project__description">A restrained support assistant for a documentation site. Grounded an LLM in the product docs with retrieval (RAG) so answers stay accurate and cite their source, designed to say "I do not know" rather than guess. Deflected 45% of routine tickets without adding noise to the interface.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">LLM</span>
+											<span class="animfolio-card__tag">RAG</span>
+											<span class="animfolio-card__tag">Vector Search</span>
+											<span class="animfolio-card__tag">Prompt Design</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+															</div>
+
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="stats" class="animfolio-section animfolio-section--stats animfolio-section--align-center" data-animfolio-section="stats"><div class="animfolio-inner"><div class="animfolio-stats animfolio-stagger" data-animfolio-stagger="0.15">
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="60" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">60+</span>
+			<span class="animfolio-stat__label">Projects</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="8" data-animfolio-decimals="0" data-animfolio-suffix="" data-animfolio-prefix="">8</span>
+			<span class="animfolio-stat__label">Years</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="40" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">40+</span>
+			<span class="animfolio-stat__label">Clients</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="99" data-animfolio-decimals="0" data-animfolio-suffix="%" data-animfolio-prefix="">99%</span>
+			<span class="animfolio-stat__label">Client Satisfaction</span>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="services" class="animfolio-section animfolio-section--services animfolio-section--align-center" data-animfolio-section="services"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Services</h2></div><div class="animfolio-grid animfolio-grid--3 animfolio-stagger" data-animfolio-stagger="0.1">
+					<div class="animfolio-service animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<div class="animfolio-service__head">
+									<div class="animfolio-card__icon animfolio-service__icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"></path></svg>					</div>
+								<h3 class="animfolio-card__title animfolio-service__title">Consulting</h3>
+			</div>
+							<p class="animfolio-card__body">Strategic guidance on technology, design, and product decisions. Clear thinking and actionable recommendations.</p>
+								</div>
+					<div class="animfolio-service animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<div class="animfolio-service__head">
+									<div class="animfolio-card__icon animfolio-service__icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>					</div>
+								<h3 class="animfolio-card__title animfolio-service__title">Design</h3>
+			</div>
+							<p class="animfolio-card__body">Clean, purposeful design. Interfaces that are intuitive and beautiful without unnecessary complexity.</p>
+								</div>
+					<div class="animfolio-service animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<div class="animfolio-service__head">
+									<div class="animfolio-card__icon animfolio-service__icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>					</div>
+								<h3 class="animfolio-card__title animfolio-service__title">Development</h3>
+			</div>
+							<p class="animfolio-card__body">Well-crafted code. Performant, accessible, and maintainable web applications.</p>
+								</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="achievements" class="animfolio-section animfolio-section--achievements animfolio-section--align-center" data-animfolio-section="achievements"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Certifications</h2></div><div class="animfolio-grid animfolio-grid--3 animfolio-stagger" data-animfolio-stagger="0.1">
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">Generative AI for Designers</h3>
+							<span class="animfolio-card__meta">DeepLearning.AI</span>
+										<span class="animfolio-card__meta">2025</span>
+								</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="contact" class="animfolio-section animfolio-section--contact animfolio-section--align-center" data-animfolio-section="contact"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Contact</h2></div><div class="animfolio-contact" data-animfolio-animate="fade-up">
+
+			<p class="animfolio-contact__heading">Let's keep it simple.</p>
+				<p class="animfolio-contact__description">Have a project that needs clarity? Tell me what you are building and I will reply within two business days.</p>
+	
+	<div class="animfolio-contact__layout">
+		<!-- Left: Contact Form -->
+		<div class="animfolio-contact__form-wrapper">
+							<form class="animfolio-form" novalidate="">
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-name">Name</label>
+						<input type="text" name="name" id="animfolio-name" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Name is required.</span>
+					</div>
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-email">Email</label>
+						<input type="email" name="email" id="animfolio-email" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Valid email is required.</span>
+					</div>
+										<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-message">Message</label>
+						<textarea name="message" id="animfolio-message" class="animfolio-form__textarea" rows="5" required="" aria-required="true"></textarea>
+						<span class="animfolio-form__error">Message is required.</span>
+					</div>
+											<div class="animfolio-form__honeypot">
+							<input type="text" name="animfolio_hp" tabindex="-1" autocomplete="off">
+						</div>
+										<input type="hidden" name="animfolio_ts" value="">
+					<input type="hidden" name="animfolio_js" value="">
+					<div class="animfolio-form__success">Thank you! I'll get back to you soon.</div>
+					<button type="submit" class="animfolio-button animfolio-button--primary animfolio-form__submit">
+						Send Message					</button>
+				</form>
+					</div>
+
+		<!-- Right: QR Code -->
+		<div class="animfolio-contact__qr-wrapper"><div class="animfolio-qr" data-animfolio-qr="" data-animfolio-vcard="QkVHSU46VkNBUkQNClZFUlNJT046My4wDQpGTjpTaWdyaWQgSGFsdm9yc2VuDQpOOkhhbHZvcnNlbjtTaWdyaWQ7OzsNClRJVExFOk1pbmltYWxpc3QgRGVzaWduZXINCkVNQUlMO1RZUEU9V09SSzp5b3VAZXhhbXBsZS5jb20NClVSTDpodHRwczovL3lvdXItd2Vic2l0ZS5leGFtcGxlDQpOT1RFOkkgc29sdmUgcHJvYmxlbXMgdGhyb3VnaCBzaW1wbGljaXR5LiBEZXNpZ25lclwsIGRldmVsb3BlclwsIGFuZCBjb25zdWx0YW50IHdpdGggYSBmb2N1cyBvbiByZW1vdmluZyB0aGUgdW5uZWNlc3NhcnkgdG8gcmV2ZWFsIHdoYXQgbWF0dGVycy4gTGVzcyBub2lzZVwsIG1vcmUgc2lnbmFsLlxuR2l0aHViOiBodHRwczovL2dpdGh1Yi5jb20veW91cnVzZXJuYW1lXG5MaW5rZWRpbjogaHR0cHM6Ly9saW5rZWRpbi5jb20vaW4veW91cnVzZXJuYW1lXG5Ud2l0dGVyOiBodHRwczovL3R3aXR0ZXIuY29tL3lvdXJ1c2VybmFtZVxuRHJpYmJibGU6IGh0dHBzOi8vZHJpYmJibGUuY29tL3lvdXJ1c2VybmFtZQ0KWC1TT0NJQUxQUk9GSUxFO1RZUEU9Z2l0aHViOmh0dHBzOi8vZ2l0aHViLmNvbS95b3VydXNlcm5hbWUNClgtU09DSUFMUFJPRklMRTtUWVBFPWxpbmtlZGluOmh0dHBzOi8vbGlua2VkaW4uY29tL2luL3lvdXJ1c2VybmFtZQ0KWC1TT0NJQUxQUk9GSUxFO1RZUEU9dHdpdHRlcjpodHRwczovL3R3aXR0ZXIuY29tL3lvdXJ1c2VybmFtZQ0KWC1TT0NJQUxQUk9GSUxFO1RZUEU9ZHJpYmJibGU6aHR0cHM6Ly9kcmliYmJsZS5jb20veW91cnVzZXJuYW1lDQpSRVY6MjAyNi0wNy0xMlQxMzoyMzowMloNCkVORDpWQ0FSRA0K"><div class="animfolio-qr__code" style="width:200px;height:200px"></div><p class="animfolio-qr__caption">Scan to save my contact</p><a href="./assets/contact.vcf" class="animfolio-qr__download animfolio-button animfolio-button--secondary" download="">Download vCard</a></div></div>	</div>
+
+</div>
+</div><!-- .animfolio-inner --></section><button class="animfolio-back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 15V5M10 5L5 10M10 5L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div class="animfolio-progress"><div class="animfolio-progress__bar"></div></div><div class="animfolio-footer-social animfolio-social-icons animfolio-social-icons--outline"><a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="animfolio-social__label">Github</span></a><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg><span class="animfolio-social__label">Linkedin</span></a><a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg><span class="animfolio-social__label">Twitter</span></a><a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg><span class="animfolio-social__label">Dribbble</span></a><a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span class="animfolio-social__label">Email</span></a></div></div>
+
+<div aria-label="Color scheme preview (demo only)" style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99999;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(18,18,24,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 30px rgba(0,0,0,.4)"><span style="padding:0 6px 0 10px;font:700 11px/1 -apple-system,sans-serif;letter-spacing:.4px;text-transform:uppercase;color:#8b90a0">Colors</span><a href="index.html" title="Pure Light" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#0D0D0D;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Pure Light</a><a href="v2.html" title="Warm Minimal" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#D97706;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Warm Minimal</a><a href="v3.html" aria-current="true" title="Cool Minimal" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#2563EB;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Cool Minimal</a></div>
+
+<script>
+var animfolioSettings = {"animationIntensity":"medium","respectReducedMotion":"1","colorScheme":"light","smoothScroll":"1","scrollBehavior":"smooth","customCursor":"","backToTop":"1","progressBar":"1","darkModeToggle":"1","debugMode":""};
+//# sourceURL=animfolio-engine-js-extra
+</script>
+<script src="./assets/js/wp-shim.js"></script>
+<script src="./assets/js/animfolio-engine.js"></script>
+<script src="./assets/js/modules/scroll-trigger.js"></script>
+<script src="./assets/js/modules/typed-text.js"></script>
+<script src="./assets/js/modules/counter.js"></script>
+<script src="./assets/js/modules/timeline-draw.js"></script>
+<script src="./assets/js/modules/stagger.js"></script>
+<script src="./assets/js/modules/parallax.js"></script>
+<script src="./assets/js/modules/progress-bar.js"></script>
+<script src="./assets/js/modules/smooth-scroll.js"></script>
+<script src="./assets/js/modules/theme-toggle.js"></script>
+<script src="./assets/js/vendor/qrcode-generator.min.js"></script>
+<script src="./assets/js/animfolio-qr.js"></script>
+<script src="./assets/js/animfolio-lightbox.js"></script>
+<script src="./assets/js/animfolio-casestudy.js"></script>
+<script src="./assets/js/format.js"></script>
+<script src="./assets/js/animfolio-contact-static.js"></script>
+</body>
+</html>

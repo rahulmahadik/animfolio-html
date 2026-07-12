@@ -1,0 +1,774 @@
+/**
+ * Format 08: Product Manager
+ *
+ * Dashboard aesthetic, metric cards, roadmap timeline,
+ * problem/solution/impact case studies, clean grids, system font stack.
+ *
+ * @package AnimFolio
+ * @author     Rahul Mahadik
+ * @since   1.0.0
+ */
+
+/* ===== Base variable mappings ===== */
+
+.animfolio-container--format-08 {
+	--animfolio-font-heading: 'Inter', sans-serif;
+	--animfolio-font-body: 'Inter', sans-serif;
+	--animfolio-font-mono: 'JetBrains Mono', monospace;
+
+	font-family: 'Inter', sans-serif;
+	background: var(--animfolio-bg);
+	color: var(--animfolio-text);
+	overflow-x: hidden;
+}
+
+/*
+ * Dual-scheme color tokens.
+ * Both the format class and a scheme class (.animfolio-container--dark /
+ * --light) ride on the container; the theme toggle swaps the scheme class.
+ * Scoping tokens under BOTH combinations makes the toggle re-theme. The plain
+ * format-class block is the no-scheme fallback (default_scheme: dark).
+ *
+ * accent-text = purple used as link/title text; lightened on dark and using
+ * the deeper config purple on light so it stays AA on bg + bg-secondary.
+ */
+
+/* No-scheme fallback (default_scheme: dark) */
+.animfolio-container--format-08 {
+	--animfolio-accent: var(--animfolio-accent, #8B5CF6);
+	/* raw accent #8B5CF6 fails AA as text on bg-secondary; lighter purple for text use */
+	--animfolio-accent-text: #A78BFA;
+	--animfolio-accent-hover: #A78BFA;
+	--animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #8B5CF6) 14%, transparent);
+	--animfolio-accent-shadow: color-mix(in srgb, var(--animfolio-accent, #8B5CF6) 35%, transparent);
+	--animfolio-accent-glow: color-mix(in srgb, var(--animfolio-accent, #8B5CF6) 20%, transparent);
+	--animfolio-accent-subtle: color-mix(in srgb, var(--animfolio-accent, #8B5CF6) 10%, transparent);
+	--animfolio-secondary: var(--animfolio-secondary, #06B6D4);
+	--animfolio-bg: #0F0B1A;
+	--animfolio-bg-secondary: #1A1528;
+	--animfolio-bg-tertiary: #241D38;
+	--animfolio-text: #EDE9FE;
+	--animfolio-text-secondary: #B6B0CC;
+	--animfolio-text-muted: #9AA0B3;
+	--animfolio-border: rgba(167, 139, 250, 0.18);
+}
+
+/* Dark scheme */
+.animfolio-container--format-08.animfolio-container--dark {
+	--animfolio-accent: #8B5CF6;
+	--animfolio-accent-text: #A78BFA;
+	--animfolio-accent-hover: #A78BFA;
+	--animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #8B5CF6) 14%, transparent);
+	--animfolio-accent-shadow: color-mix(in srgb, var(--animfolio-accent, #8B5CF6) 35%, transparent);
+	--animfolio-accent-glow: color-mix(in srgb, var(--animfolio-accent, #8B5CF6) 20%, transparent);
+	--animfolio-accent-subtle: color-mix(in srgb, var(--animfolio-accent, #8B5CF6) 10%, transparent);
+	--animfolio-secondary: #06B6D4;
+	--animfolio-bg: #0F0B1A;
+	--animfolio-bg-secondary: #1A1528;
+	--animfolio-bg-tertiary: #241D38;
+	--animfolio-text: #EDE9FE;
+	--animfolio-text-secondary: #B6B0CC;
+	--animfolio-text-muted: #9AA0B3;
+	--animfolio-border: rgba(167, 139, 250, 0.18);
+}
+
+/* Light scheme */
+.animfolio-container--format-08.animfolio-container--light {
+	--animfolio-accent: #7C3AED;
+	/* config accent #7C3AED passes AA as text on light bg + bg-secondary */
+	--animfolio-accent-text: #7C3AED;
+	--animfolio-accent-hover: #6D28D9;
+	--animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #7C3AED) 8%, transparent);
+	--animfolio-accent-shadow: color-mix(in srgb, var(--animfolio-accent, #7C3AED) 25%, transparent);
+	--animfolio-accent-glow: color-mix(in srgb, var(--animfolio-accent, #7C3AED) 15%, transparent);
+	--animfolio-accent-subtle: color-mix(in srgb, var(--animfolio-accent, #7C3AED) 6%, transparent);
+	--animfolio-secondary: #0891B2;
+	--animfolio-bg: #FFFFFF;
+	--animfolio-bg-secondary: #FAF5FF;
+	--animfolio-bg-tertiary: #F1E9FB;
+	--animfolio-text: #1E1B2E;
+	--animfolio-text-secondary: #4B4860;
+	--animfolio-text-muted: #5F6470;
+	--animfolio-border: color-mix(in srgb, var(--animfolio-accent, #7C3AED) 16%, transparent);
+}
+
+/* ===== Nav — dashboard-style tabs ===== */
+
+.animfolio-container--format-08 .animfolio-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	background: color-mix(in srgb, var(--animfolio-bg) 90%, transparent);
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+	border-bottom: 1px solid var(--animfolio-border);
+	padding: 0 2rem;
+	overflow: hidden;
+}
+
+.animfolio-container--format-08 .animfolio-nav__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: var(--animfolio-container, 1200px);
+	margin: 0 auto;
+	height: 56px;
+}
+
+.animfolio-container--format-08 .animfolio-nav__logo {
+	font-family: var(--animfolio-font-heading);
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--animfolio-text);
+	text-decoration: none;
+}
+
+.animfolio-container--format-08 .animfolio-nav__links {
+	display: flex;
+	gap: 4px;
+	list-style: none;
+	margin: 0;
+	padding: 4px;
+	background: var(--animfolio-accent-subtle);
+	border-radius: 8px;
+}
+
+.animfolio-container--format-08 .animfolio-nav__link {
+	font-size: 0.8125rem;
+	font-weight: 500;
+	color: var(--animfolio-text-secondary);
+	text-decoration: none;
+	padding: 6px 16px;
+	border-radius: 6px;
+	transition: color 0.2s ease, background 0.2s ease;
+}
+
+.animfolio-container--format-08 .animfolio-nav__link:hover {
+	color: var(--animfolio-text);
+	background: var(--animfolio-accent-light);
+}
+
+.animfolio-container--format-08 .animfolio-nav__link--active {
+	color: var(--animfolio-on-accent, #fff);
+	background: var(--animfolio-accent);
+	box-shadow: 0 2px 8px var(--animfolio-accent-glow);
+}
+
+/* ===== Hero — dashboard header ===== */
+
+.animfolio-container--format-08 .animfolio-section--hero {
+	background:
+		radial-gradient(ellipse at 30% 20%, color-mix(in srgb, var(--animfolio-accent, #8B5CF6) 12%, transparent) 0%, transparent 50%),
+		radial-gradient(ellipse at 70% 80%, color-mix(in srgb, var(--animfolio-secondary, #06B6D4) 8%, transparent) 0%, transparent 50%),
+		var(--animfolio-bg);
+}
+
+.animfolio-container--format-08 .animfolio-hero {
+	min-height: 100vh;
+	min-height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	max-width: 720px;
+	/* Centre the hero block so it lines up with the centered section headers
+	   below (every .animfolio-inner is max 1200px + auto-centred; the hero
+	   content text is already centered via base, so centering the block keeps
+	   the whole hero on-axis with the rest of the page). */
+	margin-inline: auto;
+	padding: 4rem 2rem;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.animfolio-container--format-08 .animfolio-hero__name {
+	font-family: var(--animfolio-font-heading);
+	font-weight: 800;
+	font-size: clamp(2.5rem, 5vw, 4rem);
+	letter-spacing: -0.03em;
+	line-height: 1.1;
+}
+
+.animfolio-container--format-08 .animfolio-hero__title {
+	font-size: 1.125rem;
+	color: var(--animfolio-accent-text);
+	font-weight: 500;
+	margin-top: 0.75rem;
+}
+
+.animfolio-container--format-08 .animfolio-hero__subtitle {
+	font-size: 1.0625rem;
+	line-height: 1.7;
+	color: var(--animfolio-text-secondary);
+	margin-top: 1.25rem;
+}
+
+/* ===== Section titles — dashboard label ===== */
+
+.animfolio-container--format-08 .animfolio-section__title {
+	font-family: var(--animfolio-font-heading);
+	font-weight: 700;
+	font-size: clamp(1.5rem, 3vw, 2rem);
+	letter-spacing: -0.02em;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 2rem;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.animfolio-container--format-08 .animfolio-section__title::before {
+	content: '';
+	width: 4px;
+	height: 1.25em;
+	background: var(--animfolio-accent);
+	border-radius: 2px;
+	flex-shrink: 0;
+}
+
+/* ===== Buttons — purple glow ===== */
+
+.animfolio-container--format-08 .animfolio-button--primary {
+	background: var(--animfolio-accent);
+	color: var(--animfolio-on-accent, #fff);
+	border: none;
+	border-radius: 8px;
+	font-weight: 600;
+	padding: 0.75rem 1.5rem;
+	box-shadow: 0 4px 16px var(--animfolio-accent-shadow);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.animfolio-container--format-08 .animfolio-button--primary:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px var(--animfolio-accent-shadow);
+}
+
+.animfolio-container--format-08 .animfolio-button--secondary {
+	background: transparent;
+	color: var(--animfolio-accent-text);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 8px;
+	font-weight: 600;
+	padding: 0.75rem 1.5rem;
+	transition: border-color 0.2s ease, background 0.2s ease;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.animfolio-container--format-08 .animfolio-button--secondary:hover {
+	border-color: var(--animfolio-accent);
+	background: var(--animfolio-accent-subtle);
+}
+
+/* ===== Metric cards grid ===== */
+
+.animfolio-container--format-08 .animfolio-stats__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 1rem;
+}
+
+.animfolio-container--format-08 .animfolio-stat {
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 12px;
+	padding: 1.5rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.animfolio-container--format-08 .animfolio-stat::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: linear-gradient(90deg, var(--animfolio-accent), var(--animfolio-secondary));
+}
+
+.animfolio-container--format-08 .animfolio-stat__number {
+	font-family: var(--animfolio-font-heading);
+	font-weight: 800;
+	font-size: 2.25rem;
+	letter-spacing: -0.02em;
+	color: var(--animfolio-text);
+}
+
+.animfolio-container--format-08 .animfolio-stat__label {
+	font-size: 0.8125rem;
+	color: var(--animfolio-text-secondary);
+	margin-top: 0.25rem;
+}
+
+.animfolio-container--format-08 .animfolio-stat__trend {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.75rem;
+	/* secondary cyan fails AA as text on light bg; accent-text stays AA both schemes */
+	color: var(--animfolio-accent-text);
+	margin-top: 0.5rem;
+}
+
+/* ===== Roadmap timeline ===== */
+
+.animfolio-container--format-08 .animfolio-timeline {
+	position: relative;
+	padding-inline-start: 2rem;
+}
+
+.animfolio-container--format-08 .animfolio-timeline::before {
+	content: '';
+	position: absolute;
+	inset-inline-start: 0;
+	top: 0;
+	bottom: 0;
+	width: 2px;
+	background: linear-gradient(to bottom, var(--animfolio-accent), var(--animfolio-secondary), transparent);
+}
+
+/*
+ * base.css draws its own per-item connector via .animfolio-timeline__item::before,
+ * which sits a few px off from this format's continuous .animfolio-timeline::before
+ * line and produces a visible double vertical line. Suppress base's connector so
+ * only the format's styled gradient line remains.
+ */
+.animfolio-container--format-08 .animfolio-timeline__item::before {
+	display: none;
+}
+
+.animfolio-container--format-08 .animfolio-timeline__item {
+	position: relative;
+	padding-bottom: 2.5rem;
+}
+
+.animfolio-container--format-08 .animfolio-timeline__dot {
+	position: absolute;
+	left: -2rem;
+	top: 0.25rem;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: var(--animfolio-accent);
+	border: 2px solid var(--animfolio-bg);
+	box-shadow: 0 0 0 3px var(--animfolio-accent-glow);
+	transform: translateX(-5px);
+}
+
+.animfolio-container--format-08 .animfolio-timeline__date {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.75rem;
+	color: var(--animfolio-accent-text);
+	margin-bottom: 0.25rem;
+}
+
+.animfolio-container--format-08 .animfolio-timeline__title {
+	font-weight: 700;
+	font-size: 1.0625rem;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.animfolio-container--format-08 .animfolio-timeline__company {
+	font-size: 0.875rem;
+	color: var(--animfolio-text-secondary);
+}
+
+/* ===== Case study — Problem / Solution / Impact ===== */
+
+.animfolio-container--format-08 .animfolio-project {
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 12px;
+	overflow: hidden;
+	margin-bottom: 1.5rem;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.animfolio-container--format-08 .animfolio-project__header {
+	padding: 1.5rem;
+	border-bottom: 1px solid var(--animfolio-border);
+}
+
+.animfolio-container--format-08 .animfolio-project__title {
+	font-weight: 700;
+	font-size: 1.25rem;
+}
+
+.animfolio-container--format-08 .animfolio-project__body {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0;
+}
+
+.animfolio-container--format-08 .animfolio-f08-psi-block {
+	padding: 1.5rem;
+	border-inline-end: 1px solid var(--animfolio-border);
+}
+
+.animfolio-container--format-08 .animfolio-f08-psi-block:last-child {
+	border-inline-end: none;
+}
+
+.animfolio-container--format-08 .animfolio-f08-psi-label {
+	font-size: 0.6875rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--animfolio-accent-text);
+	margin-bottom: 0.5rem;
+}
+
+.animfolio-container--format-08 .animfolio-f08-psi-text {
+	font-size: 0.875rem;
+	line-height: 1.6;
+	color: var(--animfolio-text-secondary);
+}
+
+.animfolio-container--format-08 .animfolio-f08-psi-text--muted {
+	font-style: italic;
+	color: var(--animfolio-text-muted);
+}
+
+/* ===== Case study cards (PM-style Problem/Solution/Impact) ===== */
+
+.animfolio-container--format-08 .animfolio-f08-cases {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.animfolio-container--format-08 .animfolio-f08-case {
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 12px;
+	overflow: hidden;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.animfolio-container--format-08 .animfolio-f08-case:hover {
+	border-color: var(--animfolio-accent);
+	box-shadow: 0 4px 24px var(--animfolio-accent-glow);
+}
+
+/* Header — cover thumbnail + eyebrow/title/subtitle */
+.animfolio-container--format-08 .animfolio-f08-case__header {
+	display: flex;
+	align-items: center;
+	gap: 1.25rem;
+}
+
+.animfolio-container--format-08 .animfolio-f08-case__cover {
+	flex-shrink: 0;
+	width: 64px;
+	height: 64px;
+	border-radius: 10px;
+	object-fit: cover;
+	border: 1px solid var(--animfolio-border);
+	background: var(--animfolio-bg-tertiary);
+}
+
+.animfolio-container--format-08 .animfolio-f08-case__cover--placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--animfolio-font-heading);
+	font-weight: 800;
+	font-size: 1.5rem;
+	color: var(--animfolio-accent-text);
+	background: linear-gradient(135deg, var(--animfolio-accent-light), var(--animfolio-accent-subtle));
+}
+
+.animfolio-container--format-08 .animfolio-f08-case__heading {
+	min-width: 0;
+}
+
+.animfolio-container--format-08 .animfolio-f08-case__eyebrow {
+	display: inline-block;
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--animfolio-accent-text);
+	margin-bottom: 0.35rem;
+}
+
+.animfolio-container--format-08 .animfolio-f08-case__title {
+	margin: 0;
+}
+
+.animfolio-container--format-08 .animfolio-f08-case__subtitle {
+	font-size: 0.875rem;
+	color: var(--animfolio-text-secondary);
+	margin-top: 0.25rem;
+}
+
+/* Metric chips — emphasized results pulled from the narrative */
+.animfolio-container--format-08 .animfolio-f08-case__metrics {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 1rem 1.5rem;
+	border-bottom: 1px solid var(--animfolio-border);
+}
+
+.animfolio-container--format-08 .animfolio-f08-metric {
+	font-family: var(--animfolio-font-mono);
+	font-weight: 700;
+	font-size: 0.8125rem;
+	letter-spacing: -0.01em;
+	color: var(--animfolio-text);
+	padding: 0.35rem 0.75rem;
+	border-radius: 8px;
+	background: var(--animfolio-accent-light);
+	border: 1px solid var(--animfolio-border);
+}
+
+/* Single-column overview fallback when the description has no clean PSI split */
+.animfolio-container--format-08 .animfolio-f08-case__overview {
+	padding: 1.5rem;
+	border-bottom: 1px solid var(--animfolio-border);
+}
+
+/* Footer — tools (tech_stack) + case-study CTA (no source/repo link) */
+.animfolio-container--format-08 .animfolio-f08-case__footer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1.25rem 1.5rem;
+}
+
+.animfolio-container--format-08 .animfolio-f08-case__tools {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem 0.75rem;
+	min-width: 0;
+}
+
+.animfolio-container--format-08 .animfolio-f08-case__tools-label {
+	font-size: 0.6875rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--animfolio-text-muted);
+}
+
+.animfolio-container--format-08 .animfolio-f08-case__tools-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+}
+
+.animfolio-container--format-08 .animfolio-f08-tool {
+	font-family: var(--animfolio-font-mono);
+	letter-spacing: -0.01em;
+}
+
+.animfolio-container--format-08 .animfolio-f08-case__cta {
+	flex-shrink: 0;
+	font-size: 0.8125rem;
+	padding: 0.5rem 1.1rem;
+}
+
+/* ===== Skills — cross-functional matrix ===== */
+
+.animfolio-container--format-08 .animfolio-skills__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	gap: 0.75rem;
+}
+
+.animfolio-container--format-08 .animfolio-skill-chip {
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 8px;
+	padding: 0.875rem 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 0.875rem;
+	transition: border-color 0.2s ease;
+}
+
+.animfolio-container--format-08 .animfolio-skill-chip:hover {
+	border-color: var(--animfolio-accent);
+}
+
+.animfolio-container--format-08 .animfolio-skill-chip__level {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.75rem;
+	color: var(--animfolio-accent-text);
+}
+
+/* ===== Cards ===== */
+
+.animfolio-container--format-08 .animfolio-card {
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 12px;
+	padding: 1.5rem;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.animfolio-container--format-08 .animfolio-card {
+	overflow: hidden;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.animfolio-container--format-08 .animfolio-card:hover {
+	border-color: var(--animfolio-accent);
+	box-shadow: 0 4px 24px var(--animfolio-accent-glow);
+}
+
+/* ===== Tags ===== */
+
+.animfolio-container--format-08 .animfolio-card__tag {
+	font-size: 0.75rem;
+	font-weight: 500;
+	padding: 0.25rem 0.75rem;
+	border-radius: 100px;
+	background: var(--animfolio-accent-light);
+	color: var(--animfolio-accent-text);
+}
+
+/* ===== Testimonials ===== */
+
+.animfolio-container--format-08 .animfolio-testimonial {
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 12px;
+	padding: 2rem;
+}
+
+.animfolio-container--format-08 .animfolio-testimonial__quote {
+	font-size: 1.0625rem;
+	line-height: 1.7;
+}
+
+/* ===== Contact form ===== */
+
+.animfolio-container--format-08 .animfolio-form__input,
+.animfolio-container--format-08 .animfolio-form__textarea {
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 8px;
+	padding: 0.75rem 1rem;
+}
+
+.animfolio-container--format-08 .animfolio-form__input:focus,
+.animfolio-container--format-08 .animfolio-form__textarea:focus {
+	border-color: var(--animfolio-accent);
+	outline: none;
+	box-shadow: 0 0 0 3px var(--animfolio-accent-light);
+}
+
+.animfolio-container--format-08 .animfolio-form__submit {
+	background: var(--animfolio-accent);
+	color: var(--animfolio-on-accent, #fff);
+	border: none;
+	border-radius: 8px;
+	padding: 0.75rem 2rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: opacity 0.2s ease;
+}
+
+.animfolio-container--format-08 .animfolio-form__submit:hover {
+	opacity: 0.9;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 1024px) {
+	.animfolio-container--format-08 .animfolio-hero {
+		padding: 5rem 1.5rem;
+	}
+
+	.animfolio-container--format-08 .animfolio-nav__links {
+		gap: 2px;
+	}
+
+	.animfolio-container--format-08 .animfolio-nav__link {
+		padding: 6px 10px;
+	}
+}
+
+@media (max-width: 768px) {
+	.animfolio-container--format-08 .animfolio-hero {
+		padding: 4.5rem 1.25rem;
+	}
+
+	.animfolio-container--format-08 .animfolio-project__body {
+		grid-template-columns: 1fr;
+	}
+
+	.animfolio-container--format-08 .animfolio-f08-psi-block {
+		border-inline-end: none;
+		border-bottom: 1px solid var(--animfolio-border);
+	}
+
+	.animfolio-container--format-08 .animfolio-f08-psi-block:last-child {
+		border-bottom: none;
+	}
+
+	.animfolio-container--format-08 .animfolio-f08-case__footer {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.animfolio-container--format-08 .animfolio-f08-case__cta {
+		text-align: center;
+	}
+
+	.animfolio-container--format-08 .animfolio-stats__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.animfolio-container--format-08 .animfolio-skills__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 480px) {
+	.animfolio-container--format-08 .animfolio-hero {
+		padding: 4rem 1rem;
+		min-height: 100vh;
+		min-height: 100dvh;
+	}
+
+	.animfolio-container--format-08 .animfolio-nav__links {
+		display: none;
+	}
+
+	.animfolio-container--format-08 .animfolio-stats__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.animfolio-container--format-08 .animfolio-skills__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.animfolio-container--format-08 .animfolio-button--primary,
+	.animfolio-container--format-08 .animfolio-button--secondary {
+		width: 100%;
+		text-align: center;
+		box-sizing: border-box;
+	}
+}

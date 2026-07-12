@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Sigrid Halvorsen
+N:Halvorsen;Sigrid;;;
+TITLE:Minimalist Designer
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:I solve problems through simplicity. Designer\, developer\, and consultant with a focus on removing the unnecessary to reveal what matters. Less noise\, more signal.\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:23:02Z
+END:VCARD

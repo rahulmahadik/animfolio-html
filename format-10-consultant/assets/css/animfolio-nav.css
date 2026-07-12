@@ -1,0 +1,571 @@
+/**
+ * AnimFolio Navigation Styles
+ *
+ * @package AnimFolio
+ * @author     Rahul Mahadik
+ * @since   1.0.0
+ */
+
+.animfolio-nav {
+	display: flex;
+	align-items: center;
+	/* Comfortable, responsive side gutters so the brand never sits flush against
+	   the viewport edge. clamp scales the gutter up on wide screens (closer to
+	   where the centred page content begins) and keeps a sensible minimum on
+	   small ones. Formats may still override this. */
+	padding: 0 clamp(24px, 4vw, 48px);
+	height: 64px;
+	background: var(--animfolio-bg);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border-bottom: 1px solid var(--animfolio-border);
+	/* High z-index keeps the bar above every .animfolio-section (each of which
+	   is position:relative and can otherwise paint over the nav in source
+	   order). 900 stays below the progress bar (400 is fine) yet dominates all
+	   section content and cards. */
+	z-index: 900;
+	gap: 16px;
+	position: relative;
+	/* isolation:isolate forces the nav to be a top-level stacking context even
+	   when position:relative, so its z-index reliably wins against the
+	   position:relative sections rendered after it in the document. */
+	isolation: isolate;
+}
+
+.animfolio-nav--sticky {
+	position: sticky;
+	top: 0;
+}
+
+/* Sticky Navigation toggle OFF: the nav must scroll away with the page. Every
+   per-format style.css sets `.animfolio-container--format-NN .animfolio-nav {
+   position: fixed }` unconditionally (higher specificity than this file's
+   classes), which otherwise pins the bar regardless of the setting — making the
+   toggle a no-op. Force the bar back in-flow when the --sticky modifier is
+   absent. The dots rail is intentionally always a floating fixed rail, so it is
+   excluded. !important is required to beat the per-format selector. */
+.animfolio-nav:not(.animfolio-nav--sticky):not(.animfolio-nav--dots) {
+	position: relative !important;
+	top: auto !important;
+}
+
+/* Offset for WP admin bar */
+.admin-bar .animfolio-nav--sticky {
+	top: 32px;
+}
+
+@media (max-width: 782px) {
+	.admin-bar .animfolio-nav--sticky {
+		top: 46px;
+	}
+}
+
+.animfolio-nav__list {
+	display: flex;
+	list-style: none;
+	gap: 4px;
+	margin: 0;
+	padding: 0;
+	margin-inline-start: auto;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.animfolio-nav__list::-webkit-scrollbar {
+	display: none;
+}
+
+.animfolio-nav__link {
+	display: block;
+	padding: 8px 14px;
+	font-size: 0.8125rem;
+	font-weight: 500;
+	/* Use the primary text token so links are legible in BOTH light and dark
+	   schemes by default (the muted --text-secondary could wash out on some
+	   backgrounds). Hover still lifts to full --text below. */
+	color: var(--animfolio-text);
+	border-radius: 6px;
+	transition: all 0.2s ease;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.animfolio-nav__link:hover {
+	color: var(--animfolio-text);
+	background: rgba(255, 255, 255, 0.05);
+}
+
+/* Separate focus from hover so keyboard users get a strong ring, not just a tint */
+.animfolio-nav__link:focus-visible {
+	color: var(--animfolio-text);
+	outline: 2px solid var(--animfolio-accent);
+	outline-offset: 2px;
+	background: rgba(255, 255, 255, 0.05);
+}
+
+.animfolio-nav__link--active {
+	color: var(--animfolio-accent);
+	background: var(--animfolio-accent-light);
+	/* Inset border ensures visibility when accent-light is very faint (light mode) */
+	box-shadow: inset 0 0 0 1px var(--animfolio-accent);
+}
+
+/* Mobile toggle */
+.animfolio-nav__toggle {
+	display: none;
+	flex-direction: column;
+	gap: 5px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 11px;
+	min-width: 44px;
+	min-height: 44px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 6px;
+}
+
+.animfolio-nav__toggle:focus-visible {
+	outline: 2px solid var(--animfolio-accent);
+	outline-offset: 2px;
+}
+
+.animfolio-nav__toggle-bar,
+.animfolio-nav__toggle span {
+	display: block;
+	width: 22px;
+	height: 2px;
+	background: var(--animfolio-text);
+	border-radius: 2px;
+	transition: transform 0.3s ease, opacity 0.2s ease;
+	transform-origin: center;
+}
+
+/* Animate hamburger -> X when the menu is open (works with or without the
+   .animfolio-nav__toggle-bar class, since the spans are the only children). */
+.animfolio-nav__toggle[aria-expanded="true"] .animfolio-nav__toggle-bar:nth-child(1),
+.animfolio-nav__toggle[aria-expanded="true"] span:nth-child(1) {
+	transform: translateY(7px) rotate(45deg);
+}
+
+.animfolio-nav__toggle[aria-expanded="true"] .animfolio-nav__toggle-bar:nth-child(2),
+.animfolio-nav__toggle[aria-expanded="true"] span:nth-child(2) {
+	opacity: 0;
+}
+
+.animfolio-nav__toggle[aria-expanded="true"] .animfolio-nav__toggle-bar:nth-child(3),
+.animfolio-nav__toggle[aria-expanded="true"] span:nth-child(3) {
+	transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Theme toggle */
+.animfolio-theme-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 38px;
+	height: 38px;
+	background: none;
+	border: 1px solid var(--animfolio-border);
+	border-radius: 8px;
+	cursor: pointer;
+	color: var(--animfolio-text-secondary);
+	transition: all 0.2s ease;
+	flex-shrink: 0;
+}
+
+.animfolio-theme-toggle:hover {
+	color: var(--animfolio-accent);
+	border-color: var(--animfolio-accent);
+	background: var(--animfolio-accent-light);
+}
+
+.animfolio-theme-toggle:focus-visible {
+	outline: 2px solid var(--animfolio-accent);
+	outline-offset: 2px;
+	color: var(--animfolio-accent);
+	border-color: var(--animfolio-accent);
+}
+
+/* Default: hide both, then show the correct one based on scheme.
+   Dark mode shows sun (to switch to light). Light mode shows moon (to switch to dark).
+   Auto mode: show based on OS prefers-color-scheme as a CSS-only fallback. */
+.animfolio-theme-toggle__icon { display: none; }
+
+.animfolio-container--dark .animfolio-theme-toggle__icon--sun { display: flex; }
+.animfolio-container--dark .animfolio-theme-toggle__icon--moon { display: none; }
+.animfolio-container--light .animfolio-theme-toggle__icon--sun { display: none; }
+.animfolio-container--light .animfolio-theme-toggle__icon--moon { display: flex; }
+
+/* Auto scheme: OS dark => show sun icon; OS light => show moon icon */
+@media (prefers-color-scheme: dark) {
+	.animfolio-container--auto .animfolio-theme-toggle__icon--sun { display: flex; }
+	.animfolio-container--auto .animfolio-theme-toggle__icon--moon { display: none; }
+}
+@media (prefers-color-scheme: light) {
+	.animfolio-container--auto .animfolio-theme-toggle__icon--sun { display: none; }
+	.animfolio-container--auto .animfolio-theme-toggle__icon--moon { display: flex; }
+}
+
+/* Dot navigation
+   ------------------------------------------------------------------
+   A fixed vertical rail of dots on the right edge — one per section. The
+   nav-generator suppresses the brand wordmark, hamburger and theme toggle for
+   this style (they have no place in a dot rail), so the nav holds only the
+   <ul> of dots. Each dot's text label is hidden but exposed to assistive tech
+   via the link's aria-label, and shown as a hover/focus pill for sighted users. */
+.animfolio-nav--dots {
+	position: fixed;
+	right: max(20px, env(safe-area-inset-right, 0px) + 10px);
+	top: 50%;
+	transform: translateY(-50%);
+	flex-direction: column;
+	align-items: flex-end;
+	background: transparent;
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+	border: none;
+	border-bottom: none;
+	padding: 0;
+	gap: 0;
+	z-index: 300;
+	height: auto;
+}
+
+.animfolio-nav--dots .animfolio-nav__list {
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 14px;
+	margin: 0;
+	padding: 0;
+	overflow: visible;
+}
+
+.animfolio-nav--dots .animfolio-nav__item {
+	list-style: none;
+}
+
+/* The link is a generous square hit area; the visible dot is drawn with ::before
+   so the tap/click target stays a comfortable 24px while the dot reads as ~11px. */
+.animfolio-nav--dots .animfolio-nav__link {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	border-radius: 50%;
+	background: transparent;
+	box-shadow: none;
+	overflow: visible;
+}
+
+.animfolio-nav--dots .animfolio-nav__link::before {
+	content: "";
+	display: block;
+	width: 11px;
+	height: 11px;
+	border-radius: 50%;
+	/* Resting dot must be clearly visible (the old --animfolio-border fallback
+	   is a ~10%-opacity hairline, so the rail looked empty). Use the muted text
+	   colour at rest; accent on hover/active below. */
+	background: var(--animfolio-text-secondary, var(--animfolio-text-muted, #8a8a8a));
+	box-shadow: 0 0 0 1px var(--animfolio-border);
+	transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.animfolio-nav--dots .animfolio-nav__link:hover {
+	background: transparent;
+}
+
+.animfolio-nav--dots .animfolio-nav__link:hover::before {
+	background: var(--animfolio-accent);
+	transform: scale(1.25);
+}
+
+.animfolio-nav--dots .animfolio-nav__link--active {
+	background: transparent;
+	transform: none;
+	box-shadow: none;
+}
+
+.animfolio-nav--dots .animfolio-nav__link--active::before {
+	background: var(--animfolio-accent);
+	transform: scale(1.4);
+}
+
+.animfolio-nav--dots .animfolio-nav__link:focus-visible {
+	outline: none;
+	background: transparent;
+}
+
+.animfolio-nav--dots .animfolio-nav__link:focus-visible::before {
+	outline: 2px solid var(--animfolio-accent);
+	outline-offset: 3px;
+}
+
+/* Hover/focus label pill sitting to the LEFT of the dot. */
+.animfolio-nav--dots .animfolio-nav__dot-label {
+	position: absolute;
+	right: calc(100% + 10px);
+	top: 50%;
+	transform: translateY(-50%) translateX(6px);
+	white-space: nowrap;
+	font-size: 0.75rem;
+	font-weight: 600;
+	line-height: 1;
+	padding: 6px 10px;
+	border-radius: 6px;
+	color: var(--animfolio-text);
+	background: var(--animfolio-surface, var(--animfolio-bg-secondary));
+	border: 1px solid var(--animfolio-border);
+	box-shadow: var(--animfolio-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.15));
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.animfolio-nav--dots .animfolio-nav__link:hover .animfolio-nav__dot-label,
+.animfolio-nav--dots .animfolio-nav__link:focus-visible .animfolio-nav__dot-label {
+	opacity: 1;
+	transform: translateY(-50%) translateX(0);
+}
+
+/* Mobile navigation
+   ------------------------------------------------------------------
+   DOM order inside .animfolio-nav (from nav-generator):
+     [brand] [hamburger toggle] [nav list (dropdown)] [theme toggle]
+   On mobile the list is taken out of flow (position:fixed dropdown), so the
+   flex row becomes: brand | toggle | theme-toggle. We push the toggle
+   group to the trailing edge with margin-inline-start:auto on the hamburger
+   so the brand stays on the leading edge and the controls sit on the
+   trailing edge — they never overlap, even at 390px / 320px. */
+@media (max-width: 768px) {
+	.animfolio-nav {
+		padding: 0 20px;
+		gap: 12px;
+		/* Per-format styles (.animfolio-container--format-NN .animfolio-nav) set
+		   backdrop-filter (which makes the nav the containing block for the
+		   position:fixed dropdown) AND overflow:hidden, which clips the open
+		   menu to the 64px bar so it renders behind the hero. The dropdown only
+		   exists at this breakpoint and the bar truncates the brand via the
+		   logo's own overflow, so the nav itself must not clip here. !important
+		   is required to beat the higher-specificity per-format rule. */
+		overflow: visible !important;
+	}
+
+	.animfolio-nav__toggle {
+		display: flex;
+		/* Push hamburger + theme toggle to the trailing edge, away from brand. */
+		margin-inline-start: auto;
+		order: 2;
+	}
+
+	/* Brand stays on the leading edge and is allowed to truncate before it
+	   ever reaches the controls. */
+	.animfolio-nav__logo {
+		order: 1;
+		margin-inline-end: 8px;
+	}
+
+	/* Theme toggle sits next to the hamburger on the trailing side. */
+	.animfolio-nav .animfolio-theme-toggle {
+		order: 3;
+		margin-inline-start: 0;
+	}
+
+	.animfolio-nav__list {
+		/* position:fixed takes the open menu OUT of any ancestor's flow and
+		   clipping. Combined with the high z-index below, the menu paints
+		   above every .animfolio-section (and their transformed/will-change
+		   cards) regardless of source order or stacking context — this is the
+		   fix for the dropdown rendering behind the hero.
+		   Anchored to the viewport top so it sits flush under the nav bar
+		   (the bar is 64px tall). */
+		position: fixed;
+		top: 64px;
+		inset-inline: 0;
+		order: 4;
+		flex-direction: column;
+		gap: 4px;
+		/* Solid opaque background so page content NEVER shows through the open
+		   menu. backdrop-filter alone is not enough on some browsers, so the
+		   base var(--animfolio-bg) is the solid floor. */
+		background: var(--animfolio-bg);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-bottom: 1px solid var(--animfolio-border);
+		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+		padding: 12px;
+		display: none;
+		overflow-x: visible;
+		/* Cap the dropdown height so a long menu scrolls instead of
+		   running off-screen; account for the nav bar itself. */
+		max-height: calc(100vh - 64px);
+		max-height: calc(100dvh - 64px);
+		overflow-y: auto;
+		/* Very high z-index: above the nav bar (900) and every page element.
+		   Stays below the custom cursor (700) is irrelevant — the cursor is a
+		   non-interactive overlay; the menu must beat all real content. */
+		z-index: 1000;
+	}
+
+	/* With the WP admin bar present, the sticky nav is offset downward, so the
+	   fixed menu must clear both the admin bar and the nav bar. Fixed elements
+	   ignore the sticky ancestor's offset, so we restate it here. Inside this
+	   <=768px block the admin bar is 46px tall. */
+	.admin-bar .animfolio-nav--sticky .animfolio-nav__list {
+		top: calc(64px + 46px);
+		max-height: calc(100dvh - 64px - 46px);
+	}
+
+	/* Open mobile nav when toggle is expanded */
+	.animfolio-nav:has(.animfolio-nav__toggle[aria-expanded="true"]) .animfolio-nav__list {
+		display: flex;
+	}
+
+	/* Fallback for browsers without :has() support. The toggle is the 2nd
+	   sibling (after the brand) and precedes the list, so the general
+	   sibling combinator reliably matches regardless of the theme toggle. */
+	.animfolio-nav__toggle[aria-expanded="true"] ~ .animfolio-nav__list {
+		display: flex;
+	}
+
+	/* Dots stay visible on mobile as a compact right-edge rail (there is no
+	   hamburger for the dots style, so hiding them would leave no nav at all).
+	   Pull the rail up off centre a touch so it never overlaps the back-to-top
+	   button at the bottom-right. */
+	.animfolio-nav--dots {
+		right: max(12px, env(safe-area-inset-right, 0px) + 8px);
+		top: 45%;
+	}
+
+	/* Mobile nav links: full-width tap rows, comfortable 44px target — but NOT
+	   for the dots rail, whose links are fixed-size round dots. */
+	.animfolio-nav:not(.animfolio-nav--dots) .animfolio-nav__list .animfolio-nav__link {
+		display: flex;
+		align-items: center;
+		min-height: 44px;
+		width: 100%;
+		padding: 10px 14px;
+		font-size: 0.9375rem;
+	}
+
+	/* Keep dot links as fixed round hit areas on mobile (override the generic
+	   mobile list-link sizing inheritance). */
+	.animfolio-nav--dots .animfolio-nav__link {
+		width: 24px;
+		height: 24px;
+		min-height: 0;
+		padding: 0;
+	}
+}
+
+/* Nav logo */
+.animfolio-nav__logo {
+	font-family: var(--animfolio-font-heading);
+	font-weight: 700;
+	font-size: 1.125rem;
+	color: var(--animfolio-text);
+	text-decoration: none;
+	white-space: nowrap;
+	flex-shrink: 1;   /* Allow shrinking on very narrow viewports */
+	min-width: 0;     /* Let text truncate rather than overflow the flex row */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	/* Guaranteed leading breathing room that survives even when a format zeroes
+	   the nav's own horizontal padding — the brand is never flush to the edge.
+	   No format overrides the logo's padding, so this applies broadly. */
+	padding-inline-start: 2px;
+}
+
+.animfolio-nav__logo:hover {
+	color: var(--animfolio-accent);
+}
+
+/* Landscape phones: compact nav */
+@media (max-height: 500px) and (orientation: landscape) {
+	.animfolio-nav {
+		height: 48px;
+		padding: 0 16px;
+	}
+
+	.animfolio-nav__link {
+		padding: 6px 10px;
+		font-size: 0.75rem;
+	}
+
+	/* Nav bar shrinks to 48px here, so re-anchor the fixed mobile menu flush
+	   under it (it would otherwise leave a 16px gap below the bar). */
+	.animfolio-nav__list {
+		top: 48px;
+		max-height: calc(100dvh - 48px);
+	}
+
+	.admin-bar .animfolio-nav--sticky .animfolio-nav__list {
+		top: calc(48px + 46px);
+		max-height: calc(100dvh - 48px - 46px);
+	}
+
+	.animfolio-theme-toggle {
+		width: 32px;
+		height: 32px;
+	}
+
+	.animfolio-nav--dots {
+		display: none;
+	}
+}
+
+/* Small phones (≤480px) — tighten gutters so brand + controls fit. */
+@media (max-width: 480px) {
+	.animfolio-nav {
+		padding: 0 16px;
+		gap: 8px;
+	}
+
+	.animfolio-nav__logo {
+		font-size: 0.9375rem;
+	}
+}
+
+/* Galaxy Fold (≤300px) — ultra-narrow nav prevents overflow */
+@media (max-width: 300px) {
+	.animfolio-nav {
+		padding: 0 10px;
+		gap: 6px;
+	}
+
+	/* Shrink logo further to leave room for the hamburger toggle */
+	.animfolio-nav__logo {
+		font-size: 0.875rem;
+		margin-inline-end: 4px;
+	}
+
+	/* Shrink theme toggle to save horizontal space */
+	.animfolio-theme-toggle {
+		width: 34px;
+		height: 34px;
+	}
+
+	/* Hamburger toggle: keep 44×44 touch target */
+	.animfolio-nav__toggle {
+		min-width: 44px;
+		min-height: 44px;
+		padding: 10px 8px;
+	}
+
+	/* Mobile nav dropdown: tighter padding */
+	.animfolio-nav__list {
+		padding: 10px;
+	}
+
+	.animfolio-nav__list .animfolio-nav__link {
+		padding: 10px 12px;
+		font-size: 0.875rem;
+	}
+}

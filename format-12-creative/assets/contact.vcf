@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Naomi Okonkwo
+N:Okonkwo;Naomi;;;
+TITLE:Creative Director
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:I'm a creative director working at the intersection of art\, technology\, and storytelling. Over the past 12 years\, I've directed brand films\, designed interactive installations\, and led creative campai\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:23:00Z
+END:VCARD

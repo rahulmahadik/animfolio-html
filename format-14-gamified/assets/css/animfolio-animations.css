@@ -1,0 +1,275 @@
+/**
+ * AnimFolio Animation Styles
+ *
+ * CSS-only animation fallbacks. These work without JavaScript.
+ * Uses only transform and opacity (GPU-accelerated).
+ *
+ * @package AnimFolio
+ * @author     Rahul Mahadik
+ * @since   1.0.0
+ */
+
+/* ========================================================================
+   1. Initial Hidden State (before animation triggers)
+   ======================================================================== */
+
+/* The initial hidden state is gated on the .animfolio-js class, which the inline
+   <head> failsafe adds synchronously before first paint. This makes the reveal
+   bulletproof against caching/optimization plugins (WP Rocket, LiteSpeed, W3TC,
+   Cloudflare Rocket Loader) that defer, combine, or delay-until-interaction the
+   scripts: if the failsafe script never runs, .animfolio-js is never added, so
+   elements stay fully VISIBLE rather than stuck at opacity:0 (a blank page). It
+   also covers browsers without @media (scripting) support. */
+.animfolio-js [data-animfolio-animate] {
+	opacity: 0;
+	transition-property: opacity, transform, filter;
+	transition-duration: var(--animfolio-duration, 0.6s);
+	transition-timing-function: var(--animfolio-easing, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+/* ------------------------------------------------------------------------
+   LCP fast-path — the hero is above the fold and usually holds the Largest
+   Contentful Paint element (name/photo). Hiding it at opacity:0 until the
+   footer JS engine runs pins LCP to JS execution time (and a cache plugin
+   that defers/combines JS makes that worse). Here the hero paints at full
+   opacity IMMEDIATELY and animates via a pure-CSS transform — no JS, no
+   opacity ramp — so LCP fires at first paint. Below-the-fold sections keep
+   the JS scroll-reveal. Reduced-motion users skip the animation entirely.
+   ------------------------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+	.animfolio-hero [data-animfolio-animate] {
+		opacity: 1;
+		animation: animfolio-hero-enter 0.7s var(--animfolio-easing, cubic-bezier(0.4, 0, 0.2, 1)) both;
+	}
+	.animfolio-hero [data-animfolio-animate][data-animfolio-delay="0.1"] { animation-delay: 0.1s; }
+	.animfolio-hero [data-animfolio-animate][data-animfolio-delay="0.2"] { animation-delay: 0.2s; }
+	.animfolio-hero [data-animfolio-animate][data-animfolio-delay="0.3"] { animation-delay: 0.3s; }
+	.animfolio-hero [data-animfolio-animate][data-animfolio-delay="0.4"] { animation-delay: 0.4s; }
+}
+
+@keyframes animfolio-hero-enter {
+	from { transform: translate3d(0, 20px, 0); }
+	to   { transform: translate3d(0, 0, 0); }
+}
+
+/* ========================================================================
+   2. Animation Types (initial transforms)
+   ======================================================================== */
+
+.animfolio-animate--fade-up,
+[data-animfolio-animate="fade-up"] {
+	transform: translate3d(0, 40px, 0);
+}
+
+.animfolio-animate--fade-down,
+[data-animfolio-animate="fade-down"] {
+	transform: translate3d(0, -40px, 0);
+}
+
+.animfolio-animate--fade-left,
+[data-animfolio-animate="fade-left"] {
+	transform: translate3d(40px, 0, 0);
+}
+
+.animfolio-animate--fade-right,
+[data-animfolio-animate="fade-right"] {
+	transform: translate3d(-40px, 0, 0);
+}
+
+.animfolio-animate--scale-up,
+[data-animfolio-animate="scale-up"] {
+	transform: scale3d(0.9, 0.9, 1);
+}
+
+.animfolio-animate--slide-up,
+[data-animfolio-animate="slide-up"] {
+	transform: translate3d(0, 60px, 0);
+}
+
+.animfolio-animate--flip,
+[data-animfolio-animate="flip"] {
+	transform: perspective(1000px) rotateX(10deg);
+}
+
+.animfolio-animate--zoom-in,
+[data-animfolio-animate="zoom-in"] {
+	transform: scale3d(0.85, 0.85, 1);
+}
+
+.animfolio-animate--blur-in,
+[data-animfolio-animate="blur-in"] {
+	filter: blur(12px);
+}
+
+.animfolio-animate--rotate-in,
+[data-animfolio-animate="rotate-in"] {
+	transform: rotate(-6deg) scale3d(0.94, 0.94, 1);
+}
+
+.animfolio-animate--bounce-in,
+[data-animfolio-animate="bounce-in"] {
+	transform: translate3d(0, 40px, 0) scale3d(0.96, 0.96, 1);
+}
+
+.animfolio-animate--none,
+[data-animfolio-animate="none"] {
+	opacity: 1;
+	transform: none;
+}
+
+/* ========================================================================
+   3. Visible State (after animation triggers)
+   ======================================================================== */
+
+[data-animfolio-animate].animfolio-visible,
+.animfolio-animate.animfolio-visible {
+	opacity: 1;
+	/* `none` resets ANY initial transform (translate/scale/rotate) and the
+	   blur-in filter, so every type — including rotate-in — reveals fully. */
+	transform: none;
+	filter: none;
+}
+
+/* bounce-in gets a real overshoot keyframe (the transition can't bounce). */
+[data-animfolio-animate="bounce-in"].animfolio-visible,
+.animfolio-animate--bounce-in.animfolio-visible {
+	animation: animfolio-bounce-in var(--animfolio-duration, 0.6s) cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes animfolio-bounce-in {
+	0%   { opacity: 0; transform: translate3d(0, 40px, 0) scale3d(0.96, 0.96, 1); }
+	60%  { opacity: 1; transform: translate3d(0, -6px, 0) scale3d(1.02, 1.02, 1); }
+	100% { opacity: 1; transform: none; }
+}
+
+/* ========================================================================
+   4. Stagger Items
+   ======================================================================== */
+
+.animfolio-js .animfolio-stagger__item {
+	opacity: 0;
+	transform: translate3d(0, 20px, 0);
+	transition: opacity var(--animfolio-duration, 0.6s) var(--animfolio-easing),
+		transform var(--animfolio-duration, 0.6s) var(--animfolio-easing);
+}
+
+.animfolio-stagger__item.animfolio-visible {
+	opacity: 1;
+	transform: translate3d(0, 0, 0);
+}
+
+/* ========================================================================
+   5. Reduced Motion
+   ======================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	[data-animfolio-animate],
+	.animfolio-animate,
+	.animfolio-stagger__item {
+		opacity: 1;
+		transform: none;
+		filter: none;
+		transition: none;
+		animation: none;
+	}
+}
+
+/* ========================================================================
+   5b. Progressive Enhancement — No-JS Safety Net
+   ------------------------------------------------------------------------
+   The JS engine adds .animfolio-visible to reveal elements. If JavaScript
+   never runs, those elements would stay at opacity:0 (blank portfolio).
+   When the browser reports no scripting support, force everything visible.
+   ======================================================================== */
+
+@media (scripting: none) {
+	.animfolio-container [data-animfolio-animate],
+	.animfolio-container .animfolio-animate,
+	.animfolio-container .animfolio-stagger__item {
+		opacity: 1 !important;
+		transform: none !important;
+		filter: none !important;
+		transition: none !important;
+	}
+}
+
+/* ========================================================================
+   5c. Mobile Overflow Guard
+   ------------------------------------------------------------------------
+   .animfolio-container intentionally has no overflow-x:hidden (it would
+   break the sticky nav). Horizontal-axis reveals (fade-left/right) start
+   translated ±40px (±80px at full intensity), which can briefly push an
+   element past the viewport edge on a narrow phone and trigger horizontal
+   scroll. On <=768px we swap those to a vertical (fade-up style) offset so
+   the reveal still plays but never overflows the x-axis.
+   ======================================================================== */
+
+@media (max-width: 768px) {
+	.animfolio-animate--fade-left,
+	[data-animfolio-animate="fade-left"],
+	.animfolio-animate--fade-right,
+	[data-animfolio-animate="fade-right"],
+	/* Beat the intensity modifiers (subtle/full) which carry higher
+	   specificity, so horizontal reveals stay vertical on mobile. */
+	.animfolio-container[data-animfolio-intensity] [data-animfolio-animate="fade-left"],
+	.animfolio-container[data-animfolio-intensity] [data-animfolio-animate="fade-right"] {
+		transform: translate3d(0, 30px, 0);
+	}
+}
+
+/* ========================================================================
+   6. Animation Intensity Modifiers
+   ======================================================================== */
+
+/* Subtle: smaller movement */
+.animfolio-container[data-animfolio-intensity="subtle"] [data-animfolio-animate="fade-up"] {
+	transform: translate3d(0, 20px, 0);
+}
+
+.animfolio-container[data-animfolio-intensity="subtle"] [data-animfolio-animate="fade-down"] {
+	transform: translate3d(0, -20px, 0);
+}
+
+.animfolio-container[data-animfolio-intensity="subtle"] [data-animfolio-animate="fade-left"] {
+	transform: translate3d(20px, 0, 0);
+}
+
+.animfolio-container[data-animfolio-intensity="subtle"] [data-animfolio-animate="fade-right"] {
+	transform: translate3d(-20px, 0, 0);
+}
+
+/* Full: bigger movement */
+.animfolio-container[data-animfolio-intensity="full"] [data-animfolio-animate="fade-up"] {
+	transform: translate3d(0, 80px, 0);
+}
+
+.animfolio-container[data-animfolio-intensity="full"] [data-animfolio-animate="slide-up"] {
+	transform: translate3d(0, 100px, 0);
+}
+
+/* None: no animations */
+.animfolio-container[data-animfolio-intensity="none"] [data-animfolio-animate] {
+	opacity: 1;
+	transform: none;
+	transition: none;
+}
+
+/* ========================================================================
+   7. Theme Transition
+   ======================================================================== */
+
+.animfolio-container {
+	transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Theme transitions — use transition-property to not override base hover transitions. */
+.animfolio-container .animfolio-card {
+	transition-property: background-color, color, border-color, transform, box-shadow;
+	transition-duration: 0.4s, 0.4s, 0.4s, 0.3s, 0.3s;
+	transition-timing-function: ease;
+}
+
+.animfolio-container .animfolio-nav,
+.animfolio-container .animfolio-section {
+	transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}

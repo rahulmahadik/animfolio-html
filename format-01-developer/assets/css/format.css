@@ -1,0 +1,606 @@
+/**
+ * Format 01: Developer Classic
+ *
+ * Dark terminal/code aesthetic with depth, glow effects,
+ * monospace accents, and GitHub-inspired data viz.
+ *
+ * @package AnimFolio
+ * @author     Rahul Mahadik
+ * @since   1.0.0
+ */
+
+/* ===== Base variable mappings (non-color + fonts) ===== */
+
+.animfolio-container--format-01 {
+	--animfolio-font-heading: 'Inter', sans-serif;
+	--animfolio-font-body: 'Inter', sans-serif;
+	--animfolio-font-mono: 'JetBrains Mono', monospace;
+
+	font-family: 'Inter', sans-serif;
+	background: var(--animfolio-bg);
+	color: var(--animfolio-text);
+	overflow-x: clip; /* clip prevents horizontal overflow without breaking position: sticky */
+}
+
+/* ===== Dual-scheme color tokens =====
+ * Scoped under BOTH the format class AND the scheme class so the theme
+ * toggle (which swaps --dark / --light) actually re-skins the palette.
+ * The no-scheme fallback below uses the dark palette (default_scheme: dark).
+ */
+
+/* Fallback (before JS adds a scheme class) — dark palette.
+ * --animfolio-accent / --animfolio-secondary are intentionally NOT redeclared
+ * here: the plugin injects them on .animfolio-container from the user's chosen
+ * colors, and self-referencing them (var(--animfolio-accent, …)) would create a
+ * custom-property cycle. We only map the DERIVED tokens to the plugin values,
+ * keeping the original dark-palette hex/rgba as fallbacks for standalone use. */
+.animfolio-container--format-01 {
+	--animfolio-accent-text: #9D96E8;
+	--animfolio-accent-hover: var(--animfolio-accent-hover, #6B63C8);
+	--animfolio-accent-light: var(--animfolio-accent-light, rgba(127, 119, 221, 0.1));
+	--animfolio-accent-subtle: var(--animfolio-accent-subtle, rgba(127, 119, 221, 0.06));
+	--animfolio-accent-shadow: var(--animfolio-accent-shadow, rgba(127, 119, 221, 0.4));
+	--animfolio-accent-glow: var(--animfolio-accent-glow, rgba(127, 119, 221, 0.12));
+	--animfolio-on-accent: #fff;
+	--animfolio-bg: #0a0a0a;
+	--animfolio-bg-secondary: #111111;
+	--animfolio-bg-tertiary: #1a1a1a;
+	--animfolio-nav-bg: rgba(10, 10, 10, 0.7);
+	--animfolio-text: #e5e5e5;
+	--animfolio-text-secondary: #a0a0a0;
+	--animfolio-text-muted: #8a8a8a;
+	--animfolio-border: rgba(255, 255, 255, 0.08);
+}
+
+/* Dark scheme — accent/secondary base tokens come from the plugin (user colors);
+ * only derived tokens are mapped here with the original dark hex as fallback. */
+.animfolio-container--format-01.animfolio-container--dark {
+	--animfolio-accent-text: #9D96E8;
+	--animfolio-accent-hover: var(--animfolio-accent-hover, #6B63C8);
+	--animfolio-accent-light: var(--animfolio-accent-light, rgba(127, 119, 221, 0.1));
+	--animfolio-accent-subtle: var(--animfolio-accent-subtle, rgba(127, 119, 221, 0.06));
+	--animfolio-accent-shadow: var(--animfolio-accent-shadow, rgba(127, 119, 221, 0.4));
+	--animfolio-accent-glow: var(--animfolio-accent-glow, rgba(127, 119, 221, 0.12));
+	--animfolio-on-accent: #fff;
+	--animfolio-bg: #0a0a0a;
+	--animfolio-bg-secondary: #111111;
+	--animfolio-bg-tertiary: #1a1a1a;
+	--animfolio-nav-bg: rgba(10, 10, 10, 0.7);
+	--animfolio-text: #e5e5e5;
+	--animfolio-text-secondary: #a0a0a0;
+	--animfolio-text-muted: #8a8a8a;
+	--animfolio-border: rgba(255, 255, 255, 0.08);
+}
+
+/* Light scheme — darkened accent for AA-legible link/title text.
+ * accent/secondary base tokens come from the plugin (user colors); derived
+ * tokens map to the plugin values with the original light hex as fallback. */
+.animfolio-container--format-01.animfolio-container--light {
+	--animfolio-accent-text: var(--animfolio-accent, #6B63C9);
+	--animfolio-accent-hover: var(--animfolio-accent-hover, #564FB0);
+	--animfolio-accent-light: var(--animfolio-accent-light, rgba(107, 99, 201, 0.1));
+	--animfolio-accent-subtle: var(--animfolio-accent-subtle, rgba(107, 99, 201, 0.05));
+	--animfolio-accent-shadow: var(--animfolio-accent-shadow, rgba(107, 99, 201, 0.3));
+	--animfolio-accent-glow: var(--animfolio-accent-glow, rgba(107, 99, 201, 0.12));
+	--animfolio-on-accent: #fff;
+	--animfolio-bg: #ffffff;
+	--animfolio-bg-secondary: #f5f5f5;
+	--animfolio-bg-tertiary: #ebebeb;
+	--animfolio-nav-bg: rgba(255, 255, 255, 0.82);
+	--animfolio-text: #1a1a1a;
+	--animfolio-text-secondary: #555555;
+	--animfolio-text-muted: #5b5b5b;
+	--animfolio-border: rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Nav — glassmorphism dark, monospace font ===== */
+
+.animfolio-container--format-01 .animfolio-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	background: var(--animfolio-nav-bg, rgba(10, 10, 10, 0.7));
+	-webkit-backdrop-filter: blur(16px) saturate(1.2);
+	backdrop-filter: blur(16px) saturate(1.2);
+	border-bottom: 1px solid var(--animfolio-accent-glow);
+	padding: 0 2rem;
+	transition: background 0.3s ease;
+	overflow: hidden;
+}
+
+.animfolio-container--format-01 .animfolio-nav__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: var(--animfolio-container, 1200px);
+	margin: 0 auto;
+	height: 60px;
+}
+
+.animfolio-container--format-01 .animfolio-nav__logo {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.875rem;
+	font-weight: 700;
+	color: var(--animfolio-accent-text);
+	text-decoration: none;
+}
+
+/* Developer format: clean nav logo without prefix */
+
+.animfolio-container--format-01 .animfolio-nav__links {
+	display: flex;
+	gap: 2rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.animfolio-container--format-01 .animfolio-nav__link {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.8125rem;
+	color: var(--animfolio-text-secondary);
+	text-decoration: none;
+	transition: color 0.2s ease, text-shadow 0.2s ease;
+	position: relative;
+}
+
+/* Developer format: no prefix on nav links (clean look) */
+
+.animfolio-container--format-01 .animfolio-nav__link:hover,
+.animfolio-container--format-01 .animfolio-nav__link--active {
+	color: var(--animfolio-accent-text);
+	text-shadow: 0 0 12px var(--animfolio-accent-shadow);
+}
+
+/* ===== Hero atmosphere ===== */
+
+.animfolio-container--format-01 .animfolio-section--hero {
+	background:
+		radial-gradient(ellipse at 20% 50%, color-mix(in srgb, var(--animfolio-accent) 15%, transparent) 0%, transparent 55%),
+		radial-gradient(ellipse at 80% 20%, color-mix(in srgb, var(--animfolio-secondary) 10%, transparent) 0%, transparent 45%),
+		radial-gradient(ellipse at 50% 100%, var(--animfolio-accent-subtle) 0%, transparent 40%),
+		var(--animfolio-bg);
+	overflow: hidden;
+	position: relative;
+}
+
+.animfolio-container--format-01 .animfolio-section--hero::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image:
+		radial-gradient(var(--animfolio-accent-light) 1px, transparent 1px);
+	background-size: 30px 30px;
+	pointer-events: none;
+	opacity: 0.6;
+}
+
+.animfolio-container--format-01 .animfolio-hero {
+	min-height: 100vh;
+}
+
+.animfolio-container--format-01 .animfolio-hero__name {
+	font-family: var(--animfolio-font-heading);
+	letter-spacing: -0.03em;
+	font-weight: 800;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.animfolio-container--format-01 .animfolio-hero__title {
+	font-family: var(--animfolio-font-mono);
+	font-size: clamp(1rem, 2.5vw, 1.5rem);
+	font-weight: 500;
+	opacity: 0.9;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.animfolio-container--format-01 .animfolio-hero__subtitle {
+	font-family: var(--animfolio-font-mono);
+	font-size: 1rem;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+/* ===== Code-style section titles ===== */
+
+.animfolio-container--format-01 .animfolio-section__title {
+	font-family: var(--animfolio-font-mono);
+	letter-spacing: -0.02em;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+/* ===== Cards with glow ===== */
+
+.animfolio-container--format-01 .animfolio-card--bordered {
+	background: rgba(255, 255, 255, 0.03);
+	border-color: var(--animfolio-border);
+	transition: all 0.3s ease;
+	overflow: hidden;
+}
+
+.animfolio-container--format-01 .animfolio-card--bordered:hover {
+	border-color: color-mix(in srgb, var(--animfolio-accent) 50%, transparent);
+	box-shadow:
+		0 0 30px var(--animfolio-accent-glow),
+		0 0 60px var(--animfolio-accent-subtle),
+		0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Tags as code-style chips ===== */
+
+.animfolio-container--format-01 .animfolio-card__tag {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.6875rem;
+	background: var(--animfolio-accent-light);
+	color: var(--animfolio-accent);
+	border: 1px solid color-mix(in srgb, var(--animfolio-accent) 20%, transparent);
+	border-radius: 4px;
+	padding: 3px 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100%;
+}
+
+/* ===== Skill bars — monospace + gradient ===== */
+
+.animfolio-container--format-01 .animfolio-skills__label {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.8125rem;
+}
+
+.animfolio-container--format-01 .animfolio-skills__bar {
+	height: 6px;
+	border-radius: 3px;
+}
+
+.animfolio-container--format-01 .animfolio-skills__bar-fill {
+	box-shadow: 0 0 16px var(--animfolio-accent-shadow);
+	overflow: hidden;
+}
+
+/* ===== Timeline — terminal aesthetic ===== */
+
+.animfolio-container--format-01 .animfolio-timeline__dot {
+	width: 10px;
+	height: 10px;
+	box-shadow: 0 0 0 2px var(--animfolio-accent), 0 0 20px var(--animfolio-accent-shadow);
+	flex-shrink: 0;
+}
+
+.animfolio-container--format-01 .animfolio-timeline__date {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.8125rem;
+}
+
+.animfolio-container--format-01 .animfolio-timeline__company {
+	font-family: var(--animfolio-font-mono);
+}
+
+/* ===== Projects ===== */
+
+.animfolio-container--format-01 .animfolio-project__title {
+	font-family: var(--animfolio-font-mono);
+}
+
+.animfolio-container--format-01 .animfolio-project__stack .animfolio-card__tag::before {
+	content: '#';
+}
+
+/* ===== Stats with gradient numbers ===== */
+
+.animfolio-container--format-01 .animfolio-stat__number {
+	font-family: var(--animfolio-font-mono);
+}
+
+/* ===== Testimonials ===== */
+
+.animfolio-container--format-01 .animfolio-testimonial__quote {
+	font-style: normal;
+	font-family: var(--animfolio-font-body);
+}
+
+/* ===== Contact form — terminal style inputs ===== */
+
+.animfolio-container--format-01 .animfolio-form__input,
+.animfolio-container--format-01 .animfolio-form__textarea {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.875rem;
+}
+
+/* ===== Buttons — prominent with glow ===== */
+
+.animfolio-container--format-01 .animfolio-button--primary,
+.animfolio-container--format-01 a.animfolio-button--primary {
+	background: linear-gradient(135deg, var(--animfolio-accent), var(--animfolio-accent-hover));
+	color: var(--animfolio-on-accent, #fff);
+	padding: 0.75rem 1.75rem;
+	border-radius: 8px;
+	box-shadow: 0 4px 20px var(--animfolio-accent-shadow);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	display: inline-flex;
+	align-items: center;
+	border: none;
+	cursor: pointer;
+	line-height: 1.4;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.animfolio-container--format-01 .animfolio-button--primary:hover,
+.animfolio-container--format-01 a.animfolio-button--primary:hover {
+	color: var(--animfolio-on-accent, #fff);
+	transform: translateY(-2px);
+	box-shadow: 0 8px 30px color-mix(in srgb, var(--animfolio-accent) 55%, transparent);
+}
+
+.animfolio-container--format-01 .animfolio-button--secondary,
+.animfolio-container--format-01 a.animfolio-button--secondary {
+	background: transparent;
+	color: var(--animfolio-accent);
+	padding: 0.75rem 1.75rem;
+	border-radius: 8px;
+	border: 1px solid color-mix(in srgb, var(--animfolio-accent) 40%, transparent);
+	transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	line-height: 1.4;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.animfolio-container--format-01 .animfolio-button--secondary:hover,
+.animfolio-container--format-01 a.animfolio-button--secondary:hover {
+	background: var(--animfolio-accent-light);
+	border-color: var(--animfolio-accent);
+	transform: translateY(-2px);
+}
+
+/* ===== GitHub contribution heatmap ===== */
+
+.animfolio-container--format-01 .animfolio-f01-heatmap {
+	display: grid;
+	grid-template-columns: repeat(52, 1fr);
+	gap: 2px;
+	margin-top: 20px;
+}
+
+.animfolio-container--format-01 .animfolio-f01-heatmap__cell {
+	width: 12px;
+	height: 12px;
+	border-radius: 2px;
+	background: var(--animfolio-bg-tertiary, rgba(255, 255, 255, 0.03));
+}
+
+.animfolio-container--format-01 .animfolio-f01-heatmap__cell--l1 { background: color-mix(in srgb, var(--animfolio-accent) 20%, transparent); }
+.animfolio-container--format-01 .animfolio-f01-heatmap__cell--l2 { background: color-mix(in srgb, var(--animfolio-accent) 40%, transparent); }
+.animfolio-container--format-01 .animfolio-f01-heatmap__cell--l3 { background: color-mix(in srgb, var(--animfolio-accent) 70%, transparent); }
+.animfolio-container--format-01 .animfolio-f01-heatmap__cell--l4 { background: var(--animfolio-accent); }
+
+/* ===== GitHub heatmap panel (wrapper, header, legend, label) ===== */
+
+.animfolio-container--format-01 .animfolio-f01-heatmap-panel {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid var(--animfolio-border);
+	border-radius: var(--animfolio-radius, 12px);
+	padding: 1.25rem 1.5rem;
+	margin-bottom: 2.5rem;
+	overflow: hidden;
+}
+
+.animfolio-container--format-01 .animfolio-f01-heatmap-panel__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+}
+
+.animfolio-container--format-01 .animfolio-f01-heatmap-panel__title {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.8125rem;
+	color: var(--animfolio-text-secondary);
+}
+
+.animfolio-container--format-01 .animfolio-f01-heatmap-panel__legend {
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+}
+
+.animfolio-container--format-01 .animfolio-f01-heatmap-panel__legend-label {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.6875rem;
+	color: var(--animfolio-text-muted);
+	margin: 0 4px;
+}
+
+/* Legend swatches reuse the cell classes but are not inside the grid. */
+.animfolio-container--format-01 .animfolio-f01-heatmap-panel__legend .animfolio-f01-heatmap__cell {
+	display: inline-block;
+}
+
+.animfolio-container--format-01 .animfolio-f01-heatmap-panel__note {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.6875rem;
+	color: var(--animfolio-text-muted);
+	margin: 0.75rem 0 0;
+	letter-spacing: 0.02em;
+}
+
+/* Real GitHub contribution screenshot the owner uploaded (replaces the
+   illustrative grid). Scales to the panel width, keeps its aspect ratio. */
+.animfolio-container--format-01 .animfolio-f01-heatmap-panel__img {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0.25rem 0 0;
+	border-radius: calc(var(--animfolio-radius, 12px) * 0.5);
+	border: 1px solid var(--animfolio-border);
+}
+
+/* ===== Project code-card treatment (terminal window header) ===== */
+
+.animfolio-container--format-01 .animfolio-f01-codecard {
+	/* Window mockup: the title bar and media run edge-to-edge; only the text
+	   content is padded (via __body). overflow:hidden clips the full-bleed bar
+	   and image to the card's rounded corners. */
+	padding: 0;
+	overflow: hidden;
+}
+
+.animfolio-container--format-01 .animfolio-f01-codecard__bar {
+	display: flex;
+	align-items: center;
+	gap: 0.625rem;
+	margin: 0;
+	padding: 0.75rem 1rem;
+	background: var(--animfolio-bg-tertiary, rgba(255, 255, 255, 0.04));
+	border-bottom: 1px solid var(--animfolio-border);
+}
+
+.animfolio-container--format-01 .animfolio-f01-codecard__body {
+	padding: 1.5rem 1.75rem 1.75rem;
+}
+
+.animfolio-container--format-01 .animfolio-f01-codecard .animfolio-project__image {
+	display: block;
+	width: 100%;
+	margin: 0;
+	border-radius: 0;
+}
+
+.animfolio-container--format-01 .animfolio-f01-codecard__dots {
+	display: inline-flex;
+	gap: 6px;
+	flex-shrink: 0;
+}
+
+.animfolio-container--format-01 .animfolio-f01-codecard__dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: color-mix(in srgb, var(--animfolio-text-muted) 50%, transparent);
+}
+
+.animfolio-container--format-01 .animfolio-f01-codecard__dot:nth-child(1) { background: #ff5f56; }
+.animfolio-container--format-01 .animfolio-f01-codecard__dot:nth-child(2) { background: #ffbd2e; }
+.animfolio-container--format-01 .animfolio-f01-codecard__dot:nth-child(3) { background: #27c93f; }
+
+.animfolio-container--format-01 .animfolio-f01-codecard__file {
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.75rem;
+	color: var(--animfolio-text-secondary);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.animfolio-container--format-01 .animfolio-f01-codecard__placeholder {
+	font-family: var(--animfolio-font-mono);
+	color: var(--animfolio-accent);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	min-height: 140px;
+	margin: 0;
+	border-radius: 0;
+	font-size: 2rem;
+}
+
+/* ===== Section alternating backgrounds ===== */
+
+.animfolio-container--format-01 .animfolio-section--stats {
+	background: linear-gradient(135deg, var(--animfolio-accent-glow), color-mix(in srgb, var(--animfolio-secondary) 5%, transparent));
+}
+
+/* ===== Scrollbar styling ===== */
+
+.animfolio-container--format-01::-webkit-scrollbar {
+	width: 8px;
+}
+
+.animfolio-container--format-01::-webkit-scrollbar-track {
+	background: var(--animfolio-bg);
+}
+
+.animfolio-container--format-01::-webkit-scrollbar-thumb {
+	background: var(--animfolio-bg-tertiary, #333);
+	border-radius: 4px;
+}
+
+.animfolio-container--format-01::-webkit-scrollbar-thumb:hover {
+	background: var(--animfolio-accent);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 1024px) {
+	.animfolio-container--format-01 .animfolio-f01-heatmap {
+		grid-template-columns: repeat(26, 1fr);
+		overflow: hidden;
+	}
+
+	.animfolio-container--format-01 .animfolio-hero {
+		padding-top: 80px;
+	}
+}
+
+@media (max-width: 768px) {
+	.animfolio-container--format-01 .animfolio-nav__links {
+		display: none;
+	}
+
+	.animfolio-container--format-01 .animfolio-hero__name {
+		font-size: clamp(2rem, 8vw, 3.5rem);
+	}
+
+	.animfolio-container--format-01 .animfolio-f01-heatmap {
+		grid-template-columns: repeat(13, 1fr);
+		overflow: hidden;
+	}
+
+	.animfolio-container--format-01 .animfolio-card--bordered {
+		word-break: break-word;
+	}
+
+	.animfolio-container--format-01 .animfolio-f01-codecard__body {
+		padding: 1.25rem 1.25rem 1.5rem;
+	}
+
+	.animfolio-container--format-01 .animfolio-timeline__date,
+	.animfolio-container--format-01 .animfolio-timeline__company {
+		font-size: 0.75rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.animfolio-container--format-01 .animfolio-nav {
+		padding: 0 1rem;
+	}
+
+	.animfolio-container--format-01 .animfolio-hero__title {
+		font-size: 0.875rem;
+	}
+
+	.animfolio-container--format-01 .animfolio-hero__subtitle {
+		font-size: 0.875rem;
+	}
+
+	.animfolio-container--format-01 .animfolio-f01-heatmap {
+		display: none;
+	}
+
+	.animfolio-container--format-01 .animfolio-button--primary,
+	.animfolio-container--format-01 .animfolio-button--secondary {
+		width: 100%;
+		justify-content: center;
+	}
+}

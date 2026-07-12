@@ -1,0 +1,582 @@
+/**
+ * AnimFolio — Format 15: CLI Terminal
+ * Full terminal emulator aesthetic, phosphor-green-on-black, scanline overlay.
+ * Classes match template.php: animfolio-cli__* and the container.
+ *
+ * COLORS: This format is fully driven by the --animfolio-* design tokens so
+ * the customizer / scheme toggle re-skins it like every other format. The
+ * phosphor-green terminal identity is supplied as the DEFAULT values of those
+ * tokens; every rule below consumes them via var(). A handful of
+ * terminal-specific tokens (--animfolio-cli-*) cover concepts the base set
+ * does not have (window dots, prompt path, typed-command color, system text).
+ *
+ * @package AnimFolio
+ * @author     Rahul Mahadik
+ * @since   1.0.0
+ */
+
+/* ===== Color tokens =====
+ * Scoped under BOTH the format class AND the scheme class so the theme
+ * toggle (which swaps --dark / --light) re-skins the palette. The no-scheme
+ * fallback uses the dark palette (config default_scheme: dark).
+ */
+
+/* Fallback (before JS adds a scheme class) + dark scheme — phosphor green */
+.animfolio-container--format-15,
+.animfolio-container--format-15.animfolio-container--dark {
+	--animfolio-accent: var(--animfolio-accent, #00FF41);
+	--animfolio-accent-hover: #33FF66;
+	--animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #00FF41) 10%, transparent);
+	--animfolio-accent-glow: color-mix(in srgb, var(--animfolio-accent, #00FF41) 40%, transparent);
+	--animfolio-secondary: var(--animfolio-secondary, #FFD700);
+	--animfolio-bg: #020402;
+	--animfolio-bg-secondary: #0A120A;
+	--animfolio-bg-tertiary: #0F1A0F;
+	--animfolio-text: #2DFF6A;
+	--animfolio-text-secondary: #5EC47A;
+	--animfolio-text-muted: #1f9e3f;
+	--animfolio-border: rgba(0, 255, 65, 0.22);
+
+	/* Terminal-specific tokens (no base equivalent) */
+	--animfolio-cli-system: #2ecc5a;  /* boot/system + window title — AA legible on near-black */
+	--animfolio-cli-cmd: #C8FFD4;     /* the typed command text — bright green-white */
+	--animfolio-cli-path: #5EC47A;    /* prompt path + links */
+	--animfolio-cli-link: #5EC47A;
+	--animfolio-cli-error: #FF5F56;
+	--animfolio-cli-dot-red: #FF5F56;
+	--animfolio-cli-dot-yellow: #FFBD2E;
+	--animfolio-cli-dot-green: #27C93F;
+	--animfolio-cli-scanline: rgba(0, 0, 0, 0.06);
+}
+
+/* Light scheme — darkened green for AA-legible text on a pale background */
+.animfolio-container--format-15.animfolio-container--light {
+	--animfolio-accent: var(--animfolio-accent, #007A1F);
+	--animfolio-accent-hover: #009628;
+	--animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #007A1F) 10%, transparent);
+	--animfolio-accent-glow: color-mix(in srgb, var(--animfolio-accent, #007A1F) 25%, transparent);
+	--animfolio-secondary: var(--animfolio-secondary, #8B6914);
+	--animfolio-bg: #F5F5F0;
+	--animfolio-bg-secondary: #EAEAE5;
+	--animfolio-bg-tertiary: #DCDCD5;
+	--animfolio-text: #1A1A1A;
+	--animfolio-text-secondary: #4A4A4A;
+	--animfolio-text-muted: #6A6A6A;
+	--animfolio-border: rgba(0, 0, 0, 0.12);
+
+	--animfolio-cli-system: #1c6e2d;
+	--animfolio-cli-cmd: #111111;
+	--animfolio-cli-path: #1F5FB0;
+	--animfolio-cli-link: #1F5FB0;
+	--animfolio-cli-error: #C0392B;
+	--animfolio-cli-dot-red: #FF5F56;
+	--animfolio-cli-dot-yellow: #FFBD2E;
+	--animfolio-cli-dot-green: #27C93F;
+	--animfolio-cli-scanline: rgba(0, 0, 0, 0.03);
+}
+
+/* ── Container ── */
+
+.animfolio-container--format-15 {
+	--animfolio-font-heading: 'Fira Code', 'Courier New', monospace;
+	--animfolio-font-body: 'Fira Code', 'Courier New', monospace;
+	--animfolio-font-mono: 'Fira Code', 'Courier New', monospace;
+
+	font-family: var(--animfolio-font-mono);
+	font-size: 15px;
+	line-height: 1.8;
+	background: var(--animfolio-bg);
+	color: var(--animfolio-text);
+	position: relative;
+	overflow-x: hidden;
+	box-sizing: border-box;
+}
+
+/* ── Scanline overlay — z-index below nav (nav uses 100) ── */
+
+.animfolio-container--format-15::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	background: repeating-linear-gradient(
+		0deg,
+		transparent,
+		transparent 2px,
+		var(--animfolio-cli-scanline) 2px,
+		var(--animfolio-cli-scanline) 4px
+	);
+	pointer-events: none;
+	z-index: 1;
+}
+
+/* ── CRT flicker — desktop only, disabled for reduced-motion ── */
+
+@keyframes animfolio-crt-flicker {
+	0%, 100% { opacity: 1; }
+	3% { opacity: 0.97; }
+	7.5% { opacity: 0.95; }
+	9% { opacity: 1; }
+}
+
+@media (min-width: 769px) {
+	.animfolio-container--format-15 {
+		animation: animfolio-crt-flicker 8s infinite;
+	}
+}
+
+/* ── Nav: default nav is hidden for this format (config: hide_default_nav).
+   Navigation happens inside the terminal via typed commands and the mobile
+   command bar, so no .animfolio-nav rules are needed here. ── */
+
+/* ── CLI wrapper ── */
+
+.animfolio-cli {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 0 24px;
+	min-height: 100vh;
+	box-sizing: border-box;
+	overflow-x: hidden;
+}
+
+/* ── Terminal chrome (title bar with dots) ── */
+
+.animfolio-cli__chrome {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 16px;
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-bottom: none;
+	border-radius: 8px 8px 0 0;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+
+.animfolio-cli__dots {
+	display: flex;
+	gap: 6px;
+}
+
+.animfolio-cli__dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+}
+
+.animfolio-cli__dot--red { background: var(--animfolio-cli-dot-red); }
+.animfolio-cli__dot--yellow { background: var(--animfolio-cli-dot-yellow); }
+.animfolio-cli__dot--green { background: var(--animfolio-cli-dot-green); }
+
+.animfolio-cli__title {
+	font-size: 0.75rem;
+	color: var(--animfolio-cli-system);
+	margin-left: 12px;
+}
+
+/* ── Terminal body ── */
+
+.animfolio-cli__body {
+	background: var(--animfolio-bg);
+	border: 1px solid var(--animfolio-border);
+	border-top: none;
+	border-radius: 0 0 8px 8px;
+	padding: 24px;
+	/* Grows with content; the PAGE scrolls normally (the terminal never captures the
+	   wheel or blocks page scrolling). Auto-follow during typing backs off the moment
+	   the visitor scrolls — see scrollToBottom() in script.js. */
+	min-height: 60vh;
+	overflow-x: hidden;
+	box-sizing: border-box;
+}
+
+/* ── Lines ── */
+
+.animfolio-cli__line {
+	margin-bottom: 4px;
+	word-wrap: break-word;
+}
+
+.animfolio-cli__line--system {
+	color: var(--animfolio-cli-system);
+	font-size: 0.85rem;
+}
+
+.animfolio-cli__line--banner {
+	margin: 16px 0;
+}
+
+/* ── Command prompt parts ── */
+
+.animfolio-cli__user {
+	color: var(--animfolio-accent);
+}
+
+.animfolio-cli__path {
+	color: var(--animfolio-cli-path);
+}
+
+.animfolio-cli__dollar {
+	color: var(--animfolio-accent);
+	margin: 0 4px 0 2px;
+}
+
+.animfolio-cli__cmd {
+	color: var(--animfolio-cli-cmd);
+	font-weight: 600;
+}
+
+/* ── Cursor ── */
+
+@keyframes animfolio-blink-cursor {
+	0%, 50% { opacity: 1; }
+	51%, 100% { opacity: 0; }
+}
+
+.animfolio-cli__cursor {
+	display: inline-block;
+	width: 8px;
+	height: 16px;
+	background: var(--animfolio-accent);
+	animation: animfolio-blink-cursor 1s step-end infinite;
+	vertical-align: text-bottom;
+}
+
+.animfolio-cli__input-line {
+	margin-top: 16px;
+}
+
+/* ── ASCII art ── */
+
+.animfolio-cli__ascii {
+	color: var(--animfolio-accent);
+	font-size: clamp(0.6rem, 1.2vw, 1.5rem);
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	white-space: pre;
+	overflow-x: auto;
+	max-width: 100%;
+	display: block;
+	margin: 16px 0;
+	text-shadow: 0 0 15px var(--animfolio-accent-glow), 0 0 30px var(--animfolio-accent-light);
+	scrollbar-width: thin;
+	scrollbar-color: var(--animfolio-accent-light) transparent;
+}
+
+/* ── Output blocks ── */
+
+.animfolio-cli__output {
+	padding: 8px 0 8px 20px;
+	color: var(--animfolio-text-secondary);
+	font-size: 0.9rem;
+}
+
+.animfolio-cli__success {
+	color: var(--animfolio-accent);
+}
+
+/* ── Table wrapper — prevents horizontal overflow ── */
+
+.animfolio-cli__table-wrap {
+	overflow-x: auto;
+	max-width: 100%;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: thin;
+	scrollbar-color: var(--animfolio-accent-light) transparent;
+}
+
+/* ── Table (experience) ── */
+
+.animfolio-cli__table {
+	width: 100%;
+	min-width: 480px;
+	border-collapse: collapse;
+	font-size: 0.85rem;
+	margin: 8px 0;
+}
+
+.animfolio-cli__table th {
+	text-align: start;
+	color: var(--animfolio-secondary);
+	font-weight: 600;
+	padding-block: 4px;
+	padding-inline: 0 16px;
+	border-bottom: 1px solid var(--animfolio-border);
+	white-space: nowrap;
+}
+
+.animfolio-cli__table td {
+	padding-block: 6px;
+	padding-inline: 0 16px;
+	border-bottom: 1px dashed var(--animfolio-border);
+	color: var(--animfolio-text);
+	word-break: break-word;
+}
+
+/* ── Skill bars ── */
+
+.animfolio-cli__skill-group {
+	margin-bottom: 16px;
+}
+
+.animfolio-cli__label {
+	color: var(--animfolio-secondary);
+	font-size: 0.85rem;
+	margin-bottom: 6px;
+	display: block;
+}
+
+.animfolio-cli__skill-bar {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	margin-bottom: 3px;
+	font-size: 0.8rem;
+}
+
+.animfolio-cli__skill-name {
+	color: var(--animfolio-text-secondary);
+	white-space: pre;
+	font-size: 0.8rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 160px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.animfolio-cli__bar {
+	color: var(--animfolio-accent);
+	letter-spacing: -1px;
+}
+
+.animfolio-cli__pct {
+	color: var(--animfolio-accent);
+	font-size: 0.75rem;
+	width: 35px;
+	text-align: end;
+}
+
+/* ── Projects ── */
+
+.animfolio-cli__project {
+	margin-bottom: 12px;
+	padding: 8px 0;
+	border-bottom: 1px dashed var(--animfolio-border);
+}
+
+.animfolio-cli__project strong {
+	color: var(--animfolio-cli-cmd);
+}
+
+.animfolio-cli__tags {
+	color: var(--animfolio-secondary);
+	font-size: 0.8rem;
+	margin-inline-start: 8px;
+}
+
+.animfolio-cli__desc {
+	color: var(--animfolio-text-secondary);
+	font-size: 0.85rem;
+	display: block;
+	margin-top: 2px;
+}
+
+/* ── Links ── */
+
+.animfolio-cli__link {
+	color: var(--animfolio-cli-link);
+	text-decoration: underline;
+}
+
+.animfolio-cli__link:hover {
+	color: var(--animfolio-accent);
+}
+
+/* ── Contact form inside terminal ── */
+
+.animfolio-container--format-15 .animfolio-form {
+	max-width: none;
+}
+
+.animfolio-container--format-15 .animfolio-form__label {
+	color: var(--animfolio-accent);
+	font-size: 0.85rem;
+}
+
+.animfolio-container--format-15 .animfolio-form__label::before {
+	content: '> ';
+	color: var(--animfolio-accent);
+}
+
+.animfolio-container--format-15 .animfolio-form__input,
+.animfolio-container--format-15 .animfolio-form__textarea {
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid var(--animfolio-border);
+	color: var(--animfolio-accent);
+	font-family: var(--animfolio-font-mono);
+	font-size: 0.9rem;
+	border-radius: 0;
+	padding: 8px 0;
+}
+
+.animfolio-container--format-15 .animfolio-form__input:focus,
+.animfolio-container--format-15 .animfolio-form__textarea:focus {
+	border-bottom-color: var(--animfolio-accent);
+	box-shadow: none;
+	outline: none;
+}
+
+.animfolio-container--format-15 .animfolio-button--primary {
+	background: transparent;
+	border: 1px solid var(--animfolio-accent);
+	color: var(--animfolio-accent);
+	font-family: var(--animfolio-font-mono);
+	border-radius: 2px;
+	box-shadow: none;
+}
+
+.animfolio-container--format-15 .animfolio-button--primary:hover {
+	background: var(--animfolio-accent-light);
+	box-shadow: 0 0 10px var(--animfolio-accent-light);
+}
+
+/* ── Interactive input field (created in script.js) ── */
+
+.animfolio-container--format-15 .animfolio-cli__input-field {
+	background: transparent;
+	border: none;
+	outline: none;
+	color: var(--animfolio-cli-cmd);
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	width: 60%;
+	max-width: 400px;
+	padding: 0;
+	margin: 0;
+	caret-color: var(--animfolio-accent);
+}
+
+/* ── Mobile command bar (created in script.js) ── */
+
+.animfolio-container--format-15 .animfolio-cli__mobile-commands {
+	border-top: 1px solid var(--animfolio-border);
+}
+
+.animfolio-container--format-15 .animfolio-cli__mobile-btn {
+	background: transparent;
+	border: 1px solid var(--animfolio-border);
+	color: var(--animfolio-accent);
+}
+
+.animfolio-container--format-15 .animfolio-cli__mobile-btn:hover {
+	background: var(--animfolio-accent-light);
+	border-color: var(--animfolio-accent);
+}
+
+/* ── Fallback for noscript ── */
+
+.animfolio-cli__fallback {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 40px 24px;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1024px) {
+	.animfolio-cli {
+		padding: 0 20px;
+	}
+}
+
+@media (max-width: 768px) {
+	.animfolio-container--format-15 {
+		font-size: 13px;
+	}
+
+	.animfolio-cli {
+		padding: 0 12px;
+	}
+
+	.animfolio-cli__body {
+		padding: 16px;
+	}
+
+	.animfolio-cli__ascii {
+		font-size: clamp(0.45rem, 1.8vw, 0.9rem);
+		overflow-x: auto;
+	}
+
+	.animfolio-cli__table {
+		font-size: 0.75rem;
+	}
+
+	.animfolio-cli__skill-name {
+		font-size: 0.7rem;
+		max-width: 110px;
+	}
+
+	/* Stack skill bar on narrow screens */
+	.animfolio-cli__skill-bar {
+		flex-wrap: wrap;
+		row-gap: 2px;
+	}
+}
+
+@media (max-width: 480px) {
+	.animfolio-container--format-15 {
+		font-size: 12px;
+	}
+
+	.animfolio-cli {
+		padding: 0 8px;
+	}
+
+	.animfolio-cli__body {
+		padding: 12px;
+	}
+
+	.animfolio-cli__ascii {
+		font-size: clamp(0.35rem, 2vw, 0.65rem);
+		letter-spacing: 0.05em;
+	}
+
+	.animfolio-cli__table {
+		font-size: 0.65rem;
+		min-width: 320px;
+	}
+
+	.animfolio-cli__skill-name {
+		max-width: 80px;
+	}
+
+	.animfolio-cli__project {
+		font-size: 0.8rem;
+	}
+
+	/* Command buttons accessible on touch */
+	.animfolio-cli__link {
+		display: inline-block;
+		padding: 4px 0;
+		min-height: 44px;
+		line-height: 44px;
+	}
+}
+
+/* ── Reduced Motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+	.animfolio-container--format-15 {
+		animation: none;
+	}
+
+	.animfolio-cli__cursor {
+		animation: none;
+		opacity: 1;
+	}
+}

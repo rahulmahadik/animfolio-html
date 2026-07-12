@@ -1,0 +1,2628 @@
+/**
+ * AnimFolio Base Stylesheet
+ *
+ * Scoped reset, CSS custom properties, utility classes, base components.
+ * ALL styles scoped inside .animfolio-container.
+ *
+ * @package AnimFolio
+ * @author     Rahul Mahadik
+ * @since   1.0.0
+ */
+
+/* ========================================================================
+   1. Scoped Reset
+   ======================================================================== */
+
+.animfolio-container *,
+.animfolio-container *::before,
+.animfolio-container *::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+/* ========================================================================
+   2. Container
+   ======================================================================== */
+
+.animfolio-container {
+	position: relative;
+	width: 100%;
+	min-height: 100vh;
+	font-family: var(--animfolio-font-body);
+	font-size: var(--animfolio-font-size-base, 16px);
+	line-height: var(--animfolio-line-height, 1.6);
+	letter-spacing: var(--animfolio-letter-spacing, 0);
+	color: var(--animfolio-text);
+	background-color: var(--animfolio-bg);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* Note: no overflow-x: hidden here — it breaks position: sticky on nav */
+}
+
+.animfolio-inner {
+	width: 100%;
+	max-width: var(--animfolio-container-width, 1200px);
+	margin: 0 auto;
+	padding: 0 32px;
+}
+
+/* ------------------------------------------------------------------------
+   Smooth anchor scrolling
+   ------------------------------------------------------------------------
+   The JS UI module adds .animfolio-smooth-scroll to <html> when the user's
+   "smooth scroll" setting is on and reduced-motion is NOT requested, gating
+   native (mouse/keyboard/hash) smooth scrolling without any per-event JS.
+   scroll-padding-top keeps a target from landing behind the sticky nav; the JS
+   re-measures and sets the exact value inline, this is the no-JS fallback.
+   The reduced-motion media query at the end of this file forces scroll-behavior
+   back to auto, so this never overrides an accessibility preference. */
+html.animfolio-smooth-scroll {
+	scroll-behavior: smooth;
+}
+
+html {
+	/* Fallback nav clearance (sticky bar is 64px) so anchored sections aren't
+	   hidden under the nav even before JS measures the live height. */
+	scroll-padding-top: 80px;
+}
+
+/* Section targets get the same clearance for scrollIntoView()-based jumps. */
+.animfolio-section {
+	scroll-margin-top: 80px;
+}
+
+/* ========================================================================
+   3. Typography
+   ======================================================================== */
+
+.animfolio-container h1,
+.animfolio-container h2,
+.animfolio-container h3,
+.animfolio-container h4,
+.animfolio-container h5,
+.animfolio-container h6 {
+	font-family: var(--animfolio-font-heading);
+	font-weight: var(--animfolio-font-weight-bold, 700);
+	line-height: 1.2;
+	color: var(--animfolio-text);
+}
+
+.animfolio-container h1 { font-size: var(--animfolio-font-size-h1, clamp(2.5rem, 5vw, 4rem)); }
+.animfolio-container h2 { font-size: var(--animfolio-font-size-h2, clamp(1.75rem, 3.5vw, 2.5rem)); }
+.animfolio-container h3 { font-size: var(--animfolio-font-size-h3, 1.5rem); }
+.animfolio-container h4 { font-size: var(--animfolio-font-size-h4, 1.25rem); }
+.animfolio-container h5 { font-size: var(--animfolio-font-size-h5, 1.125rem); }
+.animfolio-container h6 { font-size: var(--animfolio-font-size-h6, 1rem); }
+
+.animfolio-container p {
+	margin-bottom: 1em;
+	color: var(--animfolio-text-secondary);
+	line-height: 1.7;
+}
+
+.animfolio-container a {
+	/* Use accent-text variant where defined so link text meets WCAG AA
+	   (>=4.5:1); falls back to --animfolio-accent for formats that pass as-is. */
+	color: var(--animfolio-accent-text, var(--animfolio-accent));
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.animfolio-container a:hover,
+.animfolio-container a:focus {
+	color: var(--animfolio-accent-hover, var(--animfolio-accent));
+}
+
+.animfolio-container code,
+.animfolio-container pre {
+	font-family: var(--animfolio-font-mono);
+}
+
+.animfolio-container img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* ========================================================================
+   4. Sections
+   ======================================================================== */
+
+.animfolio-section {
+	/* max() floor: even if section_spacing is set very low (e.g. via an imported
+	   JSON below the editor's 40px minimum), sections keep a readable gap so they
+	   never cram together. The hero overrides this to 0 for its one-viewport rule. */
+	padding: max(48px, var(--animfolio-section-spacing, 100px)) 0;
+	position: relative;
+}
+
+.animfolio-section:nth-child(even) {
+	background: var(--animfolio-bg-secondary);
+}
+
+.animfolio-section__header {
+	margin-bottom: 48px;
+	text-align: center;
+}
+
+.animfolio-section__title {
+	/* No accent bar under the title — the title carries its own bottom margin so
+	   the gap to the subtitle reads as intentional spacing, not a missing bar. */
+	margin-bottom: 16px;
+	position: relative;
+}
+
+/* The section-title accent bar has been removed by request. The base rule (and
+   every per-format override) is suppressed so no underline/bar ever renders. */
+.animfolio-section__title::after {
+	content: none;
+	display: none;
+}
+
+/* ---- Left-aligned titles ----
+   Triggers cover the ways a format left-aligns its section heading:
+   1. The explicit --left modifier class on the header.
+   2. A format setting text-align:left inline on the header or the title.
+   The subtitle drops its left auto margin so it starts at the text's left edge.
+   These selectors are scoped tightly so centered formats — the default — are
+   untouched. */
+.animfolio-section__header--left,
+.animfolio-section__header[style*="left"] {
+	text-align: start;
+}
+
+.animfolio-section__header--left .animfolio-section__subtitle,
+.animfolio-section__header[style*="left"] .animfolio-section__subtitle {
+	margin-inline-start: 0;
+}
+
+/* ---- Per-section alignment ----
+   Driven by each section's text_alignment setting (default centre), the renderer
+   adds .animfolio-section--align-{left|center|right} to the wrapper. This aligns
+   the header AND the section's loose text content together, so a centred title
+   never sits over left-floating copy (or vice-versa). Structured components —
+   cards, timeline items, and form controls — always read left internally for
+   legibility, regardless of the section alignment. */
+.animfolio-section--align-center > .animfolio-inner,
+.animfolio-section--align-center .animfolio-section__header { text-align: center; }
+.animfolio-section--align-left > .animfolio-inner,
+.animfolio-section--align-left .animfolio-section__header { text-align: left; }
+.animfolio-section--align-right > .animfolio-inner,
+.animfolio-section--align-right .animfolio-section__header { text-align: right; }
+
+.animfolio-section--align-center .animfolio-section__subtitle { margin-inline: auto; }
+.animfolio-section--align-left .animfolio-section__subtitle { margin-inline-start: 0; }
+.animfolio-section--align-right .animfolio-section__subtitle { margin-inline-end: 0; margin-inline-start: auto; }
+
+/* Components keep left-aligned internals so body copy stays readable. */
+.animfolio-section[class*="--align-"] .animfolio-card,
+.animfolio-section[class*="--align-"] .animfolio-timeline__item,
+.animfolio-section[class*="--align-"] form,
+.animfolio-section[class*="--align-"] .animfolio-field,
+.animfolio-section[class*="--align-"] input,
+.animfolio-section[class*="--align-"] textarea,
+.animfolio-section[class*="--align-"] label,
+.animfolio-section[class*="--align-"] select { text-align: left; }
+
+.animfolio-section__subtitle {
+	font-size: 1.125rem;
+	line-height: 1.7;
+	color: var(--animfolio-text-secondary);
+	max-width: 600px;
+	/* Gap to the title is owned by the title's margin-bottom; no extra top
+	   margin here so the title/subtitle spacing stays balanced and intentional
+	   now that the accent bar is gone. */
+	margin-top: 0;
+	margin-inline: auto;
+}
+
+/* ========================================================================
+   5. Cards
+   ======================================================================== */
+
+.animfolio-card {
+	background: var(--animfolio-bg-secondary);
+	border-radius: var(--animfolio-radius, 12px);
+	padding: 28px;
+	/* Promote to its own compositor layer for jank-free hover animation */
+	will-change: transform;
+	transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Remove will-change after interaction to free GPU memory */
+.animfolio-card:not(:hover):not(:focus-visible) {
+	will-change: auto;
+}
+
+.animfolio-card:hover {
+	transform: translateY(-4px);
+}
+
+/* Keyboard-focusable cards (e.g. project links wrapping a card) */
+.animfolio-card:focus-visible {
+	outline: 3px solid var(--animfolio-accent);
+	outline-offset: 2px;
+	transform: translateY(-4px);
+}
+
+.animfolio-card--bordered {
+	border: 1px solid var(--animfolio-border);
+}
+
+.animfolio-card--bordered:hover {
+	border-color: var(--animfolio-accent);
+	box-shadow: 0 8px 32px var(--animfolio-accent-subtle, rgba(127, 119, 221, 0.1));
+}
+
+.animfolio-card--shadowed {
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.animfolio-card--shadowed:hover {
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.animfolio-card--glass {
+	/* Dark mode: barely-there white film over dark bg */
+	background: rgba(255, 255, 255, 0.04);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid var(--animfolio-border);
+}
+
+/* Light mode glass: use a translucent dark tint so the card is distinguishable from white bg */
+.animfolio-container--light .animfolio-card--glass,
+.animfolio-container--auto .animfolio-card--glass {
+	background: rgba(0, 0, 0, 0.03);
+}
+
+.animfolio-card--flat {
+	background: var(--animfolio-bg-secondary);
+}
+
+.animfolio-card__title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-bottom: 8px;
+}
+
+.animfolio-card__meta {
+	font-size: 0.875rem;
+	color: var(--animfolio-text-muted);
+}
+
+.animfolio-card__footer {
+	margin-top: 20px;
+	padding-top: 20px;
+	border-top: 1px solid var(--animfolio-border);
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.animfolio-card__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 16px;
+}
+
+.animfolio-card__tag {
+	font-size: 0.6875rem;
+	padding: 3px 10px;
+	border-radius: 20px;
+	background: var(--animfolio-accent-light);
+	color: var(--animfolio-accent);
+	font-weight: 500;
+	letter-spacing: 0.02em;
+	line-height: 1.4;
+	white-space: nowrap;
+}
+
+.animfolio-card__icon {
+	width: 52px;
+	height: 52px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--animfolio-accent-light);
+	border-radius: 12px;
+	margin-bottom: 16px;
+	color: var(--animfolio-accent);
+}
+
+/* ---- Services ----
+   Icon and title sit on ONE line (flex row, icon before title, vertically
+   centered) instead of the icon stacking above the title. */
+.animfolio-service__head {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 12px;
+}
+
+/* In the inline head the icon must not push the title down with its stacked
+   bottom margin, and it should not shrink when the title wraps. */
+.animfolio-service__head .animfolio-service__icon {
+	margin-bottom: 0;
+	flex-shrink: 0;
+}
+
+.animfolio-service__head .animfolio-service__title {
+	margin-bottom: 0;
+	/* Allow the title to shrink/wrap inside the flex row instead of forcing
+	   the icon off the card edge when the title is long. */
+	min-width: 0;
+	overflow-wrap: anywhere;
+}
+
+/* ========================================================================
+   6. Buttons
+   ======================================================================== */
+
+.animfolio-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	/* Consistent padding + 44px min touch target (WCAG 2.5.5) across all variants. */
+	padding: 13px 26px;
+	min-height: 44px;
+	border: none;
+	border-radius: var(--animfolio-radius, 12px);
+	font-family: var(--animfolio-font-body);
+	font-size: 1rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-decoration: none;
+	line-height: 1.2;
+	letter-spacing: 0.01em;
+	position: relative;
+}
+
+/* Focus ring — meets WCAG 2.4.11 (AA) for all button variants */
+.animfolio-button:focus-visible {
+	outline: 3px solid var(--animfolio-accent);
+	outline-offset: 3px;
+}
+
+/* Disabled state */
+.animfolio-button:disabled,
+.animfolio-button[aria-disabled="true"] {
+	opacity: 0.45;
+	cursor: not-allowed;
+	pointer-events: none;
+	transform: none !important;
+	box-shadow: none !important;
+}
+
+/* Loading state — spinner via pseudo-element */
+.animfolio-button--loading {
+	color: transparent !important;
+	pointer-events: none;
+	cursor: wait;
+}
+
+.animfolio-button--loading::after {
+	content: '';
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	border: 2px solid rgba(255, 255, 255, 0.35);
+	border-top-color: var(--animfolio-on-accent, #fff);
+	border-radius: 50%;
+	animation: animfolio-spin 0.7s linear infinite;
+}
+
+@keyframes animfolio-spin {
+	to { transform: rotate(360deg); }
+}
+
+.animfolio-container .animfolio-button--primary,
+.animfolio-container a.animfolio-button--primary {
+	background: linear-gradient(135deg, var(--animfolio-accent), var(--animfolio-accent-hover));
+	/* Label color is a token so formats with a light accent can supply a
+	   dark, legible label. Defaults to white for the standard dark accents. */
+	color: var(--animfolio-on-accent, #fff);
+	box-shadow: 0 4px 16px var(--animfolio-accent-shadow, rgba(127, 119, 221, 0.3));
+}
+
+.animfolio-container .animfolio-button--primary:hover,
+.animfolio-container a.animfolio-button--primary:hover {
+	color: var(--animfolio-on-accent, #fff);
+	transform: translateY(-2px);
+	box-shadow: 0 8px 28px var(--animfolio-accent-glow, rgba(127, 119, 221, 0.5));
+}
+
+.animfolio-button--secondary {
+	background: transparent;
+	color: var(--animfolio-accent);
+	border: 2px solid var(--animfolio-accent);
+}
+
+.animfolio-button--secondary:hover {
+	background: var(--animfolio-accent-light);
+	color: var(--animfolio-accent);
+	transform: translateY(-2px);
+}
+
+/* Secondary loading spinner should use accent color */
+.animfolio-button--secondary.animfolio-button--loading::after {
+	border-color: rgba(127, 119, 221, 0.35);
+	border-top-color: var(--animfolio-accent);
+}
+
+/* Ghost: a low-emphasis text button for tertiary actions (e.g. "Create New Card"). */
+.animfolio-button--ghost {
+	background: transparent;
+	color: var(--animfolio-text-secondary);
+	border: 1px solid transparent;
+	box-shadow: none;
+}
+
+.animfolio-button--ghost:hover {
+	color: var(--animfolio-text);
+	border-color: var(--animfolio-border);
+	background: transparent;
+	transform: none;
+}
+
+/* ========================================================================
+   7. Grid Layouts
+   ======================================================================== */
+
+.animfolio-grid {
+	display: grid;
+	gap: 24px;
+}
+
+.animfolio-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.animfolio-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.animfolio-grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+/* ---- Tablet: <=1024px — grids drop to 2 columns ---- */
+@media (max-width: 1024px) {
+	.animfolio-grid--3,
+	.animfolio-grid--4 { grid-template-columns: repeat(2, 1fr); }
+
+	/* Tablet: reduce hero from full viewport to sensible height */
+	.animfolio-hero {
+		min-height: 70vh;
+		min-height: 70dvh;
+	}
+
+	.animfolio-section {
+		padding: 80px 0;
+	}
+
+	.animfolio-section__header {
+		margin-bottom: 40px;
+	}
+}
+
+/* ---- Mobile/landscape: <=768px — grids collapse to a single column,
+        hero stacks (text above image), sections tighten ---- */
+@media (max-width: 768px) {
+	.animfolio-inner { padding: 0 20px; }
+
+	/* All content grids collapse to one column on mobile. */
+	.animfolio-grid--2,
+	.animfolio-grid--3,
+	.animfolio-grid--4 { grid-template-columns: 1fr; }
+
+	/* Stats / auto-fit grids: force single column so counters never
+	   squash side-by-side on a phone. */
+	.animfolio-stats {
+		grid-template-columns: 1fr;
+	}
+
+	/* Section vertical rhythm: clamp the configured spacing down for
+	   mobile so sections aren't 100px tall on a 360px screen. */
+	.animfolio-section {
+		padding: min(var(--animfolio-section-spacing, 100px), 64px) 0;
+	}
+
+	.animfolio-section__header { margin-bottom: 36px; }
+
+	/* Hero: single column, text above image, reduced height. */
+	.animfolio-hero {
+		min-height: 60vh;
+		min-height: 60dvh;
+		padding: 40px 0;
+	}
+
+	.animfolio-hero__name {
+		font-size: clamp(2rem, 8vw, 3rem);
+	}
+
+	.animfolio-hero__title {
+		font-size: clamp(1.125rem, 4vw, 1.75rem);
+	}
+
+	.animfolio-hero__subtitle {
+		margin-bottom: 24px;
+	}
+
+	/* CTA buttons stack full-width for easy tapping. */
+	.animfolio-hero__cta {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.animfolio-hero__cta .animfolio-button {
+		width: 100%;
+		text-align: center;
+		justify-content: center;
+	}
+
+	.animfolio-hero__photo-wrapper {
+		width: 140px;
+		height: 140px;
+	}
+
+	/* On mobile, center the CTA + social rows together for a tidy stacked hero. */
+	.animfolio-hero {
+		--animfolio-hero-justify: center;
+	}
+
+	.animfolio-hero--photo-left .animfolio-hero__photo-wrapper,
+	.animfolio-hero--photo-right .animfolio-hero__photo-wrapper {
+		float: none;
+		margin-inline: 0;
+	}
+
+	/* About: smaller portrait on mobile. */
+	.animfolio-about__photo-wrapper {
+		width: 150px;
+		height: 150px;
+	}
+
+	/* Card padding shrinks on mobile per spec (~20px). */
+	.animfolio-card {
+		padding: 20px;
+	}
+
+	.animfolio-testimonial__quote {
+		font-size: 0.9375rem;
+	}
+
+	/* Timeline responsive — collapse the left rail cleanly so dots/line
+	   don't overhang and cards run full width. */
+	.animfolio-timeline {
+		padding-inline-start: 26px;
+	}
+
+	.animfolio-timeline__item {
+		padding-bottom: 36px;
+	}
+
+	.animfolio-timeline__item::before {
+		inset-inline-start: -21px;
+	}
+
+	.animfolio-timeline__dot {
+		inset-inline-start: -26px;
+	}
+
+	.animfolio-timeline__content {
+		padding: 16px;
+	}
+}
+
+/* ---- Small phones: <=480px — tighter gutters, spacing, type ---- */
+@media (max-width: 480px) {
+	.animfolio-inner { padding: 0 20px; }
+
+	.animfolio-hero {
+		min-height: auto;
+		padding: 48px 0;
+	}
+
+	.animfolio-section {
+		padding: min(var(--animfolio-section-spacing, 100px), 52px) 0;
+	}
+
+	.animfolio-section__header {
+		margin-bottom: 32px;
+	}
+
+	.animfolio-about__photo-wrapper {
+		width: 140px;
+		height: 140px;
+	}
+}
+
+/* Landscape on phones: reduce hero height, tighten spacing */
+@media (max-height: 500px) and (orientation: landscape) {
+	.animfolio-hero {
+		min-height: auto;
+		padding: 60px 0;
+	}
+
+	.animfolio-hero__photo-wrapper {
+		width: 100px;
+		height: 100px;
+	}
+
+	.animfolio-hero__name {
+		font-size: clamp(1.5rem, 5vw, 2.5rem);
+	}
+
+	.animfolio-hero__subtitle {
+		margin-bottom: 20px;
+	}
+
+	.animfolio-section {
+		padding: 48px 0;
+	}
+
+	.animfolio-nav {
+		height: 48px;
+	}
+}
+
+/* Very small screens (≤360px, covers iPhone SE-mini) */
+@media (max-width: 360px) {
+	.animfolio-inner {
+		padding: 0 16px;
+	}
+
+	.animfolio-hero__name {
+		font-size: clamp(1.5rem, 8vw, 2.5rem);
+	}
+
+	.animfolio-button {
+		padding: 12px 20px;
+		font-size: 0.875rem;
+	}
+
+	.animfolio-card {
+		padding: 16px;
+	}
+
+	.animfolio-section__header {
+		margin-bottom: 24px;
+	}
+
+	.animfolio-hero__cta {
+		gap: 10px;
+	}
+
+	/* Visitor card: reduce horizontal padding at narrow widths */
+	.animfolio-visitor-card__card {
+		padding: 24px 16px;
+	}
+
+	/* Visitor card form row: force single column */
+	.animfolio-visitor-card__row {
+		grid-template-columns: 1fr;
+		gap: 8px;
+	}
+
+	/* Visitor card layout/subtitle padding */
+	.animfolio-visitor-card__layout,
+	.animfolio-visitor-card__subtitle {
+		padding-inline: 16px;
+	}
+
+	.animfolio-visitor-card__toggle {
+		padding: 16px;
+	}
+}
+
+/* Galaxy Fold (≤300px) — narrowest phone, prevent all overflow */
+@media (max-width: 300px) {
+	.animfolio-inner {
+		padding: 0 12px;
+	}
+
+	/* Hero: tighter typography at ~256px usable width */
+	.animfolio-hero__name {
+		font-size: clamp(1.25rem, 7vw, 2rem);
+		letter-spacing: -0.02em;
+	}
+
+	.animfolio-hero__title {
+		font-size: clamp(1rem, 5vw, 1.5rem);
+	}
+
+	/* Buttons: constrained to viewport, never overflow */
+	.animfolio-button {
+		padding: 11px 16px;
+		font-size: 0.8125rem;
+		max-width: 100%;
+	}
+
+	.animfolio-card {
+		padding: 14px;
+	}
+
+	/* Visitor card: ultra-compact layout */
+	.animfolio-visitor-card__card {
+		padding: 20px 12px;
+	}
+
+	.animfolio-visitor-card__layout,
+	.animfolio-visitor-card__subtitle {
+		padding-inline: 12px;
+	}
+
+	.animfolio-visitor-card__toggle {
+		padding: 14px 12px;
+	}
+
+	/* Section spacing: tighter at 280px */
+	.animfolio-section {
+		padding: 40px 0;
+	}
+
+	/* Stats: counter numbers stay within content width */
+	.animfolio-stat__number {
+		font-size: clamp(2rem, 10vw, 2.5rem);
+	}
+}
+
+/* ========================================================================
+   8. Hero
+   ======================================================================== */
+
+.animfolio-section--hero {
+	padding: 0 0 40px;
+}
+
+.animfolio-hero {
+	min-height: 100vh;
+	min-height: 100dvh; /* Modern: accounts for mobile address bar */
+	display: flex;
+	align-items: center;
+	/* Centre the content block horizontally too (the hero is a row flex, so
+	   without this the block sits at the start/left). Side-by-side photo layouts
+	   opt back out below. */
+	justify-content: center;
+	position: relative;
+}
+
+.animfolio-hero__content {
+	position: relative;
+	z-index: 2;
+	/* Centered hero by default — reads better across formats than left-aligned.
+	   Side-by-side photo layouts (photo-left/right) restore left alignment below;
+	   individual formats (e.g. the CLI terminal) can override as needed. The CTA
+	   and social rows follow via --animfolio-hero-justify. */
+	text-align: center;
+	--animfolio-hero-justify: center;
+}
+
+.animfolio-hero__name {
+	font-size: clamp(2.5rem, 6vw, 5rem);
+	font-weight: 800;
+	margin-bottom: 8px;
+	letter-spacing: -0.03em;
+	color: var(--animfolio-text);
+	background: linear-gradient(135deg, var(--animfolio-text) 0%, var(--animfolio-text-secondary) 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.animfolio-hero__title {
+	font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+	color: var(--animfolio-accent-text, var(--animfolio-accent));
+	margin-bottom: 16px;
+	font-weight: 600;
+}
+
+.animfolio-hero__subtitle {
+	font-size: 1.125rem;
+	color: var(--animfolio-text-secondary);
+	margin-bottom: 40px;
+	min-height: 1.6em;
+}
+
+.animfolio-hero__photo-wrapper {
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 3px solid var(--animfolio-accent);
+	/* Centered with the rest of the hero (float wins for photo-left/right). */
+	margin-inline: auto;
+	margin-bottom: 32px;
+	box-shadow: 0 0 40px var(--animfolio-accent-shadow, rgba(127, 119, 221, 0.3));
+}
+
+.animfolio-hero__photo {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* The CTA buttons AND the social row both follow the hero's alignment via one
+   variable, so they always line up with each other (default left; centered
+   heroes set --animfolio-hero-justify: center). */
+.animfolio-hero__cta {
+	display: flex;
+	gap: 16px;
+	flex-wrap: wrap;
+	justify-content: var(--animfolio-hero-justify, flex-start);
+}
+
+.animfolio-hero__social {
+	display: flex;
+	gap: 12px;
+	margin-top: 32px;
+	justify-content: var(--animfolio-hero-justify, flex-start);
+	flex-wrap: wrap;
+}
+
+/* QR block in the hero (qr_position = hero/both) — give it clear breathing room
+   from the social icons above it (which had none, so the QR crowded them), and
+   align it to the hero's text alignment. */
+.animfolio-hero__qr {
+	margin-top: 40px;
+	display: flex;
+	justify-content: var(--animfolio-hero-justify, flex-start);
+}
+
+/* Hero photo size (sm/md/lg) — md (180px) is the base size set above. */
+.animfolio-hero__photo-wrapper--sm { width: 120px; height: 120px; }
+.animfolio-hero__photo-wrapper--lg { width: 260px; height: 260px; }
+
+/* Optional per-photo Width/Height on the hero avatar (the same size controls the
+   About photo offers). A width-only value ("Keep aspect ratio" on) scales the
+   avatar proportionally so a circular frame stays a circle instead of becoming an
+   ellipse. Specificity (0,3,0) beats the per-format wrapper size (0,2,0), while
+   the inline width itself still wins; when an explicit height is also set, that
+   exact value applies instead. */
+.animfolio-hero__photo-wrapper[style*="width"]:not([style*="height"]) {
+	height: auto;
+	aspect-ratio: 1;
+}
+
+/* Hero photo position — left/right float the avatar beside the text (top is the
+   default stacked layout). */
+.animfolio-hero--photo-left .animfolio-hero__photo-wrapper { float: inline-start; margin-inline-end: 32px; margin-bottom: 16px; }
+.animfolio-hero--photo-right .animfolio-hero__photo-wrapper { float: inline-end; margin-inline-start: 32px; margin-bottom: 16px; }
+.animfolio-hero--photo-left .animfolio-hero__cta,
+.animfolio-hero--photo-right .animfolio-hero__cta { clear: both; }
+
+/* Side-by-side photo layouts read better left-aligned (text wraps beside the
+   floated photo), so they opt out of the centered default. */
+.animfolio-hero--photo-left .animfolio-hero__content,
+.animfolio-hero--photo-right .animfolio-hero__content {
+	text-align: start;
+	--animfolio-hero-justify: flex-start;
+}
+
+/* Formats whose hero is centered: center the CTA + social rows to match. */
+.animfolio-container--format-03,
+.animfolio-container--format-06,
+.animfolio-container--format-11,
+.animfolio-container--format-13 {
+	--animfolio-hero-justify: center;
+}
+
+/* Project cards: push the tech-stack chips + action buttons to the bottom so
+   they line up across cards regardless of description length. */
+.animfolio-project {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.animfolio-project .animfolio-card__tags {
+	margin-top: auto;
+}
+
+.animfolio-hero__social a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;  /* 44px minimum touch target (WCAG 2.5.5) */
+	height: 44px;
+	border-radius: 50%;
+	border: 1px solid var(--animfolio-border);
+	color: var(--animfolio-text-secondary);
+	transition: all 0.3s ease;
+	font-size: 0.875rem;
+}
+
+.animfolio-hero__social a:hover {
+	color: var(--animfolio-accent);
+	border-color: var(--animfolio-accent);
+	background: var(--animfolio-accent-light);
+	transform: translateY(-2px);
+}
+
+/* ===== Social icon styles (the social_icon_style setting) =====================
+   Applied via .animfolio-social-icons--{outline|filled|rounded|square|text} on
+   the hero AND footer social rows. The label span is hidden for icon styles and
+   shown for the 'text' style. Placed AFTER .animfolio-hero__social a so these
+   equal-specificity rules win for the chosen style. */
+.animfolio-social-icons a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.animfolio-social-icons .animfolio-social__label {
+	display: none;
+}
+.animfolio-social-icons--outline a,
+.animfolio-social-icons--filled a,
+.animfolio-social-icons--rounded a,
+.animfolio-social-icons--square a {
+	width: 44px;
+	height: 44px;
+	border: 1px solid var(--animfolio-border);
+	color: var(--animfolio-text-secondary);
+}
+.animfolio-social-icons--outline a { background: transparent; border-radius: 50%; }
+.animfolio-social-icons--filled a  { background: var(--animfolio-surface, var(--animfolio-bg-secondary)); border-radius: 50%; }
+.animfolio-social-icons--rounded a { background: var(--animfolio-surface, var(--animfolio-bg-secondary)); border-radius: 12px; }
+.animfolio-social-icons--square a  { background: var(--animfolio-surface, var(--animfolio-bg-secondary)); border-radius: 0; }
+.animfolio-social-icons--outline a:hover {
+	color: var(--animfolio-accent);
+	border-color: var(--animfolio-accent);
+	background: var(--animfolio-accent-light);
+	transform: translateY(-2px);
+}
+.animfolio-social-icons--filled a:hover,
+.animfolio-social-icons--rounded a:hover,
+.animfolio-social-icons--square a:hover {
+	background: var(--animfolio-accent);
+	border-color: var(--animfolio-accent);
+	color: var(--animfolio-on-accent, #fff);
+	transform: translateY(-2px);
+}
+/* Text style: hide the glyph, show the platform name. */
+.animfolio-social-icons--text a {
+	color: var(--animfolio-text-secondary);
+	width: auto;
+	height: auto;
+	border: none;
+	background: none;
+	padding: 4px 6px;
+}
+.animfolio-social-icons--text a svg { display: none; }
+.animfolio-social-icons--text .animfolio-social__label {
+	display: inline;
+	font-size: 0.95rem;
+	font-weight: 600;
+}
+.animfolio-social-icons--text a:hover .animfolio-social__label {
+	color: var(--animfolio-accent-text, var(--animfolio-accent));
+}
+
+/* Typed cursor */
+.animfolio-typed-cursor::after {
+	content: '|';
+	animation: animfolio-blink 1s infinite;
+	color: var(--animfolio-accent);
+	margin-inline-start: 2px;
+}
+
+@keyframes animfolio-blink {
+	0%, 50% { opacity: 1; }
+	51%, 100% { opacity: 0; }
+}
+
+/* ========================================================================
+   9. About
+   ======================================================================== */
+
+.animfolio-about {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+	text-align: center;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.animfolio-about__photo-wrapper {
+	width: 200px;
+	height: 200px;
+	border-radius: 16px;
+	overflow: hidden;
+	border: 2px solid var(--animfolio-border);
+	margin: 0 auto;
+}
+
+.animfolio-about__photo {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.animfolio-about__bio {
+	font-size: 1.125rem;
+	line-height: 1.8;
+	color: var(--animfolio-text-secondary);
+	max-width: 800px;
+	margin-inline: auto;
+}
+
+.animfolio-about__fun-facts {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-top: 8px;
+	justify-content: center;
+}
+
+.animfolio-about__fun-fact {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 20px;
+	background: var(--animfolio-bg-tertiary, var(--animfolio-bg-secondary));
+	border: 1px solid var(--animfolio-border);
+	border-radius: 40px;
+	font-size: 0.875rem;
+	color: var(--animfolio-text-secondary);
+	transition: all 0.3s ease;
+}
+
+.animfolio-about__fun-fact:hover {
+	border-color: var(--animfolio-accent);
+	color: var(--animfolio-accent);
+}
+
+.animfolio-about__fun-fact::before {
+	content: '\2022';
+	color: var(--animfolio-accent);
+	font-size: 1.2em;
+}
+
+/* ========================================================================
+   10. Timeline (Experience / Education)
+   ======================================================================== */
+
+.animfolio-timeline {
+	position: relative;
+	padding-inline-start: 40px;
+}
+
+.animfolio-timeline__line {
+	display: none;
+}
+
+.animfolio-timeline__item {
+	position: relative;
+	padding-bottom: 48px;
+}
+
+.animfolio-timeline__item::before {
+	content: '';
+	position: absolute;
+	inset-inline-start: -35px;
+	top: 18px;
+	bottom: -6px;
+	width: 2px;
+	background: linear-gradient(180deg, var(--animfolio-accent), var(--animfolio-border) 80%);
+}
+
+.animfolio-timeline__item:last-child {
+	padding-bottom: 0;
+}
+
+.animfolio-timeline__item:last-child::before {
+	display: none;
+}
+
+.animfolio-timeline__dot {
+	position: absolute;
+	inset-inline-start: -40px;
+	top: 6px;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: var(--animfolio-accent);
+	border: 3px solid var(--animfolio-bg);
+	box-shadow: 0 0 0 2px var(--animfolio-accent), 0 0 12px var(--animfolio-accent-shadow, rgba(127, 119, 221, 0.3));
+}
+
+.animfolio-timeline__content {
+	padding: 24px;
+	border-inline-start: none;
+}
+
+/* Prevent card border from creating a double-line effect on timeline */
+.animfolio-timeline .animfolio-card {
+	border-inline-start: none;
+}
+
+.animfolio-timeline__role {
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: var(--animfolio-text);
+}
+
+.animfolio-timeline__company {
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--animfolio-accent);
+}
+
+.animfolio-timeline__date {
+	font-size: 0.875rem;
+	color: var(--animfolio-text-muted);
+	margin: 4px 0 12px;
+}
+
+.animfolio-timeline__description {
+	color: var(--animfolio-text-secondary);
+	line-height: 1.7;
+}
+
+.animfolio-timeline__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 16px;
+}
+
+.animfolio-timeline__logo {
+	width: 48px;
+	height: 48px;
+	border-radius: 8px;
+	margin-bottom: 12px;
+}
+
+/* ========================================================================
+   11. Skills
+   ======================================================================== */
+
+.animfolio-skills__category {
+	margin-bottom: 40px;
+}
+
+.animfolio-skills__category-title {
+	font-size: 1.125rem;
+	margin-bottom: 20px;
+	color: var(--animfolio-text);
+}
+
+.animfolio-skills__item {
+	margin-bottom: 16px;
+}
+
+.animfolio-skills__label {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 8px;
+	font-size: 0.875rem;
+	color: var(--animfolio-text-secondary);
+}
+
+.animfolio-skills__value {
+	color: var(--animfolio-accent);
+	font-weight: 600;
+}
+
+.animfolio-skills__bar {
+	height: 8px;
+	background: var(--animfolio-bg-tertiary, rgba(255, 255, 255, 0.05));
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.animfolio-skills__bar-fill {
+	height: 100%;
+	background: linear-gradient(90deg, var(--animfolio-accent), var(--animfolio-secondary));
+	border-radius: 4px;
+	transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	box-shadow: 0 0 8px var(--animfolio-accent-shadow, rgba(127, 119, 221, 0.3));
+}
+
+/* ---- Skills: Tag Cloud ---- */
+
+.animfolio-skills__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.animfolio-skills__tag {
+	display: inline-block;
+	padding: 8px 18px;
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 40px;
+	color: var(--animfolio-text);
+	font-weight: 500;
+	transition: all 0.3s ease;
+}
+
+.animfolio-skills__tag:hover {
+	border-color: var(--animfolio-accent);
+	background: var(--animfolio-accent-light);
+	color: var(--animfolio-accent);
+}
+
+.animfolio-skills__tag--xl { font-size: 1.1rem; padding: 10px 24px; border-color: var(--animfolio-accent); color: var(--animfolio-accent); }
+.animfolio-skills__tag--lg { font-size: 1rem; padding: 9px 20px; }
+.animfolio-skills__tag--md { font-size: 0.9rem; }
+/* --sm: use muted text color instead of opacity so contrast is preserved */
+.animfolio-skills__tag--sm { font-size: 0.8rem; padding: 6px 14px; color: var(--animfolio-text-muted, var(--animfolio-text-secondary)); }
+
+/* ---- Skills: Compact Grid ---- */
+
+.animfolio-skills__compact-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 12px;
+}
+
+.animfolio-skills__compact-item {
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: var(--animfolio-radius, 12px);
+	padding: 16px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	transition: border-color 0.3s ease;
+}
+
+.animfolio-skills__compact-item:hover {
+	border-color: var(--animfolio-accent);
+}
+
+.animfolio-skills__compact-name {
+	flex: 1;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--animfolio-text);
+}
+
+.animfolio-skills__compact-level {
+	font-size: 0.8rem;
+	font-weight: 700;
+	color: var(--animfolio-accent);
+}
+
+.animfolio-skills__compact-bar {
+	width: 100%;
+	height: 4px;
+	background: var(--animfolio-bg-tertiary, rgba(255, 255, 255, 0.05));
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.animfolio-skills__compact-fill {
+	height: 100%;
+	background: linear-gradient(90deg, var(--animfolio-accent), var(--animfolio-secondary));
+	border-radius: 2px;
+}
+
+/* ---- Skills: Dot Rating ---- */
+
+.animfolio-skills__dot-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 0;
+	border-bottom: 1px solid var(--animfolio-border);
+}
+
+.animfolio-skills__dot-name {
+	font-size: 0.875rem;
+	color: var(--animfolio-text-secondary);
+}
+
+.animfolio-skills__dots {
+	display: flex;
+	gap: 6px;
+}
+
+.animfolio-skills__dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: var(--animfolio-bg-tertiary, rgba(255, 255, 255, 0.08));
+	border: 1px solid var(--animfolio-border);
+	transition: all 0.3s ease;
+}
+
+.animfolio-skills__dot--filled {
+	background: var(--animfolio-accent);
+	border-color: var(--animfolio-accent);
+	box-shadow: 0 0 6px var(--animfolio-accent-shadow, rgba(127, 119, 221, 0.3));
+}
+
+/* Skills — Constellation / Orbit visualization.
+   Central hub with skill nodes positioned on a ring around it. Pure CSS,
+   no JS dependency. The readable skill list lives in .animfolio-sr-only. */
+.animfolio-skills__category--constellation {
+	text-align: center;
+}
+
+.animfolio-constellation {
+	--animfolio-constellation-size: clamp(220px, 60vw, 340px);
+	--animfolio-constellation-radius: calc(var(--animfolio-constellation-size) / 2 - 44px);
+	position: relative;
+	width: var(--animfolio-constellation-size);
+	height: var(--animfolio-constellation-size);
+	margin: 24px auto 8px;
+	max-width: 100%;
+}
+
+.animfolio-constellation__hub {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 88px;
+	height: 88px;
+	padding: 8px;
+	border-radius: 50%;
+	background: var(--animfolio-bg-secondary);
+	border: 2px solid var(--animfolio-accent);
+	color: var(--animfolio-accent-text, var(--animfolio-accent));
+	font-weight: 700;
+	font-size: 0.8rem;
+	line-height: 1.2;
+	text-align: center;
+	box-shadow: 0 0 24px var(--animfolio-accent-subtle, rgba(127, 119, 221, 0.18));
+	z-index: 2;
+}
+
+/* The ring that carries the nodes. Rotating this rotates all nodes together;
+   each node counter-rotates so its label stays upright. */
+.animfolio-constellation::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	margin: auto;
+	width: calc(var(--animfolio-constellation-radius) * 2);
+	height: calc(var(--animfolio-constellation-radius) * 2);
+	border: 1px dashed var(--animfolio-border);
+	border-radius: 50%;
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.animfolio-constellation__node {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 56px;
+	max-width: 110px;
+	padding: 7px 12px;
+	border-radius: var(--animfolio-radius, 12px);
+	background: var(--animfolio-bg-tertiary, rgba(255, 255, 255, 0.06));
+	border: 1px solid var(--animfolio-border);
+	color: var(--animfolio-text);
+	font-size: 0.78rem;
+	line-height: 1.2;
+	text-align: center;
+	opacity: var(--animfolio-constellation-alpha, 1);
+	/* Position node i of N on the ring, then scale by skill level. */
+	transform:
+		translate(-50%, -50%)
+		rotate(calc(360deg / var(--animfolio-constellation-count, 1) * var(--animfolio-constellation-index, 0)))
+		translateY(calc(var(--animfolio-constellation-radius) * -1))
+		rotate(calc(-360deg / var(--animfolio-constellation-count, 1) * var(--animfolio-constellation-index, 0)))
+		scale(var(--animfolio-constellation-scale, 1));
+	transition: border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+	will-change: transform;
+}
+
+.animfolio-constellation__node:hover {
+	border-color: var(--animfolio-accent);
+	box-shadow: 0 0 14px var(--animfolio-accent-subtle, rgba(127, 119, 221, 0.25));
+	opacity: 1;
+	z-index: 3;
+}
+
+.animfolio-constellation__label {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+	.animfolio-constellation {
+		--animfolio-constellation-size: min(280px, 86vw);
+	}
+
+	.animfolio-constellation__node {
+		font-size: 0.7rem;
+		min-width: 48px;
+		max-width: 88px;
+		padding: 6px 9px;
+	}
+
+	.animfolio-constellation__hub {
+		width: 72px;
+		height: 72px;
+		font-size: 0.72rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.animfolio-constellation__node {
+		transition: none;
+	}
+}
+
+/* ========================================================================
+   12. Projects
+   ======================================================================== */
+
+.animfolio-project {
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.animfolio-project__image {
+	width: 100%;
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+	border-radius: var(--animfolio-radius, 12px) var(--animfolio-radius, 12px) 0 0;
+}
+
+/* Responsive video embed (YouTube/Vimeo oEmbed) — fills the card top, 16:9. */
+.animfolio-video-embed {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border-radius: var(--animfolio-radius, 12px) var(--animfolio-radius, 12px) 0 0;
+	overflow: hidden;
+	background: #000;
+}
+
+.animfolio-video-embed iframe,
+.animfolio-video-embed video,
+.animfolio-video-embed embed,
+.animfolio-video-embed object {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+/* Visually-hidden utility (screen-reader-only) for live regions/announcements. */
+.animfolio-visually-hidden {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Project gallery thumbnails (lightbox-enabled). */
+.animfolio-project__gallery {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 12px 16px 0;
+}
+
+.animfolio-project__gallery .animfolio-project__gallery-thumb {
+	width: 60px;
+	height: 60px;
+	aspect-ratio: 1;
+	object-fit: cover;
+	border-radius: var(--animfolio-radius-sm, 6px);
+	border: 1px solid var(--animfolio-border);
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.animfolio-project__gallery .animfolio-project__gallery-thumb:hover {
+	transform: scale(1.06);
+}
+
+/* Placeholder for projects without images */
+.animfolio-project__placeholder {
+	width: 100%;
+	/* Compact "no screenshot" strip instead of a full 16:10 image-size void, so
+	   image-less projects don't leave a large empty area in the card. */
+	min-height: 120px;
+	background: linear-gradient(135deg, var(--animfolio-bg-tertiary, #1e1e1e), var(--animfolio-bg-secondary));
+	border-radius: var(--animfolio-radius, 12px) var(--animfolio-radius, 12px) 0 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2.5rem;
+	color: var(--animfolio-accent);
+	opacity: 0.3;
+}
+
+/* Project text content inherits card padding (28px on desktop).
+   No additional padding override needed — card handles it. */
+
+.animfolio-project__title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-bottom: 8px;
+	margin-top: 20px;
+}
+
+.animfolio-project__description {
+	color: var(--animfolio-text-secondary);
+	font-size: 0.9375rem;
+	line-height: 1.6;
+	margin-bottom: 0;
+}
+
+.animfolio-project__stack {
+	display: flex;
+	flex-wrap: wrap;
+	/* ~8px both axes so chips never touch when they wrap onto multiple rows. */
+	gap: 8px;
+	margin-top: 16px;
+}
+
+.animfolio-project__links {
+	margin-top: 20px;
+	padding-top: 16px;
+	border-top: 1px solid var(--animfolio-border);
+	display: flex;
+	align-items: center;
+	/* ~12px between Live Demo / Source; row-gap keeps breathing room when they
+	   wrap onto two lines on narrow cards. */
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+/* Card footer inside project: no border (project__links has its own treatment),
+   but keep a clear vertical gap so the action buttons don't touch the tech-stack
+   chips above them. */
+.animfolio-project .animfolio-card__footer {
+	border-top: none;
+	padding-top: 0;
+	margin-top: 18px;
+}
+
+.animfolio-project__links .animfolio-button {
+	padding: 10px 20px;
+	font-size: 0.875rem;
+}
+
+/* ========================================================================
+   13. Stats / Counters
+   ======================================================================== */
+
+.animfolio-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 24px;
+	text-align: center;
+}
+
+.animfolio-stat {
+	padding: 36px 24px;
+	text-align: center;
+	border: 1px solid var(--animfolio-border);
+	border-radius: var(--animfolio-radius, 12px);
+	background: var(--animfolio-bg-secondary);
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.animfolio-stat:hover {
+	border-color: var(--animfolio-accent);
+	box-shadow: 0 0 24px var(--animfolio-accent-shadow, rgba(127, 119, 221, 0.15));
+}
+
+.animfolio-stat__number {
+	font-size: clamp(2.5rem, 4vw, 3.5rem);
+	font-weight: 800;
+	font-family: var(--animfolio-font-heading);
+	/* Gradient clip with solid color fallback for browsers that drop -webkit-background-clip */
+	color: var(--animfolio-accent);
+	background: linear-gradient(135deg, var(--animfolio-accent), var(--animfolio-secondary));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	display: block;
+	line-height: 1.1;
+}
+
+.animfolio-stat__label {
+	font-size: 0.9375rem;
+	font-weight: 500;
+	color: var(--animfolio-text-secondary);
+	margin-top: 12px;
+	display: block;
+	letter-spacing: 0.02em;
+}
+
+/* ========================================================================
+   14. Testimonials — Carousel
+   ======================================================================== */
+
+.animfolio-testimonials-carousel {
+	position: relative;
+	/* The inner __track has its own overflow-x:auto, so the carousel itself must
+	   stay visible — otherwise the navigation dots below the track get clipped. */
+	overflow: visible;
+}
+
+.animfolio-testimonials-carousel__track {
+	display: flex;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	gap: 0;
+}
+
+.animfolio-testimonials-carousel__track::-webkit-scrollbar {
+	display: none;
+}
+
+.animfolio-testimonials-carousel__slide {
+	flex: 0 0 100%;
+	min-width: 100%;
+	scroll-snap-align: start;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	padding: 0 4px;
+	box-sizing: border-box;
+}
+
+/* Trailing slide with one card (odd testimonial count): a single centered
+   column so the carousel never ends on a half-empty slide. */
+.animfolio-testimonials-carousel__slide--single {
+	grid-template-columns: minmax(0, 640px);
+	justify-content: center;
+}
+
+@media (max-width: 768px) {
+	.animfolio-testimonials-carousel__slide {
+		grid-template-columns: 1fr;
+	}
+
+	.animfolio-testimonials-carousel__slide--single {
+		grid-template-columns: 1fr;
+	}
+}
+
+.animfolio-testimonials-carousel__dots {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 32px;
+}
+
+.animfolio-testimonials-carousel__dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: var(--animfolio-border);
+	border: none;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-decoration: none;
+}
+
+.animfolio-testimonials-carousel__dot:hover,
+.animfolio-testimonials-carousel__dot--active {
+	background: var(--animfolio-accent);
+	transform: scale(1.3);
+}
+
+.animfolio-testimonials-carousel__dot:focus-visible {
+	outline: 3px solid var(--animfolio-accent);
+	outline-offset: 3px;
+}
+
+/* ========================================================================
+   14b. Testimonial Cards
+   ======================================================================== */
+
+/* Single testimonial: a centered, width-constrained card so one quote never
+   leaves an empty half (which a 2-col grid would). */
+.animfolio-testimonials-single {
+	display: flex;
+	justify-content: center;
+}
+
+.animfolio-testimonials-single .animfolio-testimonial {
+	width: 100%;
+	max-width: 640px;
+}
+
+.animfolio-testimonial {
+	display: flex;
+	flex-direction: column;
+}
+
+.animfolio-testimonial__quote {
+	font-size: 1rem;
+	line-height: 1.7;
+	color: var(--animfolio-text-secondary);
+	position: relative;
+	padding-inline-start: 20px;
+	padding-bottom: 4px; /* prevent italic descenders from clipping */
+	border-inline-start: 3px solid var(--animfolio-accent);
+	font-style: italic;
+	flex: 1;
+	/* overflow: hidden removed — was clipping italic descenders on long quotes */
+}
+
+.animfolio-testimonial__quote::before {
+	content: '\201C';
+	position: absolute;
+	top: -4px;
+	inset-inline-start: 4px;
+	font-size: 2rem;
+	color: var(--animfolio-accent);
+	opacity: 0.15;
+	font-family: Georgia, serif;
+	line-height: 1;
+}
+
+.animfolio-testimonial__photo {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid var(--animfolio-border);
+}
+
+.animfolio-testimonial__avatar {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, var(--animfolio-accent), var(--animfolio-secondary));
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-weight: 700;
+	font-size: 1.1rem;
+	flex-shrink: 0;
+}
+
+.animfolio-testimonial__author {
+	display: block;
+	font-weight: 600;
+	color: var(--animfolio-text);
+	font-style: normal;
+	font-size: 0.9375rem;
+}
+
+.animfolio-testimonial__role,
+.animfolio-testimonial__company {
+	font-size: 0.8125rem;
+	color: var(--animfolio-text-muted);
+	font-style: normal;
+}
+
+/* ========================================================================
+   15. Contact
+   ======================================================================== */
+
+.animfolio-contact {
+	max-width: 100%;
+}
+
+.animfolio-contact__heading {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: var(--animfolio-text);
+	margin-bottom: 8px;
+}
+
+.animfolio-contact__description {
+	font-size: 1rem;
+	color: var(--animfolio-text-secondary);
+	margin-bottom: 32px;
+	max-width: 640px;
+}
+
+.animfolio-contact__layout {
+	display: grid;
+	/* Two real columns so the QR has space to center within its own column
+	   instead of collapsing to its content width and hugging the right edge.
+	   align-items:center vertically centers the (short) QR against the form. */
+	grid-template-columns: 1fr 1fr;
+	gap: 48px;
+	align-items: center;
+}
+
+.animfolio-contact__form-wrapper {
+	max-width: 560px;
+	min-width: 0; /* allow shrink inside grid without overflow */
+}
+
+.animfolio-contact__qr-wrapper {
+	text-align: center;
+	padding-top: 16px;
+	min-width: 180px;
+}
+
+.animfolio-contact__qr-wrapper .animfolio-qr {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+}
+
+@media (max-width: 768px) {
+	.animfolio-contact__layout {
+		grid-template-columns: 1fr;
+		gap: 32px;
+	}
+}
+
+/* ========================================================================
+   16. Utility Classes
+   ======================================================================== */
+
+/* Skip-to-content link (accessibility). */
+.animfolio-skip-link {
+	position: absolute;
+	top: -100px;
+	inset-inline-start: 16px;
+	background: var(--animfolio-accent);
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 8px;
+	font-size: 0.875rem;
+	font-weight: 600;
+	z-index: 999;
+	text-decoration: none;
+	transition: top 0.2s ease;
+}
+
+.animfolio-skip-link:focus {
+	top: 8px;
+	color: #fff;
+	outline: 2px solid #fff;
+	outline-offset: 2px;
+}
+
+.animfolio-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.animfolio-hidden { display: none; }
+.animfolio-no-scroll { overflow: hidden; }
+
+/* ========================================================================
+   17. Back to Top
+   ======================================================================== */
+
+.animfolio-back-to-top {
+	position: fixed;
+	bottom: max(24px, env(safe-area-inset-bottom, 0px) + 12px);
+	right: max(24px, env(safe-area-inset-right, 0px) + 12px);
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: var(--animfolio-accent);
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(10px);
+	transition: all 0.3s ease;
+	z-index: 200;
+	box-shadow: 0 4px 16px var(--animfolio-accent-shadow, rgba(127, 119, 221, 0.3));
+}
+
+.animfolio-back-to-top--visible {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.animfolio-back-to-top:hover {
+	background: var(--animfolio-accent-hover);
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px var(--animfolio-accent-glow, rgba(127, 119, 221, 0.5));
+}
+
+/* ========================================================================
+   18. Progress Bar
+   ======================================================================== */
+
+.animfolio-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	z-index: 400;
+	background: transparent;
+}
+
+.animfolio-progress__bar {
+	height: 100%;
+	width: 0;
+	background: linear-gradient(90deg, var(--animfolio-accent), var(--animfolio-secondary));
+	transition: width 0.1s linear;
+}
+
+/* ========================================================================
+   19. Powered By
+   ======================================================================== */
+
+.animfolio-footer-social {
+	display: flex;
+	justify-content: center;
+	gap: 16px;
+	padding: 32px 0 16px;
+}
+
+.animfolio-footer-social a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 1px solid var(--animfolio-border);
+	color: var(--animfolio-text-secondary);
+	transition: all 0.3s ease;
+}
+
+.animfolio-footer-social a:hover {
+	color: var(--animfolio-accent);
+	border-color: var(--animfolio-accent);
+	background: var(--animfolio-accent-light);
+}
+
+/* Footer QR — centered like the other footer elements; the footer has room, so
+   the QR is rendered larger here (size set in the renderer) for easy scanning. */
+.animfolio-footer-qr {
+	display: flex;
+	justify-content: center;
+	padding: 40px 0 8px;
+}
+
+/* Keep the larger footer QR from overflowing narrow viewports — scale the
+   rendered canvas/svg down to fit while preserving the square aspect ratio. */
+.animfolio-footer-qr .animfolio-qr {
+	max-width: 100%;
+}
+
+.animfolio-footer-qr .animfolio-qr__code {
+	max-width: 100%;
+}
+
+.animfolio-footer-qr .animfolio-qr__code canvas,
+.animfolio-footer-qr .animfolio-qr__code svg,
+.animfolio-footer-qr .animfolio-qr__code img {
+	max-width: 100%;
+	height: auto;
+}
+
+.animfolio-powered-by {
+	text-align: center;
+	padding: 24px 32px;
+	font-size: 0.75rem;
+	color: var(--animfolio-text-muted);
+	border-top: 1px solid var(--animfolio-border);
+	margin-top: 0;
+}
+
+.animfolio-powered-by a {
+	color: var(--animfolio-accent);
+}
+
+/* ========================================================================
+   20. Page Mode: Embedded
+   ======================================================================== */
+
+.animfolio-container--embedded {
+	/* Embedded inside a host theme page: must NOT assume the full viewport.
+	   Height is driven by content, not 100vh. */
+	min-height: auto;
+	border-radius: var(--animfolio-radius, 12px);
+	/* clip:hidden keeps rounded corners crisp but would clip a position:absolute
+	   menu — the mobile nav menu is position:fixed (in animfolio-nav.css) so it
+	   escapes this clip and still paints above content. */
+	overflow: hidden;
+}
+
+.animfolio-container--embedded .animfolio-section--hero {
+	padding: 0;
+}
+
+/* Embedded hero: cap height so it sits comfortably inside a host page instead
+   of forcing a near-full-viewport block. Falls back to a fixed cap; modern
+   browsers use min(viewport, ceiling) so a very tall viewport can't blow it up
+   and a very short host area can't be over-stretched. */
+.animfolio-container--embedded .animfolio-hero {
+	min-height: 0;
+	min-height: min(60vh, 560px);
+	min-height: min(60dvh, 560px);
+	padding: 48px 0;
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+	.animfolio-container--embedded .animfolio-hero {
+		min-height: auto;
+		padding: 40px 0;
+	}
+}
+
+/* ========================================================================
+   21. Empty State
+   ======================================================================== */
+
+.animfolio-empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 50vh;
+	text-align: center;
+}
+
+.animfolio-empty__inner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	max-width: 360px;
+	padding: 48px 24px;
+}
+
+/* Large illustrative icon */
+.animfolio-empty__icon {
+	font-size: 3rem;
+	line-height: 1;
+	opacity: 0.4;
+}
+
+.animfolio-empty__title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--animfolio-text);
+	margin: 0;
+}
+
+.animfolio-empty__desc {
+	font-size: 0.9375rem;
+	color: var(--animfolio-text-secondary);
+	line-height: 1.6;
+	margin: 0;
+}
+
+/* ========================================================================
+   21. Custom Cursor
+   ======================================================================== */
+
+.animfolio-cursor {
+	pointer-events: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 700;
+}
+
+.animfolio-cursor__dot {
+	width: 6px;
+	height: 6px;
+	background: var(--animfolio-accent);
+	border-radius: 50%;
+	position: fixed;
+	top: -3px;
+	left: -3px;
+	pointer-events: none;
+}
+
+.animfolio-cursor__circle {
+	width: 36px;
+	height: 36px;
+	border: 1px solid var(--animfolio-accent);
+	border-radius: 50%;
+	position: fixed;
+	top: -18px;
+	left: -18px;
+	pointer-events: none;
+	transition: width 0.2s ease, height 0.2s ease;
+}
+
+.animfolio-cursor__circle--hover {
+	width: 56px;
+	height: 56px;
+	top: -28px;
+	left: -28px;
+	opacity: 0.5;
+}
+
+/* ========================================================================
+   22. Honeypot (spam protection)
+   ======================================================================== */
+
+.animfolio-form__honeypot {
+	position: absolute;
+	left: -9999px;
+	opacity: 0;
+	height: 0;
+	overflow: hidden;
+}
+
+/* ========================================================================
+   Visitor Card Creator
+   ======================================================================== */
+
+.animfolio-visitor-card {
+	margin-top: 0;
+	padding-top: 0;
+}
+
+.animfolio-section--visitor-card {
+	padding: max(48px, var(--animfolio-section-spacing, 80px)) 0;
+}
+
+.animfolio-visitor-card__details {
+	border: none;
+}
+
+.animfolio-visitor-card__toggle {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 24px;
+	list-style: none;
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: var(--animfolio-radius, 12px);
+	transition: all 0.3s ease;
+}
+
+.animfolio-visitor-card__toggle:hover {
+	border-color: var(--animfolio-accent);
+}
+
+.animfolio-visitor-card__toggle::-webkit-details-marker {
+	display: none;
+}
+
+.animfolio-visitor-card__toggle-text {
+	flex: 1;
+}
+
+.animfolio-visitor-card__title {
+	font-size: 1.125rem;
+	font-weight: 600;
+	margin: 0;
+	color: var(--animfolio-text);
+}
+
+.animfolio-visitor-card__expand-hint {
+	font-size: 0.8125rem;
+	color: var(--animfolio-text-muted);
+	display: block;
+	margin-top: 2px;
+}
+
+/* Anonymous "cards created" tally shown in the creator header. */
+.animfolio-visitor-card__count {
+	font-size: 0.8125rem;
+	color: var(--animfolio-text-secondary);
+	display: block;
+	margin-top: 4px;
+}
+
+.animfolio-visitor-card__count strong {
+	color: var(--animfolio-accent);
+	font-weight: 700;
+}
+
+.animfolio-visitor-card__chevron {
+	color: var(--animfolio-text-muted);
+	transition: transform 0.3s ease;
+	flex-shrink: 0;
+	display: flex;
+}
+
+.animfolio-visitor-card__details[open] .animfolio-visitor-card__chevron {
+	transform: rotate(180deg);
+}
+
+.animfolio-visitor-card__details[open] .animfolio-visitor-card__toggle {
+	border-radius: var(--animfolio-radius, 12px) var(--animfolio-radius, 12px) 0 0;
+	border-bottom-color: transparent;
+}
+
+.animfolio-visitor-card__subtitle {
+	font-size: 0.9375rem;
+	color: var(--animfolio-text-secondary);
+	margin-bottom: 32px;
+	line-height: 1.6;
+	padding: 24px 24px 0;
+}
+
+/* Content wrapper when details is open — fill the expanded panel with the same
+   surface as the toggle bar so the whole open card reads as one bordered box
+   (without the background, the side borders just ran down an empty/transparent
+   area, leaving the panel looking unbordered and uncolored). */
+.animfolio-visitor-card__details[open] > .animfolio-visitor-card__subtitle,
+.animfolio-visitor-card__details[open] > .animfolio-visitor-card__layout {
+	border-inline-start: 1px solid var(--animfolio-border);
+	border-inline-end: 1px solid var(--animfolio-border);
+	background: var(--animfolio-bg-secondary);
+}
+
+.animfolio-visitor-card__details[open] > *:last-child {
+	border-bottom: 1px solid var(--animfolio-border);
+	border-radius: 0 0 var(--animfolio-radius, 12px) var(--animfolio-radius, 12px);
+	padding-bottom: 24px;
+}
+
+.animfolio-visitor-card__layout {
+	max-width: 100%;
+	padding: 0 24px;
+}
+
+.animfolio-visitor-card__form {
+	max-width: 100%;
+}
+
+.animfolio-visitor-card__fieldset {
+	border: none;
+	padding: 0;
+	margin: 0 0 24px;
+}
+
+.animfolio-visitor-card__fieldset legend {
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--animfolio-accent);
+	margin-bottom: 12px;
+	padding: 0;
+}
+
+.animfolio-visitor-card__row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+	margin-bottom: 12px;
+}
+
+.animfolio-visitor-card__form .animfolio-form__group {
+	margin-bottom: 12px;
+}
+
+.animfolio-visitor-card__form .animfolio-form__label {
+	font-size: 0.8125rem;
+	color: var(--animfolio-text-secondary);
+	margin-bottom: 4px;
+}
+
+.animfolio-visitor-card__form .animfolio-form__input,
+.animfolio-visitor-card__form .animfolio-form__textarea {
+	width: 100%;
+	padding: 10px 14px;
+	font-size: 0.9375rem;
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 8px;
+	color: var(--animfolio-text);
+	transition: border-color 0.2s;
+}
+
+.animfolio-visitor-card__form .animfolio-form__input:focus,
+.animfolio-visitor-card__form .animfolio-form__textarea:focus {
+	border-color: var(--animfolio-accent);
+	outline: none;
+	box-shadow: 0 0 0 3px var(--animfolio-accent-light);
+}
+
+.animfolio-visitor-card__generate {
+	margin-top: 20px;
+	width: 100%;
+	padding: 14px 28px;
+	font-size: 1rem;
+}
+
+@media (min-width: 480px) {
+	.animfolio-visitor-card__generate {
+		width: auto;
+	}
+}
+
+/* Preview card */
+.animfolio-visitor-card__preview {
+	text-align: center;
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+.animfolio-visitor-card__card {
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 16px;
+	padding: 40px 32px;
+	margin-bottom: 24px;
+	text-align: center;
+}
+
+.animfolio-visitor-card__card-name {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: var(--animfolio-text);
+	margin-bottom: 4px;
+}
+
+.animfolio-visitor-card__card-title {
+	font-size: 1rem;
+	color: var(--animfolio-accent);
+	margin-bottom: 4px;
+}
+
+.animfolio-visitor-card__card-company {
+	font-size: 0.9375rem;
+	color: var(--animfolio-text-secondary);
+	margin-bottom: 16px;
+}
+
+.animfolio-visitor-card__card-details {
+	font-size: 0.8125rem;
+	color: var(--animfolio-text-muted);
+	line-height: 1.8;
+}
+
+.animfolio-visitor-card__card-socials {
+	font-size: 0.75rem;
+	color: var(--animfolio-accent);
+	margin-top: 8px;
+	font-weight: 500;
+}
+
+.animfolio-visitor-card__qr {
+	display: inline-block;
+	margin: 20px auto;
+	background: #fff;
+	padding: 12px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.animfolio-visitor-card__scan-hint {
+	font-size: 0.75rem;
+	color: var(--animfolio-text-muted);
+	margin: 0 0 16px;
+}
+
+/* Privacy reassurance under the generate button — all-client-side, no storage. */
+.animfolio-visitor-card__privacy {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	margin: 16px 0 0;
+	padding: 12px 14px;
+	font-size: 0.8125rem;
+	line-height: 1.5;
+	color: var(--animfolio-text-secondary);
+	background: var(--animfolio-accent-light);
+	border: 1px solid var(--animfolio-border);
+	border-radius: var(--animfolio-radius-sm, 6px);
+}
+
+.animfolio-visitor-card__privacy-icon {
+	flex: 0 0 auto;
+	margin-top: 1px;
+	color: var(--animfolio-accent);
+}
+
+.animfolio-visitor-card__actions {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+	.animfolio-visitor-card__row {
+		grid-template-columns: 1fr;
+		gap: 8px;
+	}
+
+	.animfolio-visitor-card__card {
+		padding: 28px 20px;
+	}
+
+	.animfolio-visitor-card__actions {
+		flex-direction: column;
+	}
+
+	.animfolio-visitor-card__actions .animfolio-button {
+		width: 100%;
+	}
+}
+
+/* ========================================================================
+   Blog — "Load More" pagination
+   ======================================================================== */
+
+.animfolio-container .animfolio-blog-loadmore-wrap {
+	display: flex;
+	justify-content: center;
+	margin-top: var(--animfolio-space-lg, 2rem);
+}
+
+/* ========================================================================
+   Project Case Study — modal
+   ======================================================================== */
+
+/* The hidden source container holding the case-study HTML — kept out of the
+   normal flow but available to the JS that clones it into the modal. */
+.animfolio-container .animfolio-project__casestudy {
+	display: none;
+}
+
+/* Shared, single overlay element (created once by animfolio-casestudy.js and
+   appended to <body>, so it is intentionally not nested under
+   .animfolio-container). */
+.animfolio-casestudy-modal {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.78);
+	z-index: 10000;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+	-webkit-overflow-scrolling: touch;
+}
+
+.animfolio-casestudy-modal__panel {
+	position: relative;
+	width: 100%;
+	max-width: 720px;
+	max-height: 88vh;
+	max-height: 88svh;
+	overflow-y: auto;
+	background: var(--animfolio-bg-secondary, #141414);
+	color: var(--animfolio-text, #e5e5e5);
+	border: 1px solid var(--animfolio-border, rgba(255, 255, 255, 0.1));
+	border-radius: var(--animfolio-radius, 12px);
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+	padding: clamp(24px, 5vw, 48px);
+	outline: none;
+}
+
+.animfolio-casestudy-modal__close {
+	position: absolute;
+	top: 12px;
+	inset-inline-end: 16px;
+	background: none;
+	border: none;
+	color: var(--animfolio-text-secondary, #a0a0a0);
+	cursor: pointer;
+	font-size: 2rem;
+	line-height: 1;
+	padding: 8px;
+	opacity: 0.8;
+	transition: opacity 0.2s, color 0.2s;
+}
+
+.animfolio-casestudy-modal__close:hover,
+.animfolio-casestudy-modal__close:focus-visible {
+	opacity: 1;
+	color: var(--animfolio-accent, #7f77dd);
+}
+
+.animfolio-casestudy-modal__title {
+	margin: 0 0 1rem;
+	padding-inline-end: 2rem;
+	font-family: var(--animfolio-font-heading, inherit);
+	color: var(--animfolio-text, #e5e5e5);
+	font-size: clamp(1.4rem, 3vw, 2rem);
+	line-height: 1.2;
+}
+
+.animfolio-casestudy-modal__body {
+	color: var(--animfolio-text-secondary, #a0a0a0);
+	line-height: 1.7;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+.animfolio-casestudy-modal__body > :first-child {
+	margin-top: 0;
+}
+
+.animfolio-casestudy-modal__body > :last-child {
+	margin-bottom: 0;
+}
+
+.animfolio-casestudy-modal__body img {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--animfolio-radius, 12px);
+}
+
+.animfolio-casestudy-modal__body a {
+	color: var(--animfolio-accent, #7f77dd);
+}
+
+@media (max-width: 600px) {
+	.animfolio-casestudy-modal {
+		padding: 0;
+	}
+
+	.animfolio-casestudy-modal__panel {
+		max-height: 100vh;
+		max-height: 100svh;
+		border-radius: 0;
+		border: none;
+	}
+}
+
+/* ---- 'auto' colour scheme: no-JS fallback ----
+   The theme-toggle script resolves the 'auto' scheme to an explicit dark/light
+   class on load (and tracks the OS preference live). When JavaScript is
+   unavailable the failsafe never adds the `animfolio-js` class to <html>, so we
+   bridge the OS-light case here with the default light palette — the dark
+   palette is already the rendered default, so only the light case needs an
+   override. Scoped to html:not(.animfolio-js) so the JS path is untouched. */
+@media (prefers-color-scheme: light) {
+	html:not(.animfolio-js) .animfolio-container[data-animfolio-scheme="auto"] {
+		--animfolio-bg: #ffffff;
+		--animfolio-bg-secondary: #f5f5f5;
+		--animfolio-bg-tertiary: #ebebeb;
+		--animfolio-text: #1a1a1a;
+		--animfolio-text-secondary: #555555;
+		--animfolio-text-muted: #767676;
+		--animfolio-border: rgba(0, 0, 0, 0.1);
+		--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+		--animfolio-surface: #ffffff;
+		--animfolio-surface-hover: #f9f9f9;
+		--animfolio-overlay: rgba(0, 0, 0, 0.5);
+	}
+}
+
+/* ---- Accessibility: visible keyboard focus (WCAG 2.4.7) + reduced-motion ---- */
+@media (prefers-reduced-motion: reduce) {
+	html,
+	html.animfolio-smooth-scroll {
+		scroll-behavior: auto;
+	}
+}
+
+.animfolio-back-to-top:focus-visible,
+.animfolio-testimonials-carousel__dot:focus-visible {
+	outline: 2px solid var(--animfolio-accent);
+	outline-offset: 2px;
+}
+
+.animfolio-skip-link:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: 2px;
+}

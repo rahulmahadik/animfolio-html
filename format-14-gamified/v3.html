@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio – AnimFolio Dev — Retro Arcade</title>
+<meta name="description" content="Riley Quinn — Game Developer. Level up your expectations.">
+<style>
+@font-face { font-family: 'Press Start 2P'; font-style: normal; font-weight: 400; font-display: swap; src: url('./assets/fonts/press-start-2p-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('./assets/fonts/inter-latin.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('./assets/fonts/jetbrains-mono-latin.woff2') format('woff2'); }
+
+/*# sourceURL=animfolio-fonts-local-inline-css */
+</style>
+<link rel="stylesheet" href="./assets/css/animfolio-base.css">
+<link rel="stylesheet" href="./assets/css/animfolio-animations.css">
+<link rel="stylesheet" href="./assets/css/animfolio-nav.css">
+<link rel="stylesheet" href="./assets/css/animfolio-contact.css">
+<link rel="stylesheet" href="./assets/css/animfolio-gallery.css">
+<link rel="stylesheet" href="./assets/css/animfolio-qr.css">
+<link rel="stylesheet" href="./assets/css/animfolio-print.css" media="print">
+<link rel="stylesheet" href="./assets/css/format.css">
+<style id="animfolio-theme-vars">
+.animfolio-container {
+	--animfolio-accent: #FF8A5B !important;
+	--animfolio-accent-hover: #f58051 !important;
+	--animfolio-accent-light: rgba(255, 138, 91, 0.1) !important;
+	--animfolio-accent-subtle: rgba(255, 138, 91, 0.12) !important;
+	--animfolio-accent-shadow: rgba(255, 138, 91, 0.3) !important;
+	--animfolio-accent-glow: rgba(255, 138, 91, 0.5) !important;
+	--animfolio-secondary: #2DD4BF !important;
+	--animfolio-secondary-hover: #23cab5 !important;
+	--animfolio-secondary-light: rgba(45, 212, 191, 0.1) !important;
+	--animfolio-on-accent: #14110f !important;
+	--animfolio-on-secondary: #14110f !important;
+	--animfolio-bg: #0C1310;
+	--animfolio-bg-secondary: #13201A;
+	--animfolio-bg-tertiary: #1e1e1e;
+	--animfolio-text: #ECF2EC;
+	--animfolio-text-secondary: #a0a0a0;
+	--animfolio-text-muted: #8a8a8a;
+	--animfolio-border: rgba(255, 255, 255, 0.1);
+	--animfolio-border-strong: rgba(255, 255, 255, 0.2);
+	--animfolio-surface: #1a1a1a;
+	--animfolio-surface-hover: #222222;
+	--animfolio-overlay: rgba(0, 0, 0, 0.75);
+	--animfolio-success: #22c55e;
+	--animfolio-warning: #f59e0b;
+	--animfolio-error: #ef4444;
+	--animfolio-info: #3b82f6;
+	--animfolio-font-heading: 'Press Start 2P', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+	--animfolio-font-size-base: 16px;
+	--animfolio-font-size-h1: clamp(2.5rem, 5vw, 4rem);
+	--animfolio-font-size-h2: clamp(1.75rem, 3.5vw, 2.5rem);
+	--animfolio-font-size-h3: 1.5rem;
+	--animfolio-font-size-h4: 1.25rem;
+	--animfolio-font-weight-bold: 700;
+	--animfolio-font-weight-medium: 500;
+	--animfolio-line-height: 1.6;
+	--animfolio-letter-spacing: 0em;
+	--animfolio-container-width: 1200px;
+	--animfolio-section-spacing: 100px;
+	--animfolio-radius: 12px;
+	--animfolio-radius-sm: 6px;
+	--animfolio-radius-lg: 16px;
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.2);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.3);
+	--animfolio-duration: 0.6s;
+	--animfolio-delay: 0s;
+	--animfolio-easing: cubic-bezier(0.4, 0, 0.2, 1);
+	--animfolio-easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--animfolio-stagger: 0.1s;
+	--animfolio-transition-fast: 150ms ease;
+	--animfolio-transition-normal: 300ms ease;
+	--animfolio-transition-slow: 500ms ease;
+	--animfolio-z-base: 1;
+	--animfolio-z-dropdown: 100;
+	--animfolio-z-sticky: 200;
+	--animfolio-z-nav: 300;
+	--animfolio-z-modal: 400;
+	--animfolio-z-lightbox: 500;
+	--animfolio-z-tooltip: 600;
+	--animfolio-z-cursor: 700;
+}
+.animfolio-container--light, .animfolio-container[data-animfolio-scheme="light"] {
+	--animfolio-bg: #F0EDE4;
+	--animfolio-bg-secondary: #f5f5f5;
+	--animfolio-bg-tertiary: #ebebeb;
+	--animfolio-text: #1C1917;
+	--animfolio-text-secondary: #555555;
+	--animfolio-text-muted: #767676;
+	--animfolio-border: rgba(0, 0, 0, 0.1);
+	--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+	--animfolio-surface: #ffffff;
+	--animfolio-surface-hover: #f9f9f9;
+	--animfolio-overlay: rgba(0, 0, 0, 0.5);
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+	--animfolio-accent-light: rgba(255, 138, 91, 0.08) !important;
+	--animfolio-accent-subtle: rgba(255, 138, 91, 0.05) !important;
+	--animfolio-accent-shadow: rgba(255, 138, 91, 0.2) !important;
+	--animfolio-accent-glow: rgba(255, 138, 91, 0.15) !important;
+	--animfolio-on-accent: #14110f !important;
+	--animfolio-on-secondary: #14110f !important;
+}
+@media (prefers-color-scheme: light) {
+	.animfolio-container--auto {
+		--animfolio-bg: #F0EDE4;
+		--animfolio-bg-secondary: #f5f5f5;
+		--animfolio-bg-tertiary: #ebebeb;
+		--animfolio-text: #1C1917;
+		--animfolio-text-secondary: #555555;
+		--animfolio-text-muted: #767676;
+		--animfolio-border: rgba(0, 0, 0, 0.1);
+		--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+		--animfolio-surface: #ffffff;
+		--animfolio-surface-hover: #f9f9f9;
+		--animfolio-overlay: rgba(0, 0, 0, 0.5);
+		--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+		--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+		--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+		--animfolio-accent-light: rgba(255, 138, 91, 0.08) !important;
+		--animfolio-accent-subtle: rgba(255, 138, 91, 0.05) !important;
+		--animfolio-accent-shadow: rgba(255, 138, 91, 0.2) !important;
+		--animfolio-accent-glow: rgba(255, 138, 91, 0.15) !important;
+		--animfolio-on-accent: #14110f !important;
+		--animfolio-on-secondary: #14110f !important;
+	}
+}
+
+.animfolio-container *,.animfolio-container *::before,.animfolio-container *::after{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{margin:0;padding:0;background:#0C1310;color:#ECF2EC;font-family:var(--animfolio-font-body,'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);font-size:var(--animfolio-font-size-base,16px);line-height:var(--animfolio-line-height,1.6);overflow-x:hidden}body.admin-bar{padding-top:32px}body.admin-bar .animfolio-nav--sticky{top:32px}@media screen and (max-width:782px){body.admin-bar{padding-top:46px}body.admin-bar .animfolio-nav--sticky{top:46px}}.wp-site-blocks,.entry-content,.page-content,.post-content{all:unset;display:block}
+/*# sourceURL=animfolio-base-inline-css */
+</style>
+<script>
+document.documentElement.className+=" animfolio-js";(function(){function r(){if(window.animfolio&&window.animfolio._initialized){return;}var e=document.querySelectorAll("[data-animfolio-animate]:not(.animfolio-visible),.animfolio-stagger__item:not(.animfolio-visible)");for(var i=0;i<e.length;i++){e[i].classList.add("animfolio-visible");}}if(document.readyState==="complete"){setTimeout(r,1500);}else{window.addEventListener("load",function(){setTimeout(r,1500);});}setTimeout(r,4000);})();
+//# sourceURL=animfolio-failsafe-js-after
+</script>
+</head>
+<body>
+<!-- ============================================================
+     CONFIG — set your email for the contact form (FormSubmit.co).
+     First submission emails you a one-time confirmation link; click it
+     once and every message afterwards lands in your inbox. See README.
+     ============================================================ -->
+<script>window.ANIMFOLIO_CONTACT_EMAIL = "you@example.com";</script>
+
+<div class="animfolio-container animfolio-container--dark animfolio-container--format-14 animfolio-container--one-page" data-animfolio-scheme="dark" data-animfolio-format="format-14-gamified" data-animfolio-intensity="medium"><a href="#hero" class="animfolio-skip-link">Skip to main content</a>
+<div class="animfolio-rpg">
+	<!-- Character Sheet Header -->
+	<section class="animfolio-rpg__character-sheet" id="hero">
+		<div class="animfolio-inner">
+			<div class="animfolio-rpg__portrait">
+									<div class="animfolio-rpg__portrait-placeholder">♦</div>
+								<div class="animfolio-rpg__level-badge">LVL 28</div>
+			</div>
+			<div class="animfolio-rpg__info">
+				<h1 class="animfolio-rpg__name">Riley Quinn</h1>
+				<div class="animfolio-rpg__class">Game Developer</div>
+				<div class="animfolio-rpg__xp-bar">
+					<div class="animfolio-rpg__xp-label">
+						XP: 28,000 / 29,000					</div>
+					<div class="animfolio-rpg__xp-track">
+						<div class="animfolio-rpg__xp-fill" style="width: 97%"></div>
+					</div>
+				</div>
+									<div class="animfolio-rpg__actions">
+													<a href="#projects" class="animfolio-rpg__btn animfolio-rpg__btn--primary">
+								View My Quests							</a>
+													<a href="#contact" class="animfolio-rpg__btn animfolio-rpg__btn--secondary">
+								Start a New Game							</a>
+											</div>
+							</div>
+		</div>
+	</section>
+
+	<!-- About as Backstory -->
+			<section class="animfolio-rpg__section" id="about">
+			<div class="animfolio-inner">
+				<h2 class="animfolio-rpg__section-title">Backstory</h2>
+				<div class="animfolio-rpg__scroll">
+					I'm a game developer and creative technologist who believes everything is better when it's fun. I build games, interactive web experiences, and tools that bring joy. Currently at Level 28 with 42,750 XP earned over 8 years grinding in the game dev industry.				</div>
+			</div>
+		</section>
+	
+	<!-- Experience as Quest Log -->
+			<section class="animfolio-rpg__section" id="experience">
+			<div class="animfolio-inner">
+				<h2 class="animfolio-rpg__section-title">Quest Log</h2>
+				<div class="animfolio-rpg__quest-log">
+																	<div class="animfolio-rpg__quest animfolio-rpg__quest--completed">
+							<div class="animfolio-rpg__quest-status">✓</div>
+							<div class="animfolio-rpg__quest-content">
+								<div class="animfolio-rpg__quest-name">Senior Gameplay Engineer</div>
+								<div class="animfolio-rpg__quest-giver">PixelForge Studios</div>
+								<div class="animfolio-rpg__quest-duration">
+									Mar 2021 → Present								</div>
+								<div class="animfolio-rpg__quest-desc">Lead the gameplay and netcode team on a live-service multiplayer RPG with 10,000 concurrent players. Architected the ECS combat system and a data-driven quest scripting engine that lets designers ship 200+ quests without touching code.</div>
+																	<div class="animfolio-rpg__quest-rewards">
+										Rewards:																					<span class="animfolio-rpg__tag">+Unity</span>
+																					<span class="animfolio-rpg__tag">+C#</span>
+																					<span class="animfolio-rpg__tag">+Netcode</span>
+																					<span class="animfolio-rpg__tag">+ECS</span>
+																					<span class="animfolio-rpg__tag">+Team Lead</span>
+																			</div>
+															</div>
+							<div class="animfolio-rpg__quest-xp">+1500 XP</div>
+						</div>
+																	<div class="animfolio-rpg__quest animfolio-rpg__quest--completed">
+							<div class="animfolio-rpg__quest-status">✓</div>
+							<div class="animfolio-rpg__quest-content">
+								<div class="animfolio-rpg__quest-name">Game Developer</div>
+								<div class="animfolio-rpg__quest-giver">Neon Void Games</div>
+								<div class="animfolio-rpg__quest-duration">
+									Jun 2018 → Feb 2021								</div>
+								<div class="animfolio-rpg__quest-desc">Built rendering and technical-art features for two shipped titles, including a custom volumetric fog system and screen-space reflections in Unreal Engine. Owned the shader pipeline from prototype to console certification.</div>
+																	<div class="animfolio-rpg__quest-rewards">
+										Rewards:																					<span class="animfolio-rpg__tag">+Unreal Engine</span>
+																					<span class="animfolio-rpg__tag">+HLSL</span>
+																					<span class="animfolio-rpg__tag">+C++</span>
+																					<span class="animfolio-rpg__tag">+Tech Art</span>
+																			</div>
+															</div>
+							<div class="animfolio-rpg__quest-xp">+1000 XP</div>
+						</div>
+																	<div class="animfolio-rpg__quest animfolio-rpg__quest--completed">
+							<div class="animfolio-rpg__quest-status">✓</div>
+							<div class="animfolio-rpg__quest-content">
+								<div class="animfolio-rpg__quest-name">Junior Game Programmer</div>
+								<div class="animfolio-rpg__quest-giver">Arcade Loop Interactive</div>
+								<div class="animfolio-rpg__quest-duration">
+									Aug 2016 → May 2018								</div>
+								<div class="animfolio-rpg__quest-desc">Shipped three mobile arcade titles from prototype to store launch. Implemented gameplay mechanics, UI flows, and procedural level generation, and tuned performance to hit a steady 60 FPS on low-end devices.</div>
+																	<div class="animfolio-rpg__quest-rewards">
+										Rewards:																					<span class="animfolio-rpg__tag">+Unity</span>
+																					<span class="animfolio-rpg__tag">+C#</span>
+																					<span class="animfolio-rpg__tag">+Mobile</span>
+																					<span class="animfolio-rpg__tag">+Procedural Gen</span>
+																			</div>
+															</div>
+							<div class="animfolio-rpg__quest-xp">+500 XP</div>
+						</div>
+									</div>
+			</div>
+		</section>
+	
+	<!-- Skills as Skill Tree -->
+			<section class="animfolio-rpg__section" id="skills">
+			<div class="animfolio-inner">
+				<h2 class="animfolio-rpg__section-title">Skill Tree</h2>
+				<div class="animfolio-rpg__skill-tree">
+											<div class="animfolio-rpg__skill-branch">
+							<h3 class="animfolio-rpg__branch-name">Game Dev</h3>
+							<div class="animfolio-rpg__skills">
+																										<div class="animfolio-rpg__skill-node animfolio-rpg__skill-node--unlocked">
+										<div class="animfolio-rpg__skill-icon">◆</div>
+										<div class="animfolio-rpg__skill-info">
+											<span class="animfolio-rpg__skill-name">Unity / Unreal</span>
+											<span class="animfolio-rpg__skill-stars">
+												★★★★☆											</span>
+										</div>
+									</div>
+																										<div class="animfolio-rpg__skill-node animfolio-rpg__skill-node--unlocked">
+										<div class="animfolio-rpg__skill-icon">◆</div>
+										<div class="animfolio-rpg__skill-info">
+											<span class="animfolio-rpg__skill-name">C# / C++</span>
+											<span class="animfolio-rpg__skill-stars">
+												★★★★☆											</span>
+										</div>
+									</div>
+																										<div class="animfolio-rpg__skill-node animfolio-rpg__skill-node--unlocked">
+										<div class="animfolio-rpg__skill-icon">◆</div>
+										<div class="animfolio-rpg__skill-info">
+											<span class="animfolio-rpg__skill-name">Game Design</span>
+											<span class="animfolio-rpg__skill-stars">
+												★★★★☆											</span>
+										</div>
+									</div>
+																										<div class="animfolio-rpg__skill-node animfolio-rpg__skill-node--unlocked">
+										<div class="animfolio-rpg__skill-icon">◆</div>
+										<div class="animfolio-rpg__skill-info">
+											<span class="animfolio-rpg__skill-name">3D Modeling</span>
+											<span class="animfolio-rpg__skill-stars">
+												★★★☆☆											</span>
+										</div>
+									</div>
+															</div>
+						</div>
+											<div class="animfolio-rpg__skill-branch">
+							<h3 class="animfolio-rpg__branch-name">Web</h3>
+							<div class="animfolio-rpg__skills">
+																										<div class="animfolio-rpg__skill-node animfolio-rpg__skill-node--unlocked">
+										<div class="animfolio-rpg__skill-icon">◆</div>
+										<div class="animfolio-rpg__skill-info">
+											<span class="animfolio-rpg__skill-name">JavaScript / TypeScript</span>
+											<span class="animfolio-rpg__skill-stars">
+												★★★★☆											</span>
+										</div>
+									</div>
+																										<div class="animfolio-rpg__skill-node animfolio-rpg__skill-node--unlocked">
+										<div class="animfolio-rpg__skill-icon">◆</div>
+										<div class="animfolio-rpg__skill-info">
+											<span class="animfolio-rpg__skill-name">WebGL / Three.js</span>
+											<span class="animfolio-rpg__skill-stars">
+												★★★☆☆											</span>
+										</div>
+									</div>
+																										<div class="animfolio-rpg__skill-node animfolio-rpg__skill-node--unlocked">
+										<div class="animfolio-rpg__skill-icon">◆</div>
+										<div class="animfolio-rpg__skill-info">
+											<span class="animfolio-rpg__skill-name">React</span>
+											<span class="animfolio-rpg__skill-stars">
+												★★★★☆											</span>
+										</div>
+									</div>
+															</div>
+						</div>
+											<div class="animfolio-rpg__skill-branch">
+							<h3 class="animfolio-rpg__branch-name">Creative Tech</h3>
+							<div class="animfolio-rpg__skills">
+																										<div class="animfolio-rpg__skill-node animfolio-rpg__skill-node--unlocked">
+										<div class="animfolio-rpg__skill-icon">◆</div>
+										<div class="animfolio-rpg__skill-info">
+											<span class="animfolio-rpg__skill-name">Shader Programming</span>
+											<span class="animfolio-rpg__skill-stars">
+												★★★☆☆											</span>
+										</div>
+									</div>
+																										<div class="animfolio-rpg__skill-node animfolio-rpg__skill-node--unlocked">
+										<div class="animfolio-rpg__skill-icon">◆</div>
+										<div class="animfolio-rpg__skill-info">
+											<span class="animfolio-rpg__skill-name">Procedural Generation</span>
+											<span class="animfolio-rpg__skill-stars">
+												★★★☆☆											</span>
+										</div>
+									</div>
+																										<div class="animfolio-rpg__skill-node animfolio-rpg__skill-node--unlocked">
+										<div class="animfolio-rpg__skill-icon">◆</div>
+										<div class="animfolio-rpg__skill-info">
+											<span class="animfolio-rpg__skill-name">Physics Engines</span>
+											<span class="animfolio-rpg__skill-stars">
+												★★★★☆											</span>
+										</div>
+									</div>
+																										<div class="animfolio-rpg__skill-node animfolio-rpg__skill-node--unlocked">
+										<div class="animfolio-rpg__skill-icon">◆</div>
+										<div class="animfolio-rpg__skill-info">
+											<span class="animfolio-rpg__skill-name">Generative AI / LLMs</span>
+											<span class="animfolio-rpg__skill-stars">
+												★★★☆☆											</span>
+										</div>
+									</div>
+															</div>
+						</div>
+									</div>
+			</div>
+		</section>
+	
+	<!-- Projects as Achievements -->
+			<section class="animfolio-rpg__section" id="projects">
+			<div class="animfolio-inner">
+				<h2 class="animfolio-rpg__section-title">Achievement Unlocked</h2>
+				<div class="animfolio-rpg__achievements">
+																	<div class="animfolio-rpg__achievement animfolio-rpg__achievement--unlocked">
+							<div class="animfolio-rpg__achievement-icon">★</div>
+							<div class="animfolio-rpg__achievement-info">
+								<strong>Boss Battle: Dungeon Renderer</strong>
+								<p>Built a real-time 3D dungeon rendering engine from scratch. Procedural generation, dynamic lighting, and physics-based interactions. The final boss of game dev challenges.</p>
+																	<div class="animfolio-rpg__achievement-tags">
+																					<span class="animfolio-rpg__tag">C++</span>
+																					<span class="animfolio-rpg__tag">OpenGL</span>
+																					<span class="animfolio-rpg__tag">Physics Engine</span>
+																					<span class="animfolio-rpg__tag">Procedural Gen</span>
+																			</div>
+															</div>
+						</div>
+																	<div class="animfolio-rpg__achievement animfolio-rpg__achievement--unlocked">
+							<div class="animfolio-rpg__achievement-icon">★</div>
+							<div class="animfolio-rpg__achievement-info">
+								<strong>Epic Quest: Multiplayer RPG</strong>
+								<p>A 2-year journey building an online multiplayer RPG with 10K concurrent players. Custom netcode, ECS architecture, and a quest scripting system with 200+ quests.</p>
+																	<div class="animfolio-rpg__achievement-tags">
+																					<span class="animfolio-rpg__tag">Unity</span>
+																					<span class="animfolio-rpg__tag">C#</span>
+																					<span class="animfolio-rpg__tag">Mirror Networking</span>
+																					<span class="animfolio-rpg__tag">AWS GameLift</span>
+																			</div>
+															</div>
+						</div>
+																	<div class="animfolio-rpg__achievement animfolio-rpg__achievement--unlocked">
+							<div class="animfolio-rpg__achievement-icon">★</div>
+							<div class="animfolio-rpg__achievement-info">
+								<strong>Dungeon Crawl: Shader Madness</strong>
+								<p>Dove deep into the shader mines to build a custom rendering pipeline. Volumetric fog, screen-space reflections, and a toon-shading system. No tutorial could prepare me for this.</p>
+																	<div class="animfolio-rpg__achievement-tags">
+																					<span class="animfolio-rpg__tag">HLSL</span>
+																					<span class="animfolio-rpg__tag">Unreal Engine</span>
+																					<span class="animfolio-rpg__tag">Render Pipeline</span>
+																			</div>
+															</div>
+						</div>
+																	<div class="animfolio-rpg__achievement animfolio-rpg__achievement--unlocked">
+							<div class="animfolio-rpg__achievement-icon">★</div>
+							<div class="animfolio-rpg__achievement-info">
+								<strong>Side Quest: Pixel Platformer</strong>
+								<p>A weekend game jam entry that turned into a polished pixel-art platformer. 30 hand-crafted levels, chiptune soundtrack, and speedrun leaderboards. 50K plays on itch.io.</p>
+																	<div class="animfolio-rpg__achievement-tags">
+																					<span class="animfolio-rpg__tag">Godot</span>
+																					<span class="animfolio-rpg__tag">GDScript</span>
+																					<span class="animfolio-rpg__tag">Aseprite</span>
+																					<span class="animfolio-rpg__tag">FMOD</span>
+																			</div>
+															</div>
+						</div>
+																	<div class="animfolio-rpg__achievement animfolio-rpg__achievement--unlocked">
+							<div class="animfolio-rpg__achievement-icon">★</div>
+							<div class="animfolio-rpg__achievement-info">
+								<strong>Summoned a Language Model: AI Quest Designer</strong>
+								<p>Built an AI co-pilot for the quest team using a fine-tuned LLM and a RAG pipeline over our lore bible. Designers describe a quest in plain English and the agent drafts branching dialogue, objectives, and reward tables, cutting quest prototyping time in half.</p>
+																	<div class="animfolio-rpg__achievement-tags">
+																					<span class="animfolio-rpg__tag">LLMs</span>
+																					<span class="animfolio-rpg__tag">RAG</span>
+																					<span class="animfolio-rpg__tag">Vector DB</span>
+																					<span class="animfolio-rpg__tag">Prompt Engineering</span>
+																					<span class="animfolio-rpg__tag">Python</span>
+																			</div>
+															</div>
+						</div>
+																	<div class="animfolio-rpg__achievement animfolio-rpg__achievement--unlocked">
+							<div class="animfolio-rpg__achievement-icon">★</div>
+							<div class="animfolio-rpg__achievement-info">
+								<strong>Achievement: Generative AI with LLMs</strong>
+								<p>Certification — DeepLearning.AI &amp; Amazon Web Services, 2024. Covered transformer architecture, fine-tuning, RLHF, and deploying generative AI applications at scale.</p>
+																	<div class="animfolio-rpg__achievement-tags">
+																					<span class="animfolio-rpg__tag">DeepLearning.AI</span>
+																					<span class="animfolio-rpg__tag">AWS</span>
+																					<span class="animfolio-rpg__tag">Certification</span>
+																					<span class="animfolio-rpg__tag">2024</span>
+																			</div>
+															</div>
+						</div>
+																	<div class="animfolio-rpg__achievement animfolio-rpg__achievement--unlocked">
+							<div class="animfolio-rpg__achievement-icon">★</div>
+							<div class="animfolio-rpg__achievement-info">
+								<strong>Achievement: Azure AI Engineer Associate</strong>
+								<p>Certification — Microsoft, 2025. Validated skills building, deploying, and managing AI solutions with Azure AI services, including generative AI and prompt orchestration.</p>
+																	<div class="animfolio-rpg__achievement-tags">
+																					<span class="animfolio-rpg__tag">Microsoft Azure AI</span>
+																					<span class="animfolio-rpg__tag">Certification</span>
+																					<span class="animfolio-rpg__tag">AI Agents</span>
+																					<span class="animfolio-rpg__tag">2025</span>
+																			</div>
+															</div>
+						</div>
+									</div>
+			</div>
+		</section>
+	
+	<!-- Stats as Character Stats -->
+			<section class="animfolio-rpg__section" id="stats">
+			<div class="animfolio-inner">
+				<h2 class="animfolio-rpg__section-title">Character Stats</h2>
+								<div class="animfolio-rpg__stats-grid">
+																	<div class="animfolio-rpg__stat-card">
+							<span class="animfolio-rpg__stat-value" data-animfolio-counter="28" data-animfolio-suffix="">28</span>
+							<span class="animfolio-rpg__stat-label">Character Level</span>
+						</div>
+																	<div class="animfolio-rpg__stat-card">
+							<span class="animfolio-rpg__stat-value" data-animfolio-counter="42750" data-animfolio-suffix="">42,750</span>
+							<span class="animfolio-rpg__stat-label">Total XP Earned</span>
+						</div>
+																	<div class="animfolio-rpg__stat-card">
+							<span class="animfolio-rpg__stat-value" data-animfolio-counter="47" data-animfolio-suffix="">47</span>
+							<span class="animfolio-rpg__stat-label">Quests Completed</span>
+						</div>
+																	<div class="animfolio-rpg__stat-card">
+							<span class="animfolio-rpg__stat-value" data-animfolio-counter="23" data-animfolio-suffix="">23</span>
+							<span class="animfolio-rpg__stat-label">Achievements Unlocked</span>
+						</div>
+									</div>
+			</div>
+		</section>
+	
+	<!-- Testimonials as NPC Dialogue -->
+			<section class="animfolio-rpg__section" id="testimonials">
+			<div class="animfolio-inner">
+				<h2 class="animfolio-rpg__section-title">NPC Dialogue</h2>
+				<div class="animfolio-rpg__dialogues">
+																	<div class="animfolio-rpg__dialogue">
+							<div class="animfolio-rpg__dialogue-box">
+								<div class="animfolio-rpg__dialogue-text">"They built a multiplayer RPG that 10,000 people play concurrently. The netcode is buttery smooth and the quest system keeps players coming back for months."</div>
+								<div class="animfolio-rpg__dialogue-speaker">
+									— Kyle Tanaka,
+									Lead Game Designer																			@ PixelForge Studios																	</div>
+							</div>
+						</div>
+																	<div class="animfolio-rpg__dialogue">
+							<div class="animfolio-rpg__dialogue-box">
+								<div class="animfolio-rpg__dialogue-text">"Their shader work is pure wizardry. The volumetric fog alone made our game look next-gen. Would recruit for any party in a heartbeat."</div>
+								<div class="animfolio-rpg__dialogue-speaker">
+									— Zoe Blackwell,
+									Art Director																			@ Neon Void Games																	</div>
+							</div>
+						</div>
+																	<div class="animfolio-rpg__dialogue">
+							<div class="animfolio-rpg__dialogue-box">
+								<div class="animfolio-rpg__dialogue-text">"Best game jam teammate I have ever had. Built a complete platformer in 48 hours that looked like it took months. 50K plays on itch.io and counting."</div>
+								<div class="animfolio-rpg__dialogue-speaker">
+									— Sam Diaz,
+									Indie Developer																			@ Game Jam Community																	</div>
+							</div>
+						</div>
+									</div>
+			</div>
+		</section>
+	
+	<!-- Contact as Tavern -->
+			<section class="animfolio-rpg__section" id="contact">
+			<div class="animfolio-inner">
+				<h2 class="animfolio-rpg__section-title">The Tavern (Contact)</h2>
+				<div class="animfolio-contact" data-animfolio-animate="fade-up">
+
+			<p class="animfolio-contact__heading">Ready Player Two?</p>
+				<p class="animfolio-contact__description">Got a game, an interactive experience, or a wild idea that needs a co-op partner? Drop a message and let's queue up the next quest. New game, new adventure — press start.</p>
+	
+	<div class="animfolio-contact__layout">
+		<!-- Left: Contact Form -->
+		<div class="animfolio-contact__form-wrapper">
+							<form class="animfolio-form" novalidate="">
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-name">Name</label>
+						<input type="text" name="name" id="animfolio-name" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Name is required.</span>
+					</div>
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-email">Email</label>
+						<input type="email" name="email" id="animfolio-email" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Valid email is required.</span>
+					</div>
+										<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-message">Message</label>
+						<textarea name="message" id="animfolio-message" class="animfolio-form__textarea" rows="5" required="" aria-required="true"></textarea>
+						<span class="animfolio-form__error">Message is required.</span>
+					</div>
+											<div class="animfolio-form__honeypot">
+							<input type="text" name="animfolio_hp" tabindex="-1" autocomplete="off">
+						</div>
+										<input type="hidden" name="animfolio_ts" value="">
+					<input type="hidden" name="animfolio_js" value="">
+					<div class="animfolio-form__success">Thank you! I'll get back to you soon.</div>
+					<button type="submit" class="animfolio-button animfolio-button--primary animfolio-form__submit">
+						Send Message					</button>
+				</form>
+					</div>
+
+		<!-- Right: QR Code -->
+		<div class="animfolio-contact__qr-wrapper"><div class="animfolio-qr" data-animfolio-qr="" data-animfolio-vcard="QkVHSU46VkNBUkQNClZFUlNJT046My4wDQpGTjpSaWxleSBRdWlubg0KTjpRdWlubjtSaWxleTs7Ow0KVElUTEU6R2FtZSBEZXZlbG9wZXINCkVNQUlMO1RZUEU9V09SSzp5b3VAZXhhbXBsZS5jb20NClVSTDpodHRwczovL3lvdXItd2Vic2l0ZS5leGFtcGxlDQpOT1RFOkknbSBhIGdhbWUgZGV2ZWxvcGVyIGFuZCBjcmVhdGl2ZSB0ZWNobm9sb2dpc3Qgd2hvIGJlbGlldmVzIGV2ZXJ5dGhpbmcgaXMgYmV0dGVyIHdoZW4gaXQncyBmdW4uIEkgYnVpbGQgZ2FtZXNcLCBpbnRlcmFjdGl2ZSB3ZWIgZXhwZXJpZW5jZXNcLCBhbmQgdG9vbHMgdGhhdCBicmluZyBqb3kuIEN1cnJlbnRseSBhdCBMZXZlbCAyOCB3aXRoIDQyXCw3NTBcbkdpdGh1YjogaHR0cHM6Ly9naXRodWIuY29tL3lvdXJ1c2VybmFtZVxuTGlua2VkaW46IGh0dHBzOi8vbGlua2VkaW4uY29tL2luL3lvdXJ1c2VybmFtZVxuVHdpdHRlcjogaHR0cHM6Ly90d2l0dGVyLmNvbS95b3VydXNlcm5hbWVcbkRyaWJiYmxlOiBodHRwczovL2RyaWJiYmxlLmNvbS95b3VydXNlcm5hbWUNClgtU09DSUFMUFJPRklMRTtUWVBFPWdpdGh1YjpodHRwczovL2dpdGh1Yi5jb20veW91cnVzZXJuYW1lDQpYLVNPQ0lBTFBST0ZJTEU7VFlQRT1saW5rZWRpbjpodHRwczovL2xpbmtlZGluLmNvbS9pbi95b3VydXNlcm5hbWUNClgtU09DSUFMUFJPRklMRTtUWVBFPXR3aXR0ZXI6aHR0cHM6Ly90d2l0dGVyLmNvbS95b3VydXNlcm5hbWUNClgtU09DSUFMUFJPRklMRTtUWVBFPWRyaWJiYmxlOmh0dHBzOi8vZHJpYmJibGUuY29tL3lvdXJ1c2VybmFtZQ0KUkVWOjIwMjYtMDctMTJUMTM6MjM6MDNaDQpFTkQ6VkNBUkQNCg=="><div class="animfolio-qr__code" style="width:200px;height:200px"></div><p class="animfolio-qr__caption">Scan to save my contact</p><a href="./assets/contact.vcf" class="animfolio-qr__download animfolio-button animfolio-button--secondary" download="">Download vCard</a></div></div>	</div>
+
+</div>
+			</div>
+		</section>
+	</div>
+<button class="animfolio-back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 15V5M10 5L5 10M10 5L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div class="animfolio-progress"><div class="animfolio-progress__bar"></div></div><div class="animfolio-footer-social animfolio-social-icons animfolio-social-icons--outline"><a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="animfolio-social__label">Github</span></a><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg><span class="animfolio-social__label">Linkedin</span></a><a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg><span class="animfolio-social__label">Twitter</span></a><a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg><span class="animfolio-social__label">Dribbble</span></a><a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span class="animfolio-social__label">Email</span></a></div></div>
+
+<div aria-label="Color scheme preview (demo only)" style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99999;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(18,18,24,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 30px rgba(0,0,0,.4)"><span style="padding:0 6px 0 10px;font:700 11px/1 -apple-system,sans-serif;letter-spacing:.4px;text-transform:uppercase;color:#8b90a0">Colors</span><a href="index.html" title="Classic RPG" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#FFC53D;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>RPG</a><a href="v2.html" title="Cyberpunk" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#C44CE8;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Cyberpunk</a><a href="v3.html" aria-current="true" title="Retro Arcade" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#FF8A5B;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Retro Arcade</a></div>
+
+<script>
+var animfolioSettings = {"animationIntensity":"medium","respectReducedMotion":"1","colorScheme":"dark","smoothScroll":"1","scrollBehavior":"smooth","customCursor":"","backToTop":"1","progressBar":"1","darkModeToggle":"1","debugMode":""};
+//# sourceURL=animfolio-engine-js-extra
+</script>
+<script src="./assets/js/wp-shim.js"></script>
+<script src="./assets/js/animfolio-engine.js"></script>
+<script src="./assets/js/modules/scroll-trigger.js"></script>
+<script src="./assets/js/modules/typed-text.js"></script>
+<script src="./assets/js/modules/counter.js"></script>
+<script src="./assets/js/modules/timeline-draw.js"></script>
+<script src="./assets/js/modules/stagger.js"></script>
+<script src="./assets/js/modules/parallax.js"></script>
+<script src="./assets/js/modules/progress-bar.js"></script>
+<script src="./assets/js/modules/smooth-scroll.js"></script>
+<script src="./assets/js/modules/theme-toggle.js"></script>
+<script src="./assets/js/vendor/qrcode-generator.min.js"></script>
+<script src="./assets/js/animfolio-qr.js"></script>
+<script src="./assets/js/animfolio-lightbox.js"></script>
+<script src="./assets/js/animfolio-casestudy.js"></script>
+<script src="./assets/js/format.js"></script>
+<script src="./assets/js/animfolio-contact-static.js"></script>
+</body>
+</html>

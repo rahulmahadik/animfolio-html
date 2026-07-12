@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio – AnimFolio Dev — Phosphor Blue</title>
+<meta name="description" content="Marcus Holloway — Backend Engineer. $ whoami → backend engineer">
+<style>
+@font-face { font-family: 'Fira Code'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('./assets/fonts/fira-code-latin.woff2') format('woff2'); }
+
+/*# sourceURL=animfolio-fonts-local-inline-css */
+</style>
+<link rel="stylesheet" href="./assets/css/animfolio-base.css">
+<link rel="stylesheet" href="./assets/css/animfolio-animations.css">
+<link rel="stylesheet" href="./assets/css/animfolio-nav.css">
+<link rel="stylesheet" href="./assets/css/animfolio-contact.css">
+<link rel="stylesheet" href="./assets/css/animfolio-gallery.css">
+<link rel="stylesheet" href="./assets/css/animfolio-print.css" media="print">
+<link rel="stylesheet" href="./assets/css/format.css">
+<style id="animfolio-theme-vars">
+.animfolio-container {
+	--animfolio-accent: #0369A1 !important;
+	--animfolio-accent-hover: #005f97 !important;
+	--animfolio-accent-light: rgba(3, 105, 161, 0.1) !important;
+	--animfolio-accent-subtle: rgba(3, 105, 161, 0.12) !important;
+	--animfolio-accent-shadow: rgba(3, 105, 161, 0.3) !important;
+	--animfolio-accent-glow: rgba(3, 105, 161, 0.5) !important;
+	--animfolio-secondary: #FF4444 !important;
+	--animfolio-secondary-hover: #f53a3a !important;
+	--animfolio-secondary-light: rgba(255, 68, 68, 0.1) !important;
+	--animfolio-on-accent: #ffffff !important;
+	--animfolio-on-secondary: #14110f !important;
+	--animfolio-bg: #020402;
+	--animfolio-bg-secondary: #0A120A;
+	--animfolio-bg-tertiary: #1e1e1e;
+	--animfolio-text: #2DFF6A;
+	--animfolio-text-secondary: #a0a0a0;
+	--animfolio-text-muted: #8a8a8a;
+	--animfolio-border: rgba(255, 255, 255, 0.1);
+	--animfolio-border-strong: rgba(255, 255, 255, 0.2);
+	--animfolio-surface: #1a1a1a;
+	--animfolio-surface-hover: #222222;
+	--animfolio-overlay: rgba(0, 0, 0, 0.75);
+	--animfolio-success: #22c55e;
+	--animfolio-warning: #f59e0b;
+	--animfolio-error: #ef4444;
+	--animfolio-info: #3b82f6;
+	--animfolio-font-heading: 'Fira Code', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-body: 'Fira Code', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-mono: 'Fira Code', 'Fira Code', 'Consolas', monospace;
+	--animfolio-font-size-base: 16px;
+	--animfolio-font-size-h1: clamp(2.5rem, 5vw, 4rem);
+	--animfolio-font-size-h2: clamp(1.75rem, 3.5vw, 2.5rem);
+	--animfolio-font-size-h3: 1.5rem;
+	--animfolio-font-size-h4: 1.25rem;
+	--animfolio-font-weight-bold: 700;
+	--animfolio-font-weight-medium: 500;
+	--animfolio-line-height: 1.6;
+	--animfolio-letter-spacing: 0em;
+	--animfolio-container-width: 1200px;
+	--animfolio-section-spacing: 100px;
+	--animfolio-radius: 12px;
+	--animfolio-radius-sm: 6px;
+	--animfolio-radius-lg: 16px;
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.2);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.3);
+	--animfolio-duration: 0.6s;
+	--animfolio-delay: 0s;
+	--animfolio-easing: cubic-bezier(0.4, 0, 0.2, 1);
+	--animfolio-easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--animfolio-stagger: 0.1s;
+	--animfolio-transition-fast: 150ms ease;
+	--animfolio-transition-normal: 300ms ease;
+	--animfolio-transition-slow: 500ms ease;
+	--animfolio-z-base: 1;
+	--animfolio-z-dropdown: 100;
+	--animfolio-z-sticky: 200;
+	--animfolio-z-nav: 300;
+	--animfolio-z-modal: 400;
+	--animfolio-z-lightbox: 500;
+	--animfolio-z-tooltip: 600;
+	--animfolio-z-cursor: 700;
+}
+.animfolio-container--light, .animfolio-container[data-animfolio-scheme="light"] {
+	--animfolio-bg: #F5F5F0;
+	--animfolio-bg-secondary: #f5f5f5;
+	--animfolio-bg-tertiary: #ebebeb;
+	--animfolio-text: #1A1A1A;
+	--animfolio-text-secondary: #555555;
+	--animfolio-text-muted: #767676;
+	--animfolio-border: rgba(0, 0, 0, 0.1);
+	--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+	--animfolio-surface: #ffffff;
+	--animfolio-surface-hover: #f9f9f9;
+	--animfolio-overlay: rgba(0, 0, 0, 0.5);
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+	--animfolio-accent-light: rgba(3, 105, 161, 0.08) !important;
+	--animfolio-accent-subtle: rgba(3, 105, 161, 0.05) !important;
+	--animfolio-accent-shadow: rgba(3, 105, 161, 0.2) !important;
+	--animfolio-accent-glow: rgba(3, 105, 161, 0.15) !important;
+	--animfolio-on-accent: #ffffff !important;
+	--animfolio-on-secondary: #14110f !important;
+}
+@media (prefers-color-scheme: light) {
+	.animfolio-container--auto {
+		--animfolio-bg: #F5F5F0;
+		--animfolio-bg-secondary: #f5f5f5;
+		--animfolio-bg-tertiary: #ebebeb;
+		--animfolio-text: #1A1A1A;
+		--animfolio-text-secondary: #555555;
+		--animfolio-text-muted: #767676;
+		--animfolio-border: rgba(0, 0, 0, 0.1);
+		--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+		--animfolio-surface: #ffffff;
+		--animfolio-surface-hover: #f9f9f9;
+		--animfolio-overlay: rgba(0, 0, 0, 0.5);
+		--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+		--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+		--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+		--animfolio-accent-light: rgba(3, 105, 161, 0.08) !important;
+		--animfolio-accent-subtle: rgba(3, 105, 161, 0.05) !important;
+		--animfolio-accent-shadow: rgba(3, 105, 161, 0.2) !important;
+		--animfolio-accent-glow: rgba(3, 105, 161, 0.15) !important;
+		--animfolio-on-accent: #ffffff !important;
+		--animfolio-on-secondary: #14110f !important;
+	}
+}
+
+.animfolio-container *,.animfolio-container *::before,.animfolio-container *::after{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{margin:0;padding:0;background:#020402;color:#2DFF6A;font-family:var(--animfolio-font-body,'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);font-size:var(--animfolio-font-size-base,16px);line-height:var(--animfolio-line-height,1.6);overflow-x:hidden}body.admin-bar{padding-top:32px}body.admin-bar .animfolio-nav--sticky{top:32px}@media screen and (max-width:782px){body.admin-bar{padding-top:46px}body.admin-bar .animfolio-nav--sticky{top:46px}}.wp-site-blocks,.entry-content,.page-content,.post-content{all:unset;display:block}
+/*# sourceURL=animfolio-base-inline-css */
+</style>
+<script>
+document.documentElement.className+=" animfolio-js";(function(){function r(){if(window.animfolio&&window.animfolio._initialized){return;}var e=document.querySelectorAll("[data-animfolio-animate]:not(.animfolio-visible),.animfolio-stagger__item:not(.animfolio-visible)");for(var i=0;i<e.length;i++){e[i].classList.add("animfolio-visible");}}if(document.readyState==="complete"){setTimeout(r,1500);}else{window.addEventListener("load",function(){setTimeout(r,1500);});}setTimeout(r,4000);})();
+//# sourceURL=animfolio-failsafe-js-after
+</script>
+</head>
+<body>
+<!-- ============================================================
+     CONFIG — set your email for the contact form (FormSubmit.co).
+     First submission emails you a one-time confirmation link; click it
+     once and every message afterwards lands in your inbox. See README.
+     ============================================================ -->
+<script>window.ANIMFOLIO_CONTACT_EMAIL = "you@example.com";</script>
+
+<div class="animfolio-container animfolio-container--dark animfolio-container--format-15 animfolio-container--one-page" data-animfolio-scheme="dark" data-animfolio-format="format-15-cli-terminal" data-animfolio-intensity="medium"><a href="#hero" class="animfolio-skip-link">Skip to main content</a>
+<div class="animfolio-cli" id="animfolio-terminal" data-cli-user="marcus" data-cli-host="portfolio" data-cli-interactive="1">
+	<!-- Terminal chrome -->
+	<div class="animfolio-cli__chrome">
+		<div class="animfolio-cli__dots">
+			<span class="animfolio-cli__dot animfolio-cli__dot--red"></span>
+			<span class="animfolio-cli__dot animfolio-cli__dot--yellow"></span>
+			<span class="animfolio-cli__dot animfolio-cli__dot--green"></span>
+		</div>
+		<div class="animfolio-cli__title">marcus@portfolio: ~</div>
+	</div>
+
+	<!-- Terminal body -->
+	<div class="animfolio-cli__body" id="animfolio-cli-output">
+		<!-- Boot sequence -->
+		<div class="animfolio-cli__line animfolio-cli__line--system">
+			Welcome to Marcus's portfolio. Type <span class="animfolio-cli__cmd">'help'</span> for available commands.
+		</div>
+		<div class="animfolio-cli__line animfolio-cli__line--system">
+			Loading portfolio data... <span class="animfolio-cli__success">OK</span>
+		</div>
+		<br>
+
+		<!-- Banner -->
+		<div class="animfolio-cli__line animfolio-cli__line--banner">
+<pre class="animfolio-cli__ascii">MARCUS</pre>		</div>
+		<div class="animfolio-cli__line">Backend Engineer</div>
+		<br>
+
+		<!-- Auto-run: about -->
+					<div class="animfolio-cli__line" data-cli-cmd="about">
+				<span class="animfolio-cli__user">marcus@portfolio</span>:<span class="animfolio-cli__path">~</span><span class="animfolio-cli__dollar">$</span> <span class="animfolio-cli__cmd">cat about.txt</span>
+			</div>
+			<div class="animfolio-cli__output" data-cli-cmd="about">
+				Backend engineer and infrastructure specialist. I build the systems that other systems depend on. 10 years of experience in distributed systems, cloud infrastructure, and making things that don't go down. I think in terminals, dream in YAML, and breathe in logs.			</div>
+			<br data-cli-cmd="about">
+		
+		<!-- Auto-run: experience -->
+								<div class="animfolio-cli__line" data-cli-cmd="experience">
+				<span class="animfolio-cli__user">marcus@portfolio</span>:<span class="animfolio-cli__path">~</span><span class="animfolio-cli__dollar">$</span> <span class="animfolio-cli__cmd">ls experience/</span>
+			</div>
+			<div class="animfolio-cli__output" data-cli-cmd="experience">
+				<div class="animfolio-cli__table-wrap">
+					<table class="animfolio-cli__table">
+						<tbody><tr>
+							<th>ROLE</th>
+							<th>COMPANY</th>
+							<th>PERIOD</th>
+						</tr>
+																				<tr>
+								<td>Staff Platform Engineer</td>
+								<td>CloudScale Systems</td>
+								<td>Feb 2021 - Present</td>
+							</tr>
+																				<tr>
+								<td>Senior Backend Engineer</td>
+								<td>HighTraffic Inc.</td>
+								<td>Jun 2017 - Jan 2021</td>
+							</tr>
+																				<tr>
+								<td>Site Reliability Engineer</td>
+								<td>ReliableOps</td>
+								<td>Aug 2014 - May 2017</td>
+							</tr>
+											</tbody></table>
+				</div>
+			</div>
+			<br data-cli-cmd="experience">
+		
+		<!-- Auto-run: skills -->
+					<div class="animfolio-cli__line" data-cli-cmd="skills">
+				<span class="animfolio-cli__user">marcus@portfolio</span>:<span class="animfolio-cli__path">~</span><span class="animfolio-cli__dollar">$</span> <span class="animfolio-cli__cmd">skills --format=bar</span>
+			</div>
+			<div class="animfolio-cli__output" data-cli-cmd="skills">
+									<div class="animfolio-cli__skill-group">
+						<strong class="animfolio-cli__label">[Backend]</strong>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">Go / Rust                </span>
+								<span class="animfolio-cli__bar">[██████████████████░░]</span>
+								<span class="animfolio-cli__pct">90%</span>
+							</div>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">Python                   </span>
+								<span class="animfolio-cli__bar">[█████████████████░░░]</span>
+								<span class="animfolio-cli__pct">88%</span>
+							</div>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">Node.js                  </span>
+								<span class="animfolio-cli__bar">[█████████████████░░░]</span>
+								<span class="animfolio-cli__pct">85%</span>
+							</div>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">PostgreSQL / Redis       </span>
+								<span class="animfolio-cli__bar">[██████████████████░░]</span>
+								<span class="animfolio-cli__pct">90%</span>
+							</div>
+											</div>
+									<div class="animfolio-cli__skill-group">
+						<strong class="animfolio-cli__label">[Infrastructure]</strong>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">Kubernetes / Docker      </span>
+								<span class="animfolio-cli__bar">[██████████████████░░]</span>
+								<span class="animfolio-cli__pct">92%</span>
+							</div>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">Terraform / Ansible      </span>
+								<span class="animfolio-cli__bar">[█████████████████░░░]</span>
+								<span class="animfolio-cli__pct">85%</span>
+							</div>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">AWS / GCP                </span>
+								<span class="animfolio-cli__bar">[█████████████████░░░]</span>
+								<span class="animfolio-cli__pct">88%</span>
+							</div>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">Linux / Bash             </span>
+								<span class="animfolio-cli__bar">[███████████████████░]</span>
+								<span class="animfolio-cli__pct">95%</span>
+							</div>
+											</div>
+									<div class="animfolio-cli__skill-group">
+						<strong class="animfolio-cli__label">[Practices]</strong>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">CI/CD Pipelines          </span>
+								<span class="animfolio-cli__bar">[██████████████████░░]</span>
+								<span class="animfolio-cli__pct">90%</span>
+							</div>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">Monitoring / Observability</span>
+								<span class="animfolio-cli__bar">[█████████████████░░░]</span>
+								<span class="animfolio-cli__pct">85%</span>
+							</div>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">Security / Hardening     </span>
+								<span class="animfolio-cli__bar">[████████████████░░░░]</span>
+								<span class="animfolio-cli__pct">80%</span>
+							</div>
+											</div>
+									<div class="animfolio-cli__skill-group">
+						<strong class="animfolio-cli__label">[AI / ML Ops]</strong>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">LLM Infra / RAG          </span>
+								<span class="animfolio-cli__bar">[████████████████░░░░]</span>
+								<span class="animfolio-cli__pct">82%</span>
+							</div>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">Prompt Engineering       </span>
+								<span class="animfolio-cli__bar">[███████████████░░░░░]</span>
+								<span class="animfolio-cli__pct">78%</span>
+							</div>
+																				<div class="animfolio-cli__skill-bar">
+								<span class="animfolio-cli__skill-name">Vector Databases         </span>
+								<span class="animfolio-cli__bar">[███████████████░░░░░]</span>
+								<span class="animfolio-cli__pct">75%</span>
+							</div>
+											</div>
+							</div>
+			<br data-cli-cmd="skills">
+		
+		<!-- Auto-run: projects -->
+								<div class="animfolio-cli__line" data-cli-cmd="projects">
+				<span class="animfolio-cli__user">marcus@portfolio</span>:<span class="animfolio-cli__path">~</span><span class="animfolio-cli__dollar">$</span> <span class="animfolio-cli__cmd">ls projects/</span>
+			</div>
+			<div class="animfolio-cli__output" data-cli-cmd="projects">
+														<div class="animfolio-cli__project">
+						<span class="animfolio-cli__success">→</span>
+						<strong>deploy-master</strong>
+													<span class="animfolio-cli__tags">[Go, Kubernetes, Helm, Prometheus]</span>
+												<br>
+						<span class="animfolio-cli__desc">&nbsp;&nbsp;Zero-downtime deployment orchestrator for containerized applications. Blue-green and canary strategies, automated rollback on health check failure, Slack notifications. Used by 40+ teams internally.</span>
+					</div>
+														<div class="animfolio-cli__project">
+						<span class="animfolio-cli__success">→</span>
+						<strong>api-gateway</strong>
+													<span class="animfolio-cli__tags">[Rust, Tokio, Redis, OpenTelemetry]</span>
+												<br>
+						<span class="animfolio-cli__desc">&nbsp;&nbsp;High-performance API gateway handling 2M requests/day. Rate limiting, JWT auth, request transformation, and circuit breaker patterns. P99 latency under 15ms.</span>
+					</div>
+														<div class="animfolio-cli__project">
+						<span class="animfolio-cli__success">→</span>
+						<strong>infra-as-code</strong>
+													<span class="animfolio-cli__tags">[Terraform, AWS, Python, GitHub Actions]</span>
+												<br>
+						<span class="animfolio-cli__desc">&nbsp;&nbsp;Complete infrastructure-as-code repository managing 200+ cloud resources across 3 AWS regions. Terraform modules, automated drift detection, and cost optimization alerts.</span>
+					</div>
+														<div class="animfolio-cli__project">
+						<span class="animfolio-cli__success">→</span>
+						<strong>monitoring-stack</strong>
+													<span class="animfolio-cli__tags">[Grafana, Prometheus, Loki, Jaeger]</span>
+												<br>
+						<span class="animfolio-cli__desc">&nbsp;&nbsp;Custom observability stack with metrics, logs, and traces. Automated alerting, runbook integration, and incident timeline reconstruction. MTTR reduced from 45min to 8min.</span>
+					</div>
+														<div class="animfolio-cli__project">
+						<span class="animfolio-cli__success">→</span>
+						<strong>llm-ops-gateway</strong>
+													<span class="animfolio-cli__tags">[Python, FastAPI, pgvector, LangChain, Kubernetes]</span>
+												<br>
+						<span class="animfolio-cli__desc">&nbsp;&nbsp;Self-hosted LLM inference gateway and RAG platform for internal engineering tools. Routes prompts across models, caches embeddings in a pgvector store, and enforces token budgets and PII redaction per team. Powers an on-call assistant that drafts incident summaries from logs and traces, cutting postmortem write-up time by 60%.</span>
+					</div>
+							</div>
+			<br data-cli-cmd="projects">
+		
+		<!-- Auto-run: stats -->
+								<div class="animfolio-cli__line" data-cli-cmd="stats">
+				<span class="animfolio-cli__user">marcus@portfolio</span>:<span class="animfolio-cli__path">~</span><span class="animfolio-cli__dollar">$</span> <span class="animfolio-cli__cmd">cat metrics.txt</span>
+			</div>
+			<div class="animfolio-cli__output" data-cli-cmd="stats">
+														<div class="animfolio-cli__skill-bar">
+						<span class="animfolio-cli__skill-name">Uptime SLA                  </span>
+						<span class="animfolio-cli__success">99.99%</span>
+					</div>
+														<div class="animfolio-cli__skill-bar">
+						<span class="animfolio-cli__skill-name">Deployments This Year       </span>
+						<span class="animfolio-cli__success">2500+</span>
+					</div>
+														<div class="animfolio-cli__skill-bar">
+						<span class="animfolio-cli__skill-name">Servers Managed             </span>
+						<span class="animfolio-cli__success">200+</span>
+					</div>
+														<div class="animfolio-cli__skill-bar">
+						<span class="animfolio-cli__skill-name">Incidents Resolved          </span>
+						<span class="animfolio-cli__success">500+</span>
+					</div>
+							</div>
+			<br data-cli-cmd="stats">
+		
+		<!-- Auto-run: contact -->
+				<div class="animfolio-cli__line" data-cli-cmd="contact">
+			<span class="animfolio-cli__user">marcus@portfolio</span>:<span class="animfolio-cli__path">~</span><span class="animfolio-cli__dollar">$</span> <span class="animfolio-cli__cmd">contact --info</span>
+		</div>
+		<div class="animfolio-cli__output" data-cli-cmd="contact">
+			<div class="animfolio-cli__success"><strong>$ ./contact --init</strong></div><div class="animfolio-cli__desc">Need someone to tame a flaky pipeline, scale a backend, or get your deploys back under control? Send me a message and I'll respond within one business day. No tickets required.</div><div>Email: <a href="mailto:you@example.com" class="animfolio-cli__link">you@example.com</a></div><div>Github: <a href="https://github.com/yourusername" target="_blank" rel="noopener" class="animfolio-cli__link">https://github.com/yourusername</a></div><div>Linkedin: <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener" class="animfolio-cli__link">https://linkedin.com/in/yourusername</a></div><div>Twitter: <a href="https://twitter.com/yourusername" target="_blank" rel="noopener" class="animfolio-cli__link">https://twitter.com/yourusername</a></div><div>Dribbble: <a href="https://dribbble.com/yourusername" target="_blank" rel="noopener" class="animfolio-cli__link">https://dribbble.com/yourusername</a></div><div>Email: <a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener" class="animfolio-cli__link">mailto:hello@yourdomain.com</a></div>		</div>
+		<br data-cli-cmd="contact">
+		
+					<div class="animfolio-cli__line" data-cli-cmd="achievements"><span class="animfolio-cli__user">marcus@portfolio</span>:<span class="animfolio-cli__path">~</span><span class="animfolio-cli__dollar">$</span> <span class="animfolio-cli__cmd">cat achievements.txt</span></div>
+			<div class="animfolio-cli__output" data-cli-cmd="achievements"><section id="achievements" class="animfolio-section animfolio-section--achievements animfolio-section--align-center" data-animfolio-section="achievements"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">~/certs $ ls -la</h2></div><div class="animfolio-grid animfolio-grid--3 animfolio-stagger" data-animfolio-stagger="0.1">
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">AWS Certified Machine Learning - Specialty</h3>
+							<span class="animfolio-card__meta">Amazon Web Services</span>
+										<span class="animfolio-card__meta">2025</span>
+										<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-card__link">
+					View credential →
+				</a>
+					</div>
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">Generative AI with LLMs</h3>
+							<span class="animfolio-card__meta">DeepLearning.AI</span>
+										<span class="animfolio-card__meta">2024</span>
+										<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-card__link">
+					View credential →
+				</a>
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section></div>
+			<br data-cli-cmd="achievements">
+		
+		<!-- Cursor -->
+		<div class="animfolio-cli__line animfolio-cli__input-line">
+			<span class="animfolio-cli__user">marcus@portfolio</span>:<span class="animfolio-cli__path">~</span><span class="animfolio-cli__dollar">$</span> <span class="animfolio-cli__cursor">█</span>
+		</div>
+	</div>
+</div>
+
+<noscript>
+	<div class="animfolio-cli__fallback">
+					<section id="hero" class="animfolio-section animfolio-section--hero animfolio-section--align-center" data-animfolio-section="hero"><div class="animfolio-inner">
+<div class="animfolio-hero">
+	<div class="animfolio-hero__content">
+		
+					<h1 class="animfolio-hero__name" data-animfolio-animate="fade-up">Marcus Holloway</h1>
+		
+					<h2 class="animfolio-hero__title" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">Backend Engineer</h2>
+		
+					<div class="animfolio-hero__subtitle animfolio-hero__typed" data-animfolio-typed="[&quot;$ whoami \u2192 backend engineer&quot;,&quot;$ cat skills.txt&quot;,&quot;$ .\/deploy --production&quot;]" data-animfolio-animate="fade-up" data-animfolio-delay="0.2">$ whoami → backend engineer</div>
+		
+					<div class="animfolio-hero__cta" data-animfolio-animate="fade-up" data-animfolio-delay="0.3">
+									<a href="#projects" class="animfolio-button animfolio-button--primary animfolio-hero__cta-primary">
+						View My Work					</a>
+									<a href="#contact" class="animfolio-button animfolio-button--secondary animfolio-hero__cta-secondary">
+						Get In Touch					</a>
+											</div>
+		
+					<div class="animfolio-hero__social animfolio-social-icons animfolio-social-icons--outline" data-animfolio-animate="fade-up" data-animfolio-delay="0.4">
+														<a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>							<span class="animfolio-social__label">Github</span>
+						</a>
+															<a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>							<span class="animfolio-social__label">Linkedin</span>
+						</a>
+															<a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>							<span class="animfolio-social__label">Twitter</span>
+						</a>
+															<a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg>							<span class="animfolio-social__label">Dribbble</span>
+						</a>
+															<a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>							<span class="animfolio-social__label">Email</span>
+						</a>
+							</div>
+		
+			</div>
+</div>
+</div><!-- .animfolio-inner --></section>					<section id="about" class="animfolio-section animfolio-section--about animfolio-section--align-center" data-animfolio-section="about"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">About Me</h2></div><div class="animfolio-about" data-animfolio-animate="fade-up">
+				<div class="animfolio-about__bio">Backend engineer and infrastructure specialist. I build the systems that other systems depend on. 10 years of experience in distributed systems, cloud infrastructure, and making things that don't go down. I think in terminals, dream in YAML, and breathe in logs.</div>
+				<div class="animfolio-about__fun-facts animfolio-stagger" data-animfolio-stagger="0.1">
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					My terminal has more plugins than most people's browsers				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I automated my home coffee maker with a Raspberry Pi				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I have 99.99% uptime on my personal projects (that one outage still haunts me)				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I use Vim. No, I will not elaborate.				</div>
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section>					<section id="experience" class="animfolio-section animfolio-section--experience animfolio-section--align-center" data-animfolio-section="experience"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Experience</h2></div>
+<div class="animfolio-timeline animfolio-stagger" data-animfolio-animate="fade-up" data-animfolio-stagger="0.1">
+	<div class="animfolio-timeline__line"></div>
+
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.0">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Staff Platform Engineer</div>
+				<div class="animfolio-timeline__company">CloudScale Systems</div>
+				<div class="animfolio-timeline__date">
+					Feb 2021 — Present											· Remote (Berlin, DE)									</div>
+									<div class="animfolio-timeline__description">Own the deployment and observability platform serving 40+ product teams. Built a zero-downtime release orchestrator that cut average deploy time from 4 hours to 12 minutes, and drove the migration of 200+ cloud resources to fully versioned infrastructure-as-code. Hold the production tier to a 99.99% uptime SLA.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">Go</span>
+													<span class="animfolio-card__tag">Kubernetes</span>
+													<span class="animfolio-card__tag">Terraform</span>
+													<span class="animfolio-card__tag">AWS</span>
+													<span class="animfolio-card__tag">Prometheus</span>
+											</div>
+							</div>
+		</div>
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Senior Backend Engineer</div>
+				<div class="animfolio-timeline__company">HighTraffic Inc.</div>
+				<div class="animfolio-timeline__date">
+					Jun 2017 — Jan 2021											· Amsterdam, NL									</div>
+									<div class="animfolio-timeline__description">Designed and shipped a Rust-based API gateway handling 2M requests per day with P99 latency under 15ms. Introduced circuit breakers, rate limiting, and OpenTelemetry tracing across the service mesh, eliminating cascading failures during peak traffic events.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">Rust</span>
+													<span class="animfolio-card__tag">Tokio</span>
+													<span class="animfolio-card__tag">Redis</span>
+													<span class="animfolio-card__tag">gRPC</span>
+													<span class="animfolio-card__tag">OpenTelemetry</span>
+											</div>
+							</div>
+		</div>
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.2">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Site Reliability Engineer</div>
+				<div class="animfolio-timeline__company">ReliableOps</div>
+				<div class="animfolio-timeline__date">
+					Aug 2014 — May 2017											· Dublin, IE									</div>
+									<div class="animfolio-timeline__description">Built the company observability stack from scratch with metrics, logs, and traces, plus runbook-driven alerting. Reduced mean time to recovery from 45 minutes to 8 minutes and led on-call rotation tooling that became standard across three engineering orgs.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">Python</span>
+													<span class="animfolio-card__tag">Grafana</span>
+													<span class="animfolio-card__tag">Loki</span>
+													<span class="animfolio-card__tag">Jaeger</span>
+													<span class="animfolio-card__tag">Ansible</span>
+											</div>
+							</div>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section>					<section id="skills" class="animfolio-section animfolio-section--skills animfolio-section--align-center" data-animfolio-section="skills"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Skills</h2></div>
+<div class="animfolio-skills animfolio-skills--bars" data-animfolio-animate="fade-up">
+
+			<!-- Progress Bars -->
+					<div class="animfolio-grid animfolio-grid--2 animfolio-stagger" data-animfolio-stagger="0.1">
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">Backend</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Go / Rust</span>
+										<span class="animfolio-skills__value">90%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 90%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Python</span>
+										<span class="animfolio-skills__value">88%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 88%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Node.js</span>
+										<span class="animfolio-skills__value">85%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 85%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>PostgreSQL / Redis</span>
+										<span class="animfolio-skills__value">90%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 90%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">Infrastructure</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Kubernetes / Docker</span>
+										<span class="animfolio-skills__value">92%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 92%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Terraform / Ansible</span>
+										<span class="animfolio-skills__value">85%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 85%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>AWS / GCP</span>
+										<span class="animfolio-skills__value">88%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 88%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Linux / Bash</span>
+										<span class="animfolio-skills__value">95%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 95%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">Practices</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>CI/CD Pipelines</span>
+										<span class="animfolio-skills__value">90%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 90%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Monitoring / Observability</span>
+										<span class="animfolio-skills__value">85%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 85%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Security / Hardening</span>
+										<span class="animfolio-skills__value">80%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 80%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">AI / ML Ops</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>LLM Infra / RAG</span>
+										<span class="animfolio-skills__value">82%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 82%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Prompt Engineering</span>
+										<span class="animfolio-skills__value">78%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 78%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Vector Databases</span>
+										<span class="animfolio-skills__value">75%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 75%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+							</div>
+		
+	
+	</div>
+</div><!-- .animfolio-inner --></section>					<section id="projects" class="animfolio-section animfolio-section--projects animfolio-section--align-center" data-animfolio-section="projects"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Featured Projects</h2></div>
+<div class="animfolio-grid animfolio-grid--2 animfolio-stagger" data-animfolio-stagger="0.15">
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-tech.jpg" alt="deploy-master" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">deploy-master</h3>
+
+							<p class="animfolio-project__description">Zero-downtime deployment orchestrator for containerized applications. Blue-green and canary strategies, automated rollback on health check failure, Slack notifications. Used by 40+ teams internally.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">Go</span>
+											<span class="animfolio-card__tag">Kubernetes</span>
+											<span class="animfolio-card__tag">Helm</span>
+											<span class="animfolio-card__tag">Prometheus</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--secondary">
+						Source					</a>
+											</div>
+
+					</div>
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-dashboard.jpg" alt="api-gateway" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">api-gateway</h3>
+
+							<p class="animfolio-project__description">High-performance API gateway handling 2M requests/day. Rate limiting, JWT auth, request transformation, and circuit breaker patterns. P99 latency under 15ms.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">Rust</span>
+											<span class="animfolio-card__tag">Tokio</span>
+											<span class="animfolio-card__tag">Redis</span>
+											<span class="animfolio-card__tag">OpenTelemetry</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--secondary">
+						Source					</a>
+											</div>
+
+					</div>
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-tech.jpg" alt="infra-as-code" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">infra-as-code</h3>
+
+							<p class="animfolio-project__description">Complete infrastructure-as-code repository managing 200+ cloud resources across 3 AWS regions. Terraform modules, automated drift detection, and cost optimization alerts.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">Terraform</span>
+											<span class="animfolio-card__tag">AWS</span>
+											<span class="animfolio-card__tag">Python</span>
+											<span class="animfolio-card__tag">GitHub Actions</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--secondary">
+						Source					</a>
+											</div>
+
+					</div>
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-dashboard.jpg" alt="monitoring-stack" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">monitoring-stack</h3>
+
+							<p class="animfolio-project__description">Custom observability stack with metrics, logs, and traces. Automated alerting, runbook integration, and incident timeline reconstruction. MTTR reduced from 45min to 8min.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">Grafana</span>
+											<span class="animfolio-card__tag">Prometheus</span>
+											<span class="animfolio-card__tag">Loki</span>
+											<span class="animfolio-card__tag">Jaeger</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--secondary">
+						Source					</a>
+											</div>
+
+					</div>
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-tech.jpg" alt="llm-ops-gateway" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">llm-ops-gateway</h3>
+
+							<p class="animfolio-project__description">Self-hosted LLM inference gateway and RAG platform for internal engineering tools. Routes prompts across models, caches embeddings in a pgvector store, and enforces token budgets and PII redaction per team. Powers an on-call assistant that drafts incident summaries from logs and traces, cutting postmortem write-up time by 60%.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">Python</span>
+											<span class="animfolio-card__tag">FastAPI</span>
+											<span class="animfolio-card__tag">pgvector</span>
+											<span class="animfolio-card__tag">LangChain</span>
+											<span class="animfolio-card__tag">Kubernetes</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--secondary">
+						Source					</a>
+											</div>
+
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section>					<section id="stats" class="animfolio-section animfolio-section--stats animfolio-section--align-center" data-animfolio-section="stats"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">By the Numbers</h2></div><div class="animfolio-stats animfolio-stagger" data-animfolio-stagger="0.15">
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="99.99" data-animfolio-decimals="2" data-animfolio-suffix="%" data-animfolio-prefix="">99.99%</span>
+			<span class="animfolio-stat__label">Uptime SLA</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="2500" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">2,500+</span>
+			<span class="animfolio-stat__label">Deployments This Year</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="200" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">200+</span>
+			<span class="animfolio-stat__label">Servers Managed</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="500" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">500+</span>
+			<span class="animfolio-stat__label">Incidents Resolved</span>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section>					<section class="animfolio-section animfolio-section--achievements animfolio-section--align-center" data-animfolio-section="achievements"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">~/certs $ ls -la</h2></div><div class="animfolio-grid animfolio-grid--3 animfolio-stagger" data-animfolio-stagger="0.1">
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">AWS Certified Machine Learning - Specialty</h3>
+							<span class="animfolio-card__meta">Amazon Web Services</span>
+										<span class="animfolio-card__meta">2025</span>
+										<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-card__link">
+					View credential →
+				</a>
+					</div>
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">Generative AI with LLMs</h3>
+							<span class="animfolio-card__meta">DeepLearning.AI</span>
+										<span class="animfolio-card__meta">2024</span>
+										<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-card__link">
+					View credential →
+				</a>
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section>					<section id="contact" class="animfolio-section animfolio-section--contact animfolio-section--align-center" data-animfolio-section="contact"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Get In Touch</h2></div><div class="animfolio-contact" data-animfolio-animate="fade-up">
+
+			<p class="animfolio-contact__heading">$ ./contact --init</p>
+				<p class="animfolio-contact__description">Need someone to tame a flaky pipeline, scale a backend, or get your deploys back under control? Send me a message and I'll respond within one business day. No tickets required.</p>
+	
+	<div class="animfolio-contact__layout">
+		<!-- Left: Contact Form -->
+		<div class="animfolio-contact__form-wrapper">
+							<form class="animfolio-form" novalidate="">
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-name">Name</label>
+						<input type="text" name="name" id="animfolio-name" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Name is required.</span>
+					</div>
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-email">Email</label>
+						<input type="email" name="email" id="animfolio-email" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Valid email is required.</span>
+					</div>
+										<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-message">Message</label>
+						<textarea name="message" id="animfolio-message" class="animfolio-form__textarea" rows="5" required="" aria-required="true"></textarea>
+						<span class="animfolio-form__error">Message is required.</span>
+					</div>
+											<div class="animfolio-form__honeypot">
+							<input type="text" name="animfolio_hp" tabindex="-1" autocomplete="off">
+						</div>
+										<input type="hidden" name="animfolio_ts" value="">
+					<input type="hidden" name="animfolio_js" value="">
+					<div class="animfolio-form__success">Thank you! I'll get back to you soon.</div>
+					<button type="submit" class="animfolio-button animfolio-button--primary animfolio-form__submit">
+						Send Message					</button>
+				</form>
+					</div>
+
+		<!-- Right: QR Code -->
+		<div class="animfolio-contact__qr-wrapper"><div class="animfolio-qr" data-animfolio-qr="" data-animfolio-vcard="QkVHSU46VkNBUkQNClZFUlNJT046My4wDQpGTjpNYXJjdXMgSG9sbG93YXkNCk46SG9sbG93YXk7TWFyY3VzOzs7DQpUSVRMRTpCYWNrZW5kIEVuZ2luZWVyDQpFTUFJTDtUWVBFPVdPUks6eW91QGV4YW1wbGUuY29tDQpVUkw6aHR0cHM6Ly95b3VyLXdlYnNpdGUuZXhhbXBsZQ0KTk9URTpCYWNrZW5kIGVuZ2luZWVyIGFuZCBpbmZyYXN0cnVjdHVyZSBzcGVjaWFsaXN0LiBJIGJ1aWxkIHRoZSBzeXN0ZW1zIHRoYXQgb3RoZXIgc3lzdGVtcyBkZXBlbmQgb24uIDEwIHllYXJzIG9mIGV4cGVyaWVuY2UgaW4gZGlzdHJpYnV0ZWQgc3lzdGVtc1wsIGNsb3VkIGluZnJhc3RydWN0dXJlXCwgYW5kIG1ha2luZyB0aGluZ3MgdGhhdCBkb24ndCBnbyBkXG5HaXRodWI6IGh0dHBzOi8vZ2l0aHViLmNvbS95b3VydXNlcm5hbWVcbkxpbmtlZGluOiBodHRwczovL2xpbmtlZGluLmNvbS9pbi95b3VydXNlcm5hbWVcblR3aXR0ZXI6IGh0dHBzOi8vdHdpdHRlci5jb20veW91cnVzZXJuYW1lXG5EcmliYmJsZTogaHR0cHM6Ly9kcmliYmJsZS5jb20veW91cnVzZXJuYW1lDQpYLVNPQ0lBTFBST0ZJTEU7VFlQRT1naXRodWI6aHR0cHM6Ly9naXRodWIuY29tL3lvdXJ1c2VybmFtZQ0KWC1TT0NJQUxQUk9GSUxFO1RZUEU9bGlua2VkaW46aHR0cHM6Ly9saW5rZWRpbi5jb20vaW4veW91cnVzZXJuYW1lDQpYLVNPQ0lBTFBST0ZJTEU7VFlQRT10d2l0dGVyOmh0dHBzOi8vdHdpdHRlci5jb20veW91cnVzZXJuYW1lDQpYLVNPQ0lBTFBST0ZJTEU7VFlQRT1kcmliYmJsZTpodHRwczovL2RyaWJiYmxlLmNvbS95b3VydXNlcm5hbWUNClJFVjoyMDI2LTA3LTEyVDEzOjIzOjA1Wg0KRU5EOlZDQVJEDQo="><div class="animfolio-qr__code" style="width:200px;height:200px"></div><p class="animfolio-qr__caption">Scan to save my contact</p><a href="./assets/contact.vcf" class="animfolio-qr__download animfolio-button animfolio-button--secondary" download="">Download vCard</a></div></div>	</div>
+
+</div>
+</div><!-- .animfolio-inner --></section>			</div>
+</noscript>
+<button class="animfolio-back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 15V5M10 5L5 10M10 5L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div class="animfolio-progress"><div class="animfolio-progress__bar"></div></div><div class="animfolio-footer-social animfolio-social-icons animfolio-social-icons--outline"><a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="animfolio-social__label">Github</span></a><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg><span class="animfolio-social__label">Linkedin</span></a><a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg><span class="animfolio-social__label">Twitter</span></a><a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg><span class="animfolio-social__label">Dribbble</span></a><a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span class="animfolio-social__label">Email</span></a></div></div>
+
+<div aria-label="Color scheme preview (demo only)" style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99999;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(18,18,24,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 30px rgba(0,0,0,.4)"><span style="padding:0 6px 0 10px;font:700 11px/1 -apple-system,sans-serif;letter-spacing:.4px;text-transform:uppercase;color:#8b90a0">Colors</span><a href="index.html" title="Matrix Green" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#00FF41;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Matrix Green</a><a href="v2.html" title="Amber Terminal" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#B45309;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Amber Terminal</a><a href="v3.html" aria-current="true" title="Phosphor Blue" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#0369A1;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Phosphor Blue</a></div>
+
+<script>
+var animfolioSettings = {"animationIntensity":"medium","respectReducedMotion":"1","colorScheme":"dark","smoothScroll":"1","scrollBehavior":"smooth","customCursor":"","backToTop":"1","progressBar":"1","darkModeToggle":"1","debugMode":""};
+//# sourceURL=animfolio-engine-js-extra
+</script>
+<script src="./assets/js/wp-shim.js"></script>
+<script src="./assets/js/animfolio-engine.js"></script>
+<script src="./assets/js/modules/scroll-trigger.js"></script>
+<script src="./assets/js/modules/typed-text.js"></script>
+<script src="./assets/js/modules/counter.js"></script>
+<script src="./assets/js/modules/timeline-draw.js"></script>
+<script src="./assets/js/modules/stagger.js"></script>
+<script src="./assets/js/modules/parallax.js"></script>
+<script src="./assets/js/modules/progress-bar.js"></script>
+<script src="./assets/js/modules/smooth-scroll.js"></script>
+<script src="./assets/js/modules/theme-toggle.js"></script>
+<script src="./assets/js/animfolio-lightbox.js"></script>
+<script src="./assets/js/animfolio-casestudy.js"></script>
+<script src="./assets/js/format.js"></script>
+<script src="./assets/js/animfolio-contact-static.js"></script>
+</body>
+</html>

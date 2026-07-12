@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Pixel & Co. Studio
+N:& Co. Studio;Pixel;;;
+TITLE:Creative Agency
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:We're a boutique creative agency specializing in brand strategy\, web design\, and digital marketing. Our team of 12 passionate creatives has helped 200+ businesses transform their digital presence. We\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:22:46Z
+END:VCARD

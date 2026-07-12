@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio – AnimFolio Dev — Jupyter Orange</title>
+<meta name="description" content="Dr. Maya Krishnan — Data Scientist & Researcher. I turn data into actionable insights.">
+<style>
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('./assets/fonts/inter-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Fira Code'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('./assets/fonts/fira-code-latin.woff2') format('woff2'); }
+
+/*# sourceURL=animfolio-fonts-local-inline-css */
+</style>
+<link rel="stylesheet" href="./assets/css/animfolio-base.css">
+<link rel="stylesheet" href="./assets/css/animfolio-animations.css">
+<link rel="stylesheet" href="./assets/css/animfolio-nav.css">
+<link rel="stylesheet" href="./assets/css/animfolio-contact.css">
+<link rel="stylesheet" href="./assets/css/animfolio-gallery.css">
+<link rel="stylesheet" href="./assets/css/animfolio-qr.css">
+<link rel="stylesheet" href="./assets/css/animfolio-print.css" media="print">
+<link rel="stylesheet" href="./assets/css/format.css">
+<style id="animfolio-theme-vars">
+.animfolio-container {
+	--animfolio-accent: #C05E10 !important;
+	--animfolio-accent-hover: #b65406 !important;
+	--animfolio-accent-light: rgba(192, 94, 16, 0.1) !important;
+	--animfolio-accent-subtle: rgba(192, 94, 16, 0.12) !important;
+	--animfolio-accent-shadow: rgba(192, 94, 16, 0.3) !important;
+	--animfolio-accent-glow: rgba(192, 94, 16, 0.5) !important;
+	--animfolio-secondary: #3B82F6 !important;
+	--animfolio-secondary-hover: #3178ec !important;
+	--animfolio-secondary-light: rgba(59, 130, 246, 0.1) !important;
+	--animfolio-on-accent: #14110f !important;
+	--animfolio-on-secondary: #14110f !important;
+	--animfolio-bg: #0c0f1a;
+	--animfolio-bg-secondary: #f8fafc;
+	--animfolio-bg-tertiary: #1e1e1e;
+	--animfolio-text: #e2e8f0;
+	--animfolio-text-secondary: #a0a0a0;
+	--animfolio-text-muted: #8a8a8a;
+	--animfolio-border: rgba(255, 255, 255, 0.1);
+	--animfolio-border-strong: rgba(255, 255, 255, 0.2);
+	--animfolio-surface: #1a1a1a;
+	--animfolio-surface-hover: #222222;
+	--animfolio-overlay: rgba(0, 0, 0, 0.75);
+	--animfolio-success: #22c55e;
+	--animfolio-warning: #f59e0b;
+	--animfolio-error: #ef4444;
+	--animfolio-info: #3b82f6;
+	--animfolio-font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-mono: 'Fira Code', 'Fira Code', 'Consolas', monospace;
+	--animfolio-font-size-base: 16px;
+	--animfolio-font-size-h1: clamp(2.5rem, 5vw, 4rem);
+	--animfolio-font-size-h2: clamp(1.75rem, 3.5vw, 2.5rem);
+	--animfolio-font-size-h3: 1.5rem;
+	--animfolio-font-size-h4: 1.25rem;
+	--animfolio-font-weight-bold: 700;
+	--animfolio-font-weight-medium: 500;
+	--animfolio-line-height: 1.6;
+	--animfolio-letter-spacing: 0em;
+	--animfolio-container-width: 1200px;
+	--animfolio-section-spacing: 100px;
+	--animfolio-radius: 12px;
+	--animfolio-radius-sm: 6px;
+	--animfolio-radius-lg: 16px;
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.2);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.3);
+	--animfolio-duration: 0.6s;
+	--animfolio-delay: 0s;
+	--animfolio-easing: cubic-bezier(0.4, 0, 0.2, 1);
+	--animfolio-easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--animfolio-stagger: 0.1s;
+	--animfolio-transition-fast: 150ms ease;
+	--animfolio-transition-normal: 300ms ease;
+	--animfolio-transition-slow: 500ms ease;
+	--animfolio-z-base: 1;
+	--animfolio-z-dropdown: 100;
+	--animfolio-z-sticky: 200;
+	--animfolio-z-nav: 300;
+	--animfolio-z-modal: 400;
+	--animfolio-z-lightbox: 500;
+	--animfolio-z-tooltip: 600;
+	--animfolio-z-cursor: 700;
+}
+.animfolio-container--light, .animfolio-container[data-animfolio-scheme="light"] {
+	--animfolio-bg: #ffffff;
+	--animfolio-bg-secondary: #f5f5f5;
+	--animfolio-bg-tertiary: #ebebeb;
+	--animfolio-text: #0f172a;
+	--animfolio-text-secondary: #555555;
+	--animfolio-text-muted: #767676;
+	--animfolio-border: rgba(0, 0, 0, 0.1);
+	--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+	--animfolio-surface: #ffffff;
+	--animfolio-surface-hover: #f9f9f9;
+	--animfolio-overlay: rgba(0, 0, 0, 0.5);
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+	--animfolio-accent-light: rgba(192, 94, 16, 0.08) !important;
+	--animfolio-accent-subtle: rgba(192, 94, 16, 0.05) !important;
+	--animfolio-accent-shadow: rgba(192, 94, 16, 0.2) !important;
+	--animfolio-accent-glow: rgba(192, 94, 16, 0.15) !important;
+	--animfolio-on-accent: #14110f !important;
+	--animfolio-on-secondary: #14110f !important;
+}
+@media (prefers-color-scheme: light) {
+	.animfolio-container--auto {
+		--animfolio-bg: #ffffff;
+		--animfolio-bg-secondary: #f5f5f5;
+		--animfolio-bg-tertiary: #ebebeb;
+		--animfolio-text: #0f172a;
+		--animfolio-text-secondary: #555555;
+		--animfolio-text-muted: #767676;
+		--animfolio-border: rgba(0, 0, 0, 0.1);
+		--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+		--animfolio-surface: #ffffff;
+		--animfolio-surface-hover: #f9f9f9;
+		--animfolio-overlay: rgba(0, 0, 0, 0.5);
+		--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+		--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+		--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+		--animfolio-accent-light: rgba(192, 94, 16, 0.08) !important;
+		--animfolio-accent-subtle: rgba(192, 94, 16, 0.05) !important;
+		--animfolio-accent-shadow: rgba(192, 94, 16, 0.2) !important;
+		--animfolio-accent-glow: rgba(192, 94, 16, 0.15) !important;
+		--animfolio-on-accent: #14110f !important;
+		--animfolio-on-secondary: #14110f !important;
+	}
+}
+
+.animfolio-container *,.animfolio-container *::before,.animfolio-container *::after{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{margin:0;padding:0;background:#ffffff;color:#0f172a;font-family:var(--animfolio-font-body,'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);font-size:var(--animfolio-font-size-base,16px);line-height:var(--animfolio-line-height,1.6);overflow-x:hidden}body.admin-bar{padding-top:32px}body.admin-bar .animfolio-nav--sticky{top:32px}@media screen and (max-width:782px){body.admin-bar{padding-top:46px}body.admin-bar .animfolio-nav--sticky{top:46px}}.wp-site-blocks,.entry-content,.page-content,.post-content{all:unset;display:block}
+/*# sourceURL=animfolio-base-inline-css */
+</style>
+<script>
+document.documentElement.className+=" animfolio-js";(function(){function r(){if(window.animfolio&&window.animfolio._initialized){return;}var e=document.querySelectorAll("[data-animfolio-animate]:not(.animfolio-visible),.animfolio-stagger__item:not(.animfolio-visible)");for(var i=0;i<e.length;i++){e[i].classList.add("animfolio-visible");}}if(document.readyState==="complete"){setTimeout(r,1500);}else{window.addEventListener("load",function(){setTimeout(r,1500);});}setTimeout(r,4000);})();
+//# sourceURL=animfolio-failsafe-js-after
+</script>
+</head>
+<body>
+<!-- ============================================================
+     CONFIG — set your email for the contact form (FormSubmit.co).
+     First submission emails you a one-time confirmation link; click it
+     once and every message afterwards lands in your inbox. See README.
+     ============================================================ -->
+<script>window.ANIMFOLIO_CONTACT_EMAIL = "you@example.com";</script>
+
+<div class="animfolio-container animfolio-container--light animfolio-container--format-07 animfolio-container--one-page" data-animfolio-scheme="light" data-animfolio-format="format-07-data-scientist" data-animfolio-intensity="medium"><a href="#hero" class="animfolio-skip-link">Skip to main content</a><nav class="animfolio-nav animfolio-nav--horizontal animfolio-nav--sticky" role="navigation" aria-label="Portfolio navigation"><a href="#hero" class="animfolio-nav__logo">Dr. Maya Krishnan</a><button class="animfolio-nav__toggle" aria-expanded="false" aria-controls="animfolio-nav-menu" aria-label="Toggle navigation"><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span></button><ul class="animfolio-nav__list" id="animfolio-nav-menu"><li class="animfolio-nav__item"><a href="#hero" class="animfolio-nav__link" data-animfolio-section="hero">Home</a></li><li class="animfolio-nav__item"><a href="#about" class="animfolio-nav__link" data-animfolio-section="about">About</a></li><li class="animfolio-nav__item"><a href="#experience" class="animfolio-nav__link" data-animfolio-section="experience">Experience</a></li><li class="animfolio-nav__item"><a href="#skills" class="animfolio-nav__link" data-animfolio-section="skills">Skills</a></li><li class="animfolio-nav__item"><a href="#projects" class="animfolio-nav__link" data-animfolio-section="projects">Projects</a></li><li class="animfolio-nav__item"><a href="#stats" class="animfolio-nav__link" data-animfolio-section="stats">Stats</a></li><li class="animfolio-nav__item"><a href="#education" class="animfolio-nav__link" data-animfolio-section="education">Education</a></li><li class="animfolio-nav__item"><a href="#achievements" class="animfolio-nav__link" data-animfolio-section="achievements">Achievements</a></li><li class="animfolio-nav__item"><a href="#contact" class="animfolio-nav__link" data-animfolio-section="contact">Contact</a></li></ul><button class="animfolio-theme-toggle" aria-label="Toggle dark mode"><span class="animfolio-theme-toggle__icon animfolio-theme-toggle__icon--sun" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span><span class="animfolio-theme-toggle__icon animfolio-theme-toggle__icon--moon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></span></button></nav><section id="hero" class="animfolio-section animfolio-section--hero animfolio-section--align-center" data-animfolio-section="hero"><div class="animfolio-inner">
+<div class="animfolio-hero">
+	<div class="animfolio-hero__content">
+		
+					<h1 class="animfolio-hero__name" data-animfolio-animate="fade-up">Dr. Maya Krishnan</h1>
+		
+					<h2 class="animfolio-hero__title" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">Data Scientist &amp; Researcher</h2>
+		
+					<div class="animfolio-hero__subtitle animfolio-hero__typed" data-animfolio-typed="[&quot;I turn data into actionable insights.&quot;,&quot;Machine learning. Statistics. Impact.&quot;,&quot;Finding patterns in the noise.&quot;]" data-animfolio-animate="fade-up" data-animfolio-delay="0.2">I turn data into actionable insights.</div>
+		
+					<div class="animfolio-hero__cta" data-animfolio-animate="fade-up" data-animfolio-delay="0.3">
+									<a href="#projects" class="animfolio-button animfolio-button--primary animfolio-hero__cta-primary">
+						View My Work					</a>
+									<a href="#contact" class="animfolio-button animfolio-button--secondary animfolio-hero__cta-secondary">
+						Get In Touch					</a>
+											</div>
+		
+					<div class="animfolio-hero__social animfolio-social-icons animfolio-social-icons--outline" data-animfolio-animate="fade-up" data-animfolio-delay="0.4">
+														<a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>							<span class="animfolio-social__label">Github</span>
+						</a>
+															<a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>							<span class="animfolio-social__label">Linkedin</span>
+						</a>
+															<a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>							<span class="animfolio-social__label">Twitter</span>
+						</a>
+															<a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg>							<span class="animfolio-social__label">Dribbble</span>
+						</a>
+															<a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>							<span class="animfolio-social__label">Email</span>
+						</a>
+							</div>
+		
+			</div>
+</div>
+</div><!-- .animfolio-inner --></section><section id="about" class="animfolio-section animfolio-section--about animfolio-section--align-center" data-animfolio-section="about"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">About</h2></div><div class="animfolio-about" data-animfolio-animate="fade-up">
+				<div class="animfolio-about__bio">I'm a data scientist and ML engineer with a PhD in Statistics and 6 years of industry experience. I specialize in building production ML systems that drive real business outcomes. My work spans NLP, computer vision, and causal inference, with publications at NeurIPS and ICML.</div>
+				<div class="animfolio-about__fun-facts animfolio-stagger" data-animfolio-stagger="0.1">
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I built a model to optimize my coffee brewing ratio				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					My Jupyter notebooks are embarrassingly well-organized				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I once spent a week debugging a model only to find a data labeling error				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I dream in confusion matrices				</div>
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="experience" class="animfolio-section animfolio-section--experience animfolio-section--align-center" data-animfolio-section="experience"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Experience</h2></div>
+<div class="animfolio-timeline animfolio-stagger" data-animfolio-animate="fade-up" data-animfolio-stagger="0.1">
+	<div class="animfolio-timeline__line"></div>
+
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.0">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Senior Machine Learning Scientist</div>
+				<div class="animfolio-timeline__company">RetainIQ</div>
+				<div class="animfolio-timeline__date">
+					Mar 2021 — Present											· San Francisco, CA									</div>
+									<div class="animfolio-timeline__description">Lead the customer intelligence ML team building churn, propensity, and lifetime-value models. Shipped a gradient-boosted churn predictor (94% accuracy) that saved $2.3M in annual retention costs, and established the MLOps practice covering feature stores, model monitoring, and automated retraining.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">Python</span>
+													<span class="animfolio-card__tag">XGBoost</span>
+													<span class="animfolio-card__tag">MLOps</span>
+													<span class="animfolio-card__tag">FastAPI</span>
+													<span class="animfolio-card__tag">AWS SageMaker</span>
+											</div>
+							</div>
+		</div>
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Data Scientist</div>
+				<div class="animfolio-timeline__company">LogiChain Supply Co.</div>
+				<div class="animfolio-timeline__date">
+					Jul 2018 — Feb 2021											· Austin, TX									</div>
+									<div class="animfolio-timeline__description">Built demand-forecasting and anomaly-detection systems across a global supply chain. Delivered a real-time analytics dashboard tracking 15 KPIs and a time-series forecasting model that cut inventory holding costs by 18% across three regional warehouses.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">Python</span>
+													<span class="animfolio-card__tag">Prophet</span>
+													<span class="animfolio-card__tag">Apache Kafka</span>
+													<span class="animfolio-card__tag">Tableau</span>
+													<span class="animfolio-card__tag">SQL</span>
+											</div>
+							</div>
+		</div>
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.2">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Research Scientist Intern</div>
+				<div class="animfolio-timeline__company">AI Research Lab</div>
+				<div class="animfolio-timeline__date">
+					May 2017 — Aug 2017											· Remote									</div>
+									<div class="animfolio-timeline__description">Researched fine-tuning strategies for transformer-based language models. Co-authored a workshop paper on transfer learning for low-resource sentiment classification and prototyped the multilingual NLP pipeline later productionized in industry.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">PyTorch</span>
+													<span class="animfolio-card__tag">Hugging Face</span>
+													<span class="animfolio-card__tag">NLP</span>
+													<span class="animfolio-card__tag">Research</span>
+											</div>
+							</div>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="skills" class="animfolio-section animfolio-section--skills animfolio-section--align-center" data-animfolio-section="skills"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Skills</h2></div>
+<div class="animfolio-skills animfolio-skills--bars" data-animfolio-animate="fade-up">
+
+			<!-- Progress Bars -->
+					<div class="animfolio-grid animfolio-grid--2 animfolio-stagger" data-animfolio-stagger="0.1">
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">Programming</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Python / Pandas</span>
+										<span class="animfolio-skills__value">95%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 95%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>R</span>
+										<span class="animfolio-skills__value">85%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 85%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>SQL</span>
+										<span class="animfolio-skills__value">90%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 90%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Jupyter / Notebooks</span>
+										<span class="animfolio-skills__value">92%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 92%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">ML &amp; AI</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>TensorFlow / PyTorch</span>
+										<span class="animfolio-skills__value">85%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 85%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Scikit-learn</span>
+										<span class="animfolio-skills__value">90%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 90%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>NLP</span>
+										<span class="animfolio-skills__value">78%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 78%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Computer Vision</span>
+										<span class="animfolio-skills__value">72%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 72%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">Visualization</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Matplotlib / Seaborn</span>
+										<span class="animfolio-skills__value">90%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 90%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Tableau</span>
+										<span class="animfolio-skills__value">80%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 80%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>D3.js</span>
+										<span class="animfolio-skills__value">70%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 70%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+							</div>
+		
+	
+	</div>
+</div><!-- .animfolio-inner --></section><section id="projects" class="animfolio-section animfolio-section--projects animfolio-section--align-center" data-animfolio-section="projects"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Featured Projects</h2></div>
+<div class="animfolio-f07-projects animfolio-stagger" data-animfolio-stagger="0.12">
+					<article class="animfolio-project animfolio-project--notebook animfolio-stagger__item">
+
+			<span class="animfolio-f07-cell-badge animfolio-project__cell" aria-hidden="true">1</span>
+
+										<img src="./assets/images/project-dashboard.jpg" alt="Customer Churn Prediction Model" class="animfolio-project__thumb" width="640" height="360" loading="lazy" decoding="async">
+			
+							<h3 class="animfolio-project__title">Customer Churn Prediction Model</h3>
+			
+							<div class="animfolio-project__abstract animfolio-project__citation">
+					<span class="animfolio-project__abstract-label" aria-hidden="true">Abstract.</span>
+					Gradient-boosted model predicting customer churn 30 days in advance with 94% accuracy. Deployed via real-time API serving 100K predictions/day. Saved $2.3M in annual retention costs.				</div>
+			
+							<p class="animfolio-project__keywords">
+					<span class="animfolio-project__keywords-label" aria-hidden="true">Keywords:</span>
+											<span class="animfolio-project__keyword animfolio-card__tag">Python</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">XGBoost</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">scikit-learn</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">FastAPI</span>									</p>
+			
+							<div class="animfolio-project__links">
+											<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-project__link">
+							<span aria-hidden="true">[PDF]</span>
+							<span class="animfolio-screen-reader-text">Read paper or view live demo</span>
+						</a>
+																<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-project__link">
+							<span aria-hidden="true">[code]</span>
+							<span class="animfolio-screen-reader-text">View source code</span>
+						</a>
+														</div>
+			
+					</article>
+					<article class="animfolio-project animfolio-project--notebook animfolio-stagger__item">
+
+			<span class="animfolio-f07-cell-badge animfolio-project__cell" aria-hidden="true">2</span>
+
+										<img src="./assets/images/project-tech.jpg" alt="Sentiment Analysis NLP Pipeline" class="animfolio-project__thumb" width="640" height="360" loading="lazy" decoding="async">
+			
+							<h3 class="animfolio-project__title">Sentiment Analysis NLP Pipeline</h3>
+			
+							<div class="animfolio-project__abstract animfolio-project__citation">
+					<span class="animfolio-project__abstract-label" aria-hidden="true">Abstract.</span>
+					Fine-tuned BERT model for multi-label sentiment analysis across 12 languages. Processes 500K social media posts daily with an F1 score of 0.91.				</div>
+			
+							<p class="animfolio-project__keywords">
+					<span class="animfolio-project__keywords-label" aria-hidden="true">Keywords:</span>
+											<span class="animfolio-project__keyword animfolio-card__tag">PyTorch</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">Hugging Face</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">SpaCy</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">Docker</span>									</p>
+			
+							<div class="animfolio-project__links">
+											<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-project__link">
+							<span aria-hidden="true">[PDF]</span>
+							<span class="animfolio-screen-reader-text">Read paper or view live demo</span>
+						</a>
+																<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-project__link">
+							<span aria-hidden="true">[code]</span>
+							<span class="animfolio-screen-reader-text">View source code</span>
+						</a>
+														</div>
+			
+					</article>
+					<article class="animfolio-project animfolio-project--notebook animfolio-stagger__item">
+
+			<span class="animfolio-f07-cell-badge animfolio-project__cell" aria-hidden="true">3</span>
+
+										<img src="./assets/images/project-dashboard.jpg" alt="Real-time Analytics Dashboard" class="animfolio-project__thumb" width="640" height="360" loading="lazy" decoding="async">
+			
+							<h3 class="animfolio-project__title">Real-time Analytics Dashboard</h3>
+			
+							<div class="animfolio-project__abstract animfolio-project__citation">
+					<span class="animfolio-project__abstract-label" aria-hidden="true">Abstract.</span>
+					Interactive data visualization dashboard for supply chain metrics. Real-time streaming data, anomaly detection alerts, and drill-down capabilities across 15 KPIs.				</div>
+			
+							<p class="animfolio-project__keywords">
+					<span class="animfolio-project__keywords-label" aria-hidden="true">Keywords:</span>
+											<span class="animfolio-project__keyword animfolio-card__tag">D3.js</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">Python</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">Apache Kafka</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">Tableau</span>									</p>
+			
+							<div class="animfolio-project__links">
+											<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-project__link">
+							<span aria-hidden="true">[PDF]</span>
+							<span class="animfolio-screen-reader-text">Read paper or view live demo</span>
+						</a>
+																<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-project__link">
+							<span aria-hidden="true">[code]</span>
+							<span class="animfolio-screen-reader-text">View source code</span>
+						</a>
+														</div>
+			
+					</article>
+					<article class="animfolio-project animfolio-project--notebook animfolio-stagger__item">
+
+			<span class="animfolio-f07-cell-badge animfolio-project__cell" aria-hidden="true">4</span>
+
+										<img src="./assets/images/project-dashboard.jpg" alt="Causal Inference in Ad Spend — Research Paper" class="animfolio-project__thumb" width="640" height="360" loading="lazy" decoding="async">
+			
+							<h3 class="animfolio-project__title">Causal Inference in Ad Spend — Research Paper</h3>
+			
+							<div class="animfolio-project__abstract animfolio-project__citation">
+					<span class="animfolio-project__abstract-label" aria-hidden="true">Abstract.</span>
+					Published research on causal inference methods for digital advertising attribution. Accepted at NeurIPS 2024 workshop. Novel approach to measuring incremental lift without A/B tests.				</div>
+			
+							<p class="animfolio-project__keywords">
+					<span class="animfolio-project__keywords-label" aria-hidden="true">Keywords:</span>
+											<span class="animfolio-project__keyword animfolio-card__tag">R</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">Stan</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">Bayesian Statistics</span><span class="animfolio-project__keyword-sep" aria-hidden="true">·</span>											<span class="animfolio-project__keyword animfolio-card__tag">LaTeX</span>									</p>
+			
+							<div class="animfolio-project__links">
+											<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-project__link">
+							<span aria-hidden="true">[PDF]</span>
+							<span class="animfolio-screen-reader-text">Read paper or view live demo</span>
+						</a>
+																<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-project__link">
+							<span aria-hidden="true">[code]</span>
+							<span class="animfolio-screen-reader-text">View source code</span>
+						</a>
+														</div>
+			
+					</article>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="stats" class="animfolio-section animfolio-section--stats animfolio-section--align-center" data-animfolio-section="stats"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">By the Numbers</h2></div><div class="animfolio-stats animfolio-stagger" data-animfolio-stagger="0.15">
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="35" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">35+</span>
+			<span class="animfolio-stat__label">Models in Production</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="12" data-animfolio-decimals="0" data-animfolio-suffix="" data-animfolio-prefix="">12</span>
+			<span class="animfolio-stat__label">Research Papers</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="50" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">50+</span>
+			<span class="animfolio-stat__label">Datasets Analyzed</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="94" data-animfolio-decimals="0" data-animfolio-suffix="%" data-animfolio-prefix="">94%</span>
+			<span class="animfolio-stat__label">Best Model Accuracy</span>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="education" class="animfolio-section animfolio-section--education animfolio-section--align-center" data-animfolio-section="education"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Education</h2></div>
+<div class="animfolio-timeline animfolio-stagger" data-animfolio-animate="fade-up" data-animfolio-stagger="0.1">
+	<div class="animfolio-timeline__line"></div>
+
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.0">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+				<div class="animfolio-timeline__role">
+					PhD											— Statistics									</div>
+				<div class="animfolio-timeline__company">Stanford University</div>
+				<div class="animfolio-timeline__date">
+					2013 — 2018				</div>
+									<div class="animfolio-timeline__description">Dissertation on Bayesian methods for causal inference in observational data. Published two first-author papers at NeurIPS and ICML and served as a teaching assistant for graduate-level machine learning.</div>
+							</div>
+		</div>
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+				<div class="animfolio-timeline__role">
+					BS											— Mathematics &amp; Computer Science									</div>
+				<div class="animfolio-timeline__company">University of Michigan</div>
+				<div class="animfolio-timeline__date">
+					2009 — 2013				</div>
+									<div class="animfolio-timeline__description">Graduated summa cum laude with a double major. Conducted undergraduate research in applied statistics and led the campus data science club.</div>
+							</div>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="achievements" class="animfolio-section animfolio-section--achievements animfolio-section--align-center" data-animfolio-section="achievements"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Publications &amp; Certifications</h2></div><div class="animfolio-grid animfolio-grid--3 animfolio-stagger" data-animfolio-stagger="0.1">
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">Causal Inference for Ad Attribution</h3>
+							<span class="animfolio-card__meta">NeurIPS 2024 Workshop (Causal ML)</span>
+										<span class="animfolio-card__meta">2024</span>
+								</div>
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">Transfer Learning for Low-Resource Sentiment Classification</h3>
+							<span class="animfolio-card__meta">ICML 2019 Proceedings</span>
+										<span class="animfolio-card__meta">2019</span>
+								</div>
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">AWS Certified Machine Learning — Specialty</h3>
+							<span class="animfolio-card__meta">Amazon Web Services</span>
+										<span class="animfolio-card__meta">2022</span>
+								</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="contact" class="animfolio-section animfolio-section--contact animfolio-section--align-center" data-animfolio-section="contact"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Contact</h2></div><div class="animfolio-contact" data-animfolio-animate="fade-up">
+
+			<p class="animfolio-contact__heading">Let's Build Something Data-Driven</p>
+				<p class="animfolio-contact__description">Have a dataset that needs unlocking or a model that needs shipping? I collaborate on research, ML consulting, and production data science. Reach out and let us talk about your problem.</p>
+	
+	<div class="animfolio-contact__layout">
+		<!-- Left: Contact Form -->
+		<div class="animfolio-contact__form-wrapper">
+							<form class="animfolio-form" novalidate="">
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-name">Name</label>
+						<input type="text" name="name" id="animfolio-name" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Name is required.</span>
+					</div>
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-email">Email</label>
+						<input type="email" name="email" id="animfolio-email" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Valid email is required.</span>
+					</div>
+										<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-message">Message</label>
+						<textarea name="message" id="animfolio-message" class="animfolio-form__textarea" rows="5" required="" aria-required="true"></textarea>
+						<span class="animfolio-form__error">Message is required.</span>
+					</div>
+											<div class="animfolio-form__honeypot">
+							<input type="text" name="animfolio_hp" tabindex="-1" autocomplete="off">
+						</div>
+										<input type="hidden" name="animfolio_ts" value="">
+					<input type="hidden" name="animfolio_js" value="">
+					<div class="animfolio-form__success">Thank you! I'll get back to you soon.</div>
+					<button type="submit" class="animfolio-button animfolio-button--primary animfolio-form__submit">
+						Send Message					</button>
+				</form>
+					</div>
+
+		<!-- Right: QR Code -->
+		<div class="animfolio-contact__qr-wrapper"><div class="animfolio-qr" data-animfolio-qr="" data-animfolio-vcard="QkVHSU46VkNBUkQNClZFUlNJT046My4wDQpGTjpEci4gTWF5YSBLcmlzaG5hbg0KTjpNYXlhIEtyaXNobmFuO0RyLjs7Ow0KVElUTEU6RGF0YSBTY2llbnRpc3QgJiBSZXNlYXJjaGVyDQpFTUFJTDtUWVBFPVdPUks6eW91QGV4YW1wbGUuY29tDQpVUkw6aHR0cHM6Ly95b3VyLXdlYnNpdGUuZXhhbXBsZQ0KTk9URTpJJ20gYSBkYXRhIHNjaWVudGlzdCBhbmQgTUwgZW5naW5lZXIgd2l0aCBhIFBoRCBpbiBTdGF0aXN0aWNzIGFuZCA2IHllYXJzIG9mIGluZHVzdHJ5IGV4cGVyaWVuY2UuIEkgc3BlY2lhbGl6ZSBpbiBidWlsZGluZyBwcm9kdWN0aW9uIE1MIHN5c3RlbXMgdGhhdCBkcml2ZSByZWFsIGJ1c2luZXNzIG91dGNvbWVzLiBNeSB3b3JrIHNwYW5zIE5MUFwsIGNcbkdpdGh1YjogaHR0cHM6Ly9naXRodWIuY29tL3lvdXJ1c2VybmFtZVxuTGlua2VkaW46IGh0dHBzOi8vbGlua2VkaW4uY29tL2luL3lvdXJ1c2VybmFtZVxuVHdpdHRlcjogaHR0cHM6Ly90d2l0dGVyLmNvbS95b3VydXNlcm5hbWVcbkRyaWJiYmxlOiBodHRwczovL2RyaWJiYmxlLmNvbS95b3VydXNlcm5hbWUNClgtU09DSUFMUFJPRklMRTtUWVBFPWdpdGh1YjpodHRwczovL2dpdGh1Yi5jb20veW91cnVzZXJuYW1lDQpYLVNPQ0lBTFBST0ZJTEU7VFlQRT1saW5rZWRpbjpodHRwczovL2xpbmtlZGluLmNvbS9pbi95b3VydXNlcm5hbWUNClgtU09DSUFMUFJPRklMRTtUWVBFPXR3aXR0ZXI6aHR0cHM6Ly90d2l0dGVyLmNvbS95b3VydXNlcm5hbWUNClgtU09DSUFMUFJPRklMRTtUWVBFPWRyaWJiYmxlOmh0dHBzOi8vZHJpYmJibGUuY29tL3lvdXJ1c2VybmFtZQ0KUkVWOjIwMjYtMDctMTJUMTM6MjI6NTFaDQpFTkQ6VkNBUkQNCg=="><div class="animfolio-qr__code" style="width:200px;height:200px"></div><p class="animfolio-qr__caption">Scan to save my contact</p><a href="./assets/contact.vcf" class="animfolio-qr__download animfolio-button animfolio-button--secondary" download="">Download vCard</a></div></div>	</div>
+
+</div>
+</div><!-- .animfolio-inner --></section><button class="animfolio-back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 15V5M10 5L5 10M10 5L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div class="animfolio-progress"><div class="animfolio-progress__bar"></div></div><div class="animfolio-footer-social animfolio-social-icons animfolio-social-icons--outline"><a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="animfolio-social__label">Github</span></a><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg><span class="animfolio-social__label">Linkedin</span></a><a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg><span class="animfolio-social__label">Twitter</span></a><a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg><span class="animfolio-social__label">Dribbble</span></a><a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span class="animfolio-social__label">Email</span></a></div></div>
+
+<div aria-label="Color scheme preview (demo only)" style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99999;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(18,18,24,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 30px rgba(0,0,0,.4)"><span style="padding:0 6px 0 10px;font:700 11px/1 -apple-system,sans-serif;letter-spacing:.4px;text-transform:uppercase;color:#8b90a0">Colors</span><a href="index.html" title="Notebook Blue" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#2563EB;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Notebook Blue</a><a href="v2.html" aria-current="true" title="Jupyter Orange" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#C05E10;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Jupyter Orange</a><a href="v3.html" title="Academic Gray" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#6366F1;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Academic Gray</a></div>
+
+<script>
+var animfolioSettings = {"animationIntensity":"medium","respectReducedMotion":"1","colorScheme":"light","smoothScroll":"1","scrollBehavior":"smooth","customCursor":"","backToTop":"1","progressBar":"1","darkModeToggle":"1","debugMode":""};
+//# sourceURL=animfolio-engine-js-extra
+</script>
+<script src="./assets/js/wp-shim.js"></script>
+<script src="./assets/js/animfolio-engine.js"></script>
+<script src="./assets/js/modules/scroll-trigger.js"></script>
+<script src="./assets/js/modules/typed-text.js"></script>
+<script src="./assets/js/modules/counter.js"></script>
+<script src="./assets/js/modules/timeline-draw.js"></script>
+<script src="./assets/js/modules/stagger.js"></script>
+<script src="./assets/js/modules/parallax.js"></script>
+<script src="./assets/js/modules/progress-bar.js"></script>
+<script src="./assets/js/modules/smooth-scroll.js"></script>
+<script src="./assets/js/modules/theme-toggle.js"></script>
+<script src="./assets/js/vendor/qrcode-generator.min.js"></script>
+<script src="./assets/js/animfolio-qr.js"></script>
+<script src="./assets/js/animfolio-lightbox.js"></script>
+<script src="./assets/js/animfolio-casestudy.js"></script>
+<script src="./assets/js/format.js"></script>
+<script src="./assets/js/animfolio-contact-static.js"></script>
+</body>
+</html>

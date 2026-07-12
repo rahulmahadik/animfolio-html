@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Daniel Mercer
+N:Mercer;Daniel;;;
+TITLE:Senior Full-Stack Engineer
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:I'm a full-stack developer with 8+ years of experience building web applications that solve real problems. I'm passionate about clean architecture\, developer experience\, and open source. When I'm not\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:22:41Z
+END:VCARD

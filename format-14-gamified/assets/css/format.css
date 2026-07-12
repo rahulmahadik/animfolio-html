@@ -1,0 +1,1046 @@
+/**
+ * AnimFolio — Format 14: Gamified Quest
+ *
+ * RPG character sheet, XP bars, quest log, achievement badges,
+ * skill tree, NPC dialogues, pixel accents.
+ *
+ * Font: "Press Start 2P" for headings (loaded via Google Fonts).
+ * Palette: #0C1310 dark bg, #FFC53D warm amber accent, #34E89E emerald-mint XP green.
+ */
+
+/* Press Start 2P font loaded via asset manager (no CDN @import for WP.org compliance) */
+
+/* ================================================================
+   Custom Properties
+   ================================================================ */
+
+.animfolio-container--format-14 {
+    --af14-gold: var(--animfolio-accent, #FFC53D);
+    --af14-gold-rgb: 255, 197, 61;
+    --af14-green: var(--animfolio-secondary, #34E89E);
+    --af14-green-rgb: 52, 232, 158;
+    --af14-bg: #0C1310;
+    --af14-bg-card: #13201A;
+    --af14-bg-elevated: #1A2C22;
+    --af14-text: #ECF2EC;
+    --af14-text-muted: #94A89B;
+    --af14-border: color-mix(in srgb, var(--animfolio-accent, #FFC53D) 15%, transparent);
+    --af14-border-strong: color-mix(in srgb, var(--animfolio-accent, #FFC53D) 35%, transparent);
+    --af14-glow: 0 0 20px color-mix(in srgb, var(--animfolio-accent, #FFC53D) 15%, transparent);
+    --af14-pixel: 'Press Start 2P', monospace;
+    --af14-body: 'Inter', -apple-system, sans-serif;
+
+    /* Map to base variables so any base components used inherit correctly */
+    --animfolio-accent: var(--animfolio-accent, #FFC53D);
+    --animfolio-accent-hover: color-mix(in srgb, var(--animfolio-accent, #FFC53D) 80%, #fff);
+    --animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #FFC53D) 10%, transparent);
+    --animfolio-secondary: var(--animfolio-secondary, #34E89E);
+    --animfolio-bg: #0C1310;
+    --animfolio-bg-secondary: #13201A;
+    --animfolio-bg-tertiary: #1A2C22;
+    --animfolio-text: #ECF2EC;
+    --animfolio-text-secondary: #C5D2C7;
+    --animfolio-text-muted: #94A89B;
+    --animfolio-border: color-mix(in srgb, var(--animfolio-accent, #FFC53D) 15%, transparent);
+    --animfolio-font-heading: 'Inter', -apple-system, sans-serif;
+    --animfolio-font-body: 'Inter', -apple-system, sans-serif;
+    --animfolio-font-mono: 'Press Start 2P', monospace;
+}
+
+/* Light scheme — higher specificity (0,3,0) so it wins over the unconditional
+   dark block above when the visitor toggles to light. Without this the format
+   ignored the light toggle entirely. */
+.animfolio-container--format-14.animfolio-container--light {
+    --af14-gold: var(--animfolio-accent, #7D5A0B);
+    --af14-gold-rgb: 125, 90, 11;
+    --af14-green: var(--animfolio-secondary, #059669);
+    --af14-green-rgb: 5, 150, 105;
+    --af14-bg: #F0EDE4;
+    --af14-bg-card: #E8E4D9;
+    --af14-bg-elevated: #DED9CC;
+    --af14-text: #1C1917;
+    --af14-text-muted: #57534E;
+    --af14-border: rgba(28, 25, 23, 0.12);
+    --af14-border-strong: rgba(28, 25, 23, 0.28);
+    --af14-glow: 0 0 20px color-mix(in srgb, var(--animfolio-accent, #7D5A0B) 12%, transparent);
+
+    --animfolio-accent: var(--animfolio-accent, #7D5A0B);
+    --animfolio-accent-hover: color-mix(in srgb, var(--animfolio-accent, #7D5A0B) 85%, #000);
+    --animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #7D5A0B) 10%, transparent);
+    --animfolio-secondary: var(--animfolio-secondary, #059669);
+    --animfolio-bg: #F0EDE4;
+    --animfolio-bg-secondary: #E8E4D9;
+    --animfolio-bg-tertiary: #DED9CC;
+    --animfolio-text: #1C1917;
+    --animfolio-text-secondary: #57534E;
+    --animfolio-text-muted: #57534E;
+    --animfolio-border: rgba(28, 25, 23, 0.12);
+}
+
+/* ── Nav: Pixel font nav with gold borders ── */
+
+.animfolio-container--format-14 .animfolio-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(12, 19, 16, 0.92);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid color-mix(in srgb, var(--animfolio-accent, #FFC53D) 20%, transparent);
+    padding: 0 2rem;
+}
+
+.animfolio-container--format-14 .animfolio-nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--animfolio-container, 1200px);
+    margin: 0 auto;
+    height: 56px;
+}
+
+.animfolio-container--format-14 .animfolio-nav__logo {
+    font-family: var(--af14-pixel);
+    font-size: 0.6rem;
+    color: var(--af14-gold);
+    text-decoration: none;
+    text-shadow: 0 0 8px color-mix(in srgb, var(--af14-gold) 40%, transparent);
+    letter-spacing: 1px;
+}
+
+.animfolio-container--format-14 .animfolio-nav__links {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.animfolio-container--format-14 .animfolio-nav__link {
+    font-family: var(--af14-pixel);
+    font-size: 0.625rem;
+    color: var(--af14-text-muted);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1px solid color-mix(in srgb, var(--af14-gold) 15%, transparent);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+}
+
+.animfolio-container--format-14 .animfolio-nav__link:hover {
+    color: var(--af14-gold);
+    border-color: color-mix(in srgb, var(--af14-gold) 40%, transparent);
+    background: color-mix(in srgb, var(--af14-gold) 6%, transparent);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--af14-gold) 30%, transparent);
+}
+
+.animfolio-container--format-14 .animfolio-nav__link--active {
+    color: var(--af14-bg);
+    background: var(--af14-gold);
+    border-color: var(--af14-gold);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--af14-gold) 40%, transparent);
+}
+
+/* ── Base button override: dark text on gold for contrast ── */
+
+.animfolio-container--format-14 .animfolio-button--primary,
+.animfolio-container--format-14 a.animfolio-button--primary {
+    background: var(--af14-gold);
+    color: var(--animfolio-on-accent, #0C1310);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--animfolio-accent, #FFC53D) 30%, transparent);
+}
+
+.animfolio-container--format-14 .animfolio-button--primary:hover,
+.animfolio-container--format-14 a.animfolio-button--primary:hover {
+    color: var(--animfolio-on-accent, #0C1310);
+}
+
+/* ================================================================
+   Main Wrapper — Scanline Overlay
+   ================================================================ */
+
+.animfolio-container--format-14 {
+    overflow-x: hidden;
+}
+
+.animfolio-rpg {
+    background: var(--af14-bg);
+    color: var(--af14-text);
+    font-family: var(--af14-body);
+    line-height: 1.6;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.animfolio-rpg::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        color-mix(in srgb, var(--af14-gold) 1.5%, transparent) 2px,
+        color-mix(in srgb, var(--af14-gold) 1.5%, transparent) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ================================================================
+   Character Sheet (Hero)
+   ================================================================ */
+
+.animfolio-rpg__character-sheet {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 0;
+    position: relative;
+    background:
+        radial-gradient(ellipse at 20% 50%, color-mix(in srgb, var(--af14-gold) 6%, transparent) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, color-mix(in srgb, var(--af14-green) 4%, transparent) 0%, transparent 50%),
+        var(--af14-bg);
+}
+
+.animfolio-rpg__character-sheet .animfolio-inner {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    background: var(--af14-bg-card);
+    border: 2px solid var(--af14-border-strong);
+    border-radius: 16px;
+    padding: 48px;
+    box-shadow: var(--af14-glow), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Gold top-edge accent */
+.animfolio-rpg__character-sheet .animfolio-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--af14-gold), var(--af14-green), var(--af14-gold), transparent);
+}
+
+/* ── Portrait ── */
+
+.animfolio-rpg__portrait {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.animfolio-rpg__portrait img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid var(--af14-gold);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--af14-gold) 30%, transparent), 0 0 48px color-mix(in srgb, var(--af14-gold) 10%, transparent);
+    object-fit: cover;
+    display: block;
+}
+
+.animfolio-rpg__portrait-placeholder {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid var(--af14-gold);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--af14-gold) 30%, transparent);
+    background: var(--af14-bg-elevated);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    line-height: 1;
+    overflow: hidden;
+}
+
+.animfolio-rpg__level-badge {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--af14-pixel);
+    font-size: 0.55rem;
+    color: var(--af14-bg);
+    background: linear-gradient(135deg, var(--af14-gold), color-mix(in srgb, var(--af14-gold) 78%, #000));
+    padding: 5px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    box-shadow: 0 2px 12px color-mix(in srgb, var(--af14-gold) 50%, transparent);
+    letter-spacing: 0.5px;
+}
+
+/* ── Info Block ── */
+
+.animfolio-rpg__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.animfolio-rpg__name {
+    font-family: var(--af14-pixel);
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    color: var(--af14-gold);
+    margin: 0 0 8px;
+    text-shadow: 0 0 20px color-mix(in srgb, var(--af14-gold) 30%, transparent);
+    line-height: 1.4;
+}
+
+.animfolio-rpg__class {
+    font-size: 1rem;
+    color: var(--af14-text-muted);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* ── XP Bar ── */
+
+.animfolio-rpg__xp-bar {
+    margin-bottom: 24px;
+}
+
+.animfolio-rpg__xp-label {
+    font-family: var(--af14-pixel);
+    font-size: 0.625rem;
+    color: var(--af14-green);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.animfolio-rpg__xp-track {
+    width: 100%;
+    height: 22px;
+    background: var(--af14-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--af14-green) 20%, transparent);
+    position: relative;
+}
+
+.animfolio-rpg__xp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--af14-green), color-mix(in srgb, var(--af14-green) 70%, #fff), var(--af14-gold));
+    border-radius: 3px;
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--af14-green) 50%, transparent), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.animfolio-rpg__xp-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, transparent 60%);
+    border-radius: 3px;
+}
+
+/* ── Action Buttons ── */
+
+.animfolio-rpg__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.animfolio-rpg__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    font-family: var(--af14-pixel);
+    font-size: 0.55rem;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid var(--af14-gold);
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.animfolio-rpg__btn--primary {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--af14-gold) 20%, transparent), color-mix(in srgb, var(--af14-gold) 5%, transparent));
+    color: var(--af14-gold);
+}
+
+.animfolio-rpg__btn--primary:hover {
+    background: var(--af14-gold);
+    color: var(--af14-bg);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--af14-gold) 40%, transparent);
+    transform: translateY(-2px);
+}
+
+.animfolio-rpg__btn--secondary {
+    border-color: var(--af14-text-muted);
+    color: var(--af14-text-muted);
+    background: transparent;
+}
+
+.animfolio-rpg__btn--secondary:hover {
+    border-color: var(--af14-gold);
+    color: var(--af14-gold);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--af14-gold) 20%, transparent);
+    transform: translateY(-2px);
+}
+
+/* ================================================================
+   Section Base
+   ================================================================ */
+
+.animfolio-rpg__section {
+    padding: 80px 0;
+}
+
+.animfolio-rpg__section-title {
+    font-family: var(--af14-pixel);
+    font-size: clamp(0.7rem, 2vw, 1.1rem);
+    color: var(--af14-gold);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    text-shadow: 0 0 12px color-mix(in srgb, var(--af14-gold) 20%, transparent);
+    letter-spacing: 1px;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* ── Backstory Scroll ── */
+
+.animfolio-rpg__scroll {
+    background: var(--af14-bg-card);
+    border: 1px solid var(--af14-border);
+    border-radius: 12px;
+    padding: 32px;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--af14-text);
+    position: relative;
+    box-shadow: var(--af14-glow);
+}
+
+.animfolio-rpg__scroll::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--af14-gold), transparent);
+    border-radius: 12px 12px 0 0;
+}
+
+/* ================================================================
+   Quest Log (Experience)
+   ================================================================ */
+
+.animfolio-rpg__quest-log {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--af14-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--af14-bg-card);
+}
+
+.animfolio-rpg__quest {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background 0.25s ease;
+}
+
+.animfolio-rpg__quest:last-child {
+    border-bottom: none;
+}
+
+.animfolio-rpg__quest:hover {
+    background: var(--af14-bg-elevated);
+}
+
+.animfolio-rpg__quest--completed .animfolio-rpg__quest-status {
+    background: var(--af14-green);
+    color: var(--af14-bg);
+    border-color: var(--af14-green);
+}
+
+.animfolio-rpg__quest-status {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 2px solid var(--af14-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.animfolio-rpg__quest-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.animfolio-rpg__quest-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+    color: var(--af14-text);
+}
+
+.animfolio-rpg__quest-giver {
+    font-size: 0.85rem;
+    color: var(--af14-gold);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.animfolio-rpg__quest-duration {
+    font-size: 0.78rem;
+    color: var(--af14-text-muted);
+    margin-bottom: 8px;
+}
+
+.animfolio-rpg__quest-desc {
+    font-size: 0.9rem;
+    color: var(--af14-text-muted);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.animfolio-rpg__quest-rewards {
+    font-size: 0.78rem;
+    color: var(--af14-text-muted);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.animfolio-rpg__quest-xp {
+    font-family: var(--af14-pixel);
+    font-size: 0.55rem;
+    color: var(--af14-green);
+    flex-shrink: 0;
+    margin-inline-start: auto;
+    padding-top: 4px;
+    text-shadow: 0 0 8px color-mix(in srgb, var(--af14-green) 40%, transparent);
+}
+
+/* ── Tags / Pills ── */
+
+.animfolio-rpg__tag {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 0.7rem;
+    border: 1px solid var(--af14-border-strong);
+    border-radius: 20px;
+    color: var(--af14-gold);
+    background: color-mix(in srgb, var(--af14-gold) 6%, transparent);
+    white-space: nowrap;
+}
+
+/* ================================================================
+   Skill Tree
+   ================================================================ */
+
+.animfolio-rpg__skill-tree {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.animfolio-rpg__skill-branch {
+    background: var(--af14-bg-card);
+    border: 1px solid var(--af14-border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.animfolio-rpg__skill-branch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--af14-gold), var(--af14-green));
+}
+
+.animfolio-rpg__branch-name {
+    font-family: var(--af14-pixel);
+    font-size: 0.6rem;
+    color: var(--af14-gold);
+    text-transform: uppercase;
+    margin: 0 0 20px;
+    letter-spacing: 1px;
+}
+
+.animfolio-rpg__skills {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.animfolio-rpg__skill-node {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+    opacity: 0.45;
+    filter: grayscale(0.5);
+}
+
+.animfolio-rpg__skill-node--unlocked {
+    opacity: 1;
+    filter: none;
+    border-color: var(--af14-border);
+}
+
+.animfolio-rpg__skill-node--unlocked:hover {
+    border-color: var(--af14-border-strong);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--af14-gold) 10%, transparent);
+    background: color-mix(in srgb, var(--af14-gold) 4%, transparent);
+}
+
+.animfolio-rpg__skill-icon {
+    font-size: 1.1rem;
+    color: var(--af14-gold);
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.animfolio-rpg__skill-node--unlocked .animfolio-rpg__skill-icon {
+    text-shadow: 0 0 10px color-mix(in srgb, var(--af14-gold) 50%, transparent);
+}
+
+.animfolio-rpg__skill-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+}
+
+.animfolio-rpg__skill-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.animfolio-rpg__skill-stars {
+    font-size: 0.7rem;
+    color: var(--af14-gold);
+    flex-shrink: 0;
+    letter-spacing: 1px;
+}
+
+/* ================================================================
+   Achievements (Projects)
+   ================================================================ */
+
+.animfolio-rpg__achievements {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.animfolio-rpg__achievement {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--af14-bg-card);
+    border: 1px solid var(--af14-border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+    filter: grayscale(0.6);
+}
+
+.animfolio-rpg__achievement--unlocked {
+    opacity: 1;
+    filter: none;
+    border-color: var(--af14-border-strong);
+    animation: animfolio-glow-pulse 3s ease-in-out infinite;
+}
+
+.animfolio-rpg__achievement--unlocked:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px color-mix(in srgb, var(--af14-gold) 15%, transparent);
+}
+
+.animfolio-rpg__achievement-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--af14-gold) 15%, transparent), color-mix(in srgb, var(--af14-gold) 4%, transparent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+    border: 2px solid var(--af14-border-strong);
+    overflow: hidden;
+}
+
+.animfolio-rpg__achievement-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.animfolio-rpg__achievement-info strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.animfolio-rpg__achievement-info p {
+    font-size: 0.85rem;
+    color: var(--af14-text-muted);
+    line-height: 1.5;
+    margin: 0 0 10px;
+}
+
+.animfolio-rpg__achievement-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* ================================================================
+   Stats Grid
+   ================================================================ */
+
+.animfolio-rpg__stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.animfolio-rpg__stat-card {
+    background: var(--af14-bg-card);
+    border: 1px solid var(--af14-border);
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.animfolio-rpg__stat-card:hover {
+    border-color: var(--af14-border-strong);
+    box-shadow: var(--af14-glow);
+    transform: translateY(-3px);
+}
+
+.animfolio-rpg__stat-value {
+    display: block;
+    font-family: var(--af14-pixel);
+    font-size: clamp(0.75rem, 2.5vw, 1.2rem);
+    background: linear-gradient(135deg, var(--af14-gold), var(--af14-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    line-height: 1.5;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.animfolio-rpg__stat-label {
+    font-size: 0.82rem;
+    color: var(--af14-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ================================================================
+   NPC Dialogues (Testimonials)
+   ================================================================ */
+
+.animfolio-rpg__dialogues {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.animfolio-rpg__dialogue {
+    max-width: 680px;
+}
+
+.animfolio-rpg__dialogue:nth-child(even) {
+    margin-inline-start: auto;
+}
+
+.animfolio-rpg__dialogue-box {
+    background: var(--af14-bg-card);
+    border: 1px solid var(--af14-border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Speech bubble arrow */
+.animfolio-rpg__dialogue-box::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    inset-inline-start: 28px;
+    width: 0;
+    height: 0;
+    /* Decorative CSS triangle — physical borders are intentional (the
+       transparent left/right edges form the arrowhead, not layout). */
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--af14-bg-card);
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
+}
+
+.animfolio-rpg__dialogue:nth-child(even) .animfolio-rpg__dialogue-box::after {
+    inset-inline-start: auto;
+    inset-inline-end: 28px;
+}
+
+.animfolio-rpg__dialogue-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    font-style: italic;
+    color: var(--af14-text);
+}
+
+.animfolio-rpg__dialogue-speaker {
+    margin-top: 16px;
+    font-family: var(--af14-pixel);
+    font-size: 0.625rem;
+    color: var(--af14-gold);
+    letter-spacing: 0.5px;
+}
+
+/* ================================================================
+   Animations / Keyframes
+   ================================================================ */
+
+@keyframes animfolio-glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 12px color-mix(in srgb, var(--af14-gold) 8%, transparent);
+    }
+    50% {
+        box-shadow: 0 0 28px color-mix(in srgb, var(--af14-gold) 20%, transparent);
+    }
+}
+
+@keyframes animfolio-unlock {
+    0% {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.08);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes animfolio-xp-shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.animfolio-rpg__xp-fill {
+    background-size: 200% 100%;
+}
+
+/* ================================================================
+   Responsive
+   ================================================================ */
+
+@media (max-width: 1024px) {
+    .animfolio-rpg__character-sheet .animfolio-inner {
+        gap: 32px;
+        padding: 36px 32px;
+    }
+
+    .animfolio-rpg__skill-tree {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+
+    .animfolio-rpg__achievements {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+
+    .animfolio-rpg__stats-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .animfolio-rpg__character-sheet {
+        padding: 40px 0;
+    }
+
+    .animfolio-rpg__character-sheet .animfolio-inner {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 20px;
+        gap: 24px;
+    }
+
+    .animfolio-rpg__actions {
+        justify-content: center;
+    }
+
+    .animfolio-rpg__quest {
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .animfolio-rpg__quest-xp {
+        margin-inline-start: 0;
+        width: 100%;
+        text-align: end;
+        margin-top: 8px;
+    }
+
+    .animfolio-rpg__skill-tree {
+        grid-template-columns: 1fr;
+    }
+
+    .animfolio-rpg__achievements {
+        grid-template-columns: 1fr;
+    }
+
+    .animfolio-rpg__stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .animfolio-rpg__dialogue {
+        max-width: 100%;
+    }
+
+    .animfolio-rpg__dialogue:nth-child(even) {
+        margin-inline-start: 0;
+    }
+
+    .animfolio-rpg__section-title {
+        font-size: 0.75rem;
+    }
+
+    .animfolio-rpg__name {
+        font-size: clamp(0.85rem, 4vw, 1.2rem);
+    }
+
+    .animfolio-rpg__btn {
+        font-size: 0.625rem;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .animfolio-rpg__portrait img,
+    .animfolio-rpg__portrait-placeholder {
+        width: 110px;
+        height: 110px;
+        font-size: 2rem;
+    }
+
+    .animfolio-rpg__stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .animfolio-rpg__btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .animfolio-rpg__achievement {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .animfolio-rpg__section-title {
+        font-size: 0.65rem;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .animfolio-rpg__name {
+        font-size: clamp(0.75rem, 5vw, 1rem);
+        word-break: break-word;
+    }
+
+    .animfolio-rpg__branch-name {
+        font-size: 0.55rem;
+        word-break: break-word;
+    }
+}
+
+/* ================================================================
+   Reduced Motion
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .animfolio-rpg__xp-fill {
+        transition: none;
+    }
+
+    .animfolio-rpg__achievement--unlocked {
+        animation: none;
+    }
+
+    .animfolio-rpg__btn,
+    .animfolio-rpg__stat-card,
+    .animfolio-rpg__achievement--unlocked,
+    .animfolio-rpg__skill-node--unlocked,
+    .animfolio-rpg__quest {
+        transition: none;
+    }
+}
+
+/* Ensure RPG sections override base section padding */
+.animfolio-rpg__section {
+    padding: 60px 0;
+}
+
+.animfolio-rpg__section .animfolio-inner {
+    max-width: 900px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Reset base section alternating bg for RPG */
+.animfolio-rpg .animfolio-rpg__section:nth-child(even) {
+    background: transparent;
+}

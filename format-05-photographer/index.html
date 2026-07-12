@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio – AnimFolio Dev</title>
+<meta name="description" content="Mira Calloway — Travel & Portrait Photographer. I capture moments that last forever.">
+<style>
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('./assets/fonts/inter-latin.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('./assets/fonts/jetbrains-mono-latin.woff2') format('woff2'); }
+
+/*# sourceURL=animfolio-fonts-local-inline-css */
+</style>
+<link rel="stylesheet" href="./assets/css/animfolio-base.css">
+<link rel="stylesheet" href="./assets/css/animfolio-animations.css">
+<link rel="stylesheet" href="./assets/css/animfolio-nav.css">
+<link rel="stylesheet" href="./assets/css/animfolio-contact.css">
+<link rel="stylesheet" href="./assets/css/animfolio-gallery.css">
+<link rel="stylesheet" href="./assets/css/animfolio-qr.css">
+<link rel="stylesheet" href="./assets/css/animfolio-print.css" media="print">
+<link rel="stylesheet" href="./assets/css/format.css">
+<style id="animfolio-theme-vars">
+.animfolio-container {
+	--animfolio-accent: #D4A853 !important;
+	--animfolio-accent-hover: #ca9e49 !important;
+	--animfolio-accent-light: rgba(212, 168, 83, 0.1) !important;
+	--animfolio-accent-subtle: rgba(212, 168, 83, 0.12) !important;
+	--animfolio-accent-shadow: rgba(212, 168, 83, 0.3) !important;
+	--animfolio-accent-glow: rgba(212, 168, 83, 0.5) !important;
+	--animfolio-secondary: #8B8B8B !important;
+	--animfolio-secondary-hover: #818181 !important;
+	--animfolio-secondary-light: rgba(139, 139, 139, 0.1) !important;
+	--animfolio-on-accent: #14110f !important;
+	--animfolio-on-secondary: #14110f !important;
+	--animfolio-bg: #111111;
+	--animfolio-bg-secondary: #1a1a1a;
+	--animfolio-bg-tertiary: #1e1e1e;
+	--animfolio-text: #f5f5f5;
+	--animfolio-text-secondary: #a0a0a0;
+	--animfolio-text-muted: #8a8a8a;
+	--animfolio-border: rgba(255, 255, 255, 0.1);
+	--animfolio-border-strong: rgba(255, 255, 255, 0.2);
+	--animfolio-surface: #1a1a1a;
+	--animfolio-surface-hover: #222222;
+	--animfolio-overlay: rgba(0, 0, 0, 0.75);
+	--animfolio-success: #22c55e;
+	--animfolio-warning: #f59e0b;
+	--animfolio-error: #ef4444;
+	--animfolio-info: #3b82f6;
+	--animfolio-font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+	--animfolio-font-size-base: 16px;
+	--animfolio-font-size-h1: clamp(2.5rem, 5vw, 4rem);
+	--animfolio-font-size-h2: clamp(1.75rem, 3.5vw, 2.5rem);
+	--animfolio-font-size-h3: 1.5rem;
+	--animfolio-font-size-h4: 1.25rem;
+	--animfolio-font-weight-bold: 700;
+	--animfolio-font-weight-medium: 500;
+	--animfolio-line-height: 1.6;
+	--animfolio-letter-spacing: 0em;
+	--animfolio-container-width: 1200px;
+	--animfolio-section-spacing: 100px;
+	--animfolio-radius: 12px;
+	--animfolio-radius-sm: 6px;
+	--animfolio-radius-lg: 16px;
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.2);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.3);
+	--animfolio-duration: 0.6s;
+	--animfolio-delay: 0s;
+	--animfolio-easing: cubic-bezier(0.4, 0, 0.2, 1);
+	--animfolio-easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--animfolio-stagger: 0.1s;
+	--animfolio-transition-fast: 150ms ease;
+	--animfolio-transition-normal: 300ms ease;
+	--animfolio-transition-slow: 500ms ease;
+	--animfolio-z-base: 1;
+	--animfolio-z-dropdown: 100;
+	--animfolio-z-sticky: 200;
+	--animfolio-z-nav: 300;
+	--animfolio-z-modal: 400;
+	--animfolio-z-lightbox: 500;
+	--animfolio-z-tooltip: 600;
+	--animfolio-z-cursor: 700;
+}
+.animfolio-container--light, .animfolio-container[data-animfolio-scheme="light"] {
+	--animfolio-bg: #ffffff;
+	--animfolio-bg-secondary: #f5f5f5;
+	--animfolio-bg-tertiary: #ebebeb;
+	--animfolio-text: #111111;
+	--animfolio-text-secondary: #555555;
+	--animfolio-text-muted: #767676;
+	--animfolio-border: rgba(0, 0, 0, 0.1);
+	--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+	--animfolio-surface: #ffffff;
+	--animfolio-surface-hover: #f9f9f9;
+	--animfolio-overlay: rgba(0, 0, 0, 0.5);
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+	--animfolio-accent-light: rgba(212, 168, 83, 0.08) !important;
+	--animfolio-accent-subtle: rgba(212, 168, 83, 0.05) !important;
+	--animfolio-accent-shadow: rgba(212, 168, 83, 0.2) !important;
+	--animfolio-accent-glow: rgba(212, 168, 83, 0.15) !important;
+	--animfolio-on-accent: #14110f !important;
+	--animfolio-on-secondary: #14110f !important;
+}
+@media (prefers-color-scheme: light) {
+	.animfolio-container--auto {
+		--animfolio-bg: #ffffff;
+		--animfolio-bg-secondary: #f5f5f5;
+		--animfolio-bg-tertiary: #ebebeb;
+		--animfolio-text: #111111;
+		--animfolio-text-secondary: #555555;
+		--animfolio-text-muted: #767676;
+		--animfolio-border: rgba(0, 0, 0, 0.1);
+		--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+		--animfolio-surface: #ffffff;
+		--animfolio-surface-hover: #f9f9f9;
+		--animfolio-overlay: rgba(0, 0, 0, 0.5);
+		--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+		--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+		--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+		--animfolio-accent-light: rgba(212, 168, 83, 0.08) !important;
+		--animfolio-accent-subtle: rgba(212, 168, 83, 0.05) !important;
+		--animfolio-accent-shadow: rgba(212, 168, 83, 0.2) !important;
+		--animfolio-accent-glow: rgba(212, 168, 83, 0.15) !important;
+		--animfolio-on-accent: #14110f !important;
+		--animfolio-on-secondary: #14110f !important;
+	}
+}
+
+.animfolio-container *,.animfolio-container *::before,.animfolio-container *::after{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{margin:0;padding:0;background:#111111;color:#f5f5f5;font-family:var(--animfolio-font-body,'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);font-size:var(--animfolio-font-size-base,16px);line-height:var(--animfolio-line-height,1.6);overflow-x:hidden}body.admin-bar{padding-top:32px}body.admin-bar .animfolio-nav--sticky{top:32px}@media screen and (max-width:782px){body.admin-bar{padding-top:46px}body.admin-bar .animfolio-nav--sticky{top:46px}}.wp-site-blocks,.entry-content,.page-content,.post-content{all:unset;display:block}
+/*# sourceURL=animfolio-base-inline-css */
+</style>
+<script>
+document.documentElement.className+=" animfolio-js";(function(){function r(){if(window.animfolio&&window.animfolio._initialized){return;}var e=document.querySelectorAll("[data-animfolio-animate]:not(.animfolio-visible),.animfolio-stagger__item:not(.animfolio-visible)");for(var i=0;i<e.length;i++){e[i].classList.add("animfolio-visible");}}if(document.readyState==="complete"){setTimeout(r,1500);}else{window.addEventListener("load",function(){setTimeout(r,1500);});}setTimeout(r,4000);})();
+//# sourceURL=animfolio-failsafe-js-after
+</script>
+</head>
+<body>
+<!-- ============================================================
+     CONFIG — set your email for the contact form (FormSubmit.co).
+     First submission emails you a one-time confirmation link; click it
+     once and every message afterwards lands in your inbox. See README.
+     ============================================================ -->
+<script>window.ANIMFOLIO_CONTACT_EMAIL = "you@example.com";</script>
+
+<div class="animfolio-container animfolio-container--dark animfolio-container--format-05 animfolio-container--one-page" data-animfolio-scheme="dark" data-animfolio-format="format-05-photographer" data-animfolio-intensity="medium"><a href="#hero" class="animfolio-skip-link">Skip to main content</a><nav class="animfolio-nav animfolio-nav--horizontal animfolio-nav--sticky" role="navigation" aria-label="Portfolio navigation"><a href="#hero" class="animfolio-nav__logo">Mira Calloway</a><button class="animfolio-nav__toggle" aria-expanded="false" aria-controls="animfolio-nav-menu" aria-label="Toggle navigation"><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span></button><ul class="animfolio-nav__list" id="animfolio-nav-menu"><li class="animfolio-nav__item"><a href="#hero" class="animfolio-nav__link" data-animfolio-section="hero">Home</a></li><li class="animfolio-nav__item"><a href="#projects" class="animfolio-nav__link" data-animfolio-section="projects">Projects</a></li><li class="animfolio-nav__item"><a href="#about" class="animfolio-nav__link" data-animfolio-section="about">About</a></li><li class="animfolio-nav__item"><a href="#services" class="animfolio-nav__link" data-animfolio-section="services">Services</a></li><li class="animfolio-nav__item"><a href="#testimonials" class="animfolio-nav__link" data-animfolio-section="testimonials">Testimonials</a></li><li class="animfolio-nav__item"><a href="#stats" class="animfolio-nav__link" data-animfolio-section="stats">Stats</a></li><li class="animfolio-nav__item"><a href="#achievements" class="animfolio-nav__link" data-animfolio-section="achievements">Achievements</a></li><li class="animfolio-nav__item"><a href="#contact" class="animfolio-nav__link" data-animfolio-section="contact">Contact</a></li></ul><button class="animfolio-theme-toggle" aria-label="Toggle dark mode"><span class="animfolio-theme-toggle__icon animfolio-theme-toggle__icon--sun" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span><span class="animfolio-theme-toggle__icon animfolio-theme-toggle__icon--moon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></span></button></nav><section id="hero" class="animfolio-section animfolio-section--hero animfolio-section--align-center" data-animfolio-section="hero"><div class="animfolio-inner">
+<div class="animfolio-hero">
+	<div class="animfolio-hero__content">
+		
+					<h1 class="animfolio-hero__name" data-animfolio-animate="fade-up">Mira Calloway</h1>
+		
+					<h2 class="animfolio-hero__title" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">Travel &amp; Portrait Photographer</h2>
+		
+					<div class="animfolio-hero__subtitle animfolio-hero__typed" data-animfolio-typed="[&quot;I capture moments that last forever.&quot;,&quot;Every photo tells a story.&quot;,&quot;Light, composition, emotion.&quot;]" data-animfolio-animate="fade-up" data-animfolio-delay="0.2">I capture moments that last forever.</div>
+		
+					<div class="animfolio-hero__cta" data-animfolio-animate="fade-up" data-animfolio-delay="0.3">
+									<a href="#projects" class="animfolio-button animfolio-button--primary animfolio-hero__cta-primary">
+						View My Work					</a>
+									<a href="#contact" class="animfolio-button animfolio-button--secondary animfolio-hero__cta-secondary">
+						Get In Touch					</a>
+											</div>
+		
+					<div class="animfolio-hero__social animfolio-social-icons animfolio-social-icons--outline" data-animfolio-animate="fade-up" data-animfolio-delay="0.4">
+														<a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>							<span class="animfolio-social__label">Github</span>
+						</a>
+															<a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>							<span class="animfolio-social__label">Linkedin</span>
+						</a>
+															<a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>							<span class="animfolio-social__label">Twitter</span>
+						</a>
+															<a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg>							<span class="animfolio-social__label">Dribbble</span>
+						</a>
+															<a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>							<span class="animfolio-social__label">Email</span>
+						</a>
+							</div>
+		
+			</div>
+</div>
+</div><!-- .animfolio-inner --></section><section id="projects" class="animfolio-section animfolio-section--projects animfolio-section--align-center" data-animfolio-section="projects"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Selected Galleries</h2></div>
+<div class="animfolio-projects__grid animfolio-stagger" data-animfolio-stagger="0.1">
+			<figure class="animfolio-project animfolio-stagger__item">
+			<div class="animfolio-project__image">
+													<img src="./assets/images/project-photo.jpg" alt="The Anderson Wedding" loading="lazy" decoding="async">
+							</div>
+
+			<figcaption class="animfolio-project__overlay">
+									<h3 class="animfolio-project__title">The Anderson Wedding</h3>
+				
+									<p class="animfolio-project__caption">A sun-drenched garden wedding captured across 12 hours. 800 curated images telling the story from preparations through the last dance. Featured in Wedding Wire's Top 10.</p>
+				
+									<a href="#" class="animfolio-project__meta animfolio-project__view" target="_blank" rel="noopener noreferrer">
+						View													<span class="animfolio-sr-only">The Anderson Wedding</span>
+											</a>
+				
+							</figcaption>
+		</figure>
+			<figure class="animfolio-project animfolio-stagger__item">
+			<div class="animfolio-project__image">
+													<img src="./assets/images/project-photo.jpg" alt="Faces of the City" loading="lazy" decoding="async">
+							</div>
+
+			<figcaption class="animfolio-project__overlay">
+									<h3 class="animfolio-project__title">Faces of the City</h3>
+				
+									<p class="animfolio-project__caption">A 6-month portrait series documenting 50 people across different neighborhoods. Each portrait accompanied by a short interview. Exhibited at the Downtown Gallery.</p>
+				
+									<a href="#" class="animfolio-project__meta animfolio-project__view" target="_blank" rel="noopener noreferrer">
+						View													<span class="animfolio-sr-only">Faces of the City</span>
+											</a>
+				
+							</figcaption>
+		</figure>
+			<figure class="animfolio-project animfolio-stagger__item">
+			<div class="animfolio-project__image">
+													<img src="./assets/images/project-nature.jpg" alt="Pacific Northwest Collection" loading="lazy" decoding="async">
+							</div>
+
+			<figcaption class="animfolio-project__overlay">
+									<h3 class="animfolio-project__title">Pacific Northwest Collection</h3>
+				
+									<p class="animfolio-project__caption">A curated landscape portfolio spanning 3 years of backcountry adventures. Misty forests, volcanic peaks, and coastal drama. 5 prints selected for National Geographic's Your Shot.</p>
+				
+									<a href="#" class="animfolio-project__meta animfolio-project__view" target="_blank" rel="noopener noreferrer">
+						View													<span class="animfolio-sr-only">Pacific Northwest Collection</span>
+											</a>
+				
+							</figcaption>
+		</figure>
+			<figure class="animfolio-project animfolio-stagger__item">
+			<div class="animfolio-project__image">
+													<img src="./assets/images/project-photo.jpg" alt="Ember &amp; Oak — Commercial Shoot" loading="lazy" decoding="async">
+							</div>
+
+			<figcaption class="animfolio-project__overlay">
+									<h3 class="animfolio-project__title">Ember &amp; Oak — Commercial Shoot</h3>
+				
+									<p class="animfolio-project__caption">Product photography and lifestyle campaign for a handcrafted furniture brand. 200 product images and 30 styled scenes used across web, catalog, and social media.</p>
+				
+									<a href="#" class="animfolio-project__meta animfolio-project__view" target="_blank" rel="noopener noreferrer">
+						View													<span class="animfolio-sr-only">Ember &amp; Oak — Commercial Shoot</span>
+											</a>
+				
+							</figcaption>
+		</figure>
+			<figure class="animfolio-project animfolio-stagger__item">
+			<div class="animfolio-project__image">
+													<img src="./assets/images/project-photo.jpg" alt="Editorial Retouch — AI-Assisted Workflow" loading="lazy" decoding="async">
+							</div>
+
+			<figcaption class="animfolio-project__overlay">
+									<h3 class="animfolio-project__title">Editorial Retouch — AI-Assisted Workflow</h3>
+				
+									<p class="animfolio-project__caption">A 40-image editorial series finished with a careful, photography-first retouching workflow. AI-powered tools handle the tedious work — dust removal, sky-gap clean-up, and generative fill to extend backgrounds for print crops — while every frame stays true to the moment as shot. Cut post-production time by roughly 40% with no compromise on authenticity.</p>
+				
+									<a href="#" class="animfolio-project__meta animfolio-project__view" target="_blank" rel="noopener noreferrer">
+						View													<span class="animfolio-sr-only">Editorial Retouch — AI-Assisted Workflow</span>
+											</a>
+				
+							</figcaption>
+		</figure>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="about" class="animfolio-section animfolio-section--about animfolio-section--align-center" data-animfolio-section="about"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">About</h2></div><div class="animfolio-about" data-animfolio-animate="fade-up">
+				<div class="animfolio-about__bio">I'm a professional photographer with 10 years of experience capturing life's most meaningful moments. From intimate weddings to sweeping landscapes, I believe every image should tell a story. My work has been featured in National Geographic Your Shot, Wedding Wire, and numerous galleries.</div>
+				<div class="animfolio-about__fun-facts animfolio-stagger" data-animfolio-stagger="0.1">
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I've shot in 23 countries across 6 continents				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					My camera bag weighs more than my luggage				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I wake up before sunrise more often than not				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I still shoot film occasionally — there's nothing like it				</div>
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="services" class="animfolio-section animfolio-section--services animfolio-section--align-center" data-animfolio-section="services"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Services</h2></div><div class="animfolio-grid animfolio-grid--3 animfolio-stagger" data-animfolio-stagger="0.1">
+					<div class="animfolio-service animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<div class="animfolio-service__head">
+									<div class="animfolio-card__icon animfolio-service__icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>					</div>
+								<h3 class="animfolio-card__title animfolio-service__title">Event Photography</h3>
+			</div>
+							<p class="animfolio-card__body">Weddings, corporate events, and celebrations captured with an authentic, documentary style. Full-day coverage with edited gallery delivered within 2 weeks.</p>
+										<span class="animfolio-card__meta">From $1,800</span>
+					</div>
+					<div class="animfolio-service animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<div class="animfolio-service__head">
+									<div class="animfolio-card__icon animfolio-service__icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>					</div>
+								<h3 class="animfolio-card__title animfolio-service__title">Portrait Sessions</h3>
+			</div>
+							<p class="animfolio-card__body">Professional headshots, family portraits, and personal branding photography. Studio or on-location with natural light styling and creative direction.</p>
+										<span class="animfolio-card__meta">From $350</span>
+					</div>
+					<div class="animfolio-service animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<div class="animfolio-service__head">
+									<div class="animfolio-card__icon animfolio-service__icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>					</div>
+								<h3 class="animfolio-card__title animfolio-service__title">Commercial Photography</h3>
+			</div>
+							<p class="animfolio-card__body">Product photography, lifestyle campaigns, and brand imagery. High-quality images optimized for web, print, and social media.</p>
+										<span class="animfolio-card__meta">Custom quote</span>
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="testimonials" class="animfolio-section animfolio-section--testimonials animfolio-section--align-center" data-animfolio-section="testimonials"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Kind Words</h2></div><div class="animfolio-testimonials-carousel" data-animfolio-animate="fade-up">
+	<div class="animfolio-testimonials-carousel__track" id="animfolio-testimonials-track">
+					<div class="animfolio-testimonials-carousel__slide" id="testimonial-slide-0">
+									<div class="animfolio-testimonial animfolio-card animfolio-card--bordered">
+						<blockquote class="animfolio-testimonial__quote">Our wedding photos are absolutely stunning. Every time we look at them, we're transported right back to that day. Worth every penny.</blockquote>
+						<div class="animfolio-card__footer">
+															<img src="./assets/images/avatar-1.jpg" alt="Emma &amp; Jake Anderson" class="animfolio-testimonial__photo" width="40" height="40" loading="lazy" decoding="async">
+														<div>
+								<strong class="animfolio-testimonial__author">Emma &amp; Jake Anderson</strong>
+																	<span class="animfolio-testimonial__role">Bride &amp; Groom</span>
+																							</div>
+						</div>
+					</div>
+									<div class="animfolio-testimonial animfolio-card animfolio-card--bordered">
+						<blockquote class="animfolio-testimonial__quote">The product images they shot transformed our online store. Conversion rate jumped 35% and returns dropped significantly. A true professional.</blockquote>
+						<div class="animfolio-card__footer">
+															<img src="./assets/images/avatar-2.jpg" alt="Sandra Wells" class="animfolio-testimonial__photo" width="40" height="40" loading="lazy" decoding="async">
+														<div>
+								<strong class="animfolio-testimonial__author">Sandra Wells</strong>
+																	<span class="animfolio-testimonial__role">Marketing Director</span>
+																									<span class="animfolio-testimonial__company">, Ember &amp; Oak Furniture</span>
+															</div>
+						</div>
+					</div>
+							</div>
+					<div class="animfolio-testimonials-carousel__slide animfolio-testimonials-carousel__slide--single" id="testimonial-slide-1">
+									<div class="animfolio-testimonial animfolio-card animfolio-card--bordered">
+						<blockquote class="animfolio-testimonial__quote">They have an incredible eye for capturing authentic emotion. Our team headshots and office photos actually look like us, not awkward stock photos.</blockquote>
+						<div class="animfolio-card__footer">
+															<img src="./assets/images/avatar-3.jpg" alt="Daniel Reeves" class="animfolio-testimonial__photo" width="40" height="40" loading="lazy" decoding="async">
+														<div>
+								<strong class="animfolio-testimonial__author">Daniel Reeves</strong>
+																	<span class="animfolio-testimonial__role">CEO</span>
+																									<span class="animfolio-testimonial__company">, Bright Studio Agency</span>
+															</div>
+						</div>
+					</div>
+							</div>
+			</div>
+
+	<div class="animfolio-testimonials-carousel__dots">
+					<a href="#testimonial-slide-0" class="animfolio-testimonials-carousel__dot animfolio-testimonials-carousel__dot--active" aria-label="Page 1"></a>
+					<a href="#testimonial-slide-1" class="animfolio-testimonials-carousel__dot " aria-label="Page 2"></a>
+			</div>
+</div>
+</div><!-- .animfolio-inner --></section><section id="stats" class="animfolio-section animfolio-section--stats animfolio-section--align-center" data-animfolio-section="stats"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">By the Numbers</h2></div><div class="animfolio-stats animfolio-stagger" data-animfolio-stagger="0.15">
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="50000" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">50,000+</span>
+			<span class="animfolio-stat__label">Photos Delivered</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="300" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">300+</span>
+			<span class="animfolio-stat__label">Events Covered</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="150" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">150+</span>
+			<span class="animfolio-stat__label">Happy Clients</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="10" data-animfolio-decimals="0" data-animfolio-suffix="" data-animfolio-prefix="">10</span>
+			<span class="animfolio-stat__label">Years Behind the Lens</span>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="achievements" class="animfolio-section animfolio-section--achievements animfolio-section--align-center" data-animfolio-section="achievements"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Certifications &amp; Training</h2></div><div class="animfolio-grid animfolio-grid--3 animfolio-stagger" data-animfolio-stagger="0.1">
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">Advanced Portrait Lighting Masterclass</h3>
+							<span class="animfolio-card__meta">New York Institute of Photography</span>
+										<span class="animfolio-card__meta">2023</span>
+								</div>
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">Generative AI for Creatives</h3>
+							<span class="animfolio-card__meta">Adobe &amp; DeepLearning.AI</span>
+										<span class="animfolio-card__meta">2025</span>
+								</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="contact" class="animfolio-section animfolio-section--contact animfolio-section--align-center" data-animfolio-section="contact"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Contact</h2></div><div class="animfolio-contact" data-animfolio-animate="fade-up">
+
+			<p class="animfolio-contact__heading">Let's create something beautiful</p>
+				<p class="animfolio-contact__description">Booking weddings, portraits, and commercial shoots worldwide. Tell me about your story and the dates you have in mind, and I'll get back to you within 48 hours.</p>
+	
+	<div class="animfolio-contact__layout">
+		<!-- Left: Contact Form -->
+		<div class="animfolio-contact__form-wrapper">
+							<form class="animfolio-form" novalidate="">
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-name">Name</label>
+						<input type="text" name="name" id="animfolio-name" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Name is required.</span>
+					</div>
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-email">Email</label>
+						<input type="email" name="email" id="animfolio-email" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Valid email is required.</span>
+					</div>
+										<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-message">Message</label>
+						<textarea name="message" id="animfolio-message" class="animfolio-form__textarea" rows="5" required="" aria-required="true"></textarea>
+						<span class="animfolio-form__error">Message is required.</span>
+					</div>
+											<div class="animfolio-form__honeypot">
+							<input type="text" name="animfolio_hp" tabindex="-1" autocomplete="off">
+						</div>
+										<input type="hidden" name="animfolio_ts" value="">
+					<input type="hidden" name="animfolio_js" value="">
+					<div class="animfolio-form__success">Thank you! I'll get back to you soon.</div>
+					<button type="submit" class="animfolio-button animfolio-button--primary animfolio-form__submit">
+						Send Message					</button>
+				</form>
+					</div>
+
+		<!-- Right: QR Code -->
+		<div class="animfolio-contact__qr-wrapper"><div class="animfolio-qr" data-animfolio-qr="" data-animfolio-vcard="QkVHSU46VkNBUkQNClZFUlNJT046My4wDQpGTjpNaXJhIENhbGxvd2F5DQpOOkNhbGxvd2F5O01pcmE7OzsNClRJVExFOlRyYXZlbCAmIFBvcnRyYWl0IFBob3RvZ3JhcGhlcg0KRU1BSUw7VFlQRT1XT1JLOnlvdUBleGFtcGxlLmNvbQ0KVVJMOmh0dHBzOi8veW91ci13ZWJzaXRlLmV4YW1wbGUNCk5PVEU6SSdtIGEgcHJvZmVzc2lvbmFsIHBob3RvZ3JhcGhlciB3aXRoIDEwIHllYXJzIG9mIGV4cGVyaWVuY2UgY2FwdHVyaW5nIGxpZmUncyBtb3N0IG1lYW5pbmdmdWwgbW9tZW50cy4gRnJvbSBpbnRpbWF0ZSB3ZWRkaW5ncyB0byBzd2VlcGluZyBsYW5kc2NhcGVzXCwgSSBiZWxpZXZlIGV2ZXJ5IGltYWdlIHNob3VsZCB0ZWxsIGEgc3RvcnkuIE15IHdvcmtcbkdpdGh1YjogaHR0cHM6Ly9naXRodWIuY29tL3lvdXJ1c2VybmFtZVxuTGlua2VkaW46IGh0dHBzOi8vbGlua2VkaW4uY29tL2luL3lvdXJ1c2VybmFtZVxuVHdpdHRlcjogaHR0cHM6Ly90d2l0dGVyLmNvbS95b3VydXNlcm5hbWVcbkRyaWJiYmxlOiBodHRwczovL2RyaWJiYmxlLmNvbS95b3VydXNlcm5hbWUNClgtU09DSUFMUFJPRklMRTtUWVBFPWdpdGh1YjpodHRwczovL2dpdGh1Yi5jb20veW91cnVzZXJuYW1lDQpYLVNPQ0lBTFBST0ZJTEU7VFlQRT1saW5rZWRpbjpodHRwczovL2xpbmtlZGluLmNvbS9pbi95b3VydXNlcm5hbWUNClgtU09DSUFMUFJPRklMRTtUWVBFPXR3aXR0ZXI6aHR0cHM6Ly90d2l0dGVyLmNvbS95b3VydXNlcm5hbWUNClgtU09DSUFMUFJPRklMRTtUWVBFPWRyaWJiYmxlOmh0dHBzOi8vZHJpYmJibGUuY29tL3lvdXJ1c2VybmFtZQ0KUkVWOjIwMjYtMDctMTJUMTM6MjI6NDhaDQpFTkQ6VkNBUkQNCg=="><div class="animfolio-qr__code" style="width:200px;height:200px"></div><p class="animfolio-qr__caption">Scan to save my contact</p><a href="./assets/contact.vcf" class="animfolio-qr__download animfolio-button animfolio-button--secondary" download="">Download vCard</a></div></div>	</div>
+
+</div>
+</div><!-- .animfolio-inner --></section><button class="animfolio-back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 15V5M10 5L5 10M10 5L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div class="animfolio-progress"><div class="animfolio-progress__bar"></div></div><div class="animfolio-footer-social animfolio-social-icons animfolio-social-icons--outline"><a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="animfolio-social__label">Github</span></a><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg><span class="animfolio-social__label">Linkedin</span></a><a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg><span class="animfolio-social__label">Twitter</span></a><a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg><span class="animfolio-social__label">Dribbble</span></a><a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span class="animfolio-social__label">Email</span></a></div></div>
+
+<div aria-label="Color scheme preview (demo only)" style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99999;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(18,18,24,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 30px rgba(0,0,0,.4)"><span style="padding:0 6px 0 10px;font:700 11px/1 -apple-system,sans-serif;letter-spacing:.4px;text-transform:uppercase;color:#8b90a0">Colors</span><a href="index.html" aria-current="true" title="Gold & Dark" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#D4A853;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Gold & Dark</a><a href="v2.html" title="Pure Mono" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#808080;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Pure Mono</a><a href="v3.html" title="Film Warm" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#C17B4A;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Film Warm</a></div>
+
+<script>
+var animfolioSettings = {"animationIntensity":"medium","respectReducedMotion":"1","colorScheme":"dark","smoothScroll":"1","scrollBehavior":"smooth","customCursor":"","backToTop":"1","progressBar":"1","darkModeToggle":"1","debugMode":""};
+//# sourceURL=animfolio-engine-js-extra
+</script>
+<script src="./assets/js/wp-shim.js"></script>
+<script src="./assets/js/animfolio-engine.js"></script>
+<script src="./assets/js/modules/scroll-trigger.js"></script>
+<script src="./assets/js/modules/typed-text.js"></script>
+<script src="./assets/js/modules/counter.js"></script>
+<script src="./assets/js/modules/timeline-draw.js"></script>
+<script src="./assets/js/modules/stagger.js"></script>
+<script src="./assets/js/modules/parallax.js"></script>
+<script src="./assets/js/modules/progress-bar.js"></script>
+<script src="./assets/js/modules/smooth-scroll.js"></script>
+<script src="./assets/js/modules/theme-toggle.js"></script>
+<script src="./assets/js/vendor/qrcode-generator.min.js"></script>
+<script src="./assets/js/animfolio-qr.js"></script>
+<script src="./assets/js/animfolio-lightbox.js"></script>
+<script src="./assets/js/animfolio-casestudy.js"></script>
+<script src="./assets/js/format.js"></script>
+<script src="./assets/js/animfolio-contact-static.js"></script>
+</body>
+</html>

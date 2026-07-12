@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Mira Calloway
+N:Calloway;Mira;;;
+TITLE:Travel & Portrait Photographer
+EMAIL;TYPE=WORK:you@example.com
+URL:https://your-website.example
+NOTE:I'm a professional photographer with 10 years of experience capturing life's most meaningful moments. From intimate weddings to sweeping landscapes\, I believe every image should tell a story. My work\nGithub: https://github.com/yourusername\nLinkedin: https://linkedin.com/in/yourusername\nTwitter: https://twitter.com/yourusername\nDribbble: https://dribbble.com/yourusername
+X-SOCIALPROFILE;TYPE=github:https://github.com/yourusername
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/yourusername
+X-SOCIALPROFILE;TYPE=twitter:https://twitter.com/yourusername
+X-SOCIALPROFILE;TYPE=dribbble:https://dribbble.com/yourusername
+REV:2026-07-12T13:22:48Z
+END:VCARD

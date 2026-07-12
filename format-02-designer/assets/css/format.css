@@ -1,0 +1,521 @@
+/**
+ * Format 02: Designer Showcase
+ *
+ * Asymmetric bento layout, soft serif typography, warm pastels,
+ * hover image reveals, and generous whitespace.
+ *
+ * @package AnimFolio
+ * @author     Rahul Mahadik
+ * @since   1.0.0
+ */
+
+/* ===== Base variable mappings (non-color + fonts) ===== */
+
+.animfolio-container--format-02 {
+	--animfolio-font-heading: 'Playfair Display', serif;
+	--animfolio-font-body: 'DM Sans', sans-serif;
+
+	font-family: 'DM Sans', sans-serif;
+	background: var(--animfolio-bg);
+	color: var(--animfolio-text);
+	overflow-x: clip;
+}
+
+/* ===== Dual-scheme color tokens =====
+ * Scoped under BOTH the format class AND the scheme class so the theme
+ * toggle re-skins the palette. The rose accent (#E8526E) fails AA as
+ * text, so --animfolio-accent-text is a tuned variant per scheme:
+ *   light -> darkened (#C02545); dark -> brightened (#EE6C84).
+ * The no-scheme fallback uses the light palette (default_scheme: light).
+ */
+
+/* Fallback (before JS adds a scheme class) — light palette.
+ * --animfolio-accent / --animfolio-secondary are intentionally NOT redefined here:
+ * the plugin injects them on .animfolio-container (equal specificity, earlier source
+ * order), and re-declaring them with a literal hex would clobber the user's chosen
+ * colors. They are consumed downstream as var(--animfolio-accent, #E8526E) so the
+ * #E8526E / #C07830 defaults still apply when no override is set. The derived alpha
+ * tints below are color-mix() over the (possibly overridden) accent. */
+.animfolio-container--format-02 {
+	--animfolio-accent-text: #C02545;
+	--animfolio-accent-hover: #D43A56;
+	--animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #E8526E) 8%, transparent);
+	--animfolio-accent-subtle: color-mix(in srgb, var(--animfolio-accent, #E8526E) 4%, transparent);
+	--animfolio-accent-shadow: color-mix(in srgb, var(--animfolio-accent, #E8526E) 30%, transparent);
+	--animfolio-accent-glow: color-mix(in srgb, var(--animfolio-accent, #E8526E) 12%, transparent);
+	--animfolio-on-accent: #fff;
+	--animfolio-bg: #FAF8F5;
+	--animfolio-bg-secondary: #F0ECE8;
+	--animfolio-bg-tertiary: #EBE5DD;
+	--animfolio-nav-bg: rgba(250, 248, 245, 0.9);
+	--animfolio-text: #1A1A1A;
+	--animfolio-text-secondary: #6B6560;
+	--animfolio-text-muted: #6b6560;
+	--animfolio-border: rgba(0, 0, 0, 0.08);
+}
+
+/* Light scheme. Base accent/secondary left to the injected values (see note above). */
+.animfolio-container--format-02.animfolio-container--light {
+	--animfolio-accent-text: #C02545;
+	--animfolio-accent-hover: #D43A56;
+	--animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #E8526E) 8%, transparent);
+	--animfolio-accent-subtle: color-mix(in srgb, var(--animfolio-accent, #E8526E) 4%, transparent);
+	--animfolio-accent-shadow: color-mix(in srgb, var(--animfolio-accent, #E8526E) 30%, transparent);
+	--animfolio-accent-glow: color-mix(in srgb, var(--animfolio-accent, #E8526E) 12%, transparent);
+	--animfolio-on-accent: #fff;
+	--animfolio-bg: #FAF8F5;
+	--animfolio-bg-secondary: #F0ECE8;
+	--animfolio-bg-tertiary: #EBE5DD;
+	--animfolio-nav-bg: rgba(250, 248, 245, 0.9);
+	--animfolio-text: #1A1A1A;
+	--animfolio-text-secondary: #6B6560;
+	--animfolio-text-muted: #6b6560;
+	--animfolio-border: rgba(0, 0, 0, 0.08);
+}
+
+/* Dark scheme — warm charcoal, brightened rose for AA text.
+ * Base accent/secondary left to the injected values (see note above); the brighter
+ * accent-text/-hover below are tuned per scheme and are not the accent hex itself. */
+.animfolio-container--format-02.animfolio-container--dark {
+	--animfolio-accent-text: #EE6C84;
+	--animfolio-accent-hover: #F07C92;
+	--animfolio-accent-light: color-mix(in srgb, var(--animfolio-accent, #E8526E) 12%, transparent);
+	--animfolio-accent-subtle: color-mix(in srgb, var(--animfolio-accent, #E8526E) 6%, transparent);
+	--animfolio-accent-shadow: color-mix(in srgb, var(--animfolio-accent, #E8526E) 35%, transparent);
+	--animfolio-accent-glow: color-mix(in srgb, var(--animfolio-accent, #E8526E) 18%, transparent);
+	--animfolio-on-accent: #fff;
+	--animfolio-bg: #1A1A1A;
+	--animfolio-bg-secondary: #242424;
+	--animfolio-bg-tertiary: #2e2e2e;
+	--animfolio-nav-bg: rgba(26, 26, 26, 0.9);
+	--animfolio-text: #F0ECE8;
+	--animfolio-text-secondary: #9C9591;
+	--animfolio-text-muted: #9c9591;
+	--animfolio-border: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Google Fonts hint ===== */
+/* Playfair Display + DM Sans loaded via animfolio font enqueue */
+
+/* ===== Nav — clean minimal, serif font, no background ===== */
+
+.animfolio-container--format-02 .animfolio-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	padding: 0 2rem;
+	background: transparent;
+	transition: background 0.3s ease;
+}
+
+.animfolio-container--format-02 .animfolio-nav--scrolled {
+	background: var(--animfolio-nav-bg, rgba(250, 248, 245, 0.9));
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
+}
+
+.animfolio-container--format-02 .animfolio-nav__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: var(--animfolio-container, 1200px);
+	margin: 0 auto;
+	height: 64px;
+}
+
+.animfolio-container--format-02 .animfolio-nav__logo {
+	font-family: var(--animfolio-font-heading);
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--animfolio-text);
+	text-decoration: none;
+	letter-spacing: -0.01em;
+	transition: color 0.2s ease;
+}
+
+.animfolio-container--format-02 .animfolio-nav__logo:hover {
+	color: var(--animfolio-accent-text);
+}
+
+.animfolio-container--format-02 .animfolio-nav__links {
+	display: flex;
+	gap: 2.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.animfolio-container--format-02 .animfolio-nav__link {
+	font-family: var(--animfolio-font-heading);
+	font-size: 0.9375rem;
+	font-weight: 400;
+	font-style: italic;
+	/* Use the full-strength text color (not muted secondary) so the thin italic
+	   serif links stay clearly legible over the transparent nav on both the
+	   dark (#F0ECE8 on #1A1A1A = 14.8:1) and light (#1A1A1A on #FAF8F5 = 16.4:1)
+	   hero backgrounds. The muted secondary read as washed-out in dark mode. */
+	color: var(--animfolio-text);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.animfolio-container--format-02 .animfolio-nav__link:hover,
+.animfolio-container--format-02 .animfolio-nav__link--active {
+	color: var(--animfolio-accent-text);
+}
+
+/* ===== Hero — editorial style ===== */
+
+.animfolio-container--format-02 .animfolio-section--hero {
+	background:
+		radial-gradient(ellipse at 70% 30%, var(--animfolio-accent-subtle) 0%, transparent 50%),
+		var(--animfolio-bg);
+	/* Hero owns its own full-height centering on the inner .animfolio-hero (see
+	   below) — matching the rest of the suite. Zero the base .animfolio-section
+	   100px vertical padding here so it doesn't stack on top of the inner's 100vh
+	   and push the centred content down into a void below the fixed nav. */
+	padding: 0;
+}
+
+.animfolio-container--format-02 .animfolio-hero {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4rem;
+	align-items: center;
+	min-height: 100vh;
+	overflow: hidden;
+}
+
+/* No hero photo → collapse the 2-column split to a centred single column so the
+   text isn't stranded in the left half beside an empty column. */
+.animfolio-container--format-02 .animfolio-hero:not(:has(.animfolio-hero__photo-wrapper)) {
+	grid-template-columns: 1fr;
+	justify-items: center;
+	text-align: center;
+}
+
+.animfolio-container--format-02 .animfolio-hero__name {
+	font-family: var(--animfolio-font-heading);
+	font-weight: 700;
+	font-size: clamp(2.5rem, 6vw, 5.5rem);
+	line-height: 1.05;
+	letter-spacing: -0.02em;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+.animfolio-container--format-02 .animfolio-hero__title {
+	font-family: var(--animfolio-font-body);
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	font-weight: 400;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	color: var(--animfolio-accent-text);
+	margin-top: 1.5rem;
+}
+
+.animfolio-container--format-02 .animfolio-hero__photo {
+	border-radius: 24px;
+	overflow: hidden;
+	aspect-ratio: 3 / 4;
+	box-shadow: 0 40px 80px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Section titles — serif elegance ===== */
+
+.animfolio-container--format-02 .animfolio-section__title {
+	font-family: var(--animfolio-font-heading);
+	font-weight: 700;
+	font-size: clamp(2rem, 4vw, 3.25rem);
+	letter-spacing: -0.02em;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+/* ===== Bento grid for projects ===== */
+
+.animfolio-container--format-02 .animfolio-projects__grid {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1.5rem;
+}
+
+.animfolio-container--format-02 .animfolio-project {
+	grid-column: span 6;
+	border-radius: 20px;
+	overflow: hidden;
+	position: relative;
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+}
+
+.animfolio-container--format-02 .animfolio-project:nth-child(3n+1) {
+	grid-column: span 7;
+}
+
+.animfolio-container--format-02 .animfolio-project:nth-child(3n+2) {
+	grid-column: span 5;
+}
+
+.animfolio-container--format-02 .animfolio-project:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+}
+
+/* Project hover image reveal */
+.animfolio-container--format-02 .animfolio-project__image {
+	overflow: hidden;
+	aspect-ratio: 16 / 10;
+}
+
+.animfolio-container--format-02 .animfolio-project__image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animfolio-container--format-02 .animfolio-project:hover .animfolio-project__image img {
+	transform: scale(1.08);
+}
+
+.animfolio-container--format-02 .animfolio-project__content {
+	padding: 1.75rem;
+}
+
+.animfolio-container--format-02 .animfolio-project__title {
+	font-family: var(--animfolio-font-heading);
+	font-size: 1.375rem;
+	font-weight: 600;
+}
+
+/* ===== Cards — soft shadows ===== */
+
+.animfolio-container--format-02 .animfolio-card {
+	background: var(--animfolio-bg-secondary);
+	border: 1px solid var(--animfolio-border);
+	border-radius: 20px;
+	padding: 2rem;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+	overflow: hidden;
+}
+
+.animfolio-container--format-02 .animfolio-card:hover {
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+	transform: translateY(-4px);
+}
+
+/* ===== Skills — pill badges ===== */
+
+.animfolio-container--format-02 .animfolio-skills__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+}
+
+.animfolio-container--format-02 .animfolio-card__tag {
+	font-family: var(--animfolio-font-body);
+	font-size: 0.75rem;
+	padding: 4px 10px;
+	border-radius: 20px;
+	background: var(--animfolio-accent-light);
+	color: var(--animfolio-accent-text);
+	border: 1px solid color-mix(in srgb, var(--animfolio-accent, #E8526E) 15%, transparent);
+	transition: background 0.2s ease;
+	white-space: nowrap;
+}
+
+.animfolio-container--format-02 .animfolio-card__tag:hover {
+	background: color-mix(in srgb, var(--animfolio-accent, #E8526E) 15%, transparent);
+}
+
+/* ===== Testimonials — large pull quote ===== */
+
+.animfolio-container--format-02 .animfolio-testimonial__quote {
+	font-family: var(--animfolio-font-heading);
+	font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+	font-style: italic;
+	line-height: 1.6;
+	position: relative;
+	padding-inline-start: 2rem;
+	border-inline-start: 3px solid var(--animfolio-accent, #E8526E);
+	overflow-wrap: break-word;
+}
+
+/* ===== Stats — elegant counters ===== */
+
+.animfolio-container--format-02 .animfolio-stat__number {
+	font-family: var(--animfolio-font-heading);
+	font-size: clamp(2.5rem, 5vw, 4rem);
+	font-weight: 700;
+	background: linear-gradient(135deg, var(--animfolio-accent, #E8526E), var(--animfolio-secondary, #C07830));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.animfolio-container--format-02 .animfolio-stat__label {
+	font-family: var(--animfolio-font-body);
+	font-size: 0.875rem;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--animfolio-text-secondary);
+}
+
+/* ===== Buttons — warm rose prominence ===== */
+
+.animfolio-container--format-02 .animfolio-button--primary,
+.animfolio-container--format-02 a.animfolio-button--primary {
+	background: var(--animfolio-accent, #E8526E);
+	color: var(--animfolio-on-accent, #fff);
+	padding: 0.75rem 2rem;
+	border: none;
+	border-radius: 100px;
+	box-shadow: 0 4px 16px var(--animfolio-accent-shadow);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	line-height: 1.4;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.animfolio-container--format-02 .animfolio-button--primary:hover,
+.animfolio-container--format-02 a.animfolio-button--primary:hover {
+	color: var(--animfolio-on-accent, #fff);
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px color-mix(in srgb, var(--animfolio-accent, #E8526E) 40%, transparent);
+}
+
+.animfolio-container--format-02 .animfolio-button--secondary,
+.animfolio-container--format-02 a.animfolio-button--secondary {
+	background: transparent;
+	color: var(--animfolio-accent-text);
+	padding: 0.75rem 2rem;
+	border: 2px solid var(--animfolio-accent, #E8526E);
+	border-radius: 100px;
+	transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	line-height: 1.4;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.animfolio-container--format-02 .animfolio-button--secondary:hover,
+.animfolio-container--format-02 a.animfolio-button--secondary:hover {
+	background: var(--animfolio-accent, #E8526E);
+	color: var(--animfolio-on-accent, #fff);
+	transform: translateY(-2px);
+}
+
+/* ===== Alternating section backgrounds ===== */
+
+.animfolio-container--format-02 .animfolio-section:nth-child(even) {
+	background: var(--animfolio-bg-secondary);
+}
+
+/* ===== Timeline — minimal line ===== */
+
+.animfolio-container--format-02 .animfolio-timeline__dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: var(--animfolio-accent, #E8526E);
+	box-shadow: 0 0 0 4px var(--animfolio-accent-light);
+	flex-shrink: 0;
+}
+
+.animfolio-container--format-02 .animfolio-timeline__line {
+	width: 2px;
+	background: linear-gradient(to bottom, var(--animfolio-accent, #E8526E), var(--animfolio-secondary, #C07830));
+}
+
+/* ===== Contact — warm form styling ===== */
+
+.animfolio-container--format-02 .animfolio-form__input,
+.animfolio-container--format-02 .animfolio-form__textarea {
+	border-radius: 12px;
+	border: 1px solid var(--animfolio-border);
+	font-family: var(--animfolio-font-body);
+	padding: 1rem 1.25rem;
+	transition: border-color 0.2s ease;
+}
+
+.animfolio-container--format-02 .animfolio-form__input:focus,
+.animfolio-container--format-02 .animfolio-form__textarea:focus {
+	border-color: var(--animfolio-accent, #E8526E);
+	outline: none;
+	box-shadow: 0 0 0 3px var(--animfolio-accent-light);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 1024px) {
+	.animfolio-container--format-02 .animfolio-hero {
+		gap: 2.5rem;
+	}
+
+	.animfolio-container--format-02 .animfolio-project,
+	.animfolio-container--format-02 .animfolio-project:nth-child(3n+1),
+	.animfolio-container--format-02 .animfolio-project:nth-child(3n+2) {
+		grid-column: span 6;
+	}
+
+	.animfolio-container--format-02 .animfolio-hero__photo {
+		max-width: 100%;
+	}
+}
+
+@media (max-width: 768px) {
+	.animfolio-container--format-02 .animfolio-hero {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		text-align: center;
+	}
+
+	.animfolio-container--format-02 .animfolio-hero__photo {
+		max-width: 320px;
+		margin: 0 auto;
+	}
+
+	.animfolio-container--format-02 .animfolio-project,
+	.animfolio-container--format-02 .animfolio-project:nth-child(3n+1),
+	.animfolio-container--format-02 .animfolio-project:nth-child(3n+2) {
+		grid-column: span 12;
+	}
+
+	.animfolio-container--format-02 .animfolio-card {
+		padding: 1.5rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.animfolio-container--format-02 .animfolio-nav__links {
+		display: none;
+	}
+
+	.animfolio-container--format-02 .animfolio-hero__name {
+		font-size: clamp(2rem, 10vw, 3rem);
+	}
+
+	.animfolio-container--format-02 .animfolio-skills__list {
+		gap: 0.5rem;
+	}
+
+	.animfolio-container--format-02 .animfolio-button--primary,
+	.animfolio-container--format-02 .animfolio-button--secondary {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.animfolio-container--format-02 .animfolio-project__content {
+		padding: 1.25rem;
+	}
+}

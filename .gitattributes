@@ -1,0 +1,2 @@
+# vCard spec requires CRLF line endings — do not normalize
+*.vcf -text

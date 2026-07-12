@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio – AnimFolio Dev</title>
+<meta name="description" content="Anaya Patel — Computer Science Student. Learning, building, growing every day.">
+<style>
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('./assets/fonts/jetbrains-mono-latin.woff2') format('woff2'); }
+
+/*# sourceURL=animfolio-fonts-local-inline-css */
+</style>
+<link rel="stylesheet" href="./assets/css/animfolio-base.css">
+<link rel="stylesheet" href="./assets/css/animfolio-animations.css">
+<link rel="stylesheet" href="./assets/css/animfolio-nav.css">
+<link rel="stylesheet" href="./assets/css/animfolio-contact.css">
+<link rel="stylesheet" href="./assets/css/animfolio-gallery.css">
+<link rel="stylesheet" href="./assets/css/animfolio-qr.css">
+<link rel="stylesheet" href="./assets/css/animfolio-print.css" media="print">
+<link rel="stylesheet" href="./assets/css/format.css">
+<style id="animfolio-theme-vars">
+.animfolio-container {
+	--animfolio-accent: #D97706 !important;
+	--animfolio-accent-hover: #cf6d00 !important;
+	--animfolio-accent-light: rgba(217, 119, 6, 0.1) !important;
+	--animfolio-accent-subtle: rgba(217, 119, 6, 0.12) !important;
+	--animfolio-accent-shadow: rgba(217, 119, 6, 0.3) !important;
+	--animfolio-accent-glow: rgba(217, 119, 6, 0.5) !important;
+	--animfolio-secondary: #DB2777 !important;
+	--animfolio-secondary-hover: #d11d6d !important;
+	--animfolio-secondary-light: rgba(219, 39, 119, 0.1) !important;
+	--animfolio-on-accent: #14110f !important;
+	--animfolio-on-secondary: #ffffff !important;
+	--animfolio-bg: #1A1A2E;
+	--animfolio-bg-secondary: #FFF7E0;
+	--animfolio-bg-tertiary: #1e1e1e;
+	--animfolio-text: #F5F5F5;
+	--animfolio-text-secondary: #a0a0a0;
+	--animfolio-text-muted: #8a8a8a;
+	--animfolio-border: rgba(255, 255, 255, 0.1);
+	--animfolio-border-strong: rgba(255, 255, 255, 0.2);
+	--animfolio-surface: #1a1a1a;
+	--animfolio-surface-hover: #222222;
+	--animfolio-overlay: rgba(0, 0, 0, 0.75);
+	--animfolio-success: #22c55e;
+	--animfolio-warning: #f59e0b;
+	--animfolio-error: #ef4444;
+	--animfolio-info: #3b82f6;
+	--animfolio-font-heading: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-body: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+	--animfolio-font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+	--animfolio-font-size-base: 16px;
+	--animfolio-font-size-h1: clamp(2.5rem, 5vw, 4rem);
+	--animfolio-font-size-h2: clamp(1.75rem, 3.5vw, 2.5rem);
+	--animfolio-font-size-h3: 1.5rem;
+	--animfolio-font-size-h4: 1.25rem;
+	--animfolio-font-weight-bold: 700;
+	--animfolio-font-weight-medium: 500;
+	--animfolio-line-height: 1.6;
+	--animfolio-letter-spacing: 0em;
+	--animfolio-container-width: 1200px;
+	--animfolio-section-spacing: 100px;
+	--animfolio-radius: 12px;
+	--animfolio-radius-sm: 6px;
+	--animfolio-radius-lg: 16px;
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.2);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.3);
+	--animfolio-duration: 0.6s;
+	--animfolio-delay: 0s;
+	--animfolio-easing: cubic-bezier(0.4, 0, 0.2, 1);
+	--animfolio-easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--animfolio-stagger: 0.1s;
+	--animfolio-transition-fast: 150ms ease;
+	--animfolio-transition-normal: 300ms ease;
+	--animfolio-transition-slow: 500ms ease;
+	--animfolio-z-base: 1;
+	--animfolio-z-dropdown: 100;
+	--animfolio-z-sticky: 200;
+	--animfolio-z-nav: 300;
+	--animfolio-z-modal: 400;
+	--animfolio-z-lightbox: 500;
+	--animfolio-z-tooltip: 600;
+	--animfolio-z-cursor: 700;
+}
+.animfolio-container--light, .animfolio-container[data-animfolio-scheme="light"] {
+	--animfolio-bg: #FFFBF0;
+	--animfolio-bg-secondary: #f5f5f5;
+	--animfolio-bg-tertiary: #ebebeb;
+	--animfolio-text: #1A1A2E;
+	--animfolio-text-secondary: #555555;
+	--animfolio-text-muted: #767676;
+	--animfolio-border: rgba(0, 0, 0, 0.1);
+	--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+	--animfolio-surface: #ffffff;
+	--animfolio-surface-hover: #f9f9f9;
+	--animfolio-overlay: rgba(0, 0, 0, 0.5);
+	--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+	--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+	--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+	--animfolio-accent-light: rgba(217, 119, 6, 0.08) !important;
+	--animfolio-accent-subtle: rgba(217, 119, 6, 0.05) !important;
+	--animfolio-accent-shadow: rgba(217, 119, 6, 0.2) !important;
+	--animfolio-accent-glow: rgba(217, 119, 6, 0.15) !important;
+	--animfolio-on-accent: #14110f !important;
+	--animfolio-on-secondary: #ffffff !important;
+}
+@media (prefers-color-scheme: light) {
+	.animfolio-container--auto {
+		--animfolio-bg: #FFFBF0;
+		--animfolio-bg-secondary: #f5f5f5;
+		--animfolio-bg-tertiary: #ebebeb;
+		--animfolio-text: #1A1A2E;
+		--animfolio-text-secondary: #555555;
+		--animfolio-text-muted: #767676;
+		--animfolio-border: rgba(0, 0, 0, 0.1);
+		--animfolio-border-strong: rgba(0, 0, 0, 0.2);
+		--animfolio-surface: #ffffff;
+		--animfolio-surface-hover: #f9f9f9;
+		--animfolio-overlay: rgba(0, 0, 0, 0.5);
+		--animfolio-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+		--animfolio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--animfolio-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+		--animfolio-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+		--animfolio-accent-light: rgba(217, 119, 6, 0.08) !important;
+		--animfolio-accent-subtle: rgba(217, 119, 6, 0.05) !important;
+		--animfolio-accent-shadow: rgba(217, 119, 6, 0.2) !important;
+		--animfolio-accent-glow: rgba(217, 119, 6, 0.15) !important;
+		--animfolio-on-accent: #14110f !important;
+		--animfolio-on-secondary: #ffffff !important;
+	}
+}
+
+.animfolio-container *,.animfolio-container *::before,.animfolio-container *::after{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{margin:0;padding:0;background:#FFFBF0;color:#1A1A2E;font-family:var(--animfolio-font-body,'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);font-size:var(--animfolio-font-size-base,16px);line-height:var(--animfolio-line-height,1.6);overflow-x:hidden}body.admin-bar{padding-top:32px}body.admin-bar .animfolio-nav--sticky{top:32px}@media screen and (max-width:782px){body.admin-bar{padding-top:46px}body.admin-bar .animfolio-nav--sticky{top:46px}}.wp-site-blocks,.entry-content,.page-content,.post-content{all:unset;display:block}
+/*# sourceURL=animfolio-base-inline-css */
+</style>
+<script>
+document.documentElement.className+=" animfolio-js";(function(){function r(){if(window.animfolio&&window.animfolio._initialized){return;}var e=document.querySelectorAll("[data-animfolio-animate]:not(.animfolio-visible),.animfolio-stagger__item:not(.animfolio-visible)");for(var i=0;i<e.length;i++){e[i].classList.add("animfolio-visible");}}if(document.readyState==="complete"){setTimeout(r,1500);}else{window.addEventListener("load",function(){setTimeout(r,1500);});}setTimeout(r,4000);})();
+//# sourceURL=animfolio-failsafe-js-after
+</script>
+</head>
+<body>
+<!-- ============================================================
+     CONFIG — set your email for the contact form (FormSubmit.co).
+     First submission emails you a one-time confirmation link; click it
+     once and every message afterwards lands in your inbox. See README.
+     ============================================================ -->
+<script>window.ANIMFOLIO_CONTACT_EMAIL = "you@example.com";</script>
+
+<div class="animfolio-container animfolio-container--light animfolio-container--format-11 animfolio-container--one-page" data-animfolio-scheme="light" data-animfolio-format="format-11-student" data-animfolio-intensity="medium"><a href="#hero" class="animfolio-skip-link">Skip to main content</a><nav class="animfolio-nav animfolio-nav--horizontal animfolio-nav--sticky" role="navigation" aria-label="Portfolio navigation"><a href="#hero" class="animfolio-nav__logo">Anaya Patel</a><button class="animfolio-nav__toggle" aria-expanded="false" aria-controls="animfolio-nav-menu" aria-label="Toggle navigation"><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span><span class="animfolio-nav__toggle-bar" aria-hidden="true"></span></button><ul class="animfolio-nav__list" id="animfolio-nav-menu"><li class="animfolio-nav__item"><a href="#hero" class="animfolio-nav__link" data-animfolio-section="hero">Home</a></li><li class="animfolio-nav__item"><a href="#about" class="animfolio-nav__link" data-animfolio-section="about">About</a></li><li class="animfolio-nav__item"><a href="#education" class="animfolio-nav__link" data-animfolio-section="education">Education</a></li><li class="animfolio-nav__item"><a href="#skills" class="animfolio-nav__link" data-animfolio-section="skills">Skills</a></li><li class="animfolio-nav__item"><a href="#projects" class="animfolio-nav__link" data-animfolio-section="projects">Projects</a></li><li class="animfolio-nav__item"><a href="#stats" class="animfolio-nav__link" data-animfolio-section="stats">Stats</a></li><li class="animfolio-nav__item"><a href="#experience" class="animfolio-nav__link" data-animfolio-section="experience">Experience</a></li><li class="animfolio-nav__item"><a href="#achievements" class="animfolio-nav__link" data-animfolio-section="achievements">Achievements</a></li><li class="animfolio-nav__item"><a href="#contact" class="animfolio-nav__link" data-animfolio-section="contact">Contact</a></li></ul><button class="animfolio-theme-toggle" aria-label="Toggle dark mode"><span class="animfolio-theme-toggle__icon animfolio-theme-toggle__icon--sun" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span><span class="animfolio-theme-toggle__icon animfolio-theme-toggle__icon--moon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></span></button></nav><section id="hero" class="animfolio-section animfolio-section--hero animfolio-section--align-center" data-animfolio-section="hero"><div class="animfolio-inner">
+<div class="animfolio-hero">
+	<div class="animfolio-hero__content">
+		
+					<h1 class="animfolio-hero__name" data-animfolio-animate="fade-up">Anaya Patel</h1>
+		
+					<h2 class="animfolio-hero__title" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">Computer Science Student</h2>
+		
+					<div class="animfolio-hero__subtitle animfolio-hero__typed" data-animfolio-typed="[&quot;Learning, building, growing every day.&quot;,&quot;Eager to make my mark.&quot;,&quot;Passionate about technology and innovation.&quot;]" data-animfolio-animate="fade-up" data-animfolio-delay="0.2">Learning, building, growing every day.</div>
+		
+					<div class="animfolio-hero__cta" data-animfolio-animate="fade-up" data-animfolio-delay="0.3">
+									<a href="#projects" class="animfolio-button animfolio-button--primary animfolio-hero__cta-primary">
+						View My Work					</a>
+									<a href="#contact" class="animfolio-button animfolio-button--secondary animfolio-hero__cta-secondary">
+						Get In Touch					</a>
+											</div>
+		
+					<div class="animfolio-hero__social animfolio-social-icons animfolio-social-icons--outline" data-animfolio-animate="fade-up" data-animfolio-delay="0.4">
+														<a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>							<span class="animfolio-social__label">Github</span>
+						</a>
+															<a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>							<span class="animfolio-social__label">Linkedin</span>
+						</a>
+															<a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>							<span class="animfolio-social__label">Twitter</span>
+						</a>
+															<a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg>							<span class="animfolio-social__label">Dribbble</span>
+						</a>
+															<a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>							<span class="animfolio-social__label">Email</span>
+						</a>
+							</div>
+		
+			</div>
+</div>
+</div><!-- .animfolio-inner --></section><section id="about" class="animfolio-section animfolio-section--about animfolio-section--align-center" data-animfolio-section="about"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">About Me</h2></div><div class="animfolio-about" data-animfolio-animate="fade-up">
+				<div class="animfolio-about__bio">I'm a Computer Science major with a minor in Data Science. I'm passionate about building technology that makes a positive impact. When I'm not studying, I'm hacking on side projects, competing in hackathons, or tutoring fellow students.</div>
+				<div class="animfolio-about__fun-facts animfolio-stagger" data-animfolio-stagger="0.1">
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I've won 3 hackathons in the last year				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					My dorm room has more monitors than furniture				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I tutor 5 students weekly in data structures				</div>
+							<div class="animfolio-about__fun-fact animfolio-stagger__item">
+					I've read every Paul Graham essay twice				</div>
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="education" class="animfolio-section animfolio-section--education animfolio-section--align-center" data-animfolio-section="education"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Education</h2></div>
+<div class="animfolio-timeline animfolio-stagger" data-animfolio-animate="fade-up" data-animfolio-stagger="0.1">
+	<div class="animfolio-timeline__line"></div>
+
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.0">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+				<div class="animfolio-timeline__role">
+					B.S. in Computer Science											— Minor in Data Science									</div>
+				<div class="animfolio-timeline__company">State University</div>
+				<div class="animfolio-timeline__date">
+					Aug 2022 — May 2026				</div>
+									<div class="animfolio-timeline__description">GPA 3.9/4.0. Dean's List all six semesters. Relevant coursework: Data Structures &amp; Algorithms, Machine Learning, Distributed Systems, Database Systems, and Human-Computer Interaction. Teaching assistant for CS 201 (Data Structures).</div>
+							</div>
+		</div>
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+				<div class="animfolio-timeline__role">
+					High School Diploma											— STEM Honors Track									</div>
+				<div class="animfolio-timeline__company">Lincoln High School</div>
+				<div class="animfolio-timeline__date">
+					Aug 2018 — Jun 2022				</div>
+									<div class="animfolio-timeline__description">Graduated valedictorian with a 4.0 GPA. Founder and president of the Robotics Club, leading the team to a regional FIRST Robotics championship.</div>
+							</div>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="skills" class="animfolio-section animfolio-section--skills animfolio-section--align-center" data-animfolio-section="skills"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Skills</h2></div>
+<div class="animfolio-skills animfolio-skills--bars" data-animfolio-animate="fade-up">
+
+			<!-- Progress Bars -->
+					<div class="animfolio-grid animfolio-grid--2 animfolio-stagger" data-animfolio-stagger="0.1">
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">Technical</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Python</span>
+										<span class="animfolio-skills__value">80%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 80%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>JavaScript</span>
+										<span class="animfolio-skills__value">75%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 75%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>HTML / CSS</span>
+										<span class="animfolio-skills__value">85%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 85%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>SQL</span>
+										<span class="animfolio-skills__value">70%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 70%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">Academic</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Research Methods</span>
+										<span class="animfolio-skills__value">85%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 85%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Technical Writing</span>
+										<span class="animfolio-skills__value">80%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 80%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Data Analysis</span>
+										<span class="animfolio-skills__value">75%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 75%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Public Speaking</span>
+										<span class="animfolio-skills__value">70%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 70%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+									<div class="animfolio-skills__category animfolio-stagger__item">
+						<h3 class="animfolio-skills__category-title">Soft Skills</h3>
+						<div class="animfolio-skills__list">
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Teamwork</span>
+										<span class="animfolio-skills__value">90%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 90%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Problem Solving</span>
+										<span class="animfolio-skills__value">85%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 85%"></div>
+									</div>
+								</div>
+															<div class="animfolio-skills__item">
+									<div class="animfolio-skills__label">
+										<span>Time Management</span>
+										<span class="animfolio-skills__value">80%</span>
+									</div>
+									<div class="animfolio-skills__bar">
+										<div class="animfolio-skills__bar-fill" style="width: 80%"></div>
+									</div>
+								</div>
+													</div>
+					</div>
+							</div>
+		
+	
+	</div>
+</div><!-- .animfolio-inner --></section><section id="projects" class="animfolio-section animfolio-section--projects animfolio-section--align-center" data-animfolio-section="projects"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Featured Projects</h2></div>
+<div class="animfolio-grid animfolio-grid--2 animfolio-stagger" data-animfolio-stagger="0.15">
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-tech.jpg" alt="SmartCampus — Capstone Project" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">SmartCampus — Capstone Project</h3>
+
+							<p class="animfolio-project__description">An IoT-powered campus management system that monitors room occupancy, HVAC efficiency, and energy consumption. Won Best Capstone Project award and reduced energy costs by 18% in pilot.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">Python</span>
+											<span class="animfolio-card__tag">React</span>
+											<span class="animfolio-card__tag">Raspberry Pi</span>
+											<span class="animfolio-card__tag">MQTT</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--secondary">
+						Source					</a>
+											</div>
+
+					</div>
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-tech.jpg" alt="MealBuddy — Hackathon Winner" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">MealBuddy — Hackathon Winner</h3>
+
+							<p class="animfolio-project__description">Built in 36 hours at HackMIT. An app that matches students with leftover meal swipes to those in need. Won 1st place and the social impact award. Now used by 3 universities.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">React Native</span>
+											<span class="animfolio-card__tag">Firebase</span>
+											<span class="animfolio-card__tag">Node.js</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--secondary">
+						Source					</a>
+											</div>
+
+					</div>
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-dashboard.jpg" alt="Bias in Hiring Algorithms — Research Paper" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">Bias in Hiring Algorithms — Research Paper</h3>
+
+							<p class="animfolio-project__description">Undergraduate research on detecting and mitigating bias in ML-based hiring tools. Analyzed 5 commercial systems and proposed a fairness-aware re-ranking algorithm. Published at the FAccT student track.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">Python</span>
+											<span class="animfolio-card__tag">scikit-learn</span>
+											<span class="animfolio-card__tag">Fairness Metrics</span>
+											<span class="animfolio-card__tag">LaTeX</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--secondary">
+						Source					</a>
+											</div>
+
+					</div>
+					<div class="animfolio-project animfolio-card animfolio-card--bordered animfolio-stagger__item">
+							<img src="./assets/images/project-team.jpg" alt="StudyTogether — Volunteer Platform" class="animfolio-project__image" width="600" height="400" loading="lazy" decoding="async">
+			
+			
+			<h3 class="animfolio-project__title animfolio-card__title">StudyTogether — Volunteer Platform</h3>
+
+							<p class="animfolio-project__description">A peer tutoring platform connecting upperclassmen with freshmen. Built as a volunteer project, now used by 500+ students. Features video calls, scheduling, and progress tracking.</p>
+			
+							<div class="animfolio-project__stack animfolio-card__tags">
+											<span class="animfolio-card__tag">Next.js</span>
+											<span class="animfolio-card__tag">PostgreSQL</span>
+											<span class="animfolio-card__tag">WebRTC</span>
+											<span class="animfolio-card__tag">Vercel</span>
+									</div>
+			
+			<div class="animfolio-project__links animfolio-card__footer">
+									<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--primary">
+						Live Demo					</a>
+													<a href="#" target="_blank" rel="noopener noreferrer" class="animfolio-button animfolio-button--secondary">
+						Source					</a>
+											</div>
+
+					</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="stats" class="animfolio-section animfolio-section--stats animfolio-section--align-center" data-animfolio-section="stats"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">By the Numbers</h2></div><div class="animfolio-stats animfolio-stagger" data-animfolio-stagger="0.15">
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="3.9" data-animfolio-decimals="1" data-animfolio-suffix="" data-animfolio-prefix="">3.9</span>
+			<span class="animfolio-stat__label">GPA</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="42" data-animfolio-decimals="0" data-animfolio-suffix="" data-animfolio-prefix="">42</span>
+			<span class="animfolio-stat__label">Courses Completed</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="5" data-animfolio-decimals="0" data-animfolio-suffix="" data-animfolio-prefix="">5</span>
+			<span class="animfolio-stat__label">Hackathons Won</span>
+		</div>
+					<div class="animfolio-stat animfolio-card animfolio-card--bordered animfolio-stagger__item">
+			<span class="animfolio-stat__number" data-animfolio-counter="200" data-animfolio-decimals="0" data-animfolio-suffix="+" data-animfolio-prefix="">200+</span>
+			<span class="animfolio-stat__label">Volunteer Hours</span>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="experience" class="animfolio-section animfolio-section--experience animfolio-section--align-center" data-animfolio-section="experience"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Internships &amp; Experience</h2></div>
+<div class="animfolio-timeline animfolio-stagger" data-animfolio-animate="fade-up" data-animfolio-stagger="0.1">
+	<div class="animfolio-timeline__line"></div>
+
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.0">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Software Engineering Intern</div>
+				<div class="animfolio-timeline__company">Stripe</div>
+				<div class="animfolio-timeline__date">
+					Jun 2025 — Aug 2025											· Remote									</div>
+									<div class="animfolio-timeline__description">Joined the Payments Reliability team for a summer internship. Shipped an internal dashboard that surfaces latency anomalies across services, cutting incident triage time by roughly 30%. Wrote unit and integration tests and presented my work at the intern demo day.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">Go</span>
+													<span class="animfolio-card__tag">React</span>
+													<span class="animfolio-card__tag">TypeScript</span>
+													<span class="animfolio-card__tag">Observability</span>
+											</div>
+							</div>
+		</div>
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.1">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Undergraduate Research Assistant</div>
+				<div class="animfolio-timeline__company">State University — Fairness in AI Lab</div>
+				<div class="animfolio-timeline__date">
+					Sep 2024 — May 2025											· On Campus									</div>
+									<div class="animfolio-timeline__description">Conducted research on bias in machine learning hiring systems under Dr. Robert Kline. Built evaluation pipelines, ran experiments across 5 commercial models, and co-authored a paper accepted to the FAccT student track.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">Python</span>
+													<span class="animfolio-card__tag">scikit-learn</span>
+													<span class="animfolio-card__tag">Research</span>
+													<span class="animfolio-card__tag">ML Fairness</span>
+											</div>
+							</div>
+		</div>
+					<div class="animfolio-timeline__item animfolio-stagger__item" data-animfolio-animate="fade-up" data-animfolio-delay="0.2">
+			<div class="animfolio-timeline__dot"></div>
+			<div class="animfolio-timeline__content animfolio-card animfolio-card--bordered">
+								<div class="animfolio-timeline__role">Teaching Assistant — CS 201 Data Structures</div>
+				<div class="animfolio-timeline__company">State University</div>
+				<div class="animfolio-timeline__date">
+					Jan 2024 — Present											· On Campus									</div>
+									<div class="animfolio-timeline__description">Lead two weekly lab sections of 25+ students, hold office hours, and grade assignments. Created supplementary practice problems on trees and graphs that the department adopted course-wide.</div>
+													<div class="animfolio-timeline__tags animfolio-card__tags">
+													<span class="animfolio-card__tag">Teaching</span>
+													<span class="animfolio-card__tag">Java</span>
+													<span class="animfolio-card__tag">Algorithms</span>
+													<span class="animfolio-card__tag">Mentoring</span>
+											</div>
+							</div>
+		</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="achievements" class="animfolio-section animfolio-section--achievements animfolio-section--align-center" data-animfolio-section="achievements"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Achievements &amp; Awards</h2></div><div class="animfolio-grid animfolio-grid--3 animfolio-stagger" data-animfolio-stagger="0.1">
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">1st Place — HackMIT</h3>
+							<span class="animfolio-card__meta">MIT</span>
+										<span class="animfolio-card__meta">Oct 2024</span>
+								</div>
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">Best Capstone Project Award</h3>
+							<span class="animfolio-card__meta">State University, CS Department</span>
+										<span class="animfolio-card__meta">May 2025</span>
+								</div>
+					<div class="animfolio-card animfolio-card--bordered animfolio-stagger__item">
+						<h3 class="animfolio-card__title">Dean's List (6 Semesters)</h3>
+							<span class="animfolio-card__meta">State University</span>
+										<span class="animfolio-card__meta">2022 – 2025</span>
+								</div>
+	</div>
+</div><!-- .animfolio-inner --></section><section id="contact" class="animfolio-section animfolio-section--contact animfolio-section--align-center" data-animfolio-section="contact"><div class="animfolio-inner"><div class="animfolio-section__header"><h2 class="animfolio-section__title">Contact</h2></div><div class="animfolio-contact" data-animfolio-animate="fade-up">
+
+			<p class="animfolio-contact__heading">Let's build something together</p>
+				<p class="animfolio-contact__description">I'm actively looking for new-grad software engineering roles and summer 2026 opportunities. Whether you'd like to chat about a project, a referral, or just say hi, my inbox is always open.</p>
+	
+	<div class="animfolio-contact__layout">
+		<!-- Left: Contact Form -->
+		<div class="animfolio-contact__form-wrapper">
+							<form class="animfolio-form" novalidate="">
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-name">Name</label>
+						<input type="text" name="name" id="animfolio-name" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Name is required.</span>
+					</div>
+					<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-email">Email</label>
+						<input type="email" name="email" id="animfolio-email" class="animfolio-form__input" required="" aria-required="true">
+						<span class="animfolio-form__error">Valid email is required.</span>
+					</div>
+										<div class="animfolio-form__group">
+						<label class="animfolio-form__label" for="animfolio-message">Message</label>
+						<textarea name="message" id="animfolio-message" class="animfolio-form__textarea" rows="5" required="" aria-required="true"></textarea>
+						<span class="animfolio-form__error">Message is required.</span>
+					</div>
+											<div class="animfolio-form__honeypot">
+							<input type="text" name="animfolio_hp" tabindex="-1" autocomplete="off">
+						</div>
+										<input type="hidden" name="animfolio_ts" value="">
+					<input type="hidden" name="animfolio_js" value="">
+					<div class="animfolio-form__success">Thank you! I'll get back to you soon.</div>
+					<button type="submit" class="animfolio-button animfolio-button--primary animfolio-form__submit">
+						Send Message					</button>
+				</form>
+					</div>
+
+		<!-- Right: QR Code -->
+		<div class="animfolio-contact__qr-wrapper"><div class="animfolio-qr" data-animfolio-qr="" data-animfolio-vcard="QkVHSU46VkNBUkQNClZFUlNJT046My4wDQpGTjpBbmF5YSBQYXRlbA0KTjpQYXRlbDtBbmF5YTs7Ow0KVElUTEU6Q29tcHV0ZXIgU2NpZW5jZSBTdHVkZW50DQpFTUFJTDtUWVBFPVdPUks6eW91QGV4YW1wbGUuY29tDQpVUkw6aHR0cHM6Ly95b3VyLXdlYnNpdGUuZXhhbXBsZQ0KTk9URTpJJ20gYSBDb21wdXRlciBTY2llbmNlIG1ham9yIHdpdGggYSBtaW5vciBpbiBEYXRhIFNjaWVuY2UuIEknbSBwYXNzaW9uYXRlIGFib3V0IGJ1aWxkaW5nIHRlY2hub2xvZ3kgdGhhdCBtYWtlcyBhIHBvc2l0aXZlIGltcGFjdC4gV2hlbiBJJ20gbm90IHN0dWR5aW5nXCwgSSdtIGhhY2tpbmcgb24gc2lkZSBwcm9qZWN0c1wsIGNvbXBldGluZyBpbiBoYWNrXG5HaXRodWI6IGh0dHBzOi8vZ2l0aHViLmNvbS95b3VydXNlcm5hbWVcbkxpbmtlZGluOiBodHRwczovL2xpbmtlZGluLmNvbS9pbi95b3VydXNlcm5hbWVcblR3aXR0ZXI6IGh0dHBzOi8vdHdpdHRlci5jb20veW91cnVzZXJuYW1lXG5EcmliYmJsZTogaHR0cHM6Ly9kcmliYmJsZS5jb20veW91cnVzZXJuYW1lDQpYLVNPQ0lBTFBST0ZJTEU7VFlQRT1naXRodWI6aHR0cHM6Ly9naXRodWIuY29tL3lvdXJ1c2VybmFtZQ0KWC1TT0NJQUxQUk9GSUxFO1RZUEU9bGlua2VkaW46aHR0cHM6Ly9saW5rZWRpbi5jb20vaW4veW91cnVzZXJuYW1lDQpYLVNPQ0lBTFBST0ZJTEU7VFlQRT10d2l0dGVyOmh0dHBzOi8vdHdpdHRlci5jb20veW91cnVzZXJuYW1lDQpYLVNPQ0lBTFBST0ZJTEU7VFlQRT1kcmliYmJsZTpodHRwczovL2RyaWJiYmxlLmNvbS95b3VydXNlcm5hbWUNClJFVjoyMDI2LTA3LTEyVDEzOjIyOjU4Wg0KRU5EOlZDQVJEDQo="><div class="animfolio-qr__code" style="width:200px;height:200px"></div><p class="animfolio-qr__caption">Scan to save my contact</p><a href="./assets/contact.vcf" class="animfolio-qr__download animfolio-button animfolio-button--secondary" download="">Download vCard</a></div></div>	</div>
+
+</div>
+</div><!-- .animfolio-inner --></section><button class="animfolio-back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 15V5M10 5L5 10M10 5L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div class="animfolio-progress"><div class="animfolio-progress__bar"></div></div><div class="animfolio-footer-social animfolio-social-icons animfolio-social-icons--outline"><a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="animfolio-social__label">Github</span></a><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg><span class="animfolio-social__label">Linkedin</span></a><a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg><span class="animfolio-social__label">Twitter</span></a><a href="https://dribbble.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg><span class="animfolio-social__label">Dribbble</span></a><a href="mailto:hello@yourdomain.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span class="animfolio-social__label">Email</span></a></div></div>
+
+<div aria-label="Color scheme preview (demo only)" style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99999;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(18,18,24,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 30px rgba(0,0,0,.4)"><span style="padding:0 6px 0 10px;font:700 11px/1 -apple-system,sans-serif;letter-spacing:.4px;text-transform:uppercase;color:#8b90a0">Colors</span><a href="index.html" aria-current="true" title="Sunshine" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#D97706;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Sunshine</a><a href="v2.html" title="Berry Pop" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#DB2777;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Berry Pop</a><a href="v3.html" title="Coral Crush" style="display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#c9cdd6;background:transparent;border:1px solid transparent;transition:.15s"><span style="width:12px;height:12px;border-radius:50%;background:#E11D48;box-shadow:0 0 0 1px rgba(255,255,255,.25)"></span>Coral Crush</a></div>
+
+<script>
+var animfolioSettings = {"animationIntensity":"medium","respectReducedMotion":"1","colorScheme":"light","smoothScroll":"1","scrollBehavior":"smooth","customCursor":"","backToTop":"1","progressBar":"1","darkModeToggle":"1","debugMode":""};
+//# sourceURL=animfolio-engine-js-extra
+</script>
+<script src="./assets/js/wp-shim.js"></script>
+<script src="./assets/js/animfolio-engine.js"></script>
+<script src="./assets/js/modules/scroll-trigger.js"></script>
+<script src="./assets/js/modules/typed-text.js"></script>
+<script src="./assets/js/modules/counter.js"></script>
+<script src="./assets/js/modules/timeline-draw.js"></script>
+<script src="./assets/js/modules/stagger.js"></script>
+<script src="./assets/js/modules/parallax.js"></script>
+<script src="./assets/js/modules/progress-bar.js"></script>
+<script src="./assets/js/modules/smooth-scroll.js"></script>
+<script src="./assets/js/modules/theme-toggle.js"></script>
+<script src="./assets/js/vendor/qrcode-generator.min.js"></script>
+<script src="./assets/js/animfolio-qr.js"></script>
+<script src="./assets/js/animfolio-lightbox.js"></script>
+<script src="./assets/js/animfolio-casestudy.js"></script>
+<script src="./assets/js/format.js"></script>
+<script src="./assets/js/animfolio-contact-static.js"></script>
+</body>
+</html>

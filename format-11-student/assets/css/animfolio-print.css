@@ -1,0 +1,85 @@
+/**
+ * AnimFolio Print Stylesheet
+ *
+ * Removes animations, navigation, dark mode. Clean printable layout.
+ *
+ * @package AnimFolio
+ * @author     Rahul Mahadik
+ * @since   1.0.0
+ */
+
+@media print {
+	.animfolio-container {
+		background: #fff !important;
+		color: #000 !important;
+	}
+
+	.animfolio-container * {
+		color: #000 !important;
+		background: transparent !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
+
+	.animfolio-nav,
+	.animfolio-back-to-top,
+	.animfolio-progress,
+	.animfolio-theme-toggle,
+	.animfolio-cursor,
+	.animfolio-screen-only,
+	.animfolio-form__submit,
+	.animfolio-powered-by {
+		display: none !important;
+	}
+
+	.animfolio-print-only {
+		display: block !important;
+	}
+
+	[data-animfolio-animate] {
+		opacity: 1 !important;
+		transform: none !important;
+		transition: none !important;
+	}
+
+	.animfolio-section {
+		break-inside: avoid;
+		page-break-inside: avoid;
+		padding: 24px 0;
+	}
+
+	.animfolio-container a[href]::after {
+		content: " (" attr(href) ")";
+		font-size: 0.8em;
+		color: #555 !important;
+	}
+
+	.animfolio-container a[href^="#"]::after,
+	.animfolio-container a[href^="javascript"]::after {
+		content: "";
+	}
+
+	.animfolio-card {
+		border: 1px solid #ddd !important;
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
+
+	.animfolio-hero {
+		min-height: auto;
+	}
+
+	.animfolio-inner {
+		max-width: 100%;
+		padding: 0;
+	}
+
+	/* Show QR code in print */
+	.animfolio-qr {
+		display: flex !important;
+	}
+
+	.animfolio-qr__code {
+		background: #fff !important;
+	}
+}
