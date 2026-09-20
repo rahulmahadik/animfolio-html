@@ -235,7 +235,7 @@
 (function () {
   var EL = document.getElementById('vcount'), N = document.getElementById('vcount-n');
   if (!EL || !N || !window.fetch) return;
-  var BASE = 8844, ROOT = 'https://abacus.jasoncameron.dev', K = 'animfolio-html/gallery';
+  var BASE = 8844, ROOT = 'https://abacus.jasoncameron.dev', K = 'rahulmahadik.github.io/animfolio-gallery';
   var counted = false;
   try { counted = sessionStorage.getItem('af_counted') === '1'; } catch (e) {}
   fetch(ROOT + (counted ? '/get/' : '/hit/') + K, { cache: 'no-store' })
